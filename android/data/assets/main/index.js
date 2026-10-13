@@ -16185,8 +16185,8 @@ System.register("chunks:///_virtual/BkPopup.ts", ['cc', './popupLayout.ts', './v
   };
 });
 
-System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts', './otaFlow.ts', './platformText.ts', './jsbOtaPort.ts'], function (exports) {
-  var cclegacy, Component, sys, director, view, Node, Layers, UITransform, Label, Color, Graphics, _decorator, readLang, setRunningVersion, runOta, platformText, JsbOtaPort, OtaConsoleLogger;
+System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts', './otaConfig.ts', './otaFlow.ts', './platformText.ts', './jsbOtaPort.ts'], function (exports) {
+  var cclegacy, Component, sys, director, view, Node, Layers, UITransform, Label, Color, Graphics, _decorator, readLang, setRunningVersion, BOOT_TRIES_KEY, runOta, platformText, JsbOtaPort, OtaConsoleLogger;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -16204,6 +16204,8 @@ System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts',
     }, function (module) {
       readLang = module.readLang;
       setRunningVersion = module.setRunningVersion;
+    }, function (module) {
+      BOOT_TRIES_KEY = module.BOOT_TRIES_KEY;
     }, function (module) {
       runOta = module.runOta;
     }, function (module) {
@@ -16237,6 +16239,8 @@ System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts',
             director.loadScene('LoginScene');
             return;
           }
+          // Toi duoc day = script ban tai nap duoc va cong OTA chay duoc (reset / D+1 cuu duoc): xoa bo dem watchdog cua hook
+          sys.localStorage.setItem(BOOT_TRIES_KEY, '0');
           const lang = readLang(sys.localStorage);
           this.buildUi();
           const port = new JsbOtaPort(new OtaConsoleLogger(), {
@@ -44459,6 +44463,8 @@ System.register("chunks:///_virtual/jsbOtaPort.ts", ['cc', './manifestRewrite.ts
           return v;
         }
         cachedVersion() {
+          // Khong co khoa thi hook khong dat search path: ban tai (neu con) khong chay
+          if (!sys.localStorage.getItem(SEARCH_PATHS_KEY)) return null;
           const p = this.storage + 'project.manifest';
           return this.fu.isFileExist(p) ? manifestVersion(this.fu.getStringFromFile(p)) : null;
         }
@@ -44501,6 +44507,9 @@ System.register("chunks:///_virtual/jsbOtaPort.ts", ['cc', './manifestRewrite.ts
           this.lastFailure = null;
           /** Manager cu giu tham chieu toi dispose: destructor cua no xoa con tro static cua engine. */
           this.retired = [];
+          /** UPDATE_FAILED cua engine khong co message: tu dem file loi va giu loi cuoi. */
+          this.failedFiles = 0;
+          this.lastError = '';
           this.fu = fu;
           this.storage = storage;
           this.pointer = pointer;
@@ -44513,6 +44522,8 @@ System.register("chunks:///_virtual/jsbOtaPort.ts", ['cc', './manifestRewrite.ts
         retry() {
           const failure = this.lastFailure;
           this.lastFailure = null;
+          this.failedFiles = 0;
+          this.lastError = '';
           const am = this.am;
           if (failure === 'assets' && am !== null) {
             am.downloadFailedAssets();
@@ -44602,8 +44613,10 @@ System.register("chunks:///_virtual/jsbOtaPort.ts", ['cc', './manifestRewrite.ts
               this.lastFailure = 'assets';
               emit({
                 type: 'failed',
-                message: ev.getMessage()
+                message: this.failedFiles + ' file loi, cuoi: ' + this.lastError
               });
+              this.failedFiles = 0;
+              this.lastError = '';
               return;
             case E.ERROR_NO_LOCAL_MANIFEST:
             case E.ERROR_DOWNLOAD_MANIFEST:
@@ -44616,12 +44629,20 @@ System.register("chunks:///_virtual/jsbOtaPort.ts", ['cc', './manifestRewrite.ts
               return;
             case E.ERROR_UPDATING:
             case E.ERROR_DECOMPRESS:
-              this.log.warn(`[ota] loi file ${ev.getAssetId()}: ${ev.getMessage()}`);
+              this.failedFiles++;
+              this.lastError = ev.getAssetId() + ': ' + ev.getMessage();
+              this.log.warn('[ota] loi file ' + this.lastError);
               progress();
               return;
             default:
               // NEW_VERSION_FOUND, UPDATE_PROGRESSION, ASSET_UPDATED
               if (ev.getMessage() !== '') this.log.debug('[ota] ' + ev.getMessage());
+              // Ban tren mang moi hon, dang tai project.manifest: otaFlow doi ngan sach 20 s -> 60 s (spec §4.4 b)
+              if (ev.getEventCode() === E.NEW_VERSION_FOUND || ev.getEventCode() === E.UPDATE_PROGRESSION && ev.getAssetId() === '@manifest') {
+                emit({
+                  type: 'checking'
+                });
+              }
               progress();
           }
         }
@@ -51815,10 +51836,14 @@ System.register("chunks:///_virtual/otaConfig.ts", ['cc'], function (exports) {
 
       /** Khoa localStorage ma hook main.js doc (spec §5). */
       const SEARCH_PATHS_KEY = exports('SEARCH_PATHS_KEY', 'HotUpdateSearchPaths');
+      /** Bo dem khoi dong ma hook main.js tang moi lan dat search path; BootSceneRoot dat ve '0' (spec §5 watchdog). */
+      const BOOT_TRIES_KEY = exports('BOOT_TRIES_KEY', 'HotUpdateBootTries');
       /** Timeout moi URL con tro (spec §4.4). */
       const POINTER_TIMEOUT_MS = exports('POINTER_TIMEOUT_MS', 6000);
-      /** Tong thoi gian truoc khi bat dau tai (spec §4.4 b). */
+      /** Thoi gian toi khi biet ban tren mang moi hon (con tro + version.manifest) (spec §4.4 b). */
       const PRE_DOWNLOAD_BUDGET_MS = exports('PRE_DOWNLOAD_BUDGET_MS', 20000);
+      /** Sau khi biet co ban moi: them toi da chung nay de tai project.manifest toi byte asset dau tien (spec §4.4 b). */
+      const MANIFEST_BUDGET_MS = exports('MANIFEST_BUDGET_MS', 60000);
       /** Khong co su kien nao trong khoang nay = loi (spec §4.4 a). */
       const STALL_MS = exports('STALL_MS', 30000);
       /** Giu chu "co ban moi tren cua hang" (spec §4.3 dong 4). */
@@ -51829,7 +51854,7 @@ System.register("chunks:///_virtual/otaConfig.ts", ['cc'], function (exports) {
 });
 
 System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decide.ts', './otaConfig.ts', './pointer.ts', './version.ts'], function (exports) {
-  var cclegacy, retryDelay, decide, NEED_STORE_HOLD_MS, PRE_DOWNLOAD_BUDGET_MS, STALL_MS, OTA_CONFIG, POINTER_TIMEOUT_MS, parsePointer, pickEffective;
+  var cclegacy, retryDelay, decide, NEED_STORE_HOLD_MS, PRE_DOWNLOAD_BUDGET_MS, STALL_MS, MANIFEST_BUDGET_MS, OTA_CONFIG, POINTER_TIMEOUT_MS, parsePointer, pickEffective;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -51841,6 +51866,7 @@ System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decid
       NEED_STORE_HOLD_MS = module.NEED_STORE_HOLD_MS;
       PRE_DOWNLOAD_BUDGET_MS = module.PRE_DOWNLOAD_BUDGET_MS;
       STALL_MS = module.STALL_MS;
+      MANIFEST_BUDGET_MS = module.MANIFEST_BUDGET_MS;
       OTA_CONFIG = module.OTA_CONFIG;
       POINTER_TIMEOUT_MS = module.POINTER_TIMEOUT_MS;
     }, function (module) {
@@ -51908,6 +51934,7 @@ System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decid
           let done = false;
           let attempt = 0;
           let started = false;
+          let manifestPhase = false;
           let cancelStall = () => {};
           let cancelBudget = () => {};
           let cancelRetry = () => {};
@@ -51966,6 +51993,20 @@ System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decid
             switch (e.type) {
               case 'upToDate':
                 end('enter', 'engine bao da moi nhat');
+                return;
+              case 'checking':
+                // Lan dau: doi ngan sach 20 s thanh MANIFEST_BUDGET_MS tinh tu bay gio; lan sau bo qua
+                if (started || manifestPhase) return;
+                manifestPhase = true;
+                cancelBudget();
+                cancelBudget = port.schedule(MANIFEST_BUDGET_MS, () => {
+                  if (!started) end('enter', 'qua ' + MANIFEST_BUDGET_MS + ' ms tai manifest');
+                });
+                armStall();
+                port.setStatus({
+                  phase: 'downloading',
+                  percent: null
+                });
                 return;
               case 'progress':
                 {
@@ -55370,7 +55411,7 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         privacy3: 'y los',
         privacy4: 'términos de servicio',
         privacy5: 'de ' + RELEASE.appName,
-        loginGuest: 'Iniciar sesión RAW',
+        loginGuest: 'Iniciar sesión FIX',
         loginFacebook: 'Unirse con FB',
         langEn: 'English',
         langEs: 'Español',
@@ -56690,7 +56731,7 @@ System.register("chunks:///_virtual/pointer.ts", ['cc', './version.ts'], functio
       function parsePointer(text) {
         let o;
         try {
-          o = JSON.parse(text.replace(/^﻿/, ''));
+          o = JSON.parse(text.replace(/^\uFEFF/, ''));
         } catch {
           return null;
         }
