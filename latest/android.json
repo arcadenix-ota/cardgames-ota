@@ -3,5 +3,5 @@
   "version": "0.0.1.5",
   "tag": "android-0.0.1.5",
   "minNativeVersion": "0.0.1",
-  "reset": false
+  "reset": true
 }
