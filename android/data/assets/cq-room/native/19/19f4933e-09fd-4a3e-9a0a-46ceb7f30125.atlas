@@ -1,0 +1,48 @@
+
+hi.png
+size: 168, 94
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+hi
+  rotate: true
+  xy: 130, 55
+  size: 37, 33
+  orig: 37, 33
+  offset: 0, 0
+  index: -1
+qiu
+  rotate: true
+  xy: 2, 2
+  size: 90, 82
+  orig: 90, 82
+  offset: 0, 0
+  index: -1
+shou
+  rotate: false
+  xy: 86, 44
+  size: 42, 48
+  orig: 44, 50
+  offset: 1, 1
+  index: -1
+weixiao
+  rotate: false
+  xy: 86, 15
+  size: 58, 27
+  orig: 60, 29
+  offset: 1, 1
+  index: -1
+yanjing2
+  rotate: true
+  xy: 146, 4
+  size: 49, 20
+  orig: 49, 20
+  offset: 0, 0
+  index: -1
+yanjing3
+  rotate: false
+  xy: 86, 5
+  size: 48, 8
+  orig: 49, 8
+  offset: 1, 0
+  index: -1

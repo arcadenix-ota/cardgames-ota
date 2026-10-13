@@ -1,0 +1,230 @@
+
+fangjian-zhu.png
+size: 316, 144
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+baishen
+  rotate: false
+  xy: 2, 92
+  size: 67, 50
+  orig: 67, 52
+  offset: 0, 2
+  index: -1
+chouma1
+  rotate: true
+  xy: 158, 2
+  size: 28, 23
+  orig: 28, 23
+  offset: 0, 0
+  index: -1
+coin_001
+  rotate: false
+  xy: 294, 76
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+coin_002
+  rotate: false
+  xy: 294, 54
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+coin_003
+  rotate: true
+  xy: 217, 8
+  size: 18, 20
+  orig: 18, 20
+  offset: 0, 0
+  index: -1
+coin_004
+  rotate: false
+  xy: 159, 54
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+coin_005
+  rotate: true
+  xy: 183, 4
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: -1
+coin_006
+  rotate: false
+  xy: 260, 9
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: -1
+coin_007
+  rotate: false
+  xy: 159, 32
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+coin_008
+  rotate: false
+  xy: 239, 6
+  size: 19, 20
+  orig: 19, 20
+  offset: 0, 0
+  index: -1
+coin_009
+  rotate: false
+  xy: 294, 32
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+weizi
+  rotate: false
+  xy: 118, 76
+  size: 56, 19
+  orig: 56, 19
+  offset: 0, 0
+  index: -1
+yingyu
+  rotate: true
+  xy: 2, 4
+  size: 86, 20
+  orig: 86, 20
+  offset: 0, 0
+  index: -1
+zhu-1
+  rotate: false
+  xy: 298, 112
+  size: 13, 30
+  orig: 15, 31
+  offset: 1, 1
+  index: -1
+zhu-10
+  rotate: false
+  xy: 71, 96
+  size: 45, 46
+  orig: 47, 46
+  offset: 1, 0
+  index: -1
+zhu-11
+  rotate: false
+  xy: 24, 44
+  size: 45, 46
+  orig: 47, 46
+  offset: 1, 0
+  index: -1
+zhu-12
+  rotate: false
+  xy: 118, 97
+  size: 46, 45
+  orig: 48, 45
+  offset: 1, 0
+  index: -1
+zhu-13
+  rotate: false
+  xy: 166, 97
+  size: 43, 45
+  orig: 46, 45
+  offset: 2, 0
+  index: -1
+zhu-14
+  rotate: false
+  xy: 211, 97
+  size: 42, 45
+  orig: 45, 45
+  offset: 1, 0
+  index: -1
+zhu-15
+  rotate: false
+  xy: 255, 98
+  size: 41, 44
+  orig: 43, 45
+  offset: 2, 0
+  index: -1
+zhu-16
+  rotate: false
+  xy: 223, 53
+  size: 35, 42
+  orig: 38, 44
+  offset: 3, 1
+  index: -1
+zhu-17
+  rotate: true
+  xy: 176, 34
+  size: 31, 41
+  orig: 33, 42
+  offset: 2, 0
+  index: -1
+zhu-18
+  rotate: true
+  xy: 219, 28
+  size: 23, 37
+  orig: 24, 38
+  offset: 1, 0
+  index: -1
+zhu-19
+  rotate: true
+  xy: 183, 15
+  size: 17, 32
+  orig: 18, 33
+  offset: 1, 0
+  index: -1
+zhu-2
+  rotate: true
+  xy: 258, 31
+  size: 18, 33
+  orig: 20, 34
+  offset: 0, 1
+  index: -1
+zhu-3
+  rotate: true
+  xy: 117, 50
+  size: 24, 40
+  orig: 26, 42
+  offset: 0, 2
+  index: -1
+zhu-4
+  rotate: true
+  xy: 176, 67
+  size: 28, 45
+  orig: 30, 45
+  offset: 0, 0
+  index: -1
+zhu-5
+  rotate: false
+  xy: 260, 51
+  size: 32, 45
+  orig: 34, 45
+  offset: 0, 0
+  index: -1
+zhu-6
+  rotate: false
+  xy: 120, 3
+  size: 36, 45
+  orig: 38, 46
+  offset: 1, 1
+  index: -1
+zhu-7
+  rotate: true
+  xy: 24, 2
+  size: 40, 46
+  orig: 42, 46
+  offset: 1, 0
+  index: -1
+zhu-8
+  rotate: false
+  xy: 71, 48
+  size: 44, 46
+  orig: 45, 46
+  offset: 0, 0
+  index: -1
+zhu-9
+  rotate: true
+  xy: 72, 2
+  size: 44, 46
+  orig: 47, 46
+  offset: 1, 0
+  index: -1

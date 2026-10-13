@@ -1,0 +1,13 @@
+
+fanpai.png
+size: 150, 163
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+K_1
+  rotate: false
+  xy: 2, 2
+  size: 146, 159
+  orig: 153, 168
+  offset: 3, 3
+  index: -1

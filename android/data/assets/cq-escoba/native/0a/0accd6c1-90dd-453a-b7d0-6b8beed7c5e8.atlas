@@ -1,0 +1,41 @@
+
+touxiang.png
+size: 186, 244
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+dian
+  rotate: true
+  xy: 144, 214
+  size: 28, 36
+  orig: 29, 37
+  offset: 1, 1
+  index: -1
+touxiang
+  rotate: false
+  xy: 2, 102
+  size: 140, 140
+  orig: 140, 140
+  offset: 0, 0
+  index: -1
+touxiang4
+  rotate: false
+  xy: 102, 18
+  size: 82, 82
+  orig: 82, 82
+  offset: 0, 0
+  index: -1
+touxiang5
+  rotate: false
+  xy: 2, 2
+  size: 98, 98
+  orig: 100, 100
+  offset: 1, 1
+  index: -1
+xingxing1
+  rotate: false
+  xy: 144, 182
+  size: 30, 30
+  orig: 32, 32
+  offset: 0, 2
+  index: -1

@@ -1,0 +1,62 @@
+
+titter.png
+size: 191, 94
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+di
+  rotate: true
+  xy: 2, 2
+  size: 90, 82
+  orig: 92, 84
+  offset: 1, 1
+  index: -1
+hongse
+  rotate: true
+  xy: 86, 4
+  size: 88, 26
+  orig: 92, 31
+  offset: 2, 2
+  index: -1
+meimao
+  rotate: false
+  xy: 136, 25
+  size: 53, 8
+  orig: 55, 10
+  offset: 1, 1
+  index: -1
+shou
+  rotate: true
+  xy: 136, 35
+  size: 57, 44
+  orig: 59, 46
+  offset: 1, 1
+  index: -1
+yanjing
+  rotate: true
+  xy: 114, 18
+  size: 74, 20
+  orig: 76, 22
+  offset: 1, 1
+  index: -1
+yanzhu
+  rotate: false
+  xy: 114, 5
+  size: 11, 11
+  orig: 13, 13
+  offset: 1, 1
+  index: -1
+yanzhu1
+  rotate: false
+  xy: 114, 5
+  size: 11, 11
+  orig: 13, 13
+  offset: 1, 1
+  index: -1
+zuiba
+  rotate: false
+  xy: 127, 6
+  size: 55, 10
+  orig: 57, 12
+  offset: 1, 1
+  index: -1

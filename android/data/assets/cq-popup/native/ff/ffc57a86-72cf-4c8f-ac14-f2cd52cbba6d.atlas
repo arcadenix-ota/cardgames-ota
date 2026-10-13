@@ -1,0 +1,90 @@
+
+jiangli.png
+size: 1462, 787
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+image/000000624
+  rotate: true
+  xy: 1390, 402
+  size: 205, 64
+  orig: 205, 64
+  offset: 0, 0
+  index: -1
+image/arcane_orbSource
+  rotate: false
+  xy: 1284, 609
+  size: 173, 176
+  orig: 205, 205
+  offset: 14, 16
+  index: -1
+image/gaung121
+  rotate: false
+  xy: 2, 122
+  size: 635, 261
+  orig: 681, 410
+  offset: 15, 147
+  index: -1
+image/glow
+  rotate: false
+  xy: 1258, 6
+  size: 99, 99
+  orig: 102, 102
+  offset: 2, 1
+  index: -1
+image/gxhd_di
+  rotate: false
+  xy: 2, 385
+  size: 1280, 400
+  orig: 1280, 403
+  offset: 0, 3
+  index: -1
+image/huan_glow02
+  rotate: false
+  xy: 979, 39
+  size: 277, 230
+  orig: 279, 240
+  offset: 1, 5
+  index: -1
+image/jaintou
+  rotate: true
+  xy: 639, 2
+  size: 267, 338
+  orig: 267, 339
+  offset: 0, 1
+  index: -1
+image/maozi
+  rotate: true
+  xy: 1284, 404
+  size: 203, 104
+  orig: 205, 105
+  offset: 1, 1
+  index: -1
+image/particle_waikuo_blur
+  rotate: false
+  xy: 1258, 107
+  size: 202, 204
+  orig: 240, 240
+  offset: 22, 19
+  index: -1
+image/sidai
+  rotate: false
+  xy: 639, 271
+  size: 501, 40
+  orig: 501, 40
+  offset: 0, 0
+  index: -1
+image/xibanya
+  rotate: false
+  xy: 2, 61
+  size: 611, 59
+  orig: 615, 61
+  offset: 2, 1
+  index: -1
+image/yingyu
+  rotate: false
+  xy: 639, 313
+  size: 671, 70
+  orig: 675, 72
+  offset: 2, 1
+  index: -1

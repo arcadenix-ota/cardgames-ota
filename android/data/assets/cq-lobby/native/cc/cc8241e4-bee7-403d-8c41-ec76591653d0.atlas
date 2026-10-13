@@ -1,0 +1,104 @@
+
+ruko_slots.png
+size: 614, 201
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+7-1
+  rotate: false
+  xy: 533, 160
+  size: 35, 39
+  orig: 37, 41
+  offset: 1, 1
+  index: -1
+7-3
+  rotate: false
+  xy: 533, 160
+  size: 35, 39
+  orig: 37, 41
+  offset: 1, 1
+  index: -1
+7-2
+  rotate: false
+  xy: 499, 76
+  size: 43, 48
+  orig: 45, 50
+  offset: 1, 1
+  index: -1
+bahsou
+  rotate: true
+  xy: 533, 129
+  size: 29, 45
+  orig: 31, 47
+  offset: 1, 1
+  index: -1
+di
+  rotate: false
+  xy: 2, 10
+  size: 294, 189
+  orig: 298, 193
+  offset: 2, 2
+  index: -1
+di-33
+  rotate: true
+  xy: 298, 16
+  size: 183, 88
+  orig: 186, 91
+  offset: 1, 2
+  index: -1
+kuang1
+  rotate: true
+  xy: 388, 65
+  size: 134, 109
+  orig: 136, 121
+  offset: 1, 11
+  index: -1
+liang-1
+  rotate: false
+  xy: 544, 105
+  size: 22, 22
+  orig: 26, 26
+  offset: 2, 2
+  index: -1
+liang-2
+  rotate: false
+  xy: 544, 81
+  size: 22, 22
+  orig: 26, 26
+  offset: 2, 2
+  index: -1
+liang-3
+  rotate: false
+  xy: 568, 105
+  size: 22, 22
+  orig: 26, 26
+  offset: 2, 2
+  index: -1
+liang-4
+  rotate: false
+  xy: 298, 2
+  size: 12, 12
+  orig: 14, 14
+  offset: 1, 1
+  index: -1
+pot_1
+  rotate: false
+  xy: 388, 18
+  size: 214, 45
+  orig: 216, 47
+  offset: 1, 1
+  index: -1
+pot_2-1
+  rotate: false
+  xy: 570, 180
+  size: 42, 19
+  orig: 42, 19
+  offset: 0, 0
+  index: -1
+wenzi
+  rotate: true
+  xy: 499, 126
+  size: 73, 32
+  orig: 75, 34
+  offset: 1, 1
+  index: -1

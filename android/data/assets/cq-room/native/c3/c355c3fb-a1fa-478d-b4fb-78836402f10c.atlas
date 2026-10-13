@@ -1,0 +1,41 @@
+
+baoxiang.png
+size: 300, 162
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+TX_gq_0002
+  rotate: false
+  xy: 127, 69
+  size: 91, 91
+  orig: 103, 99
+  offset: 6, 3
+  index: -1
+TX_gy_0013
+  rotate: true
+  xy: 220, 18
+  size: 71, 73
+  orig: 74, 76
+  offset: 1, 1
+  index: -1
+TX_lz_00000
+  rotate: false
+  xy: 2, 10
+  size: 123, 150
+  orig: 135, 155
+  offset: 7, 4
+  index: -1
+guanbi
+  rotate: false
+  xy: 127, 2
+  size: 76, 65
+  orig: 88, 78
+  offset: 6, 8
+  index: -1
+room_online_room_open
+  rotate: false
+  xy: 220, 91
+  size: 78, 69
+  orig: 88, 78
+  offset: 5, 5
+  index: -1

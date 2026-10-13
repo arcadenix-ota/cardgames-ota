@@ -1,0 +1,83 @@
+
+yiwen.png
+size: 297, 99
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+6-1
+  rotate: true
+  xy: 226, 10
+  size: 33, 48
+  orig: 33, 48
+  offset: 0, 0
+  index: -1
+6-10
+  rotate: true
+  xy: 226, 45
+  size: 52, 33
+  orig: 52, 33
+  offset: 0, 0
+  index: -1
+6-11
+  rotate: false
+  xy: 261, 57
+  size: 26, 40
+  orig: 28, 42
+  offset: 1, 1
+  index: -1
+6-2
+  rotate: true
+  xy: 118, 7
+  size: 90, 106
+  orig: 107, 106
+  offset: 0, 0
+  index: -1
+6-3
+  rotate: true
+  xy: 276, 4
+  size: 40, 19
+  orig: 42, 21
+  offset: 1, 1
+  index: -1
+6-4
+  rotate: false
+  xy: 273, 46
+  size: 9, 9
+  orig: 11, 11
+  offset: 1, 1
+  index: -1
+6-5
+  rotate: false
+  xy: 261, 46
+  size: 10, 9
+  orig: 12, 11
+  offset: 1, 1
+  index: -1
+6-7
+  rotate: false
+  xy: 284, 48
+  size: 11, 7
+  orig: 13, 9
+  offset: 1, 1
+  index: -1
+6-8
+  rotate: true
+  xy: 289, 71
+  size: 26, 6
+  orig: 28, 8
+  offset: 1, 1
+  index: -1
+6-9
+  rotate: false
+  xy: 226, 3
+  size: 46, 5
+  orig: 48, 7
+  offset: 1, 1
+  index: -1
+yiwen
+  rotate: true
+  xy: 2, 2
+  size: 95, 114
+  orig: 122, 130
+  offset: 14, 13
+  index: -1

@@ -1,0 +1,76 @@
+
+Escoba.png
+size: 638,205
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 370, 6
+  size: 51, 75
+  orig: 53, 78
+  offset: 1, 2
+  index: -1
+1-1
+  rotate: true
+  xy: 521, 5
+  size: 91, 112
+  orig: 96, 118
+  offset: 3, 3
+  index: -1
+7
+  rotate: true
+  xy: 423, 36
+  size: 45, 91
+  orig: 52, 95
+  offset: 3, 3
+  index: -1
+7-1
+  rotate: false
+  xy: 428, 84
+  size: 88, 119
+  orig: 93, 125
+  offset: 2, 3
+  index: -1
+71
+  rotate: true
+  xy: 521, 98
+  size: 105, 115
+  orig: 109, 120
+  offset: 2, 2
+  index: -1
+71-1
+  rotate: true
+  xy: 298, 6
+  size: 64, 70
+  orig: 66, 72
+  offset: 1, 1
+  index: -1
+bg
+  rotate: false
+  xy: 2, 14
+  size: 294, 189
+  orig: 298, 193
+  offset: 2, 2
+  index: -1
+shaoba
+  rotate: false
+  xy: 329, 83
+  size: 97, 120
+  orig: 103, 126
+  offset: 3, 3
+  index: -1
+shaoguang
+  rotate: false
+  xy: 298, 72
+  size: 29, 131
+  orig: 31, 133
+  offset: 1, 1
+  index: -1
+txt
+  rotate: false
+  xy: 423, 2
+  size: 96, 32
+  orig: 98, 34
+  offset: 1, 1
+  index: -1

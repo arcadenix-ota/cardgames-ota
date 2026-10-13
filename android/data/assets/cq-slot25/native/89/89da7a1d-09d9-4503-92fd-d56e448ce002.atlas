@@ -1,0 +1,48 @@
+
+beijing_4.png
+size: 117, 87
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+suipian-1
+  rotate: true
+  xy: 90, 47
+  size: 38, 25
+  orig: 48, 26
+  offset: 10, 1
+  index: -1
+suipian-2
+  rotate: false
+  xy: 77, 5
+  size: 31, 31
+  orig: 32, 33
+  offset: 1, 1
+  index: -1
+suipian-3
+  rotate: false
+  xy: 48, 38
+  size: 40, 47
+  orig: 41, 47
+  offset: 1, 0
+  index: -1
+suipian-4
+  rotate: false
+  xy: 48, 2
+  size: 27, 34
+  orig: 27, 36
+  offset: 0, 0
+  index: -1
+suipian-6
+  rotate: false
+  xy: 2, 32
+  size: 44, 53
+  orig: 48, 55
+  offset: 2, 0
+  index: -1
+suipian-7
+  rotate: false
+  xy: 2, 3
+  size: 44, 27
+  orig: 58, 30
+  offset: 13, 1
+  index: -1

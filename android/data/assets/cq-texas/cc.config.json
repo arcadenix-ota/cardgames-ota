@@ -1,0 +1,1225 @@
+{
+    "importBase": "import",
+    "nativeBase": "native",
+    "name": "cq-texas",
+    "deps": [],
+    "uuids": [
+        "03e8f9398",
+        "0800d59e3",
+        "0aa5c960-a065-4610-911c-d2d6be18f9dc",
+        "0aa5c960-a065-4610-911c-d2d6be18f9dc@6c48a",
+        "0aa5c960-a065-4610-911c-d2d6be18f9dc@f9941",
+        "0ae9aef65",
+        "0ec59efc2",
+        "0f67793a1",
+        "12069960-94b2-46df-a0f9-428bc1dbb811",
+        "12069960-94b2-46df-a0f9-428bc1dbb811@6c48a",
+        "12069960-94b2-46df-a0f9-428bc1dbb811@f9941",
+        "15d17493-e0ef-4fd2-853a-da8ce48728b5",
+        "2e1e8cea-144e-4ec1-9a2f-fb83cecaf6cd",
+        "30a1b704-a1a4-49b6-ba90-dccb4d1dc67d",
+        "3618b208-5d00-4b43-83dc-efd2c9098847",
+        "3618b208-5d00-4b43-83dc-efd2c9098847@6c48a",
+        "3618b208-5d00-4b43-83dc-efd2c9098847@f9941",
+        "3840b04a-8efa-4b6c-b640-d13b29c277ef",
+        "3840b04a-8efa-4b6c-b640-d13b29c277ef@6c48a",
+        "3840b04a-8efa-4b6c-b640-d13b29c277ef@f9941",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@140df",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@14b23",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@1b2b3",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@53519",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@64e62",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@65f47",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@a38cf",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@ba206",
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@ffbc4",
+        "41a96f12-719f-4038-94f8-b400b47fd3ce",
+        "41a96f12-719f-4038-94f8-b400b47fd3ce@6c48a",
+        "41a96f12-719f-4038-94f8-b400b47fd3ce@f9941",
+        "496fc611-f8c4-4772-9489-e65b6a84ba14",
+        "496fc611-f8c4-4772-9489-e65b6a84ba14@6c48a",
+        "496fc611-f8c4-4772-9489-e65b6a84ba14@f9941",
+        "52e8363a-2432-4c8f-9137-1b8e92165547",
+        "52e8363a-2432-4c8f-9137-1b8e92165547@6c48a",
+        "52e8363a-2432-4c8f-9137-1b8e92165547@f9941",
+        "67a0c78a-a21c-4703-98b0-e1bf81c4a431",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@07550",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@07e16",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@08b6c",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@11716",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@194c6",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@1ae9d",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@1ce49",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@220f0",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@3356c",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@3d3da",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@48ea2",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@4bbab",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@4e302",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@4fd52",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@54af5",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@5e6cd",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@61cd4",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@65ee2",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@68688",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@6bb0f",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@709e2",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@79256",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@7a0fc",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@7fdc1",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@85555",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@87ce4",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@8c424",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@8f09a",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@90b03",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@9595d",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@95e44",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@975ce",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@9a419",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@a9ef4",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@ad451",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@adc03",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@c710e",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@cfa14",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d047a",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d2d27",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d58f8",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d88e8",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@da1f9",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@db40a",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@de287",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@e13c7",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@e4662",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@e9cbf",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@eca69",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@ed0d2",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@f1e79",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@f2fbb",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@f5e5a",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@fbefb",
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@feb91",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@00bdc",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@0bc24",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@14910",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@33a14",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@48206",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@56a56",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@6696d",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@6746a",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@7cb23",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@91106",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@a85f6",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@c24b8",
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@cddc5",
+        "a8651950-3408-4b2b-b1b6-16e557f89010",
+        "a8651950-3408-4b2b-b1b6-16e557f89010@6c48a",
+        "a8651950-3408-4b2b-b1b6-16e557f89010@f9941",
+        "b5c3b96e-80c3-49ce-9837-3434cf229ce4",
+        "b5c3b96e-80c3-49ce-9837-3434cf229ce4@6c48a",
+        "b5c3b96e-80c3-49ce-9837-3434cf229ce4@f9941",
+        "b80ef59d-198b-4fec-98c4-fa0f01a6a7ca",
+        "b80ef59d-198b-4fec-98c4-fa0f01a6a7ca@6c48a",
+        "b80ef59d-198b-4fec-98c4-fa0f01a6a7ca@f9941",
+        "b9026ac9-d630-4a2c-83fe-cf899fc0fec9",
+        "cd8b41a3-5383-479a-980b-4d852714118e",
+        "df1346bc-c860-4049-917c-decace9d75b5",
+        "e17df5ea-8393-4823-b7f4-b5c96a786fb8",
+        "e8bfe7c5-b41d-4ed8-8a8c-a42a8ee6155e",
+        "e8bfe7c5-b41d-4ed8-8a8c-a42a8ee6155e@6c48a",
+        "e8bfe7c5-b41d-4ed8-8a8c-a42a8ee6155e@f9941",
+        "e95aada0-4b9d-44ec-b581-f8d30f451024",
+        "eab8cb43-ac59-4825-ad42-11b5426f4693",
+        "f0a7c143-81a0-4ea0-b8c7-55656b4d0cad",
+        "f0a7c143-81a0-4ea0-b8c7-55656b4d0cad@6c48a",
+        "f0a7c143-81a0-4ea0-b8c7-55656b4d0cad@f9941",
+        "f353bc73-d416-4a68-9e59-c645956996f8",
+        "f353bc73-d416-4a68-9e59-c645956996f8@6c48a",
+        "f353bc73-d416-4a68-9e59-c645956996f8@f9941",
+        "fa8005eb-32be-47e5-b774-1c62a5a2507f",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@0d2c5",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@11353",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1a018",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1a784",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1ee07",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@22c25",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@25d24",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@2a4de",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@33206",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@40945",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@40ad0",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@4b01a",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@4d344",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@64f7a",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@68997",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@68ca6",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@698de",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@6e1f0",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@6f6d3",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@70c3b",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@7a476",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@7e4df",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@82e01",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@8e08a",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@9758c",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@9a980",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@bbd33",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@cf3e1",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d07f0",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d121d",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d4ed2",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d6253",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@da026",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@da7c4",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@dc4ca",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e3896",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e54ba",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e65cd",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e6de8",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@ec2a7",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@ef0cb",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f132f",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f2d6a",
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f9e71"
+    ],
+    "paths": {
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c": [
+            "image/r0x06001200/texas/poker/texas_poker",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@11353": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_square_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@33206": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@40945": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@68997": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1ee07": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_bg_back",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@82e01": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_bg_fore",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f132f": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@6f6d3": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_10",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@7e4df": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_11",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@cf3e1": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_12",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@6e1f0": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_13",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e65cd": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e54ba": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@ef0cb": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@da7c4": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f9e71": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@64f7a": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d07f0": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_big_11",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d4ed2": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_big_12",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@22c25": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_black_big_13",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@0d2c5": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_heart_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1a018": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_heart_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@9758c": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_light",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@25d24": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_plum_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@698de": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_plum_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e6de8": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1a784": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_10",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@40ad0": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_11",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@4b01a": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_12",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@4d344": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_13",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@70c3b": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f2d6a": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e3896": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@da026": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@ec2a7": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d121d": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@7a476": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@8e08a": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_big_11",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@68ca6": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_big_12",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@2a4de": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_red_big_13",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@bbd33": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_spade_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@9a980": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_spade_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@dc4ca": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_square_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d6253": [
+            "image/r0x06001200/texas/poker/texas_poker/texas_poker_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "12069960-94b2-46df-a0f9-428bc1dbb811": [
+            "image/r0x06001200/texas/poker/texas_poker",
+            "cc.ImageAsset",
+            1
+        ],
+        "12069960-94b2-46df-a0f9-428bc1dbb811@6c48a": [
+            "image/r0x06001200/texas/poker/texas_poker/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "12069960-94b2-46df-a0f9-428bc1dbb811@f9941": [
+            "image/r0x06001200/texas/poker/texas_poker/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9": [
+            "image/r0x06001200/texas/room/texas_room",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@11716": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@68688": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figureT",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@79256": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_13",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@85555": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@f5e5a": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_add_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@eca69": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@65ee2": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_10",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@da1f9": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_11",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@975ce": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_12",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d047a": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@3d3da": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@ed0d2": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@c710e": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@9595d": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@220f0": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@f1e79": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_figure_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@9a419": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_win1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@48ea2": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_win2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@ad451": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_win3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@adc03": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_win4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@7fdc1": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_anim_win5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d2d27": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_buy_in_box",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@f2fbb": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_cal_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@08b6c": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_card_style_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@a9ef4": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_card_style_bg_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@4fd52": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_card_style_bg_zhezhao2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@07550": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_center_poker_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@cfa14": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@feb91": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@61cd4": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@1ae9d": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@95e44": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@e13c7": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@e4662": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@7a0fc": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@8c424": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@de287": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figureB",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@1ce49": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figureD",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@87ce4": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figureK",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d88e8": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figureM",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@4e302": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figureP",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@d58f8": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_figure_split",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@4bbab": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_fold_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@3356c": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_logo",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@90b03": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_nick_bg_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@709e2": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_oper_tip_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@fbefb": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_other_card_style_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@194c6": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_poker",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@54af5": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_pre_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@e9cbf": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_pre_select_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@5e6cd": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_pre_select_icon",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@6bb0f": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_send_chip_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@db40a": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_wait1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@8f09a": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_wait2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6b706901-9c26-4ee5-b3bc-311005462ab9@07e16": [
+            "image/r0x06001200/texas/room/texas_room/texas_room_wait3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "52e8363a-2432-4c8f-9137-1b8e92165547": [
+            "image/r0x06001200/texas/room/texas_room",
+            "cc.ImageAsset",
+            1
+        ],
+        "52e8363a-2432-4c8f-9137-1b8e92165547@6c48a": [
+            "image/r0x06001200/texas/room/texas_room/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "52e8363a-2432-4c8f-9137-1b8e92165547@f9941": [
+            "image/r0x06001200/texas/room/texas_room/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "b80ef59d-198b-4fec-98c4-fa0f01a6a7ca": [
+            "image/r0x06001200/texas/room/texas_room_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "b80ef59d-198b-4fec-98c4-fa0f01a6a7ca@6c48a": [
+            "image/r0x06001200/texas/room/texas_room_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "b80ef59d-198b-4fec-98c4-fa0f01a6a7ca@f9941": [
+            "image/r0x06001200/texas/room/texas_room_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "0aa5c960-a065-4610-911c-d2d6be18f9dc": [
+            "image/r0x06001200/texas/room/texas_room_chair",
+            "cc.ImageAsset",
+            1
+        ],
+        "0aa5c960-a065-4610-911c-d2d6be18f9dc@6c48a": [
+            "image/r0x06001200/texas/room/texas_room_chair/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "0aa5c960-a065-4610-911c-d2d6be18f9dc@f9941": [
+            "image/r0x06001200/texas/room/texas_room_chair/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "41a96f12-719f-4038-94f8-b400b47fd3ce": [
+            "image/r0x06001200/texas/room/texas_room_direct",
+            "cc.ImageAsset",
+            1
+        ],
+        "41a96f12-719f-4038-94f8-b400b47fd3ce@6c48a": [
+            "image/r0x06001200/texas/room/texas_room_direct/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "41a96f12-719f-4038-94f8-b400b47fd3ce@f9941": [
+            "image/r0x06001200/texas/room/texas_room_direct/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "f353bc73-d416-4a68-9e59-c645956996f8": [
+            "image/r0x06001200/texas/room/texas_room_direct_own",
+            "cc.ImageAsset",
+            1
+        ],
+        "f353bc73-d416-4a68-9e59-c645956996f8@6c48a": [
+            "image/r0x06001200/texas/room/texas_room_direct_own/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "f353bc73-d416-4a68-9e59-c645956996f8@f9941": [
+            "image/r0x06001200/texas/room/texas_room_direct_own/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "b5c3b96e-80c3-49ce-9837-3434cf229ce4": [
+            "image/r0x06001200/texas/room/texas_room_time_green",
+            "cc.ImageAsset",
+            1
+        ],
+        "b5c3b96e-80c3-49ce-9837-3434cf229ce4@6c48a": [
+            "image/r0x06001200/texas/room/texas_room_time_green/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "b5c3b96e-80c3-49ce-9837-3434cf229ce4@f9941": [
+            "image/r0x06001200/texas/room/texas_room_time_green/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e8bfe7c5-b41d-4ed8-8a8c-a42a8ee6155e": [
+            "image/r0x06001200/texas/room/texas_room_time_red",
+            "cc.ImageAsset",
+            1
+        ],
+        "e8bfe7c5-b41d-4ed8-8a8c-a42a8ee6155e@6c48a": [
+            "image/r0x06001200/texas/room/texas_room_time_red/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "e8bfe7c5-b41d-4ed8-8a8c-a42a8ee6155e@f9941": [
+            "image/r0x06001200/texas/room/texas_room_time_red/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3840b04a-8efa-4b6c-b640-d13b29c277ef": [
+            "image/r0x06001200/texas/room/texas_room_time_yellow",
+            "cc.ImageAsset",
+            1
+        ],
+        "3840b04a-8efa-4b6c-b640-d13b29c277ef@6c48a": [
+            "image/r0x06001200/texas/room/texas_room_time_yellow/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "3840b04a-8efa-4b6c-b640-d13b29c277ef@f9941": [
+            "image/r0x06001200/texas/room/texas_room_time_yellow/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "496fc611-f8c4-4772-9489-e65b6a84ba14": [
+            "image/r0x06001200/texas/room/texas_table_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "496fc611-f8c4-4772-9489-e65b6a84ba14@6c48a": [
+            "image/r0x06001200/texas/room/texas_table_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "496fc611-f8c4-4772-9489-e65b6a84ba14@f9941": [
+            "image/r0x06001200/texas/room/texas_table_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "f0a7c143-81a0-4ea0-b8c7-55656b4d0cad": [
+            "image/r0x06001200/texas/room/texas_wait_for_next_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "f0a7c143-81a0-4ea0-b8c7-55656b4d0cad@6c48a": [
+            "image/r0x06001200/texas/room/texas_wait_for_next_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "f0a7c143-81a0-4ea0-b8c7-55656b4d0cad@f9941": [
+            "image/r0x06001200/texas/room/texas_wait_for_next_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "cd8b41a3-5383-479a-980b-4d852714118e": [
+            "sounds/android/0x06001200/texas/texas_allin",
+            "cc.AudioClip",
+            1
+        ],
+        "2e1e8cea-144e-4ec1-9a2f-fb83cecaf6cd": [
+            "sounds/android/0x06001200/texas/texas_bet",
+            "cc.AudioClip",
+            1
+        ],
+        "e17df5ea-8393-4823-b7f4-b5c96a786fb8": [
+            "sounds/android/0x06001200/texas/texas_fapai",
+            "cc.AudioClip",
+            1
+        ],
+        "fa8005eb-32be-47e5-b774-1c62a5a2507f": [
+            "sounds/android/0x06001200/texas/texas_fold",
+            "cc.AudioClip",
+            1
+        ],
+        "15d17493-e0ef-4fd2-853a-da8ce48728b5": [
+            "sounds/android/0x06001200/texas/texas_lookat",
+            "cc.AudioClip",
+            1
+        ],
+        "e95aada0-4b9d-44ec-b581-f8d30f451024": [
+            "sounds/android/0x06001200/texas/texas_onecard",
+            "cc.AudioClip",
+            1
+        ],
+        "df1346bc-c860-4049-917c-decace9d75b5": [
+            "sounds/android/0x06001200/texas/texas_receivemoney",
+            "cc.AudioClip",
+            1
+        ],
+        "30a1b704-a1a4-49b6-ba90-dccb4d1dc67d": [
+            "sounds/android/0x06001200/texas/texas_sitdown",
+            "cc.AudioClip",
+            1
+        ],
+        "67a0c78a-a21c-4703-98b0-e1bf81c4a431": [
+            "sounds/android/0x06001200/texas/texas_timelimit",
+            "cc.AudioClip",
+            1
+        ],
+        "b9026ac9-d630-4a2c-83fe-cf899fc0fec9": [
+            "sounds/android/0x06001200/texas/texas_twocard",
+            "cc.AudioClip",
+            1
+        ],
+        "eab8cb43-ac59-4825-ad42-11b5426f4693": [
+            "sounds/android/0x06001200/texas/texas_win",
+            "cc.AudioClip",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@14910": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_progress",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@48206": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_add",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@91106": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_down_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@7cb23": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_add_disabled",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@6696d": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@c24b8": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@a85f6": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_btn_disable",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@6746a": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_minus",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@cddc5": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_minus_disabled",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@33a14": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_progress_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@00bdc": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_slider",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@0bc24": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_tip_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "7b25a162-6a3c-4d43-aac1-67b3e359691d@56a56": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texas_addChip_popup_up_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "a8651950-3408-4b2b-b1b6-16e557f89010": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup",
+            "cc.ImageAsset",
+            1
+        ],
+        "a8651950-3408-4b2b-b1b6-16e557f89010@6c48a": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "a8651950-3408-4b2b-b1b6-16e557f89010@f9941": [
+            "image/r0x06001200/texas/popup/addChip/texas_addChip_popup/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@53519": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_top_gamecoin_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@a38cf": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_add",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@14b23": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_col_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@65f47": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_progress",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@64e62": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_progress_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@1b2b3": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_selected",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@140df": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_tip",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@ba206": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_top_slider",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@ffbc4": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texas_buyInfo_popup_unselected",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3618b208-5d00-4b43-83dc-efd2c9098847": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup",
+            "cc.ImageAsset",
+            1
+        ],
+        "3618b208-5d00-4b43-83dc-efd2c9098847@6c48a": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "3618b208-5d00-4b43-83dc-efd2c9098847@f9941": [
+            "image/r0x06001200/texas/popup/buyInfo/texas_buyInfo_popup/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ]
+    },
+    "scenes": {},
+    "packs": {
+        "0ec59efc2": [
+            "0aa5c960-a065-4610-911c-d2d6be18f9dc@6c48a",
+            "41a96f12-719f-4038-94f8-b400b47fd3ce@6c48a",
+            "52e8363a-2432-4c8f-9137-1b8e92165547@6c48a",
+            "496fc611-f8c4-4772-9489-e65b6a84ba14@6c48a",
+            "3618b208-5d00-4b43-83dc-efd2c9098847@6c48a",
+            "3840b04a-8efa-4b6c-b640-d13b29c277ef@6c48a",
+            "12069960-94b2-46df-a0f9-428bc1dbb811@6c48a",
+            "a8651950-3408-4b2b-b1b6-16e557f89010@6c48a",
+            "b5c3b96e-80c3-49ce-9837-3434cf229ce4@6c48a",
+            "b80ef59d-198b-4fec-98c4-fa0f01a6a7ca@6c48a",
+            "e8bfe7c5-b41d-4ed8-8a8c-a42a8ee6155e@6c48a",
+            "f0a7c143-81a0-4ea0-b8c7-55656b4d0cad@6c48a",
+            "f353bc73-d416-4a68-9e59-c645956996f8@6c48a"
+        ],
+        "0f67793a1": [
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@140df",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@14b23",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@1b2b3",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@53519",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@64e62",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@65f47",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@a38cf",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@ba206",
+            "3b18b720-f70c-41c1-81e5-63bc2bfb0edb@ffbc4"
+        ],
+        "03e8f9398": [
+            "6b706901-9c26-4ee5-b3bc-311005462ab9",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@07550",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@07e16",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@08b6c",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@11716",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@194c6",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@1ae9d",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@1ce49",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@220f0",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@3356c",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@3d3da",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@48ea2",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@4bbab",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@4e302",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@4fd52",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@54af5",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@5e6cd",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@61cd4",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@65ee2",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@68688",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@6bb0f",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@709e2",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@79256",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@7a0fc",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@7fdc1",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@85555",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@87ce4",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@8c424",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@8f09a",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@90b03",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@9595d",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@95e44",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@975ce",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@9a419",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@a9ef4",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@ad451",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@adc03",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@c710e",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@cfa14",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@d047a",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@d2d27",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@d58f8",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@d88e8",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@da1f9",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@db40a",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@de287",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@e13c7",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@e4662",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@e9cbf",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@eca69",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@ed0d2",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@f1e79",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@f2fbb",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@f5e5a",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@fbefb",
+            "6b706901-9c26-4ee5-b3bc-311005462ab9@feb91"
+        ],
+        "0ae9aef65": [
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@00bdc",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@0bc24",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@14910",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@33a14",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@48206",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@56a56",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@6696d",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@6746a",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@7cb23",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@91106",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@a85f6",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@c24b8",
+            "7b25a162-6a3c-4d43-aac1-67b3e359691d@cddc5"
+        ],
+        "0800d59e3": [
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@0d2c5",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@11353",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1a018",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1a784",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@1ee07",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@22c25",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@25d24",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@2a4de",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@33206",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@40945",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@40ad0",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@4b01a",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@4d344",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@64f7a",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@68997",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@68ca6",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@698de",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@6e1f0",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@6f6d3",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@70c3b",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@7a476",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@7e4df",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@82e01",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@8e08a",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@9758c",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@9a980",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@bbd33",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@cf3e1",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d07f0",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d121d",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d4ed2",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@d6253",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@da026",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@da7c4",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@dc4ca",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e3896",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e54ba",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e65cd",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@e6de8",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@ec2a7",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@ef0cb",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f132f",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f2d6a",
+            "fc56fe1e-2bc9-435d-b19e-0bc05febf91c@f9e71"
+        ]
+    },
+    "versions": {
+        "import": [],
+        "native": []
+    },
+    "redirect": [],
+    "debug": true,
+    "extensionMap": {},
+    "hasPreloadScript": true,
+    "dependencyRelationships": {}
+}

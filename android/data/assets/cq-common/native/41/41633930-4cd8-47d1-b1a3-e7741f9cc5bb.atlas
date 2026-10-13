@@ -1,0 +1,20 @@
+
+bigwin_guang.png
+size: 718, 213
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+guang2
+  rotate: false
+  xy: 507, 2
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+guang3
+  rotate: false
+  xy: 2, 17
+  size: 503, 194
+  orig: 511, 194
+  offset: 8, 0
+  index: -1

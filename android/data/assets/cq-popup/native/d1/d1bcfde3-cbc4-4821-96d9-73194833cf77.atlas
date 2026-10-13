@@ -1,0 +1,104 @@
+
+jinzhu_tubiao.png
+size: 328, 89
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+baishen
+  rotate: false
+  xy: 87, 14
+  size: 74, 73
+  orig: 74, 73
+  offset: 0, 0
+  index: -1
+coin_001
+  rotate: false
+  xy: 283, 67
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+coin_002
+  rotate: false
+  xy: 283, 45
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+coin_003
+  rotate: true
+  xy: 283, 25
+  size: 18, 20
+  orig: 18, 20
+  offset: 0, 0
+  index: -1
+coin_004
+  rotate: false
+  xy: 305, 45
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+coin_005
+  rotate: false
+  xy: 317, 6
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: -1
+coin_006
+  rotate: true
+  xy: 163, 7
+  size: 9, 20
+  orig: 9, 20
+  offset: 0, 0
+  index: -1
+coin_007
+  rotate: true
+  xy: 305, 28
+  size: 15, 20
+  orig: 15, 20
+  offset: 0, 0
+  index: -1
+coin_008
+  rotate: false
+  xy: 305, 67
+  size: 19, 20
+  orig: 19, 20
+  offset: 0, 0
+  index: -1
+coin_009
+  rotate: false
+  xy: 295, 3
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+quan
+  rotate: false
+  xy: 2, 6
+  size: 83, 81
+  orig: 83, 84
+  offset: 0, 1
+  index: -1
+quan-1
+  rotate: true
+  xy: 163, 18
+  size: 69, 73
+  orig: 70, 75
+  offset: 1, 2
+  index: -1
+weizi
+  rotate: false
+  xy: 238, 2
+  size: 55, 21
+  orig: 55, 21
+  offset: 0, 0
+  index: -1
+yin
+  rotate: false
+  xy: 238, 25
+  size: 43, 62
+  orig: 43, 62
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,69 @@
+
+chouma.png
+size: 740, 106
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+coin_001
+  rotate: false
+  xy: 2, 2
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+coin_002
+  rotate: false
+  xy: 106, 2
+  size: 101, 102
+  orig: 103, 102
+  offset: 2, 0
+  index: -1
+coin_003
+  rotate: false
+  xy: 312, 2
+  size: 92, 102
+  orig: 102, 102
+  offset: 9, 0
+  index: -1
+coin_004
+  rotate: false
+  xy: 500, 3
+  size: 72, 101
+  orig: 103, 102
+  offset: 21, 0
+  index: -1
+coin_005
+  rotate: false
+  xy: 648, 3
+  size: 44, 101
+  orig: 102, 102
+  offset: 32, 0
+  index: -1
+coin_006
+  rotate: false
+  xy: 694, 4
+  size: 44, 100
+  orig: 102, 102
+  offset: 32, 0
+  index: -1
+coin_007
+  rotate: false
+  xy: 574, 3
+  size: 72, 101
+  orig: 103, 102
+  offset: 21, 0
+  index: -1
+coin_008
+  rotate: false
+  xy: 406, 2
+  size: 92, 102
+  orig: 102, 102
+  offset: 8, 0
+  index: -1
+coin_009
+  rotate: false
+  xy: 209, 2
+  size: 101, 102
+  orig: 103, 102
+  offset: 2, 0
+  index: -1

@@ -1,0 +1,83 @@
+
+shuitong.png
+size: 413, 120
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+bing
+  rotate: true
+  xy: 125, 17
+  size: 101, 119
+  orig: 104, 124
+  offset: 2, 3
+  index: -1
+guangdian
+  rotate: true
+  xy: 375, 45
+  size: 73, 36
+  orig: 74, 37
+  offset: 1, 0
+  index: -1
+hua1
+  rotate: false
+  xy: 191, 5
+  size: 18, 10
+  orig: 20, 12
+  offset: 1, 1
+  index: -1
+hua2
+  rotate: false
+  xy: 125, 2
+  size: 20, 13
+  orig: 22, 15
+  offset: 1, 1
+  index: -1
+hua3
+  rotate: true
+  xy: 333, 29
+  size: 13, 8
+  orig: 15, 10
+  offset: 1, 1
+  index: -1
+hua4
+  rotate: false
+  xy: 170, 3
+  size: 19, 12
+  orig: 21, 14
+  offset: 1, 1
+  index: -1
+hua5
+  rotate: false
+  xy: 147, 3
+  size: 21, 12
+  orig: 23, 14
+  offset: 1, 1
+  index: -1
+pen
+  rotate: false
+  xy: 246, 44
+  size: 95, 74
+  orig: 97, 76
+  offset: 1, 1
+  index: -1
+shui
+  rotate: false
+  xy: 2, 6
+  size: 121, 112
+  orig: 121, 112
+  offset: 0, 0
+  index: -1
+shui1
+  rotate: false
+  xy: 246, 3
+  size: 85, 39
+  orig: 85, 39
+  offset: 0, 0
+  index: -1
+shui3
+  rotate: true
+  xy: 343, 9
+  size: 109, 30
+  orig: 115, 36
+  offset: 5, 5
+  index: -1

@@ -1,0 +1,83 @@
+
+qipao.png
+size: 690, 302
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Image 1
+  rotate: false
+  xy: 158, 152
+  size: 149, 148
+  orig: 157, 153
+  offset: 1, 2
+  index: -1
+Image 2
+  rotate: false
+  xy: 2, 4
+  size: 152, 146
+  orig: 157, 153
+  offset: 1, 4
+  index: -1
+Image 3
+  rotate: false
+  xy: 2, 152
+  size: 154, 148
+  orig: 157, 153
+  offset: 1, 3
+  index: -1
+Image 4
+  rotate: true
+  xy: 156, 4
+  size: 146, 147
+  orig: 157, 153
+  offset: 4, 4
+  index: -1
+Image 5
+  rotate: false
+  xy: 309, 153
+  size: 143, 147
+  orig: 157, 153
+  offset: 6, 4
+  index: -1
+Image 6
+  rotate: false
+  xy: 454, 153
+  size: 142, 147
+  orig: 157, 153
+  offset: 6, 3
+  index: -1
+Image 8
+  rotate: false
+  xy: 305, 2
+  size: 141, 148
+  orig: 157, 153
+  offset: 8, 2
+  index: -1
+Image 9
+  rotate: false
+  xy: 448, 6
+  size: 143, 145
+  orig: 157, 153
+  offset: 6, 4
+  index: -1
+guang
+  rotate: true
+  xy: 593, 28
+  size: 92, 91
+  orig: 96, 95
+  offset: 2, 2
+  index: -1
+quan
+  rotate: true
+  xy: 598, 198
+  size: 102, 90
+  orig: 107, 102
+  offset: 4, 7
+  index: -1
+quan-di
+  rotate: false
+  xy: 598, 122
+  size: 75, 74
+  orig: 75, 74
+  offset: 0, 0
+  index: -1

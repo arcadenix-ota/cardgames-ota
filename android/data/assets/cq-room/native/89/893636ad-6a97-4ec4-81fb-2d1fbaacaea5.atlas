@@ -1,0 +1,13 @@
+
+shanguang.png
+size: 223, 219
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+guang2
+  rotate: false
+  xy: 2, 2
+  size: 219, 215
+  orig: 237, 230
+  offset: 6, 12
+  index: -1

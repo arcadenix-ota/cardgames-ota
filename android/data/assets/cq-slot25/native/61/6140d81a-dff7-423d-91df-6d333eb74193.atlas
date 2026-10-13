@@ -1,0 +1,153 @@
+
+jiasu.png
+size: 1239, 247
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+333
+  rotate: false
+  xy: 2, 10
+  size: 191, 235
+  orig: 195, 264
+  offset: 2, 14
+  index: -1
+img/71scact_00000
+  rotate: false
+  xy: 1071, 90
+  size: 53, 155
+  orig: 56, 158
+  offset: 2, 2
+  index: -1
+img/71scact_00001
+  rotate: true
+  xy: 195, 2
+  size: 61, 155
+  orig: 63, 158
+  offset: 2, 1
+  index: -1
+img/71scact_00002
+  rotate: false
+  xy: 701, 89
+  size: 65, 156
+  orig: 69, 160
+  offset: 2, 1
+  index: -1
+img/71scact_00003
+  rotate: true
+  xy: 509, 6
+  size: 57, 157
+  orig: 70, 158
+  offset: 2, 0
+  index: -1
+img/71scact_00004
+  rotate: false
+  xy: 768, 89
+  size: 65, 156
+  orig: 68, 158
+  offset: 2, 1
+  index: -1
+img/71scact_00005
+  rotate: false
+  xy: 957, 89
+  size: 45, 156
+  orig: 48, 158
+  offset: 2, 1
+  index: -1
+img/71scact_00006
+  rotate: false
+  xy: 902, 89
+  size: 53, 156
+  orig: 56, 158
+  offset: 2, 1
+  index: -1
+img/71scact_00007
+  rotate: true
+  xy: 352, 2
+  size: 61, 155
+  orig: 63, 158
+  offset: 2, 2
+  index: -1
+img/71scact_00008
+  rotate: false
+  xy: 835, 89
+  size: 65, 156
+  orig: 69, 160
+  offset: 2, 3
+  index: -1
+img/71scact_00009
+  rotate: true
+  xy: 668, 6
+  size: 57, 157
+  orig: 70, 158
+  offset: 2, 1
+  index: -1
+img/71scact_00010
+  rotate: false
+  xy: 1004, 90
+  size: 65, 155
+  orig: 68, 158
+  offset: 2, 2
+  index: -1
+img/71scact_00011
+  rotate: false
+  xy: 1126, 90
+  size: 45, 155
+  orig: 48, 158
+  offset: 2, 2
+  index: -1
+img/9999
+  rotate: true
+  xy: 195, 65
+  size: 180, 504
+  orig: 180, 504
+  offset: 0, 0
+  index: -1
+img/kuang_00000
+  rotate: true
+  xy: 827, 7
+  size: 80, 64
+  orig: 80, 64
+  offset: 0, 0
+  index: -1
+img/kuang_00001
+  rotate: true
+  xy: 893, 7
+  size: 80, 64
+  orig: 80, 64
+  offset: 0, 0
+  index: -1
+img/kuang_00002
+  rotate: true
+  xy: 959, 7
+  size: 80, 64
+  orig: 80, 64
+  offset: 0, 0
+  index: -1
+img/kuang_00003
+  rotate: true
+  xy: 1025, 8
+  size: 80, 64
+  orig: 80, 64
+  offset: 0, 0
+  index: -1
+img/kuang_00004
+  rotate: true
+  xy: 1091, 8
+  size: 80, 64
+  orig: 80, 64
+  offset: 0, 0
+  index: -1
+img/kuang_00005
+  rotate: true
+  xy: 1157, 8
+  size: 80, 64
+  orig: 80, 64
+  offset: 0, 0
+  index: -1
+img/kuang_00006
+  rotate: true
+  xy: 1173, 165
+  size: 80, 64
+  orig: 80, 64
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,55 @@
+
+beshy.png
+size: 95, 228
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+bai
+  rotate: true
+  xy: 89, 66
+  size: 76, 3
+  orig: 76, 3
+  offset: 0, 0
+  index: -1
+biyan
+  rotate: false
+  xy: 2, 65
+  size: 76, 30
+  orig: 78, 32
+  offset: 1, 1
+  index: -1
+di
+  rotate: false
+  xy: 2, 144
+  size: 91, 82
+  orig: 93, 84
+  offset: 1, 1
+  index: -1
+hong
+  rotate: false
+  xy: 2, 97
+  size: 85, 45
+  orig: 88, 48
+  offset: 2, 1
+  index: -1
+shou
+  rotate: false
+  xy: 2, 37
+  size: 74, 26
+  orig: 76, 28
+  offset: 1, 1
+  index: -1
+zhnagyan
+  rotate: false
+  xy: 2, 2
+  size: 69, 33
+  orig: 69, 33
+  offset: 0, 0
+  index: -1
+zuiba
+  rotate: true
+  xy: 73, 18
+  size: 17, 19
+  orig: 19, 21
+  offset: 1, 1
+  index: -1

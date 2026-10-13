@@ -1,0 +1,223 @@
+
+JACKPOT.png
+size: 1761, 779
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+2/jinbi_00000
+  rotate: false
+  xy: 1216, 12
+  size: 86, 86
+  orig: 102, 102
+  offset: 8, 8
+  index: -1
+2/jinbi_00001
+  rotate: true
+  xy: 1304, 2
+  size: 78, 86
+  orig: 102, 102
+  offset: 16, 8
+  index: -1
+2/jinbi_00002
+  rotate: false
+  xy: 1700, 33
+  size: 56, 86
+  orig: 103, 102
+  offset: 26, 8
+  index: -1
+2/jinbi_00003
+  rotate: false
+  xy: 1264, 146
+  size: 32, 86
+  orig: 102, 102
+  offset: 35, 8
+  index: -1
+2/jinbi_00004
+  rotate: false
+  xy: 1701, 287
+  size: 56, 86
+  orig: 103, 102
+  offset: 26, 8
+  index: -1
+2/jinbi_00005
+  rotate: true
+  xy: 732, 35
+  size: 78, 86
+  orig: 102, 102
+  offset: 16, 8
+  index: -1
+2/jinbi_00006
+  rotate: true
+  xy: 644, 28
+  size: 85, 86
+  orig: 103, 102
+  offset: 10, 8
+  index: -1
+EffDanGradingKing4.png
+  rotate: false
+  xy: 119, 6
+  size: 110, 107
+  orig: 110, 107
+  offset: 0, 0
+  index: -1
+glow1
+  rotate: false
+  xy: 1542, 36
+  size: 156, 156
+  orig: 169, 175
+  offset: 8, 10
+  index: -1
+guang1-1
+  rotate: false
+  xy: 2, 115
+  size: 905, 662
+  orig: 915, 706
+  offset: 7, 44
+  index: -1
+kuang
+  rotate: false
+  xy: 909, 617
+  size: 689, 160
+  orig: 693, 162
+  offset: 2, 1
+  index: -1
+pifeng-1
+  rotate: true
+  xy: 1062, 9
+  size: 89, 152
+  orig: 89, 152
+  offset: 0, 0
+  index: -1
+quan_00000
+  rotate: false
+  xy: 1264, 234
+  size: 123, 124
+  orig: 123, 124
+  offset: 0, 0
+  index: -1
+renwu_huzi
+  rotate: false
+  xy: 1062, 139
+  size: 67, 18
+  orig: 67, 18
+  offset: 0, 0
+  index: -1
+renwu_jita
+  rotate: true
+  xy: 1542, 194
+  size: 179, 157
+  orig: 182, 157
+  offset: 3, 0
+  index: -1
+renwu_lingdai
+  rotate: true
+  xy: 1700, 121
+  size: 71, 57
+  orig: 71, 57
+  offset: 0, 0
+  index: -1
+renwu_maozi-1
+  rotate: false
+  xy: 909, 33
+  size: 151, 124
+  orig: 151, 124
+  offset: 0, 0
+  index: -1
+renwu_maozi-1-1
+  rotate: false
+  xy: 505, 13
+  size: 137, 100
+  orig: 137, 100
+  offset: 0, 0
+  index: -1
+renwu_pifeng
+  rotate: false
+  xy: 1304, 82
+  size: 78, 150
+  orig: 78, 150
+  offset: 0, 0
+  index: -1
+renwu_shenti
+  rotate: false
+  xy: 909, 159
+  size: 220, 199
+  orig: 227, 234
+  offset: 7, 0
+  index: -1
+renwu_shou-1
+  rotate: false
+  xy: 231, 9
+  size: 168, 104
+  orig: 168, 104
+  offset: 0, 0
+  index: -1
+renwu_shou-2
+  rotate: false
+  xy: 1701, 194
+  size: 54, 91
+  orig: 54, 91
+  offset: 0, 0
+  index: -1
+renwu_shou-2-1
+  rotate: true
+  xy: 1062, 105
+  size: 32, 55
+  orig: 32, 55
+  offset: 0, 0
+  index: -1
+renwu_shou-3
+  rotate: false
+  xy: 1264, 125
+  size: 12, 19
+  orig: 12, 19
+  offset: 0, 0
+  index: -1
+xian
+  rotate: true
+  xy: 1131, 100
+  size: 258, 131
+  orig: 258, 131
+  offset: 0, 0
+  index: -1
+yezi_1
+  rotate: false
+  xy: 2, 6
+  size: 115, 107
+  orig: 115, 107
+  offset: 0, 0
+  index: -1
+yezi_2
+  rotate: false
+  xy: 401, 11
+  size: 102, 102
+  orig: 102, 102
+  offset: 0, 0
+  index: -1
+you1
+  rotate: true
+  xy: 1542, 375
+  size: 176, 161
+  orig: 176, 161
+  offset: 0, 0
+  index: -1
+yuan
+  rotate: false
+  xy: 909, 360
+  size: 485, 255
+  orig: 489, 259
+  offset: 2, 2
+  index: -1
+zhi
+  rotate: true
+  xy: 1396, 4
+  size: 611, 144
+  orig: 620, 153
+  offset: 5, 5
+  index: -1
+zuo1
+  rotate: true
+  xy: 1600, 553
+  size: 224, 159
+  orig: 224, 159
+  offset: 0, 0
+  index: -1

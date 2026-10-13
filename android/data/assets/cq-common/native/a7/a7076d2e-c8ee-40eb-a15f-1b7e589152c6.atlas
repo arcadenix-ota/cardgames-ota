@@ -1,0 +1,97 @@
+
+LaViuda.png
+size: 636, 201
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+10
+  rotate: false
+  xy: 298, 95
+  size: 103, 104
+  orig: 108, 109
+  offset: 2, 2
+  index: -1
+10-1
+  rotate: true
+  xy: 595, 39
+  size: 34, 39
+  orig: 34, 39
+  offset: 0, 0
+  index: -1
+a
+  rotate: true
+  xy: 403, 110
+  size: 89, 111
+  orig: 94, 115
+  offset: 3, 2
+  index: -1
+a-1
+  rotate: true
+  xy: 515, 40
+  size: 33, 78
+  orig: 33, 78
+  offset: 0, 0
+  index: -1
+chou-2
+  rotate: false
+  xy: 515, 7
+  size: 47, 31
+  orig: 49, 33
+  offset: 1, 1
+  index: -1
+di
+  rotate: false
+  xy: 2, 10
+  size: 294, 189
+  orig: 298, 193
+  offset: 2, 2
+  index: -1
+j
+  rotate: true
+  xy: 564, 17
+  size: 20, 42
+  orig: 20, 42
+  offset: 0, 0
+  index: -1
+j-1
+  rotate: true
+  xy: 516, 109
+  size: 90, 103
+  orig: 95, 108
+  offset: 2, 2
+  index: -1
+k
+  rotate: true
+  xy: 298, 12
+  size: 81, 110
+  orig: 86, 115
+  offset: 3, 3
+  index: -1
+k-1
+  rotate: true
+  xy: 457, 5
+  size: 23, 44
+  orig: 23, 44
+  offset: 0, 0
+  index: -1
+q
+  rotate: true
+  xy: 410, 30
+  size: 78, 103
+  orig: 82, 108
+  offset: 2, 3
+  index: -1
+q-1
+  rotate: true
+  xy: 410, 2
+  size: 26, 45
+  orig: 26, 45
+  offset: 0, 0
+  index: -1
+wenzi
+  rotate: false
+  xy: 515, 75
+  size: 115, 32
+  orig: 117, 34
+  offset: 1, 1
+  index: -1

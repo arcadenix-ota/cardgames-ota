@@ -1,0 +1,41 @@
+
+Crazy.png
+size: 235, 85
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+di
+  rotate: false
+  xy: 2, 2
+  size: 89, 81
+  orig: 89, 81
+  offset: 0, 0
+  index: -1
+shou
+  rotate: false
+  xy: 119, 50
+  size: 98, 33
+  orig: 100, 35
+  offset: 1, 1
+  index: -1
+yanhong
+  rotate: false
+  xy: 150, 7
+  size: 83, 41
+  orig: 88, 45
+  offset: 3, 2
+  index: -1
+yanjing
+  rotate: true
+  xy: 93, 23
+  size: 60, 24
+  orig: 62, 26
+  offset: 1, 1
+  index: -1
+zui
+  rotate: true
+  xy: 119, 6
+  size: 42, 29
+  orig: 44, 31
+  offset: 1, 1
+  index: -1

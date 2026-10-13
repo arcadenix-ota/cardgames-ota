@@ -1,0 +1,69 @@
+
+chouma.png
+size: 521, 90
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+jinbi/jinbi_1
+  rotate: false
+  xy: 2, 2
+  size: 86, 86
+  orig: 102, 102
+  offset: 8, 8
+  index: -1
+jinbi/jinbi_2
+  rotate: false
+  xy: 90, 2
+  size: 85, 86
+  orig: 103, 102
+  offset: 10, 8
+  index: -1
+jinbi/jinbi_9
+  rotate: false
+  xy: 90, 2
+  size: 85, 86
+  orig: 103, 102
+  offset: 10, 8
+  index: -1
+jinbi/jinbi_3
+  rotate: false
+  xy: 177, 2
+  size: 78, 86
+  orig: 102, 102
+  offset: 16, 8
+  index: -1
+jinbi/jinbi_4
+  rotate: false
+  xy: 337, 2
+  size: 56, 86
+  orig: 103, 102
+  offset: 26, 8
+  index: -1
+jinbi/jinbi_5
+  rotate: false
+  xy: 453, 2
+  size: 32, 86
+  orig: 102, 102
+  offset: 35, 8
+  index: -1
+jinbi/jinbi_6
+  rotate: false
+  xy: 487, 2
+  size: 32, 86
+  orig: 102, 102
+  offset: 35, 8
+  index: -1
+jinbi/jinbi_7
+  rotate: false
+  xy: 395, 2
+  size: 56, 86
+  orig: 103, 102
+  offset: 26, 8
+  index: -1
+jinbi/jinbi_8
+  rotate: false
+  xy: 257, 2
+  size: 78, 86
+  orig: 102, 102
+  offset: 16, 8
+  index: -1

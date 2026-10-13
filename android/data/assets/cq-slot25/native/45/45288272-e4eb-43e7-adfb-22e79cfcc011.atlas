@@ -1,0 +1,223 @@
+
+CONGRATULATIONS.png
+size: 1741, 1174
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+bq2
+  rotate: false
+  xy: 1593, 369
+  size: 92, 90
+  orig: 100, 100
+  offset: 3, 6
+  index: -1
+chouma1
+  rotate: false
+  xy: 1572, 165
+  size: 60, 46
+  orig: 60, 47
+  offset: 0, 0
+  index: -1
+chouma2
+  rotate: true
+  xy: 2, 2
+  size: 42, 45
+  orig: 42, 45
+  offset: 0, 0
+  index: -1
+chouma3
+  rotate: false
+  xy: 1562, 116
+  size: 52, 47
+  orig: 52, 47
+  offset: 0, 0
+  index: -1
+chouma4
+  rotate: false
+  xy: 1562, 67
+  size: 51, 47
+  orig: 52, 47
+  offset: 0, 0
+  index: -1
+dd_4
+  rotate: false
+  xy: 245, 23
+  size: 21, 21
+  orig: 25, 25
+  offset: 2, 2
+  index: -1
+ddx
+  rotate: false
+  xy: 1593, 292
+  size: 75, 75
+  orig: 80, 78
+  offset: 3, 3
+  index: -1
+giang-1
+  rotate: false
+  xy: 787, 529
+  size: 780, 643
+  orig: 831, 653
+  offset: 4, 5
+  index: -1
+giang-2
+  rotate: false
+  xy: 787, 12
+  size: 673, 515
+  orig: 762, 548
+  offset: 47, 33
+  index: -1
+gss
+  rotate: false
+  xy: 1462, 277
+  size: 129, 130
+  orig: 155, 137
+  offset: 14, 5
+  index: -1
+guang
+  rotate: false
+  xy: 2, 525
+  size: 783, 647
+  orig: 787, 693
+  offset: 1, 19
+  index: -1
+huomiaoxl01
+  rotate: true
+  xy: 1569, 420
+  size: 16, 22
+  orig: 108, 94
+  offset: 0, 3
+  index: -1
+huomiaoxl02
+  rotate: false
+  xy: 213, 19
+  size: 30, 25
+  orig: 108, 94
+  offset: 0, 3
+  index: -1
+huomiaoxl03
+  rotate: false
+  xy: 85, 18
+  size: 48, 26
+  orig: 108, 94
+  offset: 7, 5
+  index: -1
+huomiaoxl04
+  rotate: false
+  xy: 1687, 365
+  size: 43, 31
+  orig: 108, 94
+  offset: 13, 5
+  index: -1
+huomiaoxl05
+  rotate: false
+  xy: 135, 11
+  size: 38, 33
+  orig: 108, 94
+  offset: 24, 9
+  index: -1
+huomiaoxl06
+  rotate: true
+  xy: 175, 12
+  size: 32, 36
+  orig: 108, 94
+  offset: 35, 15
+  index: -1
+huomiaoxl07
+  rotate: false
+  xy: 49, 3
+  size: 34, 41
+  orig: 108, 94
+  offset: 42, 22
+  index: -1
+huomiaoxl08
+  rotate: false
+  xy: 1462, 8
+  size: 84, 60
+  orig: 108, 94
+  offset: 0, 11
+  index: -1
+huomiaoxl09
+  rotate: false
+  xy: 1687, 398
+  size: 46, 61
+  orig: 108, 94
+  offset: 44, 14
+  index: -1
+huomiaoxl10
+  rotate: false
+  xy: 1548, 19
+  size: 43, 46
+  orig: 108, 94
+  offset: 52, 33
+  index: -1
+huomiaoxl11
+  rotate: false
+  xy: 1572, 213
+  size: 61, 62
+  orig: 108, 94
+  offset: 37, 21
+  index: -1
+huomiaoxl12
+  rotate: false
+  xy: 1569, 438
+  size: 22, 21
+  orig: 108, 94
+  offset: 78, 65
+  index: -1
+huomiaoxl13
+  rotate: false
+  xy: 245, 2
+  size: 19, 19
+  orig: 108, 94
+  offset: 82, 68
+  index: -1
+huomiaoxl14
+  rotate: false
+  xy: 1593, 47
+  size: 18, 18
+  orig: 108, 94
+  offset: 85, 71
+  index: -1
+huomiaoxl15
+  rotate: false
+  xy: 1593, 280
+  size: 10, 10
+  orig: 108, 94
+  offset: 91, 77
+  index: -1
+kuang
+  rotate: true
+  xy: 1569, 461
+  size: 711, 170
+  orig: 713, 172
+  offset: 2, 2
+  index: -1
+mysjsp
+  rotate: false
+  xy: 2, 46
+  size: 779, 477
+  orig: 779, 478
+  offset: 0, 1
+  index: -1
+qiqiu1
+  rotate: true
+  xy: 1462, 409
+  size: 118, 105
+  orig: 118, 105
+  offset: 0, 0
+  index: -1
+qiqiu2
+  rotate: false
+  xy: 1462, 170
+  size: 108, 105
+  orig: 109, 105
+  offset: 1, 0
+  index: -1
+quan
+  rotate: false
+  xy: 1462, 70
+  size: 98, 98
+  orig: 100, 100
+  offset: 1, 1
+  index: -1

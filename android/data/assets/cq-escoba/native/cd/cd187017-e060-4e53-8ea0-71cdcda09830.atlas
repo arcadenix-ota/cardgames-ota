@@ -1,0 +1,104 @@
+
+shengli.png
+size: 1231, 427
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+C
+  rotate: false
+  xy: 1161, 337
+  size: 68, 88
+  orig: 68, 88
+  offset: 0, 0
+  index: -1
+E
+  rotate: true
+  xy: 1033, 323
+  size: 102, 126
+  orig: 102, 126
+  offset: 0, 0
+  index: -1
+O
+  rotate: true
+  xy: 869, 31
+  size: 87, 88
+  orig: 87, 88
+  offset: 0, 0
+  index: -1
+S
+  rotate: false
+  xy: 1155, 51
+  size: 64, 88
+  orig: 64, 88
+  offset: 0, 0
+  index: -1
+a
+  rotate: true
+  xy: 1033, 241
+  size: 80, 88
+  orig: 80, 88
+  offset: 0, 0
+  index: -1
+b
+  rotate: false
+  xy: 959, 10
+  size: 86, 108
+  orig: 86, 108
+  offset: 0, 0
+  index: -1
+bq2
+  rotate: false
+  xy: 1061, 49
+  size: 92, 90
+  orig: 100, 100
+  offset: 3, 6
+  index: -1
+dd_4
+  rotate: false
+  xy: 1161, 168
+  size: 21, 21
+  orig: 25, 25
+  offset: 2, 2
+  index: -1
+ddx
+  rotate: false
+  xy: 1123, 246
+  size: 75, 75
+  orig: 80, 78
+  offset: 3, 3
+  index: -1
+maozi
+  rotate: false
+  xy: 869, 120
+  size: 190, 119
+  orig: 190, 119
+  offset: 0, 0
+  index: -1
+quan
+  rotate: false
+  xy: 1061, 141
+  size: 98, 98
+  orig: 100, 100
+  offset: 1, 1
+  index: -1
+shaoba
+  rotate: false
+  xy: 869, 241
+  size: 162, 184
+  orig: 162, 184
+  offset: 0, 0
+  index: -1
+xingguang
+  rotate: false
+  xy: 2, 2
+  size: 865, 423
+  orig: 911, 493
+  offset: 28, 10
+  index: -1
+xx
+  rotate: false
+  xy: 1161, 191
+  size: 52, 53
+  orig: 59, 64
+  offset: 3, 5
+  index: -1

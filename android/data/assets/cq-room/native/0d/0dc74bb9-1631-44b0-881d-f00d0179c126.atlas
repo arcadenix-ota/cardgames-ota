@@ -1,0 +1,62 @@
+
+facai.png
+size: 225, 142
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+5-1-1
+  rotate: false
+  xy: 37, 3
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+5-1-2
+  rotate: false
+  xy: 66, 3
+  size: 27, 27
+  orig: 27, 27
+  offset: 0, 0
+  index: -1
+5-10
+  rotate: false
+  xy: 111, 7
+  size: 44, 17
+  orig: 46, 19
+  offset: 1, 1
+  index: -1
+5-11
+  rotate: false
+  xy: 2, 2
+  size: 33, 28
+  orig: 35, 30
+  offset: 1, 1
+  index: -1
+5-12
+  rotate: false
+  xy: 157, 18
+  size: 58, 6
+  orig: 60, 8
+  offset: 1, 1
+  index: -1
+5-3
+  rotate: false
+  xy: 123, 26
+  size: 100, 114
+  orig: 139, 124
+  offset: 21, 0
+  index: -1
+5-5
+  rotate: true
+  xy: 95, 5
+  size: 25, 14
+  orig: 27, 22
+  offset: 1, 6
+  index: -1
+facai
+  rotate: true
+  xy: 2, 32
+  size: 108, 119
+  orig: 122, 130
+  offset: 9, 11
+  index: -1

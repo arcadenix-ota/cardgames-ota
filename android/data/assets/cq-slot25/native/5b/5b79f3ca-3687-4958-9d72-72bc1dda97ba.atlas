@@ -1,0 +1,27 @@
+
+SPIN_anniu.png
+size: 261, 230
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+guang
+  rotate: false
+  xy: 81, 149
+  size: 178, 79
+  orig: 178, 79
+  offset: 0, 0
+  index: -1
+guangquan
+  rotate: false
+  xy: 2, 151
+  size: 77, 77
+  orig: 77, 77
+  offset: 0, 0
+  index: -1
+saoguang
+  rotate: true
+  xy: 2, 2
+  size: 145, 220
+  orig: 156, 229
+  offset: 8, 1
+  index: -1

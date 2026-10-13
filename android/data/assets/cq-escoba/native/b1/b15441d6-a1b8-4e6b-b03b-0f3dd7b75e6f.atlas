@@ -1,0 +1,20 @@
+
+shuaguang.png
+size: 512, 128
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+1-2
+  rotate: false
+  xy: 174, 2
+  size: 90, 85
+  orig: 90, 85
+  offset: 0, 0
+  index: -1
+369
+  rotate: false
+  xy: 2, 24
+  size: 170, 63
+  orig: 170, 63
+  offset: 0, 0
+  index: -1

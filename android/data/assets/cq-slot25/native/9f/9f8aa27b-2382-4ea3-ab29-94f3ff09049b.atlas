@@ -1,0 +1,90 @@
+
+guang.png
+size: 976, 1081
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+dianji_2
+  rotate: true
+  xy: 608, 753
+  size: 326, 327
+  orig: 336, 336
+  offset: 5, 5
+  index: -1
+xuanzhong1
+  rotate: true
+  xy: 721, 278
+  size: 166, 253
+  orig: 168, 255
+  offset: 1, 1
+  index: -1
+xuanzhong2
+  rotate: true
+  xy: 2, 2
+  size: 251, 191
+  orig: 253, 193
+  offset: 1, 1
+  index: -1
+xuanzhong3
+  rotate: true
+  xy: 601, 20
+  size: 252, 169
+  orig: 254, 171
+  offset: 1, 1
+  index: -1
+xuanzhong4
+  rotate: true
+  xy: 226, 273
+  size: 217, 239
+  orig: 219, 241
+  offset: 1, 1
+  index: -1
+xuanzhong5
+  rotate: false
+  xy: 427, 19
+  size: 172, 252
+  orig: 174, 254
+  offset: 1, 1
+  index: -1
+xuanzhong_zuo1
+  rotate: false
+  xy: 772, 21
+  size: 163, 255
+  orig: 165, 257
+  offset: 1, 1
+  index: -1
+xuanzhong_zuo2
+  rotate: true
+  xy: 226, 23
+  size: 248, 199
+  orig: 250, 201
+  offset: 1, 1
+  index: -1
+xuanzhong_zuo3
+  rotate: false
+  xy: 467, 274
+  size: 252, 170
+  orig: 254, 172
+  offset: 1, 1
+  index: -1
+xuanzhong_zuo4
+  rotate: false
+  xy: 2, 255
+  size: 222, 235
+  orig: 224, 237
+  offset: 1, 1
+  index: -1
+zhuanpan_waiquan2
+  rotate: false
+  xy: 2, 492
+  size: 604, 587
+  orig: 646, 628
+  offset: 21, 20
+  index: -1
+zuidaguang
+  rotate: false
+  xy: 608, 446
+  size: 306, 305
+  orig: 333, 345
+  offset: 17, 20
+  index: -1

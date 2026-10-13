@@ -1,0 +1,97 @@
+
+ganbei.png
+size: 268, 126
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+1-4
+  rotate: true
+  xy: 191, 2
+  size: 18, 14
+  orig: 20, 16
+  offset: 1, 1
+  index: -1
+1-6
+  rotate: true
+  xy: 254, 104
+  size: 20, 12
+  orig: 22, 14
+  offset: 1, 1
+  index: -1
+8-1
+  rotate: true
+  xy: 207, 13
+  size: 21, 38
+  orig: 21, 38
+  offset: 0, 0
+  index: -1
+8-2
+  rotate: false
+  xy: 118, 22
+  size: 86, 102
+  orig: 92, 102
+  offset: 0, 0
+  index: -1
+8-3
+  rotate: true
+  xy: 206, 81
+  size: 43, 46
+  orig: 45, 48
+  offset: 1, 1
+  index: -1
+8-3-1
+  rotate: true
+  xy: 118, 5
+  size: 15, 28
+  orig: 15, 28
+  offset: 0, 0
+  index: -1
+8-3-3
+  rotate: true
+  xy: 206, 36
+  size: 43, 29
+  orig: 43, 29
+  offset: 0, 0
+  index: -1
+8-4
+  rotate: true
+  xy: 237, 36
+  size: 19, 29
+  orig: 21, 31
+  offset: 1, 1
+  index: -1
+8-5
+  rotate: false
+  xy: 148, 3
+  size: 20, 17
+  orig: 22, 19
+  offset: 1, 1
+  index: -1
+8-6
+  rotate: false
+  xy: 170, 3
+  size: 19, 17
+  orig: 21, 19
+  offset: 1, 1
+  index: -1
+8-7
+  rotate: false
+  xy: 237, 57
+  size: 26, 22
+  orig: 28, 24
+  offset: 1, 1
+  index: -1
+8-8
+  rotate: true
+  xy: 254, 83
+  size: 19, 12
+  orig: 21, 14
+  offset: 1, 1
+  index: -1
+ganbei
+  rotate: true
+  xy: 2, 5
+  size: 119, 114
+  orig: 122, 130
+  offset: 2, 14
+  index: -1

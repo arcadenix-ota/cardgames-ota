@@ -1,0 +1,160 @@
+
+burro.png
+size: 136,554
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 183
+  size: 86, 60
+  orig: 88, 60
+  offset: 0, 0
+  index: -1
+2
+  rotate: true
+  xy: 75, 2
+  size: 79, 47
+  orig: 79, 47
+  offset: 0, 0
+  index: -1
+22
+  rotate: false
+  xy: 2, 245
+  size: 89, 58
+  orig: 92, 58
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 2, 122
+  size: 84, 59
+  orig: 85, 60
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 2, 368
+  size: 91, 61
+  orig: 93, 61
+  offset: 1, 0
+  index: -1
+5
+  rotate: false
+  xy: 2, 305
+  size: 91, 61
+  orig: 93, 61
+  offset: 1, 0
+  index: -1
+6
+  rotate: false
+  xy: 2, 23
+  size: 36, 33
+  orig: 37, 33
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 88, 83
+  size: 44, 42
+  orig: 49, 44
+  offset: 3, 1
+  index: -1
+maofa_1
+  rotate: false
+  xy: 95, 271
+  size: 37, 33
+  orig: 37, 33
+  offset: 0, 0
+  index: -1
+maofa_2
+  rotate: false
+  xy: 75, 105
+  size: 9, 15
+  orig: 9, 15
+  offset: 0, 0
+  index: -1
+maofa_3
+  rotate: false
+  xy: 75, 89
+  size: 9, 14
+  orig: 9, 14
+  offset: 0, 0
+  index: -1
+maofa_4
+  rotate: false
+  xy: 2, 8
+  size: 20, 13
+  orig: 20, 13
+  offset: 0, 0
+  index: -1
+maofa_5
+  rotate: true
+  xy: 40, 13
+  size: 16, 19
+  orig: 16, 19
+  offset: 0, 0
+  index: -1
+shangpaiya
+  rotate: true
+  xy: 95, 306
+  size: 62, 29
+  orig: 62, 29
+  offset: 0, 0
+  index: -1
+shetou
+  rotate: false
+  xy: 95, 370
+  size: 31, 59
+  orig: 38, 59
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 2, 431
+  size: 121, 129
+  orig: 121, 129
+  offset: 0, 0
+  index: -1
+youerduo
+  rotate: false
+  xy: 2, 58
+  size: 71, 62
+  orig: 71, 62
+  offset: 0, 0
+  index: -1
+youyankuang
+  rotate: false
+  xy: 93, 237
+  size: 38, 32
+  orig: 43, 40
+  offset: 4, 4
+  index: -1
+youyanzhu
+  rotate: false
+  xy: 126, 361
+  size: 8, 7
+  orig: 10, 9
+  offset: 1, 1
+  index: -1
+zuoerduo
+  rotate: true
+  xy: 90, 127
+  size: 108, 43
+  orig: 108, 47
+  offset: 0, 4
+  index: -1
+zuoyankuang
+  rotate: false
+  xy: 40, 31
+  size: 30, 25
+  orig: 37, 30
+  offset: 3, 3
+  index: -1
+zuoyanzhu
+  rotate: false
+  xy: 126, 352
+  size: 8, 7
+  orig: 10, 9
+  offset: 1, 1
+  index: -1

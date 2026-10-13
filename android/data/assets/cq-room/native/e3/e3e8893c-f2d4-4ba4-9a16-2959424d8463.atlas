@@ -1,0 +1,20 @@
+
+conquian_room_pot_anim.png
+size: 294, 111
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+kuang1
+  rotate: false
+  xy: 2, 48
+  size: 290, 61
+  orig: 290, 78
+  offset: 0, 0
+  index: -1
+kuang2
+  rotate: false
+  xy: 2, 2
+  size: 278, 44
+  orig: 278, 44
+  offset: 0, 0
+  index: -1

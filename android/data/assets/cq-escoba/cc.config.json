@@ -1,0 +1,2192 @@
+{
+    "importBase": "import",
+    "nativeBase": "native",
+    "name": "cq-escoba",
+    "deps": [],
+    "uuids": [
+        "043891c5-13a7-4985-805e-617f41d1964a",
+        "043891c5-13a7-4985-805e-617f41d1964a@6c48a",
+        "043891c5-13a7-4985-805e-617f41d1964a@f9941",
+        "046c6ea07",
+        "04bb76743",
+        "04bf1e870",
+        "0accd6c1-90dd-453a-b7d0-6b8beed7c5e8",
+        "0b5d6fa1-cbdc-4a1a-a8df-227c4de49c46",
+        "0ba539801",
+        "107ed453-24b0-49f0-9e40-535ed214c35d",
+        "11401f8a-b421-4f97-9247-1dcff681023e",
+        "21270ef1-be1f-458d-a540-fc2a35137dd3",
+        "248e0fdc-80c3-4775-88e1-8cfa21e68a75",
+        "2a9c67a0-6107-4134-b3fa-292eef27efb0",
+        "2fd625c9-a822-4f84-b7a1-c6c9b023937b",
+        "37faecfd-51f2-4c77-bf94-94cbddbdb2fd",
+        "37faecfd-51f2-4c77-bf94-94cbddbdb2fd@6c48a",
+        "37faecfd-51f2-4c77-bf94-94cbddbdb2fd@f9941",
+        "3bf3775d-bfd5-434f-8da6-feb125e4a232",
+        "3bf3775d-bfd5-434f-8da6-feb125e4a232@6c48a",
+        "3bf3775d-bfd5-434f-8da6-feb125e4a232@f9941",
+        "40bb6188-a02b-4a68-bce6-b4dc33fe7435",
+        "43ab6327-4442-4d3d-abf6-e376661c7732",
+        "43ab6327-4442-4d3d-abf6-e376661c7732@6c48a",
+        "43ab6327-4442-4d3d-abf6-e376661c7732@f9941",
+        "475c0c01-2063-4031-8a64-defdfcae93a9",
+        "475c0c01-2063-4031-8a64-defdfcae93a9@6c48a",
+        "475c0c01-2063-4031-8a64-defdfcae93a9@f9941",
+        "4b0ae36d-1ba5-4579-90e0-a346c55c1500",
+        "4c3bd79e-64e0-4810-98e7-b46d9128e4ce",
+        "4c3bd79e-64e0-4810-98e7-b46d9128e4ce@6c48a",
+        "4c3bd79e-64e0-4810-98e7-b46d9128e4ce@f9941",
+        "4e04cbfb-76a0-4ee4-973c-89a238e87cb0",
+        "550e2cce-39de-4eb7-ba53-193d12f70f0c",
+        "560dafe3-108c-42c0-b6f7-28e1613177c3",
+        "60edf1e5-1de4-4937-b484-9a7f5064e261",
+        "60edf1e5-1de4-4937-b484-9a7f5064e261@6c48a",
+        "60edf1e5-1de4-4937-b484-9a7f5064e261@f9941",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@16698",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@7d775",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@7fc53",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@9fd3c",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@a6812",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@bcf8a",
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@c71d0",
+        "645d75e8-b8aa-455c-b0a9-8e30e2f5cb2b",
+        "70f9f13f-2767-47dd-a095-7abc6718fcac",
+        "715a0011-971a-4dd0-bde1-a35b81a18218",
+        "79fc0112-67c3-4526-9f07-857595951176",
+        "85124ca2-e28c-4b79-8921-cee7dd366f8e",
+        "90a4777e-148a-486c-b9d2-dbbeceba6b58",
+        "9b6d300e-7cc9-4cf4-87ec-3c2cc2160b51",
+        "9da4908f-a326-4a3e-b01e-6139d287d28c",
+        "9da4908f-a326-4a3e-b01e-6139d287d28c@6c48a",
+        "9da4908f-a326-4a3e-b01e-6139d287d28c@f9941",
+        "a1a4bc04-dbc2-4144-8a56-32598292615e",
+        "a852c205-ae6e-446b-81c1-598b4bf3f611",
+        "a852c205-ae6e-446b-81c1-598b4bf3f611@6c48a",
+        "a852c205-ae6e-446b-81c1-598b4bf3f611@f9941",
+        "aa01ea2f-ed77-4655-86e6-ad53e04c3ef5",
+        "b15441d6-a1b8-4e6b-b03b-0f3dd7b75e6f",
+        "b9b10295-1d24-4c51-b8b9-ce0e55f45311",
+        "be274fde-4df6-459b-9592-e4cd237f5949",
+        "be274fde-4df6-459b-9592-e4cd237f5949@6c48a",
+        "be274fde-4df6-459b-9592-e4cd237f5949@f9941",
+        "c8d04263-c6ff-438c-9b48-89f4aaedc94a",
+        "cb8d544e-1ad8-41e7-838a-35e90ede9f31",
+        "cc7fe6b3-1bfd-4cdd-9636-b64775c3570b",
+        "cd03da6d-6e46-4e4a-a756-99467fc0b1d4",
+        "cd03da6d-6e46-4e4a-a756-99467fc0b1d4@6c48a",
+        "cd03da6d-6e46-4e4a-a756-99467fc0b1d4@f9941",
+        "cd187017-e060-4e53-8ea0-71cdcda09830",
+        "cdbfeba4-715b-4c1c-9dd0-4ba88df05bd7",
+        "cdbfeba4-715b-4c1c-9dd0-4ba88df05bd7@6c48a",
+        "cdbfeba4-715b-4c1c-9dd0-4ba88df05bd7@f9941",
+        "d9f91f83-1416-4a56-8b98-5fd5f8ca681e",
+        "d9f91f83-1416-4a56-8b98-5fd5f8ca681e@6c48a",
+        "d9f91f83-1416-4a56-8b98-5fd5f8ca681e@f9941",
+        "dd2b79bf-5646-4fe8-a23e-ca79bb9be93e",
+        "dd2b79bf-5646-4fe8-a23e-ca79bb9be93e@6c48a",
+        "dd2b79bf-5646-4fe8-a23e-ca79bb9be93e@f9941",
+        "df511f41-2451-4f46-9ddf-5525ed28b577",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@08829",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@0b5f6",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@18bbc",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@21734",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@38fab",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@3b2ea",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@5b20d",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@5dbf1",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@5fe3b",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@63f04",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@66a9e",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@68df2",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@6bd5c",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@6cd50",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@731de",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@7f3b5",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@9ea13",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@a9ad6",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@b1cf5",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@b6110",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@da086",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@dc69c",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@dd2d4",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@e069c",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@e4106",
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@fecbd",
+        "ec1cccbd-1180-4f37-88ac-3bfc34290ae5",
+        "ec1cccbd-1180-4f37-88ac-3bfc34290ae5@6c48a",
+        "ec1cccbd-1180-4f37-88ac-3bfc34290ae5@f9941",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0072f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@009e4",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@02707",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@032d7",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@04025",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@048dc",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@04fa1",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@05136",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@05b4e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@07656",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0ac2e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0d125",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0e82f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0ff26",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@120dd",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1343d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@14349",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@167d6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@177af",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1940e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1b2be",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1b658",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1cfa2",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1d195",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1d735",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1df5c",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1f7ea",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1f839",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@20945",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2210f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@22492",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@232b6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@24a37",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@262ca",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2846d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2a13c",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2a52f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2c9cf",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@30d6f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@312cf",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3174a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3206d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3248a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@33388",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@345a6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@34f46",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@37323",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@37e43",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@41596",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@416bb",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@42026",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@42ca0",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@439b6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@43fde",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@44f12",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@45c7f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@46dcc",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@46f16",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@470c0",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@51527",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@536ea",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@54125",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@54cca",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@557ae",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@56afd",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@57662",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@58b0e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5be4e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5c77e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5cb7b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5d9ee",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5df3d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5e42f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5e904",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5ef31",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@63f8d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@646d8",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@64a1a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@662f1",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@66317",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@675fb",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6869e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@68d03",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6b33e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6c186",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6d348",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@70ae7",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@71cf2",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@73074",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7a1ec",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7a394",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7ba30",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@80aba",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@81051",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8442d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@84c0b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85948",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85b16",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85e7b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@86669",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8831f",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@88646",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8a95d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8ab74",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8cb61",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8dd9a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8f552",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91178",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91af1",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91ed5",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@933fe",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@94f4a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@95c37",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@981e3",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@98899",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@98f7d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@99a82",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@9cd01",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@9e16d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a0a04",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a0ee0",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a3859",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a3905",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a4d75",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a58c2",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a6659",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a8598",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aa516",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aaa8d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aae0b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ac38d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ac777",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@adf38",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ae2ed",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ae31b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b12b6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b1af9",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b2387",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b3e3b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b4059",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b441d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b4ced",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b51e6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b743c",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b8f0c",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b8f92",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@bcb44",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@be9b1",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@bff40",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c2110",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c256d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c39a0",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c46f6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c48f0",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c5236",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c5252",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c6c8e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c6e87",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c7370",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c80ba",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c91cd",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ccccf",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@cd28a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@cfd03",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d28d8",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d3341",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4973",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4c75",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4d2c",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d5741",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d57a7",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d592b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d8b64",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d9604",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da2f8",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da63b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da941",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dba6d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dd3ca",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@de5ff",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dec4b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e103a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e48da",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e7779",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e79d8",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e955a",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e955b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e9c63",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ea825",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@eb38e",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@eb4fe",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@edd8d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f06a9",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f0b90",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f2b26",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f3d6d",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f5d8b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f5f6b",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f7fdb",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f8f59",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fa2d2",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fb0f0",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fbb93",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fe9a6",
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fefa8",
+        "efac61ba-b43b-41fa-802f-7f7962874b04",
+        "fd72d4b9-a804-4b99-b90f-ee96c4429834"
+    ],
+    "paths": {
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2": [
+            "image/r0x06001200/escoba/language/escoba_room",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@16698": [
+            "image/r0x06001200/escoba/language/escoba_room/escoba_room_green_btn_text1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@7d775": [
+            "image/r0x06001200/escoba/language/escoba_room/escoba_room_bancarota",
+            "cc.SpriteFrame",
+            1
+        ],
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@9fd3c": [
+            "image/r0x06001200/escoba/language/escoba_room/escoba_room_blue_btn_text1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@a6812": [
+            "image/r0x06001200/escoba/language/escoba_room/escoba_room_blue_btn_text2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@c71d0": [
+            "image/r0x06001200/escoba/language/escoba_room/escoba_room_green_btn_text2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@7fc53": [
+            "image/r0x06001200/escoba/language/escoba_room/escoba_room_green_btn_text3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@bcf8a": [
+            "image/r0x06001200/escoba/language/escoba_room/escoba_room_green_btn_text4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "a852c205-ae6e-446b-81c1-598b4bf3f611": [
+            "image/r0x06001200/escoba/language/escoba_room",
+            "cc.ImageAsset",
+            1
+        ],
+        "a852c205-ae6e-446b-81c1-598b4bf3f611@6c48a": [
+            "image/r0x06001200/escoba/language/escoba_room/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "a852c205-ae6e-446b-81c1-598b4bf3f611@f9941": [
+            "image/r0x06001200/escoba/language/escoba_room/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46": [
+            "image/r0x06001200/escoba/poker/escoba_poker",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@21734": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_mid_light",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@dc69c": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_0_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@63f04": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_0_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@5b20d": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_1_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@b6110": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_1_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@5dbf1": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_2_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@66a9e": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_2_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@a9ad6": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_3_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@731de": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_3_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@38fab": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_bg_back",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@dd2d4": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_bg_fore",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@7f3b5": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_big_light",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@6cd50": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@e069c": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_10",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@08829": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_10_king",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@9ea13": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_11",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@3b2ea": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_11_king",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@6bd5c": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_12",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@da086": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_12_king",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@5fe3b": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@0b5f6": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@68df2": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@fecbd": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@e4106": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@18bbc": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_num_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e46eaec6-24c7-47b8-984a-24b73a0bca46@b1cf5": [
+            "image/r0x06001200/escoba/poker/escoba_poker/escoba_poker_small_light",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3bf3775d-bfd5-434f-8da6-feb125e4a232": [
+            "image/r0x06001200/escoba/poker/escoba_poker",
+            "cc.ImageAsset",
+            1
+        ],
+        "3bf3775d-bfd5-434f-8da6-feb125e4a232@6c48a": [
+            "image/r0x06001200/escoba/poker/escoba_poker/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "3bf3775d-bfd5-434f-8da6-feb125e4a232@f9941": [
+            "image/r0x06001200/escoba/poker/escoba_poker/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f": [
+            "image/r0x06001200/escoba/room/escoba_room",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@14349": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@20945": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@22492": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@33388": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@37323": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_arrow_up",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@41596": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@42026": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@51527": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@54125": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@57662": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_jiantou1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@66317": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@73074": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@81051": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85948": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_gift_icon",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@86669": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@88646": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_K",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91178": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@98899": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5df3d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_arrow_down",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@262ca": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_arrow_down_grey",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2a13c": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_arrow_up_grey",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0ac2e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7ba30": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d28d8": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c7370": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0ff26": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d592b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@167d6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e955b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figure9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@439b6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figureB",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dba6d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figureK",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3174a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figureM",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8a95d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figureT",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6d348": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figured",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b2387": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_bet_figurep",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b1af9": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_blue_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a6659": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_click",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a58c2": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@bff40": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@98f7d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@70ae7": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fb0f0": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da2f8": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f0b90": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7a1ec": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@71cf2": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_score9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@9cd01": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_green_scorec",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@02707": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_jiantou2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5c77e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_jiantou3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4973": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b8f92": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1d195": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@44f12": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c5252": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0e82f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4d2c": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da63b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0072f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_num9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@bcb44": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_numbg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@de5ff": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_pile_shadow",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@30d6f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a0ee0": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ccccf": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d57a7": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a3859": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f5f6b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6869e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fe9a6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c2110": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_score9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ae2ed": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_red_scorec",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3248a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_score_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@009e4": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@04fa1": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f06a9": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@120dd": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8dd9a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@94f4a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8cb61": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@eb4fe": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_score9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@933fe": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_card_white_scorec",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@05136": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_chip",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c6c8e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_dealer",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f2b26": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_exit_btn_light",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@177af": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_green_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c39a0": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_grey_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@536ea": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1cfa2": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ac38d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7a394": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4c75": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2c9cf": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f3d6d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e955a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5cb7b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figure9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@58b0e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figureB",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@675fb": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figureK",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c5236": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figureM",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@adf38": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figureT",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b4ced": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figured",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@cd28a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_jc_figurep",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b4059": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_loading1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b51e6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_loading2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5be4e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_loading3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6c186": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8831f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@032d7": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@64a1a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fbb93": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@54cca": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b8f0c": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c48f0": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5e42f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@646d8": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_B",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8ab74": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_K",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@80aba": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_M",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5ef31": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_T",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@45c7f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_p",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@557ae": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_lost_figure_sub",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dd3ca": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_msg_left",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fefa8": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_msg_right",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a3905": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_nick_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1f7ea": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_nick_gray_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@9e16d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_other_seat_album",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@34f46": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_other_seat_album_gray_di",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@05b4e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_other_seat_album_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1d735": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_own_album",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0d125": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_own_album_gray_di",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e48da": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_own_album_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@24a37": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_robot_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c6e87": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8442d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1b2be": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@edd8d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@662f1": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c80ba": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1343d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2a52f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a0a04": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_score_board_text9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2210f": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_guan1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e103a": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_guan2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@95c37": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_guan3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2846d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_guanhui1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aa516": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_guanhui2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@345a6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_guanhui3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6b33e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_icon1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@46dcc": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_icon2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c46f6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_icon3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a4d75": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_icon4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@eb38e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_icon5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@981e3": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aae0b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@312cf": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a8598": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@cfd03": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1f839": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91ed5": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@99a82": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ac777": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@37e43": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_lose_num9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f5d8b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_mask",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d9604": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_tipBg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e79d8": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d8b64": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fa2d2": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f7fdb": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dec4b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ae31b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b3e3b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@04025": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85e7b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85b16": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b743c": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_scoreboard_win_num9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aaa8d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_seat_robot",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b441d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_seat_robot_anim_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@84c0b": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_seat_robot_anim_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3206d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_seat_robot_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e7779": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_seat_tag",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c256d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_sitdown",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d5741": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@07656": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@56afd": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@be9b1": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5d9ee": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f8f59": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8f552": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c91cd": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d3341": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1b658": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_star_num9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@416bb": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_watching_point",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1940e": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91af1": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e9c63": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1df5c": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@68d03": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b12b6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@63f8d": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@42ca0": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@470c0": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5e904": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@232b6": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_B",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@46f16": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_M",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@048dc": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_T",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@43fde": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_add",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da941": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_d",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ea825": [
+            "image/r0x06001200/escoba/room/escoba_room/escoba_room_win_figure_p",
+            "cc.SpriteFrame",
+            1
+        ],
+        "be274fde-4df6-459b-9592-e4cd237f5949": [
+            "image/r0x06001200/escoba/room/escoba_room",
+            "cc.ImageAsset",
+            1
+        ],
+        "be274fde-4df6-459b-9592-e4cd237f5949@6c48a": [
+            "image/r0x06001200/escoba/room/escoba_room/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "be274fde-4df6-459b-9592-e4cd237f5949@f9941": [
+            "image/r0x06001200/escoba/room/escoba_room/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "60edf1e5-1de4-4937-b484-9a7f5064e261": [
+            "image/r0x06001200/escoba/room/escoba_room_time_green",
+            "cc.ImageAsset",
+            1
+        ],
+        "60edf1e5-1de4-4937-b484-9a7f5064e261@6c48a": [
+            "image/r0x06001200/escoba/room/escoba_room_time_green/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "60edf1e5-1de4-4937-b484-9a7f5064e261@f9941": [
+            "image/r0x06001200/escoba/room/escoba_room_time_green/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "cd03da6d-6e46-4e4a-a756-99467fc0b1d4": [
+            "image/r0x06001200/escoba/room/escoba_room_time_red",
+            "cc.ImageAsset",
+            1
+        ],
+        "cd03da6d-6e46-4e4a-a756-99467fc0b1d4@6c48a": [
+            "image/r0x06001200/escoba/room/escoba_room_time_red/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "cd03da6d-6e46-4e4a-a756-99467fc0b1d4@f9941": [
+            "image/r0x06001200/escoba/room/escoba_room_time_red/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "43ab6327-4442-4d3d-abf6-e376661c7732": [
+            "image/r0x06001200/escoba/room/escoba_room_time_yellow",
+            "cc.ImageAsset",
+            1
+        ],
+        "43ab6327-4442-4d3d-abf6-e376661c7732@6c48a": [
+            "image/r0x06001200/escoba/room/escoba_room_time_yellow/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "43ab6327-4442-4d3d-abf6-e376661c7732@f9941": [
+            "image/r0x06001200/escoba/room/escoba_room_time_yellow/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "475c0c01-2063-4031-8a64-defdfcae93a9": [
+            "image/r0x06001200/escoba/room/room_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "475c0c01-2063-4031-8a64-defdfcae93a9@6c48a": [
+            "image/r0x06001200/escoba/room/room_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "475c0c01-2063-4031-8a64-defdfcae93a9@f9941": [
+            "image/r0x06001200/escoba/room/room_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "043891c5-13a7-4985-805e-617f41d1964a": [
+            "image/r0x06001200/escoba/room/room_center_area",
+            "cc.ImageAsset",
+            1
+        ],
+        "043891c5-13a7-4985-805e-617f41d1964a@6c48a": [
+            "image/r0x06001200/escoba/room/room_center_area/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "043891c5-13a7-4985-805e-617f41d1964a@f9941": [
+            "image/r0x06001200/escoba/room/room_center_area/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "cdbfeba4-715b-4c1c-9dd0-4ba88df05bd7": [
+            "image/r0x06001200/escoba/room/room_wait_for_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "cdbfeba4-715b-4c1c-9dd0-4ba88df05bd7@6c48a": [
+            "image/r0x06001200/escoba/room/room_wait_for_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "cdbfeba4-715b-4c1c-9dd0-4ba88df05bd7@f9941": [
+            "image/r0x06001200/escoba/room/room_wait_for_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "cd187017-e060-4e53-8ea0-71cdcda09830": [
+            "image/r0x06001200/escoba/room/shengli",
+            "cc.Asset",
+            1
+        ],
+        "0b5d6fa1-cbdc-4a1a-a8df-227c4de49c46": [
+            "image/r0x06001200/escoba/room/shengli",
+            "sp.SkeletonData",
+            1
+        ],
+        "4c3bd79e-64e0-4810-98e7-b46d9128e4ce": [
+            "image/r0x06001200/escoba/room/shengli",
+            "cc.ImageAsset",
+            1
+        ],
+        "4c3bd79e-64e0-4810-98e7-b46d9128e4ce@6c48a": [
+            "image/r0x06001200/escoba/room/shengli/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "4c3bd79e-64e0-4810-98e7-b46d9128e4ce@f9941": [
+            "image/r0x06001200/escoba/room/shengli/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "b15441d6-a1b8-4e6b-b03b-0f3dd7b75e6f": [
+            "image/r0x06001200/escoba/room/shuaguang",
+            "cc.Asset",
+            1
+        ],
+        "40bb6188-a02b-4a68-bce6-b4dc33fe7435": [
+            "image/r0x06001200/escoba/room/shuaguang",
+            "sp.SkeletonData",
+            1
+        ],
+        "37faecfd-51f2-4c77-bf94-94cbddbdb2fd": [
+            "image/r0x06001200/escoba/room/shuaguang",
+            "cc.ImageAsset",
+            1
+        ],
+        "37faecfd-51f2-4c77-bf94-94cbddbdb2fd@6c48a": [
+            "image/r0x06001200/escoba/room/shuaguang/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "37faecfd-51f2-4c77-bf94-94cbddbdb2fd@f9941": [
+            "image/r0x06001200/escoba/room/shuaguang/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "4b0ae36d-1ba5-4579-90e0-a346c55c1500": [
+            "image/r0x06001200/escoba/room/start",
+            "cc.Asset",
+            1
+        ],
+        "b9b10295-1d24-4c51-b8b9-ce0e55f45311": [
+            "image/r0x06001200/escoba/room/start",
+            "sp.SkeletonData",
+            1
+        ],
+        "d9f91f83-1416-4a56-8b98-5fd5f8ca681e": [
+            "image/r0x06001200/escoba/room/start",
+            "cc.ImageAsset",
+            1
+        ],
+        "d9f91f83-1416-4a56-8b98-5fd5f8ca681e@6c48a": [
+            "image/r0x06001200/escoba/room/start/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "d9f91f83-1416-4a56-8b98-5fd5f8ca681e@f9941": [
+            "image/r0x06001200/escoba/room/start/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "0accd6c1-90dd-453a-b7d0-6b8beed7c5e8": [
+            "image/r0x06001200/escoba/room/touxiang",
+            "cc.Asset",
+            1
+        ],
+        "645d75e8-b8aa-455c-b0a9-8e30e2f5cb2b": [
+            "image/r0x06001200/escoba/room/touxiang",
+            "sp.SkeletonData",
+            1
+        ],
+        "ec1cccbd-1180-4f37-88ac-3bfc34290ae5": [
+            "image/r0x06001200/escoba/room/touxiang",
+            "cc.ImageAsset",
+            1
+        ],
+        "ec1cccbd-1180-4f37-88ac-3bfc34290ae5@6c48a": [
+            "image/r0x06001200/escoba/room/touxiang/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "ec1cccbd-1180-4f37-88ac-3bfc34290ae5@f9941": [
+            "image/r0x06001200/escoba/room/touxiang/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "715a0011-971a-4dd0-bde1-a35b81a18218": [
+            "image/r0x06001200/escoba/room/win",
+            "cc.Asset",
+            1
+        ],
+        "560dafe3-108c-42c0-b6f7-28e1613177c3": [
+            "image/r0x06001200/escoba/room/win",
+            "sp.SkeletonData",
+            1
+        ],
+        "dd2b79bf-5646-4fe8-a23e-ca79bb9be93e": [
+            "image/r0x06001200/escoba/room/win",
+            "cc.ImageAsset",
+            1
+        ],
+        "dd2b79bf-5646-4fe8-a23e-ca79bb9be93e@6c48a": [
+            "image/r0x06001200/escoba/room/win/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "dd2b79bf-5646-4fe8-a23e-ca79bb9be93e@f9941": [
+            "image/r0x06001200/escoba/room/win/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "9b6d300e-7cc9-4cf4-87ec-3c2cc2160b51": [
+            "image/r0x06001200/escoba/room/xipai",
+            "cc.Asset",
+            1
+        ],
+        "fd72d4b9-a804-4b99-b90f-ee96c4429834": [
+            "image/r0x06001200/escoba/room/xipai",
+            "sp.SkeletonData",
+            1
+        ],
+        "9da4908f-a326-4a3e-b01e-6139d287d28c": [
+            "image/r0x06001200/escoba/room/xipai",
+            "cc.ImageAsset",
+            1
+        ],
+        "9da4908f-a326-4a3e-b01e-6139d287d28c@6c48a": [
+            "image/r0x06001200/escoba/room/xipai/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "9da4908f-a326-4a3e-b01e-6139d287d28c@f9941": [
+            "image/r0x06001200/escoba/room/xipai/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "21270ef1-be1f-458d-a540-fc2a35137dd3": [
+            "sounds/android/0x06001200/escoba/escoba_chipai",
+            "cc.AudioClip",
+            1
+        ],
+        "4e04cbfb-76a0-4ee4-973c-89a238e87cb0": [
+            "sounds/android/0x06001200/escoba/escoba_escoba_anim",
+            "cc.AudioClip",
+            1
+        ],
+        "70f9f13f-2767-47dd-a095-7abc6718fcac": [
+            "sounds/android/0x06001200/escoba/escoba_escoba_chip_fly",
+            "cc.AudioClip",
+            1
+        ],
+        "cc7fe6b3-1bfd-4cdd-9636-b64775c3570b": [
+            "sounds/android/0x06001200/escoba/escoba_fapai",
+            "cc.AudioClip",
+            1
+        ],
+        "cb8d544e-1ad8-41e7-838a-35e90ede9f31": [
+            "sounds/android/0x06001200/escoba/escoba_flush_card",
+            "cc.AudioClip",
+            1
+        ],
+        "107ed453-24b0-49f0-9e40-535ed214c35d": [
+            "sounds/android/0x06001200/escoba/escoba_gameStart",
+            "cc.AudioClip",
+            1
+        ],
+        "11401f8a-b421-4f97-9247-1dcff681023e": [
+            "sounds/android/0x06001200/escoba/escoba_hand_card_insert",
+            "cc.AudioClip",
+            1
+        ],
+        "aa01ea2f-ed77-4655-86e6-ad53e04c3ef5": [
+            "sounds/android/0x06001200/escoba/escoba_hand_card_zhankai",
+            "cc.AudioClip",
+            1
+        ],
+        "90a4777e-148a-486c-b9d2-dbbeceba6b58": [
+            "sounds/android/0x06001200/escoba/escoba_lost",
+            "cc.AudioClip",
+            1
+        ],
+        "79fc0112-67c3-4526-9f07-857595951176": [
+            "sounds/android/0x06001200/escoba/escoba_myturn",
+            "cc.AudioClip",
+            1
+        ],
+        "efac61ba-b43b-41fa-802f-7f7962874b04": [
+            "sounds/android/0x06001200/escoba/escoba_outcard",
+            "cc.AudioClip",
+            1
+        ],
+        "2fd625c9-a822-4f84-b7a1-c6c9b023937b": [
+            "sounds/android/0x06001200/escoba/escoba_pot_chip_move",
+            "cc.AudioClip",
+            1
+        ],
+        "550e2cce-39de-4eb7-ba53-193d12f70f0c": [
+            "sounds/android/0x06001200/escoba/escoba_pot_chip_show",
+            "cc.AudioClip",
+            1
+        ],
+        "248e0fdc-80c3-4775-88e1-8cfa21e68a75": [
+            "sounds/android/0x06001200/escoba/escoba_scoreboard_itme",
+            "cc.AudioClip",
+            1
+        ],
+        "df511f41-2451-4f46-9ddf-5525ed28b577": [
+            "sounds/android/0x06001200/escoba/escoba_scoreboard_move",
+            "cc.AudioClip",
+            1
+        ],
+        "c8d04263-c6ff-438c-9b48-89f4aaedc94a": [
+            "sounds/android/0x06001200/escoba/escoba_selectcard",
+            "cc.AudioClip",
+            1
+        ],
+        "2a9c67a0-6107-4134-b3fa-292eef27efb0": [
+            "sounds/android/0x06001200/escoba/escoba_sitdown",
+            "cc.AudioClip",
+            1
+        ],
+        "85124ca2-e28c-4b79-8921-cee7dd366f8e": [
+            "sounds/android/0x06001200/escoba/escoba_timelimit",
+            "cc.AudioClip",
+            1
+        ],
+        "a1a4bc04-dbc2-4144-8a56-32598292615e": [
+            "sounds/android/0x06001200/escoba/escoba_win",
+            "cc.AudioClip",
+            1
+        ]
+    },
+    "scenes": {},
+    "packs": {
+        "04bb76743": [
+            "3bf3775d-bfd5-434f-8da6-feb125e4a232@6c48a",
+            "4c3bd79e-64e0-4810-98e7-b46d9128e4ce@6c48a",
+            "9da4908f-a326-4a3e-b01e-6139d287d28c@6c48a",
+            "37faecfd-51f2-4c77-bf94-94cbddbdb2fd@6c48a",
+            "43ab6327-4442-4d3d-abf6-e376661c7732@6c48a",
+            "60edf1e5-1de4-4937-b484-9a7f5064e261@6c48a",
+            "475c0c01-2063-4031-8a64-defdfcae93a9@6c48a",
+            "043891c5-13a7-4985-805e-617f41d1964a@6c48a",
+            "a852c205-ae6e-446b-81c1-598b4bf3f611@6c48a",
+            "be274fde-4df6-459b-9592-e4cd237f5949@6c48a",
+            "cd03da6d-6e46-4e4a-a756-99467fc0b1d4@6c48a",
+            "cdbfeba4-715b-4c1c-9dd0-4ba88df05bd7@6c48a",
+            "d9f91f83-1416-4a56-8b98-5fd5f8ca681e@6c48a",
+            "dd2b79bf-5646-4fe8-a23e-ca79bb9be93e@6c48a",
+            "ec1cccbd-1180-4f37-88ac-3bfc34290ae5@6c48a"
+        ],
+        "046c6ea07": [
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2",
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@16698",
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@7d775",
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@7fc53",
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@9fd3c",
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@a6812",
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@bcf8a",
+            "61e610a7-c2ad-4957-9a5a-2dbe0506abc2@c71d0"
+        ],
+        "0ba539801": [
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@08829",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@0b5f6",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@18bbc",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@21734",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@38fab",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@3b2ea",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@5b20d",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@5dbf1",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@5fe3b",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@63f04",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@66a9e",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@68df2",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@6bd5c",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@6cd50",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@731de",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@7f3b5",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@9ea13",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@a9ad6",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@b1cf5",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@b6110",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@da086",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@dc69c",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@dd2d4",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@e069c",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@e4106",
+            "e46eaec6-24c7-47b8-984a-24b73a0bca46@fecbd"
+        ],
+        "04bf1e870": [
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0072f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@009e4",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@02707",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@032d7",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@04025",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@048dc",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@04fa1",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@05136",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@05b4e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@07656",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0ac2e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0d125",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0e82f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@0ff26",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@120dd",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1343d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@14349",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@167d6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@177af",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1940e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1b2be",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1b658",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1cfa2",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1d195",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1d735",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1df5c",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1f7ea",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@1f839",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@20945",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2210f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@22492",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@232b6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@24a37",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@262ca",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2846d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2a13c",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2a52f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@2c9cf",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@30d6f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@312cf",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3174a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3206d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@3248a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@33388",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@345a6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@34f46",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@37323",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@37e43",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@41596",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@416bb",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@42026",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@42ca0",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@439b6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@43fde",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@44f12",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@45c7f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@46dcc",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@46f16",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@470c0",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@51527",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@536ea",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@54125",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@54cca",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@557ae",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@56afd",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@57662",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@58b0e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5be4e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5c77e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5cb7b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5d9ee",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5df3d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5e42f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5e904",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@5ef31",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@63f8d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@646d8",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@64a1a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@662f1",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@66317",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@675fb",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6869e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@68d03",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6b33e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6c186",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@6d348",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@70ae7",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@71cf2",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@73074",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7a1ec",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7a394",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@7ba30",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@80aba",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@81051",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8442d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@84c0b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85948",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85b16",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@85e7b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@86669",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8831f",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@88646",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8a95d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8ab74",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8cb61",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8dd9a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@8f552",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91178",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91af1",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@91ed5",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@933fe",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@94f4a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@95c37",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@981e3",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@98899",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@98f7d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@99a82",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@9cd01",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@9e16d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a0a04",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a0ee0",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a3859",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a3905",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a4d75",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a58c2",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a6659",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@a8598",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aa516",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aaa8d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@aae0b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ac38d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ac777",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@adf38",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ae2ed",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ae31b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b12b6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b1af9",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b2387",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b3e3b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b4059",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b441d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b4ced",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b51e6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b743c",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b8f0c",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@b8f92",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@bcb44",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@be9b1",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@bff40",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c2110",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c256d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c39a0",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c46f6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c48f0",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c5236",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c5252",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c6c8e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c6e87",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c7370",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c80ba",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@c91cd",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ccccf",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@cd28a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@cfd03",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d28d8",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d3341",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4973",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4c75",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d4d2c",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d5741",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d57a7",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d592b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d8b64",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@d9604",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da2f8",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da63b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@da941",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dba6d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dd3ca",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@de5ff",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@dec4b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e103a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e48da",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e7779",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e79d8",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e955a",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e955b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@e9c63",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@ea825",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@eb38e",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@eb4fe",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@edd8d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f06a9",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f0b90",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f2b26",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f3d6d",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f5d8b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f5f6b",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f7fdb",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@f8f59",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fa2d2",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fb0f0",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fbb93",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fe9a6",
+            "ef6c5c3f-96a7-43b2-8982-4457f1321f9f@fefa8"
+        ]
+    },
+    "versions": {
+        "import": [],
+        "native": []
+    },
+    "redirect": [],
+    "debug": true,
+    "extensionMap": {},
+    "hasPreloadScript": true,
+    "dependencyRelationships": {}
+}

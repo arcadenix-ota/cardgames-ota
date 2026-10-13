@@ -1,0 +1,76 @@
+
+Smoke.png
+size: 396,352
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: false
+  xy: 2, 277
+  size: 74, 73
+  orig: 74, 73
+  offset: 0, 0
+  index: -1
+10
+  rotate: false
+  xy: 2, 16
+  size: 121, 132
+  orig: 121, 132
+  offset: 0, 0
+  index: -1
+2
+  rotate: true
+  xy: 78, 263
+  size: 87, 88
+  orig: 87, 88
+  offset: 0, 0
+  index: -1
+3
+  rotate: true
+  xy: 168, 249
+  size: 101, 106
+  orig: 101, 106
+  offset: 0, 0
+  index: -1
+4
+  rotate: true
+  xy: 276, 244
+  size: 106, 115
+  orig: 106, 115
+  offset: 0, 0
+  index: -1
+5
+  rotate: true
+  xy: 2, 150
+  size: 111, 122
+  orig: 111, 122
+  offset: 0, 0
+  index: -1
+6
+  rotate: true
+  xy: 126, 135
+  size: 112, 127
+  orig: 112, 127
+  offset: 0, 0
+  index: -1
+7
+  rotate: true
+  xy: 255, 125
+  size: 117, 130
+  orig: 117, 130
+  offset: 0, 0
+  index: -1
+8
+  rotate: true
+  xy: 125, 2
+  size: 121, 133
+  orig: 121, 133
+  offset: 0, 0
+  index: -1
+9
+  rotate: true
+  xy: 260, 2
+  size: 121, 134
+  orig: 121, 134
+  offset: 0, 0
+  index: -1

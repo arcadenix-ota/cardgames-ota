@@ -1,0 +1,132 @@
+
+quantou.png
+size: 1665, 585
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+1
+  rotate: false
+  xy: 1383, 34
+  size: 111, 117
+  orig: 123, 127
+  offset: 5, 5
+  index: -1
+2
+  rotate: false
+  xy: 1473, 385
+  size: 184, 198
+  orig: 206, 209
+  offset: 14, 6
+  index: -1
+3
+  rotate: true
+  xy: 1076, 368
+  size: 215, 208
+  orig: 222, 218
+  offset: 1, 7
+  index: -1
+4
+  rotate: false
+  xy: 1041, 92
+  size: 211, 220
+  orig: 227, 230
+  offset: 11, 6
+  index: -1
+5
+  rotate: false
+  xy: 1449, 170
+  size: 200, 203
+  orig: 239, 218
+  offset: 19, 11
+  index: -1
+7
+  rotate: true
+  xy: 824, 82
+  size: 230, 215
+  orig: 232, 223
+  offset: 1, 7
+  index: -1
+8
+  rotate: true
+  xy: 1286, 375
+  size: 208, 185
+  orig: 211, 191
+  offset: 2, 1
+  index: -1
+9
+  rotate: true
+  xy: 1254, 153
+  size: 213, 193
+  orig: 248, 195
+  offset: 3, 1
+  index: -1
+guang
+  rotate: true
+  xy: 1254, 2
+  size: 149, 127
+  orig: 153, 143
+  offset: 1, 2
+  index: -1
+quantou
+  rotate: true
+  xy: 1041, 5
+  size: 85, 98
+  orig: 87, 100
+  offset: 1, 1
+  index: -1
+yanwu1-1
+  rotate: false
+  xy: 1496, 13
+  size: 167, 155
+  orig: 399, 333
+  offset: 113, 56
+  index: -1
+yanwu1-2
+  rotate: true
+  xy: 295, 291
+  size: 292, 235
+  orig: 399, 333
+  offset: 0, 32
+  index: -1
+yanwu1-3
+  rotate: false
+  xy: 812, 314
+  size: 262, 269
+  orig: 399, 333
+  offset: 66, 23
+  index: -1
+yanwu1-4
+  rotate: true
+  xy: 264, 6
+  size: 282, 279
+  orig: 399, 333
+  offset: 56, 18
+  index: -1
+yanwu1-5
+  rotate: false
+  xy: 2, 290
+  size: 291, 293
+  orig: 399, 333
+  offset: 47, 10
+  index: -1
+yanwu1-6
+  rotate: true
+  xy: 532, 295
+  size: 288, 278
+  orig: 399, 333
+  offset: 53, 25
+  index: -1
+yanwu1-7
+  rotate: true
+  xy: 545, 6
+  size: 287, 277
+  orig: 399, 333
+  offset: 53, 19
+  index: -1
+yanwu1-8
+  rotate: true
+  xy: 2, 4
+  size: 284, 260
+  orig: 399, 333
+  offset: 56, 51
+  index: -1

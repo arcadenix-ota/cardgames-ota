@@ -1,0 +1,27 @@
+
+chuanglian2.png
+size: 667,245
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shachuang1-1
+  rotate: true
+  xy: 2, 47
+  size: 196, 663
+  orig: 196, 663
+  offset: 0, 0
+  index: -1
+shengzi1-1
+  rotate: true
+  xy: 2, 2
+  size: 43, 306
+  orig: 43, 306
+  offset: 0, 0
+  index: -1
+shengzi1-2
+  rotate: true
+  xy: 310, 9
+  size: 36, 230
+  orig: 36, 230
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,48 @@
+
+conquian_room_pot_light_anim.png
+size: 309, 580
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+POT_0
+  rotate: true
+  xy: 2, 272
+  size: 306, 305
+  orig: 308, 308
+  offset: 1, 2
+  index: -1
+POT_1
+  rotate: true
+  xy: 154, 2
+  size: 124, 152
+  orig: 155, 152
+  offset: 15, 0
+  index: -1
+POT_2
+  rotate: true
+  xy: 154, 128
+  size: 142, 149
+  orig: 155, 152
+  offset: 3, 0
+  index: -1
+POT_3
+  rotate: true
+  xy: 154, 128
+  size: 142, 149
+  orig: 155, 152
+  offset: 3, 0
+  index: -1
+POT_4
+  rotate: true
+  xy: 2, 122
+  size: 148, 150
+  orig: 155, 152
+  offset: 2, 1
+  index: -1
+jiangbei1
+  rotate: true
+  xy: 2, 94
+  size: 26, 31
+  orig: 26, 32
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,48 @@
+
+bonusgame.png
+size: 1809, 555
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+BONUS
+  rotate: false
+  xy: 879, 174
+  size: 564, 167
+  orig: 565, 168
+  offset: 1, 0
+  index: -1
+GAME
+  rotate: false
+  xy: 879, 2
+  size: 511, 170
+  orig: 516, 174
+  offset: 3, 2
+  index: -1
+guang
+  rotate: true
+  xy: 1392, 83
+  size: 89, 83
+  orig: 89, 83
+  offset: 0, 0
+  index: -1
+guang1
+  rotate: false
+  xy: 1445, 192
+  size: 362, 361
+  orig: 364, 363
+  offset: 1, 1
+  index: -1
+guang2
+  rotate: false
+  xy: 879, 343
+  size: 544, 210
+  orig: 544, 210
+  offset: 0, 0
+  index: -1
+gung
+  rotate: false
+  xy: 2, 7
+  size: 875, 546
+  orig: 1010, 601
+  offset: 60, 24
+  index: -1

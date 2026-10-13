@@ -1,0 +1,48 @@
+
+bye.png
+size: 98, 182
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+bye
+  rotate: false
+  xy: 2, 26
+  size: 52, 39
+  orig: 54, 41
+  offset: 1, 1
+  index: -1
+di
+  rotate: false
+  xy: 2, 99
+  size: 90, 81
+  orig: 92, 83
+  offset: 1, 1
+  index: -1
+meimao
+  rotate: false
+  xy: 2, 5
+  size: 44, 19
+  orig: 46, 21
+  offset: 1, 1
+  index: -1
+shou
+  rotate: false
+  xy: 56, 2
+  size: 40, 46
+  orig: 42, 48
+  offset: 1, 1
+  index: -1
+xiao
+  rotate: false
+  xy: 2, 67
+  size: 59, 30
+  orig: 65, 35
+  offset: 1, 4
+  index: -1
+yanjing
+  rotate: true
+  xy: 63, 50
+  size: 47, 31
+  orig: 49, 33
+  offset: 1, 1
+  index: -1

@@ -1,0 +1,13 @@
+
+lizi.png
+size: 660, 83
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+image/dian
+  rotate: false
+  xy: 2, 2
+  size: 656, 79
+  orig: 657, 80
+  offset: 1, 0
+  index: -1

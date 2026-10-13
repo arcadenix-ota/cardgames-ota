@@ -1,0 +1,118 @@
+
+posui.png
+size: 1498, 545
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+baishen1
+  rotate: false
+  xy: 922, 222
+  size: 461, 321
+  orig: 463, 321
+  offset: 2, 0
+  index: -1
+guang1
+  rotate: false
+  xy: 2, 151
+  size: 506, 392
+  orig: 562, 423
+  offset: 29, 11
+  index: -1
+guang2
+  rotate: false
+  xy: 510, 160
+  size: 410, 383
+  orig: 466, 449
+  offset: 30, 36
+  index: -1
+guang3
+  rotate: false
+  xy: 954, 28
+  size: 135, 131
+  orig: 138, 140
+  offset: 2, 5
+  index: -1
+light02_06
+  rotate: true
+  xy: 341, 2
+  size: 147, 151
+  orig: 159, 162
+  offset: 11, 11
+  index: -1
+posui10
+  rotate: false
+  xy: 675, 9
+  size: 151, 149
+  orig: 151, 149
+  offset: 0, 0
+  index: -1
+posui11
+  rotate: true
+  xy: 1385, 371
+  size: 172, 107
+  orig: 172, 107
+  offset: 0, 0
+  index: -1
+posui12
+  rotate: true
+  xy: 1091, 47
+  size: 112, 74
+  orig: 112, 74
+  offset: 0, 0
+  index: -1
+posui2
+  rotate: false
+  xy: 922, 161
+  size: 248, 59
+  orig: 248, 62
+  offset: 0, 3
+  index: -1
+posui3
+  rotate: true
+  xy: 1392, 213
+  size: 156, 104
+  orig: 156, 104
+  offset: 0, 0
+  index: -1
+posui4
+  rotate: false
+  xy: 510, 72
+  size: 163, 86
+  orig: 163, 86
+  offset: 0, 0
+  index: -1
+posui5
+  rotate: true
+  xy: 1172, 45
+  size: 175, 218
+  orig: 175, 218
+  offset: 0, 0
+  index: -1
+posui6
+  rotate: true
+  xy: 828, 21
+  size: 137, 124
+  orig: 137, 124
+  offset: 0, 0
+  index: -1
+posui7
+  rotate: false
+  xy: 187, 4
+  size: 152, 145
+  orig: 152, 146
+  offset: 0, 1
+  index: -1
+posui8
+  rotate: true
+  xy: 2, 5
+  size: 144, 183
+  orig: 144, 183
+  offset: 0, 0
+  index: -1
+posui9
+  rotate: false
+  xy: 1392, 46
+  size: 95, 165
+  orig: 98, 165
+  offset: 2, 0
+  index: -1

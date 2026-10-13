@@ -1,0 +1,27 @@
+
+take.png
+size: 662, 541
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+guang1
+  rotate: false
+  xy: 2, 2
+  size: 537, 537
+  orig: 588, 588
+  offset: 26, 25
+  index: -1
+jiaozi
+  rotate: true
+  xy: 541, 270
+  size: 129, 112
+  orig: 130, 113
+  offset: 0, 1
+  index: -1
+jiaozi-1
+  rotate: true
+  xy: 541, 401
+  size: 138, 119
+  orig: 142, 122
+  offset: 2, 1
+  index: -1

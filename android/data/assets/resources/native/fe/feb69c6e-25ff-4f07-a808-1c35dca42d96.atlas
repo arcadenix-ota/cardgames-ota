@@ -1,0 +1,90 @@
+
+skeleton.png
+size: 1247,510
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+5.draw/fx/Ellipse 2 copy 2
+  rotate: false
+  xy: 632, 166
+  size: 363, 37
+  orig: 364, 37
+  offset: 0, 0
+  index: -1
+5.draw/fx/Ellipse 2 copy 3
+  rotate: false
+  xy: 632, 205
+  size: 364, 37
+  orig: 364, 37
+  offset: 0, 0
+  index: -1
+5.draw/fx/Group 228
+  rotate: false
+  xy: 632, 244
+  size: 552, 151
+  orig: 552, 151
+  offset: 0, 0
+  index: -1
+5.draw/fx/Layer 22 copy
+  rotate: true
+  xy: 923, 38
+  size: 61, 93
+  orig: 62, 93
+  offset: 0, 0
+  index: -1
+5.draw/fx/Layer 24
+  rotate: false
+  xy: 632, 397
+  size: 608, 111
+  orig: 609, 111
+  offset: 1, 0
+  index: -1
+5.draw/fx/Layer 28
+  rotate: true
+  xy: 998, 176
+  size: 66, 87
+  orig: 66, 87
+  offset: 0, 0
+  index: -1
+5.draw/fx/Layer 29
+  rotate: false
+  xy: 757, 8
+  size: 83, 91
+  orig: 83, 91
+  offset: 0, 0
+  index: -1
+5.draw/fx/Layer 30
+  rotate: false
+  xy: 842, 8
+  size: 79, 91
+  orig: 79, 91
+  offset: 0, 0
+  index: -1
+5.draw/fx/Layer 32
+  rotate: false
+  xy: 1186, 301
+  size: 59, 94
+  orig: 60, 94
+  offset: 0, 0
+  index: -1
+5.draw/fx/Layer 7
+  rotate: false
+  xy: 757, 101
+  size: 259, 63
+  orig: 259, 63
+  offset: 0, 0
+  index: -1
+5.draw/fx/Layer 8 copy
+  rotate: false
+  xy: 2, 2
+  size: 753, 145
+  orig: 797, 153
+  offset: 13, 0
+  index: -1
+5.draw/fx/[bone]_lightB copy
+  rotate: false
+  xy: 2, 149
+  size: 628, 359
+  orig: 709, 379
+  offset: 38, 10
+  index: -1

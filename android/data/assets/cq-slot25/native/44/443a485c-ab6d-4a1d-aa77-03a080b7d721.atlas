@@ -1,0 +1,97 @@
+
+WILD.png
+size: 184, 1048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+WILD
+  rotate: true
+  xy: 125, 311
+  size: 148, 55
+  orig: 148, 55
+  offset: 0, 0
+  index: -1
+WILD1
+  rotate: false
+  xy: 2, 881
+  size: 165, 165
+  orig: 166, 166
+  offset: 1, 0
+  index: -1
+WILD_1
+  rotate: false
+  xy: 2, 566
+  size: 171, 152
+  orig: 172, 152
+  offset: 0, 0
+  index: -1
+a1
+  rotate: true
+  xy: 2, 251
+  size: 95, 96
+  orig: 95, 96
+  offset: 0, 0
+  index: -1
+a23
+  rotate: false
+  xy: 2, 720
+  size: 165, 159
+  orig: 192, 161
+  offset: 4, 2
+  index: -1
+di
+  rotate: false
+  xy: 2, 461
+  size: 169, 103
+  orig: 169, 103
+  offset: 0, 0
+  index: -1
+glow02/glow02_00000
+  rotate: true
+  xy: 2, 2
+  size: 78, 77
+  orig: 78, 77
+  offset: 0, 0
+  index: -1
+glow02/glow02_00002
+  rotate: false
+  xy: 86, 55
+  size: 79, 78
+  orig: 80, 79
+  offset: 1, 1
+  index: -1
+glow02/glow02_00004
+  rotate: true
+  xy: 2, 82
+  size: 81, 82
+  orig: 82, 82
+  offset: 1, 0
+  index: -1
+glow02/glow02_00006
+  rotate: true
+  xy: 90, 135
+  size: 83, 84
+  orig: 84, 84
+  offset: 1, 0
+  index: -1
+glow02/glow02_00008
+  rotate: true
+  xy: 2, 165
+  size: 84, 86
+  orig: 84, 86
+  offset: 0, 0
+  index: -1
+glow02/glow02_00010
+  rotate: false
+  xy: 100, 220
+  size: 82, 89
+  orig: 82, 89
+  offset: 0, 0
+  index: -1
+shanguang_00111
+  rotate: true
+  xy: 2, 348
+  size: 111, 121
+  orig: 111, 121
+  offset: 0, 0
+  index: -1

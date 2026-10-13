@@ -1,0 +1,48 @@
+
+zhizhen_huoguang.png
+size: 243, 151
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+fs_001 (1)
+  rotate: false
+  xy: 130, 2
+  size: 95, 51
+  orig: 99, 54
+  offset: 2, 1
+  index: -1
+fs_001 (2)
+  rotate: false
+  xy: 134, 55
+  size: 107, 47
+  orig: 115, 49
+  offset: 1, 1
+  index: -1
+fs_001 (3)
+  rotate: false
+  xy: 2, 105
+  size: 113, 44
+  orig: 116, 47
+  offset: 1, 1
+  index: -1
+fs_001 (4)
+  rotate: false
+  xy: 2, 9
+  size: 126, 46
+  orig: 129, 48
+  offset: 1, 1
+  index: -1
+fs_001 (5)
+  rotate: false
+  xy: 117, 104
+  size: 120, 45
+  orig: 127, 47
+  offset: 2, 1
+  index: -1
+fs_001 (6)
+  rotate: false
+  xy: 2, 57
+  size: 130, 45
+  orig: 137, 47
+  offset: 1, 1
+  index: -1

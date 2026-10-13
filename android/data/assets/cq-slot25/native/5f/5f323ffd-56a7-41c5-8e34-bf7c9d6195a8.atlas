@@ -1,0 +1,13 @@
+
+jackpot_guang1.png
+size: 280, 70
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+di1
+  rotate: false
+  xy: 2, 2
+  size: 276, 66
+  orig: 276, 66
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,83 @@
+
+xingyunlibao.png
+size: 65, 225
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+chouma
+  rotate: false
+  xy: 2, 60
+  size: 55, 33
+  orig: 55, 33
+  offset: 0, 0
+  index: -1
+chouma1
+  rotate: true
+  xy: 44, 16
+  size: 21, 16
+  orig: 21, 16
+  offset: 0, 0
+  index: -1
+chouma1-2
+  rotate: false
+  xy: 26, 41
+  size: 21, 17
+  orig: 21, 17
+  offset: 0, 0
+  index: -1
+chouma2
+  rotate: false
+  xy: 2, 23
+  size: 20, 15
+  orig: 20, 15
+  offset: 0, 0
+  index: -1
+chouma2-2
+  rotate: true
+  xy: 49, 39
+  size: 19, 14
+  orig: 19, 14
+  offset: 0, 0
+  index: -1
+chouma3
+  rotate: false
+  xy: 2, 6
+  size: 19, 15
+  orig: 19, 15
+  offset: 0, 0
+  index: -1
+chouma3-2
+  rotate: false
+  xy: 23, 2
+  size: 19, 13
+  orig: 19, 14
+  offset: 0, 1
+  index: -1
+chouma4
+  rotate: true
+  xy: 26, 17
+  size: 22, 16
+  orig: 22, 16
+  offset: 0, 0
+  index: -1
+chouma4-2
+  rotate: false
+  xy: 2, 40
+  size: 22, 18
+  orig: 22, 18
+  offset: 0, 0
+  index: -1
+hezi
+  rotate: false
+  xy: 2, 95
+  size: 61, 62
+  orig: 61, 62
+  offset: 0, 0
+  index: -1
+vjdbjdbfb
+  rotate: true
+  xy: 2, 159
+  size: 64, 60
+  orig: 73, 68
+  offset: 4, 4
+  index: -1

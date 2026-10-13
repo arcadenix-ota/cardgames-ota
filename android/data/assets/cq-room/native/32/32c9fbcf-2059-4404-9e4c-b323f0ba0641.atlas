@@ -1,0 +1,76 @@
+
+doubt.png
+size: 173, 91
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+di
+  rotate: false
+  xy: 2, 7
+  size: 91, 82
+  orig: 93, 84
+  offset: 1, 1
+  index: -1
+meimao
+  rotate: true
+  xy: 127, 2
+  size: 60, 7
+  orig: 62, 9
+  offset: 1, 1
+  index: -1
+shou
+  rotate: true
+  xy: 95, 64
+  size: 25, 51
+  orig: 25, 51
+  offset: 0, 0
+  index: -1
+wenhao1
+  rotate: false
+  xy: 148, 61
+  size: 22, 28
+  orig: 24, 30
+  offset: 1, 1
+  index: -1
+wenhao2
+  rotate: true
+  xy: 136, 35
+  size: 24, 28
+  orig: 26, 30
+  offset: 1, 1
+  index: -1
+yankuang
+  rotate: true
+  xy: 95, 9
+  size: 25, 30
+  orig: 27, 32
+  offset: 1, 1
+  index: -1
+yankuang2
+  rotate: true
+  xy: 95, 36
+  size: 26, 30
+  orig: 28, 32
+  offset: 1, 1
+  index: -1
+yanzhu
+  rotate: true
+  xy: 157, 18
+  size: 15, 14
+  orig: 17, 16
+  offset: 1, 1
+  index: -1
+yanzhu2
+  rotate: false
+  xy: 157, 2
+  size: 14, 14
+  orig: 16, 16
+  offset: 1, 1
+  index: -1
+zuiba
+  rotate: false
+  xy: 136, 13
+  size: 19, 20
+  orig: 21, 23
+  offset: 1, 2
+  index: -1

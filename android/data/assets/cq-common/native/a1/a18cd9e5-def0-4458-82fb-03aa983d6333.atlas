@@ -1,0 +1,167 @@
+
+zhadan1.png
+size: 505, 1035
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+1_00000
+  rotate: false
+  xy: 378, 119
+  size: 122, 106
+  orig: 200, 155
+  offset: 43, 22
+  index: -1
+1_00001
+  rotate: false
+  xy: 378, 11
+  size: 122, 106
+  orig: 200, 155
+  offset: 43, 22
+  index: -1
+1_00002
+  rotate: false
+  xy: 137, 272
+  size: 154, 131
+  orig: 200, 155
+  offset: 24, 14
+  index: -1
+1_00003
+  rotate: true
+  xy: 2, 333
+  size: 163, 133
+  orig: 200, 155
+  offset: 20, 11
+  index: -1
+1_00004
+  rotate: false
+  xy: 322, 354
+  size: 172, 139
+  orig: 200, 155
+  offset: 14, 9
+  index: -1
+1_00005
+  rotate: false
+  xy: 141, 405
+  size: 179, 141
+  orig: 200, 155
+  offset: 13, 8
+  index: -1
+1_00006
+  rotate: false
+  xy: 143, 548
+  size: 185, 143
+  orig: 200, 155
+  offset: 10, 6
+  index: -1
+1_00007
+  rotate: false
+  xy: 195, 887
+  size: 191, 146
+  orig: 200, 155
+  offset: 6, 7
+  index: -1
+1_00008
+  rotate: false
+  xy: 2, 886
+  size: 191, 147
+  orig: 200, 155
+  offset: 6, 6
+  index: -1
+1_00009
+  rotate: true
+  xy: 330, 495
+  size: 193, 135
+  orig: 200, 155
+  offset: 5, 5
+  index: -1
+1_00010
+  rotate: true
+  xy: 2, 498
+  size: 192, 137
+  orig: 200, 155
+  offset: 5, 5
+  index: -1
+1_00012
+  rotate: true
+  xy: 340, 690
+  size: 193, 142
+  orig: 200, 155
+  offset: 4, 3
+  index: -1
+1_00014
+  rotate: true
+  xy: 195, 693
+  size: 192, 143
+  orig: 200, 155
+  offset: 6, 3
+  index: -1
+1_00016
+  rotate: true
+  xy: 2, 692
+  size: 192, 139
+  orig: 200, 155
+  offset: 5, 2
+  index: -1
+1_00018
+  rotate: true
+  xy: 2, 162
+  size: 169, 119
+  orig: 200, 155
+  offset: 15, 21
+  index: -1
+1_00020
+  rotate: true
+  xy: 388, 885
+  size: 148, 115
+  orig: 200, 155
+  offset: 31, 24
+  index: -1
+1_00022
+  rotate: false
+  xy: 249, 115
+  size: 127, 110
+  orig: 200, 155
+  offset: 31, 31
+  index: -1
+1_00024
+  rotate: false
+  xy: 423, 257
+  size: 76, 95
+  orig: 200, 155
+  offset: 69, 39
+  index: -1
+TX_hybz_0058
+  rotate: false
+  xy: 232, 2
+  size: 112, 111
+  orig: 130, 132
+  offset: 10, 6
+  index: -1
+TX_hybz_0060
+  rotate: false
+  xy: 2, 39
+  size: 118, 121
+  orig: 130, 132
+  offset: 7, 3
+  index: -1
+TX_hybz_0062
+  rotate: true
+  xy: 123, 152
+  size: 118, 124
+  orig: 130, 132
+  offset: 6, 3
+  index: -1
+TX_hybz_0064
+  rotate: true
+  xy: 293, 227
+  size: 125, 128
+  orig: 130, 132
+  offset: 2, 3
+  index: -1
+TX_hybz_0068
+  rotate: true
+  xy: 122, 24
+  size: 126, 108
+  orig: 130, 132
+  offset: 3, 23
+  index: -1

@@ -1,0 +1,83 @@
+
+freegame_huo.png
+size: 1131, 247
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+0590
+  rotate: false
+  xy: 2, 2
+  size: 237, 243
+  orig: 243, 253
+  offset: 2, 3
+  index: -1
+xulie_fire021_5x2_0
+  rotate: true
+  xy: 435, 16
+  size: 229, 95
+  orig: 256, 115
+  offset: 13, 9
+  index: -1
+xulie_fire021_5x2_1
+  rotate: true
+  xy: 338, 14
+  size: 231, 95
+  orig: 256, 115
+  offset: 12, 9
+  index: -1
+xulie_fire021_5x2_2
+  rotate: true
+  xy: 241, 12
+  size: 233, 95
+  orig: 256, 115
+  offset: 10, 9
+  index: -1
+xulie_fire021_5x2_3
+  rotate: true
+  xy: 532, 13
+  size: 232, 90
+  orig: 256, 115
+  offset: 11, 9
+  index: -1
+xulie_fire021_5x2_4
+  rotate: true
+  xy: 797, 13
+  size: 232, 82
+  orig: 256, 115
+  offset: 12, 9
+  index: -1
+xulie_fire021_5x2_5
+  rotate: true
+  xy: 964, 14
+  size: 231, 81
+  orig: 256, 115
+  offset: 13, 9
+  index: -1
+xulie_fire021_5x2_6
+  rotate: true
+  xy: 1047, 23
+  size: 222, 82
+  orig: 256, 115
+  offset: 18, 9
+  index: -1
+xulie_fire021_5x2_7
+  rotate: true
+  xy: 881, 13
+  size: 232, 81
+  orig: 256, 115
+  offset: 11, 9
+  index: -1
+xulie_fire021_5x2_8
+  rotate: true
+  xy: 711, 12
+  size: 233, 84
+  orig: 256, 115
+  offset: 12, 9
+  index: -1
+xulie_fire021_5x2_9
+  rotate: true
+  xy: 624, 14
+  size: 231, 85
+  orig: 256, 115
+  offset: 15, 9
+  index: -1

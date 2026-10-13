@@ -1,0 +1,90 @@
+
+beijing.png
+size: 1927, 472
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+22
+  rotate: false
+  xy: 2, 112
+  size: 637, 358
+  orig: 638, 359
+  offset: 1, 0
+  index: -1
+btn
+  rotate: true
+  xy: 1829, 16
+  size: 454, 96
+  orig: 454, 96
+  offset: 0, 0
+  index: -1
+guang1
+  rotate: false
+  xy: 641, 123
+  size: 474, 116
+  orig: 476, 118
+  offset: 1, 1
+  index: -1
+saiguang
+  rotate: false
+  xy: 641, 241
+  size: 608, 229
+  orig: 610, 231
+  offset: 1, 1
+  index: -1
+tx4_00000
+  rotate: false
+  xy: 2, 2
+  size: 466, 108
+  orig: 466, 108
+  offset: 0, 0
+  index: -1
+tx4_00001
+  rotate: false
+  xy: 1251, 362
+  size: 466, 108
+  orig: 466, 108
+  offset: 0, 0
+  index: -1
+tx4_00002
+  rotate: false
+  xy: 1251, 252
+  size: 466, 108
+  orig: 466, 108
+  offset: 0, 0
+  index: -1
+tx4_00003
+  rotate: false
+  xy: 641, 13
+  size: 466, 108
+  orig: 466, 108
+  offset: 0, 0
+  index: -1
+tx4_00004
+  rotate: false
+  xy: 1251, 142
+  size: 463, 108
+  orig: 465, 108
+  offset: 0, 0
+  index: -1
+tx4_00005
+  rotate: true
+  xy: 1719, 28
+  size: 442, 108
+  orig: 461, 108
+  offset: 17, 0
+  index: -1
+tx4_00006
+  rotate: false
+  xy: 1117, 32
+  size: 455, 108
+  orig: 461, 108
+  offset: 4, 0
+  index: -1
+vjdbjdbfb
+  rotate: false
+  xy: 470, 35
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1

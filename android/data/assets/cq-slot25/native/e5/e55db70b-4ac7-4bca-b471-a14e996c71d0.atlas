@@ -1,0 +1,13 @@
+
+SPIN_lizi.png
+size: 16, 16
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+dian
+  rotate: false
+  xy: 2, 2
+  size: 9, 9
+  orig: 10, 10
+  offset: 1, 0
+  index: -1

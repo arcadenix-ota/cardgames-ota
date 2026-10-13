@@ -1,0 +1,83 @@
+
+pai_gaung.png
+size: 1763, 1237
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+3_1
+  rotate: false
+  xy: 1236, 3
+  size: 472, 406
+  orig: 474, 408
+  offset: 1, 1
+  index: -1
+3_2
+  rotate: false
+  xy: 1236, 411
+  size: 476, 410
+  orig: 480, 414
+  offset: 2, 2
+  index: -1
+3_3
+  rotate: false
+  xy: 1236, 823
+  size: 478, 412
+  orig: 480, 414
+  offset: 1, 1
+  index: -1
+4_1
+  rotate: true
+  xy: 828, 14
+  size: 565, 406
+  orig: 567, 408
+  offset: 1, 1
+  index: -1
+4_2
+  rotate: true
+  xy: 416, 6
+  size: 569, 410
+  orig: 573, 414
+  offset: 2, 2
+  index: -1
+4_3
+  rotate: true
+  xy: 2, 2
+  size: 571, 412
+  orig: 573, 414
+  offset: 1, 1
+  index: -1
+g_1
+  rotate: true
+  xy: 415, 577
+  size: 658, 409
+  orig: 662, 413
+  offset: 2, 2
+  index: -1
+g_2
+  rotate: true
+  xy: 826, 581
+  size: 654, 405
+  orig: 656, 407
+  offset: 1, 1
+  index: -1
+g_3
+  rotate: true
+  xy: 2, 575
+  size: 660, 411
+  orig: 662, 413
+  offset: 1, 1
+  index: -1
+g_6
+  rotate: false
+  xy: 1710, 342
+  size: 51, 67
+  orig: 55, 70
+  offset: 3, 2
+  index: -1
+g_7
+  rotate: false
+  xy: 1716, 1205
+  size: 30, 30
+  orig: 32, 32
+  offset: 1, 1
+  index: -1

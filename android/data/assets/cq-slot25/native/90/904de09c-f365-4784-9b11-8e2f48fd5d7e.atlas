@@ -1,0 +1,13 @@
+
+beijing_3.png
+size: 1102, 592
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+beijing4
+  rotate: false
+  xy: 2, 2
+  size: 1098, 588
+  orig: 1140, 613
+  offset: 0, 25
+  index: -1

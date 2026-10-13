@@ -1,0 +1,27 @@
+
+beijingguang.png
+size: 777, 242
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+beijing1
+  rotate: true
+  xy: 636, 53
+  size: 187, 139
+  orig: 195, 144
+  offset: 4, 2
+  index: -1
+beijing2
+  rotate: false
+  xy: 2, 9
+  size: 360, 231
+  orig: 426, 261
+  offset: 35, 13
+  index: -1
+beijing3
+  rotate: false
+  xy: 364, 2
+  size: 270, 238
+  orig: 295, 265
+  offset: 15, 11
+  index: -1

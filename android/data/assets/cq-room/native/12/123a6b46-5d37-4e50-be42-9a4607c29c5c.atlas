@@ -1,0 +1,41 @@
+
+conquian_room_seat_action_anim.png
+size: 327, 144
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+quan1
+  rotate: false
+  xy: 244, 61
+  size: 81, 81
+  orig: 83, 83
+  offset: 1, 1
+  index: -1
+quan2
+  rotate: false
+  xy: 144, 43
+  size: 98, 99
+  orig: 101, 102
+  offset: 2, 2
+  index: -1
+quan3
+  rotate: false
+  xy: 2, 2
+  size: 140, 140
+  orig: 142, 142
+  offset: 1, 1
+  index: -1
+x_1
+  rotate: true
+  xy: 244, 8
+  size: 51, 67
+  orig: 55, 70
+  offset: 3, 2
+  index: -1
+x_2
+  rotate: false
+  xy: 144, 11
+  size: 30, 30
+  orig: 32, 32
+  offset: 1, 1
+  index: -1

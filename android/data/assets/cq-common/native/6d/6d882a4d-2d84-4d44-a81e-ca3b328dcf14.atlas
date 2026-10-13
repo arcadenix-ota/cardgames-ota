@@ -1,0 +1,97 @@
+
+magewin.png
+size: 1328,518
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+big
+  rotate: false
+  xy: 880, 340
+  size: 446, 176
+  orig: 449, 180
+  offset: 2, 2
+  index: -1
+guang3
+  rotate: true
+  xy: 684, 13
+  size: 503, 194
+  orig: 511, 194
+  offset: 8, 0
+  index: -1
+sdian_10
+  rotate: false
+  xy: 2, 2
+  size: 331, 76
+  orig: 334, 79
+  offset: 1, 2
+  index: -1
+sdian_11
+  rotate: true
+  xy: 951, 8
+  size: 330, 69
+  orig: 334, 73
+  offset: 2, 2
+  index: -1
+sdian_3
+  rotate: false
+  xy: 2, 80
+  size: 328, 81
+  orig: 334, 86
+  offset: 3, 2
+  index: -1
+sdian_4
+  rotate: false
+  xy: 332, 90
+  size: 331, 71
+  orig: 334, 73
+  offset: 2, 1
+  index: -1
+sdian_5
+  rotate: true
+  xy: 1157, 8
+  size: 330, 60
+  orig: 334, 64
+  offset: 2, 3
+  index: -1
+sdian_6
+  rotate: true
+  xy: 1091, 8
+  size: 330, 64
+  orig: 334, 67
+  offset: 2, 2
+  index: -1
+sdian_7
+  rotate: true
+  xy: 1022, 8
+  size: 330, 67
+  orig: 334, 69
+  offset: 2, 1
+  index: -1
+sdian_8
+  rotate: true
+  xy: 880, 7
+  size: 331, 69
+  orig: 334, 72
+  offset: 1, 2
+  index: -1
+sdian_9
+  rotate: false
+  xy: 335, 18
+  size: 330, 70
+  orig: 334, 73
+  offset: 2, 2
+  index: -1
+shuiz
+  rotate: false
+  xy: 2, 163
+  size: 627, 125
+  orig: 627, 125
+  offset: 0, 0
+  index: -1
+win
+  rotate: false
+  xy: 2, 290
+  size: 680, 226
+  orig: 684, 229
+  offset: 2, 2
+  index: -1

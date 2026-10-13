@@ -1,0 +1,76 @@
+
+changge.png
+size: 294, 126
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+7-1
+  rotate: false
+  xy: 190, 3
+  size: 20, 35
+  orig: 22, 37
+  offset: 1, 1
+  index: -1
+7-2
+  rotate: true
+  xy: 158, 13
+  size: 25, 30
+  orig: 27, 32
+  offset: 1, 1
+  index: -1
+7-3
+  rotate: true
+  xy: 119, 40
+  size: 84, 106
+  orig: 84, 106
+  offset: 0, 0
+  index: -1
+7-4
+  rotate: true
+  xy: 227, 30
+  size: 94, 65
+  orig: 96, 68
+  offset: 1, 2
+  index: -1
+7-5
+  rotate: true
+  xy: 274, 9
+  size: 19, 17
+  orig: 84, 28
+  offset: 64, 10
+  index: -1
+7-6
+  rotate: true
+  xy: 119, 7
+  size: 31, 37
+  orig: 31, 37
+  offset: 0, 0
+  index: -1
+7-7
+  rotate: false
+  xy: 212, 23
+  size: 13, 15
+  orig: 15, 17
+  offset: 1, 1
+  index: -1
+7-8
+  rotate: false
+  xy: 227, 9
+  size: 45, 19
+  orig: 47, 29
+  offset: 1, 1
+  index: -1
+7-8-1
+  rotate: false
+  xy: 158, 2
+  size: 24, 9
+  orig: 24, 9
+  offset: 0, 0
+  index: -1
+changge
+  rotate: true
+  xy: 2, 11
+  size: 113, 115
+  orig: 122, 130
+  offset: 5, 13
+  index: -1

@@ -1,0 +1,13 @@
+
+laohuji_guang.png
+size: 285, 259
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+guang2
+  rotate: false
+  xy: 2, 2
+  size: 281, 255
+  orig: 328, 305
+  offset: 21, 24
+  index: -1

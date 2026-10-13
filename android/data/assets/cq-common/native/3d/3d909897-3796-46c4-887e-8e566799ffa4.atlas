@@ -1,0 +1,125 @@
+
+qiubite.png
+size: 282,130
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chibang
+  rotate: false
+  xy: 78, 4
+  size: 58, 51
+  orig: 58, 51
+  offset: 0, 0
+  index: -1
+chibang2
+  rotate: false
+  xy: 214, 3
+  size: 61, 43
+  orig: 61, 43
+  offset: 0, 0
+  index: -1
+gong
+  rotate: true
+  xy: 171, 39
+  size: 89, 40
+  orig: 91, 42
+  offset: 1, 1
+  index: -1
+jian
+  rotate: true
+  xy: 213, 48
+  size: 25, 40
+  orig: 27, 42
+  offset: 1, 1
+  index: -1
+quantou
+  rotate: true
+  xy: 260, 109
+  size: 19, 16
+  orig: 21, 18
+  offset: 1, 1
+  index: -1
+shenti
+  rotate: true
+  xy: 78, 57
+  size: 71, 91
+  orig: 113, 116
+  offset: 27, 0
+  index: -1
+shou
+  rotate: true
+  xy: 213, 75
+  size: 53, 45
+  orig: 53, 45
+  offset: 0, 0
+  index: -1
+tou
+  rotate: true
+  xy: 2, 55
+  size: 73, 74
+  orig: 85, 74
+  offset: 0, 0
+  index: -1
+toufa1
+  rotate: true
+  xy: 138, 14
+  size: 41, 26
+  orig: 41, 26
+  offset: 0, 0
+  index: -1
+toufa2
+  rotate: false
+  xy: 39, 6
+  size: 28, 23
+  orig: 28, 23
+  offset: 0, 0
+  index: -1
+toufa3
+  rotate: false
+  xy: 2, 3
+  size: 35, 26
+  orig: 35, 26
+  offset: 0, 0
+  index: -1
+toufa4
+  rotate: true
+  xy: 166, 3
+  size: 34, 46
+  orig: 34, 46
+  offset: 0, 0
+  index: -1
+toufa5
+  rotate: true
+  xy: 255, 55
+  size: 18, 25
+  orig: 18, 25
+  offset: 0, 0
+  index: -1
+xian
+  rotate: false
+  xy: 2, 31
+  size: 73, 22
+  orig: 73, 22
+  offset: 0, 0
+  index: -1
+yanjing1
+  rotate: true
+  xy: 138, 2
+  size: 10, 13
+  orig: 12, 15
+  offset: 1, 1
+  index: -1
+yanjing2
+  rotate: false
+  xy: 260, 78
+  size: 15, 12
+  orig: 17, 14
+  offset: 1, 1
+  index: -1
+zuiba
+  rotate: true
+  xy: 260, 92
+  size: 15, 14
+  orig: 17, 16
+  offset: 1, 1
+  index: -1
