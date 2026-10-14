@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "version": "1.0.0.9",
-  "tag": "android-1.0.0.9",
+  "version": "1.0.0.10",
+  "tag": "android-1.0.0.10",
   "minNativeVersion": "1.0.0",
   "reset": false
 }
