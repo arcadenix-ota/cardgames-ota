@@ -1,8 +1,4 @@
-System.register("chunks:///_virtual/cq-lang-en", [], function () {
-  return {
-    execute: function () {}
-  };
-});
+System.register("chunks:///_virtual/cq-lang-en",[],(function(){return{execute:function(){}}}));
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-lang-en', 'chunks:///_virtual/cq-lang-en'); 

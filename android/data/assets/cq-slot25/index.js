@@ -1,8 +1,4 @@
-System.register("chunks:///_virtual/cq-slot25", [], function () {
-  return {
-    execute: function () {}
-  };
-});
+System.register("chunks:///_virtual/cq-slot25",[],(function(){return{execute:function(){}}}));
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-slot25', 'chunks:///_virtual/cq-slot25'); 
