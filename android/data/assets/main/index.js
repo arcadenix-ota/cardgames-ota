@@ -43233,6 +43233,8 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
             // Spec B5 §3.6: don chuoi ket toan APK (FB: no-op) va bo xam tay
             v.table.clearSettlement();
             v.hand.setGray(false);
+            // Tay cua van cu khong duoc con tren man trong luc spine bat dau van / truoc khi chia (3126 da xoa; luoi an toan).
+            v.hand.setHand([]);
             // Spec B4 §2.6: van moi an mui ten luot va nhan hanh dong
             v.table.showTurnArrows([]);
             v.table.hideActionLabels();
@@ -43958,7 +43960,11 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
             // Hieu ung vao van (spec AX §4.3). Day la ban cocos3 cua
             // MyCard.updateMoneyUserJoinGame — PlayerMoneyData trung ten truong voi
             // `data` ban goc. KHONG phai onGameStart: StartGameData chi co playerCards.
-            if (intro) v.table.showStartFx(this.startBets());
+            if (intro) {
+              // Van moi: bo bai tren tay cua van cu ngay luc hien spine bat dau van (khong doi toi luc chia).
+              v.hand.setHand([]);
+              v.table.showStartFx(this.startBets());
+            }
           }, {
             fixed: () => this.introPhase()
           });
@@ -50168,6 +50174,14 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
 
       /** CONG CU DEV (khong phai release): trang thai popup chon so bot + bo bai cheat (spec dev-bot §7). */
 
+      const DEFAULT_LOBBY_TIMERS = {
+        set: (fn, ms) => setTimeout(fn, ms),
+        clear: h => clearTimeout(h)
+      };
+
+      /** Lobby dang mo: tai lai bang muc (so nguoi online moi muc) moi chu ky nay. */
+      const LOBBY_POLL_MS = exports('LOBBY_POLL_MS', 5000);
+
       /** G5 Q4: nho tab so ghe theo game (localStorage), hong / thieu -> mac dinh. */
       const SEAT_TAB_KEY = exports('SEAT_TAB_KEY', storageKey('lobbySeats'));
       function readSeatTab(store, gameId, count, def) {
@@ -50208,6 +50222,8 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
           this.devLoading = false;
           /** G5 Q4: chi so tab so ghe dang chon (-1 = game khong co cong tac). */
           this.seatTab = -1;
+          /** Hen tai lai bang muc ke tiep (schedulePoll); null = khong hen. */
+          this.pollTimer = null;
           this.view = view;
           this.d = d;
           const tabs = this.d.seatTabs;
@@ -50231,6 +50247,40 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
           this.disposed = true;
           if (this.unsubEvents !== null) this.unsubEvents();
           this.unsubEvents = null;
+          if (this.pollTimer !== null) this.timers().clear(this.pollTimer);
+          this.pollTimer = null;
+        }
+        timers() {
+          return this.d.timers ?? DEFAULT_LOBBY_TIMERS;
+        }
+
+        /** Hen lan tai lai ke (chuoi setTimeout, khong chong lan goi). */
+        schedulePoll() {
+          if (this.disposed || this.pollTimer !== null) return;
+          this.pollTimer = this.timers().set(() => {
+            this.pollTimer = null;
+            void this.poll();
+          }, LOBBY_POLL_MS);
+        }
+
+        /**
+         * Tai lai bang muc (so nguoi online) khi Lobby dang mo. Bo qua luot khi dang vao ban hoac phien chua online;
+         * loi mang im lang (lan sau thu lai). Chi ve lai luoi khi so lieu doi (tranh nhay).
+         */
+        async poll() {
+          if (this.disposed) return;
+          if (!this.busy && this.d.session.status === 'online') {
+            try {
+              const levels = await this.d.session.fetchTableLevels(this.d.gameId);
+              if (this.disposed) return;
+              const before = this.levels();
+              this.d.app.levels.set(this.d.gameId, levels);
+              if (before === null || JSON.stringify(lobbyItems(before)) !== JSON.stringify(lobbyItems(levels))) this.render();
+            } catch {
+              // mat mang / server ban: giu so cu, lan sau thu lai
+            }
+          }
+          this.schedulePoll();
         }
 
         /** CONG CU DEV: mo popup, tai danh sach bo bai lan dau (chi Colyseus dev hieu dev.deck_list). */
@@ -50349,6 +50399,8 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
           if (home !== null) this.renderDots(home.redDots);
           this.render();
           const ok = await this.reload();
+          // So nguoi online moi muc tu cap nhat trong luc Lobby mo (ca khi lan tai dau hong).
+          this.schedulePoll();
           if (!ok || this.d.fromTable !== true || this.d.bankruptDone === true) return;
           const p = this.d.app.profile;
           const t = this.levels();
