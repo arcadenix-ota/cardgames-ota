@@ -1,4 +1,8 @@
-System.register("chunks:///_virtual/cq-platform-ui",[],(function(){return{execute:function(){}}}));
+System.register("chunks:///_virtual/cq-platform-ui", [], function () {
+  return {
+    execute: function () {}
+  };
+});
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-platform-ui', 'chunks:///_virtual/cq-platform-ui'); 

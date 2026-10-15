@@ -1,4 +1,8 @@
-System.register("chunks:///_virtual/cq-popup",[],(function(){return{execute:function(){}}}));
+System.register("chunks:///_virtual/cq-popup", [], function () {
+  return {
+    execute: function () {}
+  };
+});
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-popup', 'chunks:///_virtual/cq-popup'); 

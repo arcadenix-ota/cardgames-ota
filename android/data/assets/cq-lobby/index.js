@@ -1,4 +1,8 @@
-System.register("chunks:///_virtual/cq-lobby",[],(function(){return{execute:function(){}}}));
+System.register("chunks:///_virtual/cq-lobby", [], function () {
+  return {
+    execute: function () {}
+  };
+});
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-lobby', 'chunks:///_virtual/cq-lobby'); 

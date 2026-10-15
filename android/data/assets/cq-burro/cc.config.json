@@ -1,1 +1,2422 @@
-{"importBase":"import","nativeBase":"native","name":"cq-burro","deps":[],"uuids":["012c8ef52","02Nc3taphFIYYz/ndQJ9mS@6c48a","1ahQSPESNL5aA08sE4DOpx@6c48a","23QPRNlt1K+bhKaQ4lgfDy","23QPRNlt1K+bhKaQ4lgfDy@0036f","23QPRNlt1K+bhKaQ4lgfDy@08245","23QPRNlt1K+bhKaQ4lgfDy@11214","23QPRNlt1K+bhKaQ4lgfDy@19b8f","23QPRNlt1K+bhKaQ4lgfDy@28139","02Nc3taphFIYYz/ndQJ9mS","02Nc3taphFIYYz/ndQJ9mS@f9941","043e734f9","04nylkZ2pPh7xv1W7jzLRA","057fa3305","05eee36d1","07RGnX9ehPPKOJJlQbYAhL@6c48a","0fk1iJt+dB3Y/WCF2nj5dV@6c48a","23QPRNlt1K+bhKaQ4lgfDy@00235","23QPRNlt1K+bhKaQ4lgfDy@0408b","23QPRNlt1K+bhKaQ4lgfDy@0617d","23QPRNlt1K+bhKaQ4lgfDy@0a8ac","23QPRNlt1K+bhKaQ4lgfDy@14999","23QPRNlt1K+bhKaQ4lgfDy@23bc5","07RGnX9ehPPKOJJlQbYAhL","07RGnX9ehPPKOJJlQbYAhL@f9941","0bVGAUU1FCsZ31k285TB0i","0d4f094f1","0f10b170d","23QPRNlt1K+bhKaQ4lgfDy@07c8b","23QPRNlt1K+bhKaQ4lgfDy@09f41","23QPRNlt1K+bhKaQ4lgfDy@101f5","23QPRNlt1K+bhKaQ4lgfDy@128e5","23QPRNlt1K+bhKaQ4lgfDy@177ab","23QPRNlt1K+bhKaQ4lgfDy@220f9","23QPRNlt1K+bhKaQ4lgfDy@27060","23QPRNlt1K+bhKaQ4lgfDy@287ae","23QPRNlt1K+bhKaQ4lgfDy@2a1f2","23QPRNlt1K+bhKaQ4lgfDy@2a888","23QPRNlt1K+bhKaQ4lgfDy@2c048","23QPRNlt1K+bhKaQ4lgfDy@2f351","23QPRNlt1K+bhKaQ4lgfDy@30996","23QPRNlt1K+bhKaQ4lgfDy@3116f","23QPRNlt1K+bhKaQ4lgfDy@31eed","23QPRNlt1K+bhKaQ4lgfDy@33390","23QPRNlt1K+bhKaQ4lgfDy@33efa","23QPRNlt1K+bhKaQ4lgfDy@3a752","23QPRNlt1K+bhKaQ4lgfDy@3aa45","23QPRNlt1K+bhKaQ4lgfDy@3b719","23QPRNlt1K+bhKaQ4lgfDy@42778","23QPRNlt1K+bhKaQ4lgfDy@43aa1","23QPRNlt1K+bhKaQ4lgfDy@44db4","23QPRNlt1K+bhKaQ4lgfDy@47f20","23QPRNlt1K+bhKaQ4lgfDy@4b45b","23QPRNlt1K+bhKaQ4lgfDy@4c27e","23QPRNlt1K+bhKaQ4lgfDy@4f19b","23QPRNlt1K+bhKaQ4lgfDy@51f08","23QPRNlt1K+bhKaQ4lgfDy@54d45","23QPRNlt1K+bhKaQ4lgfDy@54e25","23QPRNlt1K+bhKaQ4lgfDy@564c5","23QPRNlt1K+bhKaQ4lgfDy@56ad8","23QPRNlt1K+bhKaQ4lgfDy@57ed6","23QPRNlt1K+bhKaQ4lgfDy@58910","23QPRNlt1K+bhKaQ4lgfDy@58f17","23QPRNlt1K+bhKaQ4lgfDy@5f310","23QPRNlt1K+bhKaQ4lgfDy@603d7","23QPRNlt1K+bhKaQ4lgfDy@60465","23QPRNlt1K+bhKaQ4lgfDy@644c4","23QPRNlt1K+bhKaQ4lgfDy@64922","23QPRNlt1K+bhKaQ4lgfDy@66cba","23QPRNlt1K+bhKaQ4lgfDy@69402","23QPRNlt1K+bhKaQ4lgfDy@6b4dc","23QPRNlt1K+bhKaQ4lgfDy@6c2c5","23QPRNlt1K+bhKaQ4lgfDy@6c7fc","23QPRNlt1K+bhKaQ4lgfDy@6cfba","23QPRNlt1K+bhKaQ4lgfDy@6da8b","23QPRNlt1K+bhKaQ4lgfDy@6f63c","23QPRNlt1K+bhKaQ4lgfDy@76b03","23QPRNlt1K+bhKaQ4lgfDy@786f8","23QPRNlt1K+bhKaQ4lgfDy@7a233","23QPRNlt1K+bhKaQ4lgfDy@7ce11","23QPRNlt1K+bhKaQ4lgfDy@7d28f","23QPRNlt1K+bhKaQ4lgfDy@7d610","23QPRNlt1K+bhKaQ4lgfDy@7e037","23QPRNlt1K+bhKaQ4lgfDy@7ffa3","23QPRNlt1K+bhKaQ4lgfDy@827a8","23QPRNlt1K+bhKaQ4lgfDy@84256","23QPRNlt1K+bhKaQ4lgfDy@856a5","23QPRNlt1K+bhKaQ4lgfDy@86c36","23QPRNlt1K+bhKaQ4lgfDy@871ff","23QPRNlt1K+bhKaQ4lgfDy@8c946","23QPRNlt1K+bhKaQ4lgfDy@91efa","23QPRNlt1K+bhKaQ4lgfDy@96cdc","23QPRNlt1K+bhKaQ4lgfDy@96f7c","23QPRNlt1K+bhKaQ4lgfDy@98d3c","23QPRNlt1K+bhKaQ4lgfDy@99388","23QPRNlt1K+bhKaQ4lgfDy@995c6","23QPRNlt1K+bhKaQ4lgfDy@9aa3d","23QPRNlt1K+bhKaQ4lgfDy@9b5a1","23QPRNlt1K+bhKaQ4lgfDy@9b914","23QPRNlt1K+bhKaQ4lgfDy@9be93","23QPRNlt1K+bhKaQ4lgfDy@9f961","23QPRNlt1K+bhKaQ4lgfDy@a1220","23QPRNlt1K+bhKaQ4lgfDy@a14da","23QPRNlt1K+bhKaQ4lgfDy@a3947","23QPRNlt1K+bhKaQ4lgfDy@a3e1d","23QPRNlt1K+bhKaQ4lgfDy@a4917","23QPRNlt1K+bhKaQ4lgfDy@a5b94","23QPRNlt1K+bhKaQ4lgfDy@a9049","23QPRNlt1K+bhKaQ4lgfDy@a9289","23QPRNlt1K+bhKaQ4lgfDy@aa654","23QPRNlt1K+bhKaQ4lgfDy@ac539","23QPRNlt1K+bhKaQ4lgfDy@aee98","23QPRNlt1K+bhKaQ4lgfDy@af873","23QPRNlt1K+bhKaQ4lgfDy@b3ecd","23QPRNlt1K+bhKaQ4lgfDy@b47cd","23QPRNlt1K+bhKaQ4lgfDy@b6422","23QPRNlt1K+bhKaQ4lgfDy@b881b","23QPRNlt1K+bhKaQ4lgfDy@b8d60","23QPRNlt1K+bhKaQ4lgfDy@be51d","23QPRNlt1K+bhKaQ4lgfDy@be5c4","23QPRNlt1K+bhKaQ4lgfDy@c235a","23QPRNlt1K+bhKaQ4lgfDy@c3e17","23QPRNlt1K+bhKaQ4lgfDy@c4111","23QPRNlt1K+bhKaQ4lgfDy@c4ced","23QPRNlt1K+bhKaQ4lgfDy@c82eb","23QPRNlt1K+bhKaQ4lgfDy@c93b0","23QPRNlt1K+bhKaQ4lgfDy@cafad","23QPRNlt1K+bhKaQ4lgfDy@d481a","23QPRNlt1K+bhKaQ4lgfDy@d4854","23QPRNlt1K+bhKaQ4lgfDy@d4b5c","23QPRNlt1K+bhKaQ4lgfDy@d4f11","23QPRNlt1K+bhKaQ4lgfDy@d51fc","23QPRNlt1K+bhKaQ4lgfDy@d76b0","23QPRNlt1K+bhKaQ4lgfDy@dc44f","23QPRNlt1K+bhKaQ4lgfDy@dc7c6","23QPRNlt1K+bhKaQ4lgfDy@df723","23QPRNlt1K+bhKaQ4lgfDy@e1599","23QPRNlt1K+bhKaQ4lgfDy@e1844","23QPRNlt1K+bhKaQ4lgfDy@e67b2","23QPRNlt1K+bhKaQ4lgfDy@e8242","23QPRNlt1K+bhKaQ4lgfDy@e9a3a","23QPRNlt1K+bhKaQ4lgfDy@ea9ec","23QPRNlt1K+bhKaQ4lgfDy@eb811","23QPRNlt1K+bhKaQ4lgfDy@ed2fc","23QPRNlt1K+bhKaQ4lgfDy@ee449","23QPRNlt1K+bhKaQ4lgfDy@f0d62","23QPRNlt1K+bhKaQ4lgfDy@f4509","23QPRNlt1K+bhKaQ4lgfDy@f4855","23QPRNlt1K+bhKaQ4lgfDy@f4be4","23QPRNlt1K+bhKaQ4lgfDy@f64b5","23QPRNlt1K+bhKaQ4lgfDy@f6bd5","23QPRNlt1K+bhKaQ4lgfDy@f764d","23QPRNlt1K+bhKaQ4lgfDy@f8168","23QPRNlt1K+bhKaQ4lgfDy@f98fd","23QPRNlt1K+bhKaQ4lgfDy@fb1e1","23QPRNlt1K+bhKaQ4lgfDy@fca7a","23QPRNlt1K+bhKaQ4lgfDy@fceb3","23QPRNlt1K+bhKaQ4lgfDy@fdbde","23QPRNlt1K+bhKaQ4lgfDy@fecf4","2c4eHRQaRBDrmhqRDVuG8E@6c48a","3cgd0GBx5JrarO5+0nBnxm","3cgd0GBx5JrarO5+0nBnxm@0873e","3cgd0GBx5JrarO5+0nBnxm@10432","3cgd0GBx5JrarO5+0nBnxm@14c1a","3cgd0GBx5JrarO5+0nBnxm@1b4aa","3cgd0GBx5JrarO5+0nBnxm@1ea4c","3cgd0GBx5JrarO5+0nBnxm@27344","3cgd0GBx5JrarO5+0nBnxm@2cb38","3cgd0GBx5JrarO5+0nBnxm@38a93","3cgd0GBx5JrarO5+0nBnxm@3a116","3cgd0GBx5JrarO5+0nBnxm@48934","3cgd0GBx5JrarO5+0nBnxm@4941e","3cgd0GBx5JrarO5+0nBnxm@4c54c","3cgd0GBx5JrarO5+0nBnxm@4cbd6","3cgd0GBx5JrarO5+0nBnxm@4d184","3cgd0GBx5JrarO5+0nBnxm@53e77","3cgd0GBx5JrarO5+0nBnxm@56388","3cgd0GBx5JrarO5+0nBnxm@56c74","3cgd0GBx5JrarO5+0nBnxm@579e1","3cgd0GBx5JrarO5+0nBnxm@5b1c6","3cgd0GBx5JrarO5+0nBnxm@60eb0","3cgd0GBx5JrarO5+0nBnxm@62a14","3cgd0GBx5JrarO5+0nBnxm@6b99f","3cgd0GBx5JrarO5+0nBnxm@6c8f2","3cgd0GBx5JrarO5+0nBnxm@76968","3cgd0GBx5JrarO5+0nBnxm@819e7","3cgd0GBx5JrarO5+0nBnxm@86823","3cgd0GBx5JrarO5+0nBnxm@91e4f","3cgd0GBx5JrarO5+0nBnxm@96765","3cgd0GBx5JrarO5+0nBnxm@99761","3cgd0GBx5JrarO5+0nBnxm@a9030","3cgd0GBx5JrarO5+0nBnxm@abe01","3cgd0GBx5JrarO5+0nBnxm@afd3c","3cgd0GBx5JrarO5+0nBnxm@ba71d","3cgd0GBx5JrarO5+0nBnxm@cd05e","3cgd0GBx5JrarO5+0nBnxm@ce325","3cgd0GBx5JrarO5+0nBnxm@d16f0","3cgd0GBx5JrarO5+0nBnxm@d29d2","3cgd0GBx5JrarO5+0nBnxm@dc82c","3cgd0GBx5JrarO5+0nBnxm@dd43f","3cgd0GBx5JrarO5+0nBnxm@e4dce","3cgd0GBx5JrarO5+0nBnxm@e6d25","3cgd0GBx5JrarO5+0nBnxm@ebeac","3cgd0GBx5JrarO5+0nBnxm@f6043","3cgd0GBx5JrarO5+0nBnxm@fc1da","3cgd0GBx5JrarO5+0nBnxm@fd320","43HLtkT6FMIa0XbXksksWy@6c48a","4cD0tEryhJRrEkNwf97MBg@6c48a","4chzqXPtZGbbux2R6oP8nd@6c48a","4enVPsF9VKeKBvq2uSIgJL@6c48a","4eshtRZ9dNV6MEPgBzDEFa@6c48a","58MwkLyqhJNpF6Cgu2zGmh@6c48a","67vooVA3dKzYUTgh0qv973@6c48a","75biA60vpMMLHRDZXEWm9s@6c48a","85YzXuYIRPa7oupkjWlWnL@6c48a","85vjSwwqJMAp3f7qwr78+c@6c48a","8dHWXM2F5Eg6xlCanMdDBI@6c48a","91I99Oe7tKu6Affys56gxE@6c48a","9cPzMUEVlCA4ZlwIDFLgfH@6c48a","a6B/Yerc1N15CKqF68qR52@6c48a","a6VCO2vNBGqpCqgUzOODnP@6c48a","b2uIUMevRHcppL9Oek4FNN@6c48a","c0d2aEvzdECrMQtAF3+mxs@6c48a","c896rHYfdONJD0qcG2HeGM@6c48a","c9maJdmsdGspzIt+gEcNEH@6c48a","d6oa/7t25N86K4mixapb3g@6c48a","d9T4+l/BRHMb74/fyUHroT","d9T4+l/BRHMb74/fyUHroT@25784","d9T4+l/BRHMb74/fyUHroT@262bb","d9T4+l/BRHMb74/fyUHroT@2a6c5","d9T4+l/BRHMb74/fyUHroT@3eb5f","d9T4+l/BRHMb74/fyUHroT@4324d","d9T4+l/BRHMb74/fyUHroT@4624c","d9T4+l/BRHMb74/fyUHroT@58fcb","d9T4+l/BRHMb74/fyUHroT@88fbe","d9T4+l/BRHMb74/fyUHroT@91c84","d9T4+l/BRHMb74/fyUHroT@93e15","d9T4+l/BRHMb74/fyUHroT@97932","d9T4+l/BRHMb74/fyUHroT@99cc7","d9T4+l/BRHMb74/fyUHroT@c9a6e","d9T4+l/BRHMb74/fyUHroT@cb3da","d9T4+l/BRHMb74/fyUHroT@f40b8","e4rLmgtKxFPbUchvnKHKv4@6c48a","e6pDUglzhKvKOBDqgOEsrQ@6c48a","e9klgriLZJoYL1sRNd2PAz@6c48a","ed2Hn0zZZIsYbj7N9wVUMG","ed2Hn0zZZIsYbj7N9wVUMG@081fd","ed2Hn0zZZIsYbj7N9wVUMG@2e1b8","ed2Hn0zZZIsYbj7N9wVUMG@3d165","ed2Hn0zZZIsYbj7N9wVUMG@3e6f0","ed2Hn0zZZIsYbj7N9wVUMG@3ff48","ed2Hn0zZZIsYbj7N9wVUMG@5b8a2","ed2Hn0zZZIsYbj7N9wVUMG@5cc21","ed2Hn0zZZIsYbj7N9wVUMG@5d1e1","ed2Hn0zZZIsYbj7N9wVUMG@5ee7c","ed2Hn0zZZIsYbj7N9wVUMG@769a1","ed2Hn0zZZIsYbj7N9wVUMG@7fca5","ed2Hn0zZZIsYbj7N9wVUMG@83a13","ed2Hn0zZZIsYbj7N9wVUMG@8756c","ed2Hn0zZZIsYbj7N9wVUMG@8cd82","ed2Hn0zZZIsYbj7N9wVUMG@93f8a","ed2Hn0zZZIsYbj7N9wVUMG@94419","ed2Hn0zZZIsYbj7N9wVUMG@ab2dc","ed2Hn0zZZIsYbj7N9wVUMG@b1994","ed2Hn0zZZIsYbj7N9wVUMG@c5169","ed2Hn0zZZIsYbj7N9wVUMG@c8f0d","ed2Hn0zZZIsYbj7N9wVUMG@d3412","ed2Hn0zZZIsYbj7N9wVUMG@d3ec7","ed2Hn0zZZIsYbj7N9wVUMG@f0c2a","ed2Hn0zZZIsYbj7N9wVUMG@f6958","ed2Hn0zZZIsYbj7N9wVUMG@fe4ba","efYhVdcdhFD5pSfMpHEv5K@6c48a","f0XQ/ltpJNAKod8B27e/kQ","f0XQ/ltpJNAKod8B27e/kQ@09dc9","f0XQ/ltpJNAKod8B27e/kQ@5a025","f0XQ/ltpJNAKod8B27e/kQ@9134d","0fk1iJt+dB3Y/WCF2nj5dV","0fk1iJt+dB3Y/WCF2nj5dV@f9941","10R86yLy1I5LKeZteIRgMl","14GPK1B2xEDJUc6EKupqTA","14sJ4tMANHlpijr2+lJjw7","180/6YgWxFb6kzItn2MMwm","1ahQSPESNL5aA08sE4DOpx","1ahQSPESNL5aA08sE4DOpx@f9941","1e6v7goGdBtpffJHyAh5yY","1fCKL5G/dNWZV/82IWdLH2","240OF21PdNnqiREnJabZX/","2c4eHRQaRBDrmhqRDVuG8E","2c4eHRQaRBDrmhqRDVuG8E@f9941","34vhQTVWZI/44QIeRLnxBp","43HLtkT6FMIa0XbXksksWy","43HLtkT6FMIa0XbXksksWy@f9941","4cD0tEryhJRrEkNwf97MBg","4cD0tEryhJRrEkNwf97MBg@f9941","4chzqXPtZGbbux2R6oP8nd","4chzqXPtZGbbux2R6oP8nd@f9941","4enVPsF9VKeKBvq2uSIgJL","4enVPsF9VKeKBvq2uSIgJL@f9941","4eshtRZ9dNV6MEPgBzDEFa","4eshtRZ9dNV6MEPgBzDEFa@f9941","4fSk3Ugm9KlJS8Ln7tJ46A","55e7c4EGNIkJCFxG2grMxu","58MwkLyqhJNpF6Cgu2zGmh","58MwkLyqhJNpF6Cgu2zGmh@f9941","5dmxoOfHJEbYLUs9f8+h/5","5ec2pdDW9NkYXKD/H9LdN/","61BufZgkhAbJ91SWrnrQ4W","61yKRk9cBKEopjJ7EQsN+i","67vooVA3dKzYUTgh0qv973","67vooVA3dKzYUTgh0qv973@f9941","72WQwvdWFN05N98SF9yefx","75biA60vpMMLHRDZXEWm9s","75biA60vpMMLHRDZXEWm9s@f9941","85YzXuYIRPa7oupkjWlWnL","85YzXuYIRPa7oupkjWlWnL@f9941","85vjSwwqJMAp3f7qwr78+c","85vjSwwqJMAp3f7qwr78+c@f9941","8agq3LEJZDTJ1uIc7F8iL/","8dHWXM2F5Eg6xlCanMdDBI","8dHWXM2F5Eg6xlCanMdDBI@f9941","91I99Oe7tKu6Affys56gxE","91I99Oe7tKu6Affys56gxE@f9941","92HEiOzc9FQIlhjCTm4UsR","9cPzMUEVlCA4ZlwIDFLgfH","9cPzMUEVlCA4ZlwIDFLgfH@f9941","9dAE9iGGhOsrU5WDfamsxn","9ej9bhHmBLzbeD0EmwcJGa","9fGmMPPtpHVYilYviF5Qyh","a6B/Yerc1N15CKqF68qR52","a6B/Yerc1N15CKqF68qR52@f9941","a6VCO2vNBGqpCqgUzOODnP","a6VCO2vNBGqpCqgUzOODnP@f9941","a9hGv2oaBOKY05wSopwOSq","b2uIUMevRHcppL9Oek4FNN","b2uIUMevRHcppL9Oek4FNN@f9941","b6T9GEYcVOtKEhCzvWA+f8","b6ZHzsbYxL6Y/vi8rcK1Lx","b9BXlp6jtKLIAgATrT25HG","c0d2aEvzdECrMQtAF3+mxs","c0d2aEvzdECrMQtAF3+mxs@f9941","c5vN2UwRRHbbq7Dr3vBKVv","c896rHYfdONJD0qcG2HeGM","c896rHYfdONJD0qcG2HeGM@f9941","c9maJdmsdGspzIt+gEcNEH","c9maJdmsdGspzIt+gEcNEH@f9941","ceFvs54BpPwYo1kk173wfb","d6oa/7t25N86K4mixapb3g","d6oa/7t25N86K4mixapb3g@f9941","e3e6d9Z7BEIY9onU0zSAdC","e4rLmgtKxFPbUchvnKHKv4","e4rLmgtKxFPbUchvnKHKv4@f9941","e6pDUglzhKvKOBDqgOEsrQ","e6pDUglzhKvKOBDqgOEsrQ@f9941","e9klgriLZJoYL1sRNd2PAz","e9klgriLZJoYL1sRNd2PAz@f9941","eb9sEKCrNGEoHmLY4Piilt","efYhVdcdhFD5pSfMpHEv5K","efYhVdcdhFD5pSfMpHEv5K@f9941","faeI5Y/3JLGZp2Xw6zeHgI"],"paths":{"1":["image/r0x06001200/burro/room/burro_room_time_direct/texture",3,1],"2":["image/r0x06001200/burro/room/burro_room_time_point3/texture",3,1],"3":["image/r0x06001200/burro/room/burro_room",0,1],"4":["image/r0x06001200/burro/room/burro_room/burro_room_time_clock",1,1],"5":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure9",1,1],"6":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureM",1,1],"7":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_9_big",1,1],"8":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figureM",1,1],"9":["image/r0x06001200/burro/room/burro_room_time_direct",2,1],"10":["image/r0x06001200/burro/room/burro_room_time_direct/spriteFrame",1,1],"12":["sounds/android/0x06001200/burro/burro_fapai",7,1],"15":["image/r0x06001200/burro/room/burro_room_hand_anim/texture",3,1],"16":["image/r0x06001200/burro/room/burro_room_time_bg3/texture",3,1],"17":["image/r0x06001200/burro/room/burro_room/burro_room_exit_btn_light",1,1],"18":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure4",1,1],"19":["image/r0x06001200/burro/room/burro_room/burro_room_left_can_not_get",1,1],"20":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_6",1,1],"21":["image/r0x06001200/burro/room/burro_room/burro_room_rank_1",1,1],"22":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_M",1,1],"23":["image/r0x06001200/burro/room/burro_room_hand_anim",2,1],"24":["image/r0x06001200/burro/room/burro_room_hand_anim/spriteFrame",1,1],"25":["sounds/android/0x06001200/burro/burro_timelimit",7,1],"28":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figureK",1,1],"29":["image/r0x06001200/burro/room/burro_room/burro_room_wait_2",1,1],"30":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bg",1,1],"31":["image/r0x06001200/burro/room/burro_room/burro_room_pot_cur_progress_di",1,1],"32":["image/r0x06001200/burro/room/burro_room/burro_room_right_can_not_get",1,1],"33":["image/r0x06001200/burro/room/burro_room/burro_room_ready_btn",1,1],"34":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure2",1,1],"35":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress5",1,1],"36":["image/r0x06001200/burro/room/burro_room/burro_room_time_clock_2",1,1],"37":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figureP",1,1],"38":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_6_big",1,1],"39":["image/r0x06001200/burro/room/burro_room/burro_room_tuoguan_btn",1,1],"40":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure7",1,1],"41":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress4",1,1],"42":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure5",1,1],"43":["image/r0x06001200/burro/room/burro_room/burro_room_up_can_not_get",1,1],"44":["image/r0x06001200/burro/room/burro_room/burro_room_light_star",1,1],"45":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_4",1,1],"46":["image/r0x06001200/burro/room/burro_room/burro_room_board",1,1],"47":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure5",1,1],"48":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureP",1,1],"49":["image/r0x06001200/burro/room/burro_room/burro_room_wait_3",1,1],"50":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_T",1,1],"51":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figureD",1,1],"52":["image/r0x06001200/burro/room/burro_room/burro_room_rank_2",1,1],"53":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure6",1,1],"54":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_0_big",1,1],"55":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure0",1,1],"56":["image/r0x06001200/burro/room/burro_room/burro_room_player_bg",1,1],"57":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure3",1,1],"58":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure7",1,1],"59":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figureT",1,1],"60":["image/r0x06001200/burro/room/burro_room/burro_room_first_champion",1,1],"61":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure6",1,1],"62":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure2",1,1],"63":["image/r0x06001200/burro/room/burro_room/burro_room_msg_bg",1,1],"64":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure5",1,1],"65":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_8",1,1],"66":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_3",1,1],"67":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureT",1,1],"68":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure1",1,1],"69":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_bg",1,1],"70":["image/r0x06001200/burro/room/burro_room/burro_room_wait3",1,1],"71":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure3",1,1],"72":["image/r0x06001200/burro/room/burro_room/burro_room_second_champion",1,1],"73":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure0",1,1],"74":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_9",1,1],"75":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure1",1,1],"76":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_K",1,1],"77":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress0",1,1],"78":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure2",1,1],"79":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_7",1,1],"80":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_5_big",1,1],"81":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_1",1,1],"82":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress_mult",1,1],"83":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_7",1,1],"84":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress8",1,1],"85":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_2_big",1,1],"86":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_6",1,1],"87":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_2",1,1],"88":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure9",1,1],"89":["image/r0x06001200/burro/room/burro_room/burro_room_pot_chip",1,1],"90":["image/r0x06001200/burro/room/burro_room/burro_room_down_can_not_get",1,1],"91":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_1_big",1,1],"92":["image/r0x06001200/burro/room/burro_room/burro_room_wait2",1,1],"93":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure3",1,1],"94":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress7",1,1],"95":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_3",1,1],"96":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure6",1,1],"97":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress6",1,1],"98":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress9",1,1],"99":["image/r0x06001200/burro/room/burro_room/burro_room_pot_cur_progress",1,1],"100":["image/r0x06001200/burro/room/burro_room/burro_room_ready",1,1],"101":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure3",1,1],"102":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureB",1,1],"103":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress2",1,1],"104":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_5",1,1],"105":["image/r0x06001200/burro/room/burro_room/burro_room_wait1",1,1],"106":["image/r0x06001200/burro/room/burro_room/burro_room_chip",1,1],"107":["image/r0x06001200/burro/room/burro_room/burro_room_player",1,1],"108":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure6",1,1],"109":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_4_big",1,1],"110":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure8",1,1],"111":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure8",1,1],"112":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_2",1,1],"113":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure4",1,1],"114":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_B",1,1],"115":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure7",1,1],"116":["image/r0x06001200/burro/room/burro_room/burro_room_seat_album",1,1],"117":["image/r0x06001200/burro/room/burro_room/burro_room_logo",1,1],"118":["image/r0x06001200/burro/room/burro_room/burro_room_third_champion",1,1],"119":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_8",1,1],"120":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureD",1,1],"121":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_9",1,1],"122":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure2",1,1],"123":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_4",1,1],"124":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure1",1,1],"125":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_P",1,1],"126":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure1",1,1],"127":["image/r0x06001200/burro/room/burro_room/burro_room_wait_1",1,1],"128":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_1",1,1],"129":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress1",1,1],"130":["image/r0x06001200/burro/room/burro_room/burro_room_time_clock_1",1,1],"131":["image/r0x06001200/burro/room/burro_room/burro_room_rank_3",1,1],"132":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure5",1,1],"133":["image/r0x06001200/burro/room/burro_room/burro_room_pot_progress3",1,1],"134":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure4",1,1],"135":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure9",1,1],"136":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure0",1,1],"137":["image/r0x06001200/burro/room/burro_room/burro_room_out_btn",1,1],"138":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_D",1,1],"139":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figure4",1,1],"140":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_3_big",1,1],"141":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_bg_big",1,1],"142":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure0",1,1],"143":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_0",1,1],"144":["image/r0x06001200/burro/room/burro_room/burro_room_left_time_bg",1,1],"145":["image/r0x06001200/burro/room/burro_room/burro_poker_gray",1,1],"146":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure9",1,1],"147":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_0",1,1],"148":["image/r0x06001200/burro/room/burro_room/burro_room_champion_figureB",1,1],"149":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure8",1,1],"150":["image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_x",1,1],"151":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_7_big",1,1],"152":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_5",1,1],"153":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure8",1,1],"154":["image/r0x06001200/burro/room/burro_room/burro_room_poker_count_8_big",1,1],"155":["image/r0x06001200/burro/room/burro_room/burro_room_time_figure7",1,1],"156":["image/r0x06001200/burro/room/burro_room/burro_room_pot_bg",1,1],"157":["image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureK",1,1],"158":["image/r0x06001200/burro/room/burro_room/burro_room_bankrupt_seat_zhezhao",1,1],"159":["image/r0x06001200/burro/room/burro_room/texture",3,1],"160":["image/r0x06001200/burro/popup/result/burro_result_popup",0,1],"161":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_9",1,1],"162":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_d",1,1],"163":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_4",1,1],"164":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_6",1,1],"165":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_0",1,1],"166":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_5",1,1],"167":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_8",1,1],"168":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_blue_btn",1,1],"169":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_T",1,1],"170":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_2",1,1],"171":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_add",1,1],"172":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_own_item_bg",1,1],"173":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_3",1,1],"174":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_p",1,1],"175":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_minus",1,1],"176":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_3",1,1],"177":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_8",1,1],"178":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_K",1,1],"179":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_7",1,1],"180":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_M",1,1],"181":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_title_bg",1,1],"182":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_5",1,1],"183":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_zero_figure_0",1,1],"184":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_9",1,1],"185":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_T",1,1],"186":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_d",1,1],"187":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_7",1,1],"188":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_zero_figure_add",1,1],"189":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_2",1,1],"190":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_0",1,1],"191":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_4",1,1],"192":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_burro",1,1],"193":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_6",1,1],"194":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lose_title_bg",1,1],"195":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_M",1,1],"196":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_B",1,1],"197":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_p",1,1],"198":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_1",1,1],"199":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_K",1,1],"200":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_item_bg",1,1],"201":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_add",1,1],"202":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_bg_zhezhao",1,1],"203":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_B",1,1],"204":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_orange_btn",1,1],"205":["image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_1",1,1],"206":["image/r0x06001200/burro/room/burro_table_bg/texture",3,1],"207":["image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/texture",3,1],"208":["image/r0x06001200/burro/room/burro_room_max_card_anim/texture",3,1],"209":["image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_1/texture",3,1],"210":["image/r0x06001200/burro/room/Smoke/texture",3,1],"211":["image/r0x06001200/burro/room/burro_room_bg/texture",3,1],"212":["image/r0x06001200/burro/room/burro_room_time_bg2/texture",3,1],"213":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot/texture",3,1],"214":["image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim/texture",3,1],"215":["image/r0x06001200/burro/room/burro_room_flush_card_anim/texture",3,1],"216":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2/texture",3,1],"217":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2/texture",3,1],"218":["image/r0x06001200/burro/popup/result/burro_result_popup/texture",3,1],"219":["image/r0x06001200/burro/room/burro/texture",3,1],"220":["image/r0x06001200/burro/room/burro_room_tutorial_split/texture",3,1],"221":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang/texture",3,1],"222":["image/r0x06001200/burro/room/burro_fa_card_anim/texture",3,1],"223":["image/r0x06001200/burro/poker/burro_poker/texture",3,1],"224":["image/r0x06001200/burro/room/burro_room_out_card_anim/texture",3,1],"225":["image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_2/texture",3,1],"226":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff",0,1],"227":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_tutorial_figure",1,1],"228":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_third_figure",1,1],"229":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_first_figure",1,1],"230":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_rank_1_figure",1,1],"231":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_di_figure_title",1,1],"232":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_player_figure",1,1],"233":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_rank_2_figure",1,1],"234":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_total_bet_figure",1,1],"235":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_second_figure",1,1],"236":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_total_di_figure",1,1],"237":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_rank_3_figure",1,1],"238":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_forth_figure",1,1],"239":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_player_mult_figure",1,1],"240":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_bankrupt_figure",1,1],"241":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_pass_figure",1,1],"242":["image/r0x06001200/burro/room/burro_room_time_point2/texture",3,1],"243":["image/r0x06001200/burro/room/burro_room_time_bg/texture",3,1],"244":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/texture",3,1],"245":["image/r0x06001200/burro/poker/burro_poker",0,1],"246":["image/r0x06001200/burro/poker/burro_poker/burro_poker_3_big",1,1],"247":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_6",1,1],"248":["image/r0x06001200/burro/poker/burro_poker/burro_poker_0_small",1,1],"249":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_11",1,1],"250":["image/r0x06001200/burro/poker/burro_poker/burro_poker_bg_back",1,1],"251":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_5",1,1],"252":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_2",1,1],"253":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_4",1,1],"254":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_10_king",1,1],"255":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_7",1,1],"256":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_12_king",1,1],"257":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_11_king",1,1],"258":["image/r0x06001200/burro/poker/burro_poker/burro_poker_select",1,1],"259":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_3",1,1],"260":["image/r0x06001200/burro/poker/burro_poker/burro_poker_3_small",1,1],"261":["image/r0x06001200/burro/poker/burro_poker/burro_poker_bg_fore",1,1],"262":["image/r0x06001200/burro/poker/burro_poker/burro_poker_bg_back_no_zhezhao",1,1],"263":["image/r0x06001200/burro/poker/burro_poker/burro_poker_0_big",1,1],"264":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_1",1,1],"265":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_12",1,1],"266":["image/r0x06001200/burro/poker/burro_poker/burro_poker_1_small",1,1],"267":["image/r0x06001200/burro/poker/burro_poker/burro_poker_2_big",1,1],"268":["image/r0x06001200/burro/poker/burro_poker/burro_poker_2_small",1,1],"269":["image/r0x06001200/burro/poker/burro_poker/burro_poker_num_10",1,1],"270":["image/r0x06001200/burro/poker/burro_poker/burro_poker_1_big",1,1],"271":["image/r0x06001200/burro/room/burro_room_time_point/texture",3,1],"272":["image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff",0,1],"273":["image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/burro_result_popup_you_lose_figure",1,1],"274":["image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/burro_result_popup_you_win_figure",1,1],"275":["image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/burro_result_popup_bankrupt_figure",1,1],"276":["image/r0x06001200/burro/room/burro_room_time_bg3",2,1],"277":["image/r0x06001200/burro/room/burro_room_time_bg3/spriteFrame",1,1],"278":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang.gaf",6,1],"279":["sounds/android/0x06001200/burro/burro_max_poker",7,1],"280":["sounds/android/0x06001200/burro/burro_change",7,1],"281":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2.gaf",6,1],"282":["image/r0x06001200/burro/room/burro_room_time_point3",2,1],"283":["image/r0x06001200/burro/room/burro_room_time_point3/spriteFrame",1,1],"284":["image/r0x06001200/burro/room/burro_room_time_direct.gaf",6,1],"285":["sounds/android/0x06001200/burro/burro_selectcard",7,1],"286":["sounds/android/0x06001200/burro/burro_rank",7,1],"287":["image/r0x06001200/burro/room/burro_room",2,1],"288":["image/r0x06001200/burro/room/burro_room/spriteFrame",1,1],"289":["image/r0x06001200/burro/room/burro",5,1],"290":["image/r0x06001200/burro/room/burro_table_bg",2,1],"291":["image/r0x06001200/burro/room/burro_table_bg/spriteFrame",1,1],"292":["image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff",2,1],"293":["image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/spriteFrame",1,1],"294":["image/r0x06001200/burro/room/burro_room_max_card_anim",2,1],"295":["image/r0x06001200/burro/room/burro_room_max_card_anim/spriteFrame",1,1],"296":["image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_1",2,1],"297":["image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_1/spriteFrame",1,1],"298":["image/r0x06001200/burro/room/Smoke",2,1],"299":["image/r0x06001200/burro/room/Smoke/spriteFrame",1,1],"300":["sounds/android/0x06001200/burro/burro_bet",7,1],"301":["sounds/android/0x06001200/burro/burro_flush_card",7,1],"302":["image/r0x06001200/burro/room/burro_room_bg",2,1],"303":["image/r0x06001200/burro/room/burro_room_bg/spriteFrame",1,1],"304":["sounds/android/0x06001200/burro/burro_mult_value",7,1],"305":["image/r0x06001200/burro/room/burro_room_out_card_anim.gaf",6,1],"306":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2.gaf",6,1],"307":["sounds/android/0x06001200/burro/burro_ready_timelimit",7,1],"308":["image/r0x06001200/burro/room/burro_room_time_bg2",2,1],"309":["image/r0x06001200/burro/room/burro_room_time_bg2/spriteFrame",1,1],"310":["image/r0x06001200/burro/room/burro_fa_card_anim.gaf",6,1],"311":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot",2,1],"312":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot/spriteFrame",1,1],"313":["image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim",2,1],"314":["image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim/spriteFrame",1,1],"315":["image/r0x06001200/burro/room/burro_room_flush_card_anim",2,1],"316":["image/r0x06001200/burro/room/burro_room_flush_card_anim/spriteFrame",1,1],"317":["sounds/android/0x06001200/burro/burro_lost",7,1],"318":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2",2,1],"319":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2/spriteFrame",1,1],"320":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2",2,1],"321":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2/spriteFrame",1,1],"322":["image/r0x06001200/burro/room/burro_room_max_card_anim.gaf",6,1],"323":["image/r0x06001200/burro/popup/result/burro_result_popup",2,1],"324":["image/r0x06001200/burro/popup/result/burro_result_popup/spriteFrame",1,1],"325":["image/r0x06001200/burro/room/Smoke",4,1],"326":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot.gaf",6,1],"327":["image/r0x06001200/burro/room/burro",4,1],"328":["image/r0x06001200/burro/room/burro",2,1],"329":["image/r0x06001200/burro/room/burro/spriteFrame",1,1],"330":["image/r0x06001200/burro/room/burro_room_tutorial_split",2,1],"331":["image/r0x06001200/burro/room/burro_room_tutorial_split/spriteFrame",1,1],"332":["image/r0x06001200/burro/room/burro_room_flush_card_anim.gaf",6,1],"333":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang",2,1],"334":["image/r0x06001200/burro/room/burro_room_player_bg_sao_guang/spriteFrame",1,1],"335":["sounds/android/0x06001200/burro/burro_out_card",7,1],"336":["sounds/android/0x06001200/burro/burro_sitdown",7,1],"337":["image/r0x06001200/burro/room/Smoke",5,1],"338":["image/r0x06001200/burro/room/burro_fa_card_anim",2,1],"339":["image/r0x06001200/burro/room/burro_fa_card_anim/spriteFrame",1,1],"340":["sounds/android/0x06001200/burro/burro_out_card2",7,1],"341":["image/r0x06001200/burro/poker/burro_poker",2,1],"342":["image/r0x06001200/burro/poker/burro_poker/spriteFrame",1,1],"343":["image/r0x06001200/burro/room/burro_room_out_card_anim",2,1],"344":["image/r0x06001200/burro/room/burro_room_out_card_anim/spriteFrame",1,1],"345":["sounds/android/0x06001200/burro/burro_my_turn",7,1],"346":["image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_2",2,1],"347":["image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_2/spriteFrame",1,1],"348":["image/r0x06001200/burro/room/burro_room_hand_anim.gaf",6,1],"349":["image/r0x06001200/burro/room/burro_room_time_point2",2,1],"350":["image/r0x06001200/burro/room/burro_room_time_point2/spriteFrame",1,1],"351":["image/r0x06001200/burro/room/burro_room_time_bg",2,1],"352":["image/r0x06001200/burro/room/burro_room_time_bg/spriteFrame",1,1],"353":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff",2,1],"354":["image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/spriteFrame",1,1],"355":["sounds/android/0x06001200/burro/burro_win",7,1],"356":["image/r0x06001200/burro/room/burro_room_time_point",2,1],"357":["image/r0x06001200/burro/room/burro_room_time_point/spriteFrame",1,1],"358":["image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim.gaf",6,1]},"scenes":{},"packs":{"012c8ef52":[245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270],"043e734f9":[272,273,274,275],"057fa3305":[160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205],"05eee36d1":[226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241],"0d4f094f1":[16,2,159,207,208,209,210,216,218,212,215,1,206,213,217,15,214,211,219,220,221,223,224,222,225,242,243,244,271],"0f10b170d":[3,17,4,18,19,28,5,29,20,30,6,31,21,32,7,33,22,34,8,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158]},"versions":{"import":[],"native":[]},"redirect":[],"debug":false,"extensionMap":{},"hasPreloadScript":true,"dependencyRelationships":{},"types":["cc.SpriteAtlas","cc.SpriteFrame","cc.ImageAsset","cc.Texture2D","cc.Asset","sp.SkeletonData","cc.JsonAsset","cc.AudioClip"]}
+{
+    "importBase": "import",
+    "nativeBase": "native",
+    "name": "cq-burro",
+    "deps": [],
+    "uuids": [
+        "012c8ef52",
+        "0235cded-6a98-4521-8633-fe775027d992",
+        "0235cded-6a98-4521-8633-fe775027d992@6c48a",
+        "0235cded-6a98-4521-8633-fe775027d992@f9941",
+        "043e734f9",
+        "049f2964-676a-4f87-bc6f-d56ee3ccb440",
+        "057fa3305",
+        "05eee36d1",
+        "074469d7-f5e8-4f3c-a389-26541b60084b",
+        "074469d7-f5e8-4f3c-a389-26541b60084b@6c48a",
+        "074469d7-f5e8-4f3c-a389-26541b60084b@f9941",
+        "0b546014-5351-42b1-9df5-936f394c1d22",
+        "0d4f094f1",
+        "0f10b170d",
+        "0f935889-b7e7-41dd-8fd6-085da78f9755",
+        "0f935889-b7e7-41dd-8fd6-085da78f9755@6c48a",
+        "0f935889-b7e7-41dd-8fd6-085da78f9755@f9941",
+        "1047ceb2-2f2d-48e4-b29e-66d788460325",
+        "1418f2b5-076c-440c-951c-e842aea6a4c0",
+        "14b09e2d-3003-4796-98a3-af6fa5263c3b",
+        "18d3fe98-816c-456f-a933-22d9f630cc26",
+        "1a85048f-1123-4be5-a034-f2c1380cea71",
+        "1a85048f-1123-4be5-a034-f2c1380cea71@6c48a",
+        "1a85048f-1123-4be5-a034-f2c1380cea71@f9941",
+        "1eeafee0-a067-41b6-97df-247c80879c98",
+        "1f08a2f9-1bf7-4d59-957f-f3621674b1f6",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@00235",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0036f",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0408b",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0617d",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@07c8b",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@08245",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@09f41",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0a8ac",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@101f5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@11214",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@128e5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@14999",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@177ab",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@19b8f",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@220f9",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@23bc5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@27060",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@28139",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@287ae",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2a1f2",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2a888",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2c048",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2f351",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@30996",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3116f",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@31eed",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@33390",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@33efa",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3a752",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3aa45",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3b719",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@42778",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@43aa1",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@44db4",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@47f20",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@4b45b",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@4c27e",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@4f19b",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@51f08",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@54d45",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@54e25",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@564c5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@56ad8",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@57ed6",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@58910",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@58f17",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@5f310",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@603d7",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@60465",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@644c4",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@64922",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@66cba",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@69402",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6b4dc",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6c2c5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6c7fc",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6cfba",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6da8b",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6f63c",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@76b03",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@786f8",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7a233",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7ce11",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7d28f",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7d610",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7e037",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7ffa3",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@827a8",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@84256",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@856a5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@86c36",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@871ff",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@8c946",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@91efa",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@96cdc",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@96f7c",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@98d3c",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@99388",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@995c6",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9aa3d",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9b5a1",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9b914",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9be93",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9f961",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a1220",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a14da",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a3947",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a3e1d",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a4917",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a5b94",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a9049",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a9289",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@aa654",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ac539",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@aee98",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@af873",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b3ecd",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b47cd",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b6422",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b881b",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b8d60",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@be51d",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@be5c4",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c235a",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c3e17",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c4111",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c4ced",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c82eb",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c93b0",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@cafad",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d481a",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4854",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4b5c",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4f11",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d51fc",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d76b0",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@dc44f",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@dc7c6",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@df723",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e1599",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e1844",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e67b2",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e8242",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e9a3a",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ea9ec",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@eb811",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ed2fc",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ee449",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f0d62",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4509",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4855",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4be4",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f64b5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f6bd5",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f764d",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f8168",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f98fd",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fb1e1",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fca7a",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fceb3",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fdbde",
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fecf4",
+        "24d0e176-d4f7-4d9e-a891-12725a6d95ff",
+        "2ce1e1d1-41a4-410e-b9a1-a910d5b86f04",
+        "2ce1e1d1-41a4-410e-b9a1-a910d5b86f04@6c48a",
+        "2ce1e1d1-41a4-410e-b9a1-a910d5b86f04@f9941",
+        "34be1413-5566-48ff-8e10-21e44b9f1069",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@0873e",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@10432",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@14c1a",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@1b4aa",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@1ea4c",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@27344",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@2cb38",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@38a93",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@3a116",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@48934",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4941e",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4c54c",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4cbd6",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4d184",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@53e77",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@56388",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@56c74",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@579e1",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@5b1c6",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@60eb0",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@62a14",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@6b99f",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@6c8f2",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@76968",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@819e7",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@86823",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@91e4f",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@96765",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@99761",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@a9030",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@abe01",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@afd3c",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@ba71d",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@cd05e",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@ce325",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@d16f0",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@d29d2",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@dc82c",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@dd43f",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@e4dce",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@e6d25",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@ebeac",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@f6043",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@fc1da",
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@fd320",
+        "431cbb64-4fa1-4c21-ad17-6d792c92c5b2",
+        "431cbb64-4fa1-4c21-ad17-6d792c92c5b2@6c48a",
+        "431cbb64-4fa1-4c21-ad17-6d792c92c5b2@f9941",
+        "4c0f4b44-af28-4946-b124-3707fdecc060",
+        "4c0f4b44-af28-4946-b124-3707fdecc060@6c48a",
+        "4c0f4b44-af28-4946-b124-3707fdecc060@f9941",
+        "4c873a97-3ed6-466d-bbb1-d91ea83fc9dd",
+        "4c873a97-3ed6-466d-bbb1-d91ea83fc9dd@6c48a",
+        "4c873a97-3ed6-466d-bbb1-d91ea83fc9dd@f9941",
+        "4e9d53ec-17d5-4a78-a06f-ab6b9222024b",
+        "4e9d53ec-17d5-4a78-a06f-ab6b9222024b@6c48a",
+        "4e9d53ec-17d5-4a78-a06f-ab6b9222024b@f9941",
+        "4eb21b51-67d7-4d57-a304-3e00730c415a",
+        "4eb21b51-67d7-4d57-a304-3e00730c415a@6c48a",
+        "4eb21b51-67d7-4d57-a304-3e00730c415a@f9941",
+        "4f4a4dd4-826f-4a94-94bc-2e7eed278e80",
+        "557bb738-1063-4890-9085-c46da0accc6e",
+        "5833090b-caa8-4936-917a-0a0bb6cc69a1",
+        "5833090b-caa8-4936-917a-0a0bb6cc69a1@6c48a",
+        "5833090b-caa8-4936-917a-0a0bb6cc69a1@f9941",
+        "5d9b1a0e-7c72-446d-82d4-b3d7fcfa1ff9",
+        "5e736a5d-0d6f-4d91-85ca-0ff1fd2dd37f",
+        "6106e7d9-8248-406c-9f75-496ae7ad0e16",
+        "61c8a464-f5c0-4a12-8a63-27b110b0dfa2",
+        "67be8a15-0377-4acd-8513-821d2abfdef7",
+        "67be8a15-0377-4acd-8513-821d2abfdef7@6c48a",
+        "67be8a15-0377-4acd-8513-821d2abfdef7@f9941",
+        "72590c2f-7561-4dd3-937d-f1217dc9e7f1",
+        "756e203a-d2fa-4c30-b1d1-0d95c45a6f6c",
+        "756e203a-d2fa-4c30-b1d1-0d95c45a6f6c@6c48a",
+        "756e203a-d2fa-4c30-b1d1-0d95c45a6f6c@f9941",
+        "856335ee-6084-4f6b-ba2e-a648d69569cb",
+        "856335ee-6084-4f6b-ba2e-a648d69569cb@6c48a",
+        "856335ee-6084-4f6b-ba2e-a648d69569cb@f9941",
+        "85be34b0-c2a2-4c02-9ddf-eeac2befcf9c",
+        "85be34b0-c2a2-4c02-9ddf-eeac2befcf9c@6c48a",
+        "85be34b0-c2a2-4c02-9ddf-eeac2befcf9c@f9941",
+        "8a82adcb-1096-434c-9d6e-21cec5f222ff",
+        "8d1d65cc-d85e-4483-ac65-09a9cc743048",
+        "8d1d65cc-d85e-4483-ac65-09a9cc743048@6c48a",
+        "8d1d65cc-d85e-4483-ac65-09a9cc743048@f9941",
+        "9123df4e-7bbb-4abb-a01f-7f2b39ea0c44",
+        "9123df4e-7bbb-4abb-a01f-7f2b39ea0c44@6c48a",
+        "9123df4e-7bbb-4abb-a01f-7f2b39ea0c44@f9941",
+        "921c488e-cdcf-4540-8961-8c24e6e14b11",
+        "9c3f3314-1159-4203-8665-c080c52e07c7",
+        "9c3f3314-1159-4203-8665-c080c52e07c7@6c48a",
+        "9c3f3314-1159-4203-8665-c080c52e07c7@f9941",
+        "9d004f62-1868-4eb2-b539-5837da9acc67",
+        "9e8fd6e1-1e60-4bcd-b783-d049b070919a",
+        "9f1a630f-3eda-4755-88a5-62f885e50ca1",
+        "a607f61e-adcd-4dd7-908a-a85ebca91e76",
+        "a607f61e-adcd-4dd7-908a-a85ebca91e76@6c48a",
+        "a607f61e-adcd-4dd7-908a-a85ebca91e76@f9941",
+        "a65423b6-bcd0-46aa-90aa-814cce3839cf",
+        "a65423b6-bcd0-46aa-90aa-814cce3839cf@6c48a",
+        "a65423b6-bcd0-46aa-90aa-814cce3839cf@f9941",
+        "a9846bf6-a1a0-4e29-8d39-c12a29c0e4aa",
+        "b2b8850c-7af4-4772-9a4b-f4e7a4e0534d",
+        "b2b8850c-7af4-4772-9a4b-f4e7a4e0534d@6c48a",
+        "b2b8850c-7af4-4772-9a4b-f4e7a4e0534d@f9941",
+        "b64fd184-61c5-4eb4-a121-0b3bd603e7fc",
+        "b6647cec-6d8c-4be9-8fef-8bcadc2b52f1",
+        "b9057969-ea3b-4a2c-8020-013ad3db91c6",
+        "c0776684-bf37-440a-b310-b40177fa6c6c",
+        "c0776684-bf37-440a-b310-b40177fa6c6c@6c48a",
+        "c0776684-bf37-440a-b310-b40177fa6c6c@f9941",
+        "c5bcdd94-c114-476d-babb-0ebdef04a56f",
+        "c8f7aac7-61f7-4e34-90f4-a9c1b61de18c",
+        "c8f7aac7-61f7-4e34-90f4-a9c1b61de18c@6c48a",
+        "c8f7aac7-61f7-4e34-90f4-a9c1b61de18c@f9941",
+        "c999a25d-9ac7-46b2-9cc8-b7e80470d107",
+        "c999a25d-9ac7-46b2-9cc8-b7e80470d107@6c48a",
+        "c999a25d-9ac7-46b2-9cc8-b7e80470d107@f9941",
+        "ce16fb39-e01a-4fc1-8a35-924d7bdf07db",
+        "d6a1affb-b76e-4df3-a2b8-9a2c5aa5bde0",
+        "d6a1affb-b76e-4df3-a2b8-9a2c5aa5bde0@6c48a",
+        "d6a1affb-b76e-4df3-a2b8-9a2c5aa5bde0@f9941",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@25784",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@262bb",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@2a6c5",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@3eb5f",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@4324d",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@4624c",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@58fcb",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@88fbe",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@91c84",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@93e15",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@97932",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@99cc7",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@c9a6e",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@cb3da",
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@f40b8",
+        "e37ba77d-67b0-4421-8f68-9d4d33480742",
+        "e4acb9a0-b4ac-453d-b51c-86f9ca1cabf8",
+        "e4acb9a0-b4ac-453d-b51c-86f9ca1cabf8@6c48a",
+        "e4acb9a0-b4ac-453d-b51c-86f9ca1cabf8@f9941",
+        "e6a43520-9738-4abc-a381-0ea80e12cad0",
+        "e6a43520-9738-4abc-a381-0ea80e12cad0@6c48a",
+        "e6a43520-9738-4abc-a381-0ea80e12cad0@f9941",
+        "e992582b-88b6-49a1-82f5-b1135dd8f033",
+        "e992582b-88b6-49a1-82f5-b1135dd8f033@6c48a",
+        "e992582b-88b6-49a1-82f5-b1135dd8f033@f9941",
+        "ebf6c10a-0ab3-4612-81e6-2d8e0f8a296d",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@081fd",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@2e1b8",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@3d165",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@3e6f0",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@3ff48",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5b8a2",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5cc21",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5d1e1",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5ee7c",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@769a1",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@7fca5",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@83a13",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@8756c",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@8cd82",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@93f8a",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@94419",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@ab2dc",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@b1994",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@c5169",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@c8f0d",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@d3412",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@d3ec7",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@f0c2a",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@f6958",
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@fe4ba",
+        "ef62155d-71d8-450f-9a52-7cca4712fe4a",
+        "ef62155d-71d8-450f-9a52-7cca4712fe4a@6c48a",
+        "ef62155d-71d8-450f-9a52-7cca4712fe4a@f9941",
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910",
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@09dc9",
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@5a025",
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@9134d",
+        "fa788e58-ff72-4b19-9a76-5f0eb3787808"
+    ],
+    "paths": {
+        "edd879f4-cd96-48b1-86e3-ecdf70554306": [
+            "image/r0x06001200/burro/poker/burro_poker",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@94419": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_bg_fore",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@b1994": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_0_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@3d165": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_0_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@fe4ba": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_1_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@d3412": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_1_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@d3ec7": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_2_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@f0c2a": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_2_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@081fd": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_3_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@93f8a": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_3_small",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@3ff48": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_bg_back",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@ab2dc": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_bg_back_no_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@c5169": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@f6958": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_10",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5ee7c": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_10_king",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@3e6f0": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_11",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@83a13": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_11_king",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@c8f0d": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_12",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@7fca5": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_12_king",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5cc21": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@8cd82": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5d1e1": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@5b8a2": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@2e1b8": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@769a1": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_num_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "edd879f4-cd96-48b1-86e3-ecdf70554306@8756c": [
+            "image/r0x06001200/burro/poker/burro_poker/burro_poker_select",
+            "cc.SpriteFrame",
+            1
+        ],
+        "c8f7aac7-61f7-4e34-90f4-a9c1b61de18c": [
+            "image/r0x06001200/burro/poker/burro_poker",
+            "cc.ImageAsset",
+            1
+        ],
+        "c8f7aac7-61f7-4e34-90f4-a9c1b61de18c@6c48a": [
+            "image/r0x06001200/burro/poker/burro_poker/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "c8f7aac7-61f7-4e34-90f4-a9c1b61de18c@f9941": [
+            "image/r0x06001200/burro/poker/burro_poker/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "9f1a630f-3eda-4755-88a5-62f885e50ca1": [
+            "image/r0x06001200/burro/room/burro",
+            "cc.Asset",
+            1
+        ],
+        "34be1413-5566-48ff-8e10-21e44b9f1069": [
+            "image/r0x06001200/burro/room/burro",
+            "sp.SkeletonData",
+            1
+        ],
+        "a607f61e-adcd-4dd7-908a-a85ebca91e76": [
+            "image/r0x06001200/burro/room/burro",
+            "cc.ImageAsset",
+            1
+        ],
+        "a607f61e-adcd-4dd7-908a-a85ebca91e76@6c48a": [
+            "image/r0x06001200/burro/room/burro/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "a607f61e-adcd-4dd7-908a-a85ebca91e76@f9941": [
+            "image/r0x06001200/burro/room/burro/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "72590c2f-7561-4dd3-937d-f1217dc9e7f1": [
+            "image/r0x06001200/burro/room/burro_fa_card_anim.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "c0776684-bf37-440a-b310-b40177fa6c6c": [
+            "image/r0x06001200/burro/room/burro_fa_card_anim",
+            "cc.ImageAsset",
+            1
+        ],
+        "c0776684-bf37-440a-b310-b40177fa6c6c@6c48a": [
+            "image/r0x06001200/burro/room/burro_fa_card_anim/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "c0776684-bf37-440a-b310-b40177fa6c6c@f9941": [
+            "image/r0x06001200/burro/room/burro_fa_card_anim/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2": [
+            "image/r0x06001200/burro/room/burro_room",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@11214": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureM",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@14999": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_rank_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@27060": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@28139": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figureM",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@30996": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@33390": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_up_can_not_get",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@42778": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureP",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@58910": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@60465": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@64922": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureT",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@69402": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@84256": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_2_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@99388": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f0d62": [
+            "image/r0x06001200/burro/room/burro_room/burro_poker_gray",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fecf4": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_bankrupt_seat_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3aa45": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_board",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e1599": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c82eb": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6c2c5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0408b": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@31eed": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@4c27e": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f64b5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@08245": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figure9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a14da": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureB",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c235a": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureD",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fdbde": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bet_figureK",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@101f5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@51f08": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6f63c": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@58f17": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@98d3c": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e8242": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3b719": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9aa3d": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b6422": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ac539": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@df723": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figure9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4be4": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figureB",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@47f20": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figureD",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@07c8b": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figureK",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2a888": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figureP",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@56ad8": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_figureT",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4855": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7d610": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@af873": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@995c6": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3a752": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a3e1d": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0a8ac": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7ce11": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@be5c4": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c3e17": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b47cd": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_B",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e67b2": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_D",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@76b03": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_K",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@23bc5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_M",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c93b0": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_P",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@44db4": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_T",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f6bd5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_champion_mult_x",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a5b94": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_chip",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@91efa": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_down_can_not_get",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@00235": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_exit_btn_light",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@57ed6": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_first_champion",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0617d": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_can_not_get",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ee449": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6cfba": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@66cba": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c4111": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@54e25": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b3ecd": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d76b0": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a9289": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@564c5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@aee98": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@871ff": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_left_time_figure9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@33efa": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_light_star",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b8d60": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_logo",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@5f310": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_msg_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e1844": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_out_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a9049": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_player",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@54d45": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_player_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ed2fc": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@4f19b": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_0_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4854": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@96cdc": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_1_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@86c36": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@644c4": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@e9a3a": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_3_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@c4ced": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@aa654": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_4_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f8168": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7d28f": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_5_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@856a5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2c048": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_6_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7ffa3": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f764d": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_7_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fb1e1": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_8_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6da8b": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@19b8f": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_9_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@ea9ec": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_poker_count_bg_big",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fceb3": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@8c946": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_chip",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9be93": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_cur_progress",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@128e5": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_cur_progress_di",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@786f8": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4b5c": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a3947": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@dc44f": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@3116f": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@287ae": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9b5a1": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@827a8": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9b914": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7e037": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_pot_progress_mult",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@4b45b": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_rank_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d51fc": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_rank_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@9f961": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_ready",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@220f9": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_ready_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@177ab": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_right_can_not_get",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@b881b": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_seat_album",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6c7fc": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_second_champion",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@be51d": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_third_champion",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@0036f": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_clock",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4f11": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_clock_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2a1f2": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_clock_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@eb811": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@cafad": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@7a233": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a1220": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@dc7c6": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@603d7": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@fca7a": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f98fd": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4509": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_time_figure9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@2f351": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_tuoguan_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@a4917": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_wait1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@96f7c": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_wait2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@6b4dc": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_wait3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@d481a": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_wait_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@09f41": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_wait_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2340f44d-96dd-4af9-b84a-690e2581f0f2@43aa1": [
+            "image/r0x06001200/burro/room/burro_room/burro_room_wait_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "2ce1e1d1-41a4-410e-b9a1-a910d5b86f04": [
+            "image/r0x06001200/burro/room/burro_room",
+            "cc.ImageAsset",
+            1
+        ],
+        "2ce1e1d1-41a4-410e-b9a1-a910d5b86f04@6c48a": [
+            "image/r0x06001200/burro/room/burro_room/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "2ce1e1d1-41a4-410e-b9a1-a910d5b86f04@f9941": [
+            "image/r0x06001200/burro/room/burro_room/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "5833090b-caa8-4936-917a-0a0bb6cc69a1": [
+            "image/r0x06001200/burro/room/burro_room_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "5833090b-caa8-4936-917a-0a0bb6cc69a1@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "5833090b-caa8-4936-917a-0a0bb6cc69a1@f9941": [
+            "image/r0x06001200/burro/room/burro_room_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "a9846bf6-a1a0-4e29-8d39-c12a29c0e4aa": [
+            "image/r0x06001200/burro/room/burro_room_flush_card_anim.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "85be34b0-c2a2-4c02-9ddf-eeac2befcf9c": [
+            "image/r0x06001200/burro/room/burro_room_flush_card_anim",
+            "cc.ImageAsset",
+            1
+        ],
+        "85be34b0-c2a2-4c02-9ddf-eeac2befcf9c@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_flush_card_anim/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "85be34b0-c2a2-4c02-9ddf-eeac2befcf9c@f9941": [
+            "image/r0x06001200/burro/room/burro_room_flush_card_anim/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e37ba77d-67b0-4421-8f68-9d4d33480742": [
+            "image/r0x06001200/burro/room/burro_room_hand_anim.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "074469d7-f5e8-4f3c-a389-26541b60084b": [
+            "image/r0x06001200/burro/room/burro_room_hand_anim",
+            "cc.ImageAsset",
+            1
+        ],
+        "074469d7-f5e8-4f3c-a389-26541b60084b@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_hand_anim/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "074469d7-f5e8-4f3c-a389-26541b60084b@f9941": [
+            "image/r0x06001200/burro/room/burro_room_hand_anim/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "921c488e-cdcf-4540-8961-8c24e6e14b11": [
+            "image/r0x06001200/burro/room/burro_room_max_card_anim.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "4c873a97-3ed6-466d-bbb1-d91ea83fc9dd": [
+            "image/r0x06001200/burro/room/burro_room_max_card_anim",
+            "cc.ImageAsset",
+            1
+        ],
+        "4c873a97-3ed6-466d-bbb1-d91ea83fc9dd@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_max_card_anim/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "4c873a97-3ed6-466d-bbb1-d91ea83fc9dd@f9941": [
+            "image/r0x06001200/burro/room/burro_room_max_card_anim/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "fa788e58-ff72-4b19-9a76-5f0eb3787808": [
+            "image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "856335ee-6084-4f6b-ba2e-a648d69569cb": [
+            "image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim",
+            "cc.ImageAsset",
+            1
+        ],
+        "856335ee-6084-4f6b-ba2e-a648d69569cb@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "856335ee-6084-4f6b-ba2e-a648d69569cb@f9941": [
+            "image/r0x06001200/burro/room/burro_room_max_poker_card_circle_anim/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "5e736a5d-0d6f-4d91-85ca-0ff1fd2dd37f": [
+            "image/r0x06001200/burro/room/burro_room_out_card_anim.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "c999a25d-9ac7-46b2-9cc8-b7e80470d107": [
+            "image/r0x06001200/burro/room/burro_room_out_card_anim",
+            "cc.ImageAsset",
+            1
+        ],
+        "c999a25d-9ac7-46b2-9cc8-b7e80470d107@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_out_card_anim/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "c999a25d-9ac7-46b2-9cc8-b7e80470d107@f9941": [
+            "image/r0x06001200/burro/room/burro_room_out_card_anim/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "1047ceb2-2f2d-48e4-b29e-66d788460325": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "b2b8850c-7af4-4772-9a4b-f4e7a4e0534d": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang",
+            "cc.ImageAsset",
+            1
+        ],
+        "b2b8850c-7af4-4772-9a4b-f4e7a4e0534d@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "b2b8850c-7af4-4772-9a4b-f4e7a4e0534d@f9941": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "18d3fe98-816c-456f-a933-22d9f630cc26": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "9123df4e-7bbb-4abb-a01f-7f2b39ea0c44": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2",
+            "cc.ImageAsset",
+            1
+        ],
+        "9123df4e-7bbb-4abb-a01f-7f2b39ea0c44@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "9123df4e-7bbb-4abb-a01f-7f2b39ea0c44@f9941": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang2/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "9e8fd6e1-1e60-4bcd-b783-d049b070919a": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "756e203a-d2fa-4c30-b1d1-0d95c45a6f6c": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot",
+            "cc.ImageAsset",
+            1
+        ],
+        "756e203a-d2fa-4c30-b1d1-0d95c45a6f6c@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "756e203a-d2fa-4c30-b1d1-0d95c45a6f6c@f9941": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "6106e7d9-8248-406c-9f75-496ae7ad0e16": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "8d1d65cc-d85e-4483-ac65-09a9cc743048": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2",
+            "cc.ImageAsset",
+            1
+        ],
+        "8d1d65cc-d85e-4483-ac65-09a9cc743048@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "8d1d65cc-d85e-4483-ac65-09a9cc743048@f9941": [
+            "image/r0x06001200/burro/room/burro_room_player_bg_sao_guang_circle_rot2/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e6a43520-9738-4abc-a381-0ea80e12cad0": [
+            "image/r0x06001200/burro/room/burro_room_time_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "e6a43520-9738-4abc-a381-0ea80e12cad0@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_time_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "e6a43520-9738-4abc-a381-0ea80e12cad0@f9941": [
+            "image/r0x06001200/burro/room/burro_room_time_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "67be8a15-0377-4acd-8513-821d2abfdef7": [
+            "image/r0x06001200/burro/room/burro_room_time_bg2",
+            "cc.ImageAsset",
+            1
+        ],
+        "67be8a15-0377-4acd-8513-821d2abfdef7@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_time_bg2/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "67be8a15-0377-4acd-8513-821d2abfdef7@f9941": [
+            "image/r0x06001200/burro/room/burro_room_time_bg2/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "0f935889-b7e7-41dd-8fd6-085da78f9755": [
+            "image/r0x06001200/burro/room/burro_room_time_bg3",
+            "cc.ImageAsset",
+            1
+        ],
+        "0f935889-b7e7-41dd-8fd6-085da78f9755@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_time_bg3/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "0f935889-b7e7-41dd-8fd6-085da78f9755@f9941": [
+            "image/r0x06001200/burro/room/burro_room_time_bg3/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "1eeafee0-a067-41b6-97df-247c80879c98": [
+            "image/r0x06001200/burro/room/burro_room_time_direct.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "0235cded-6a98-4521-8633-fe775027d992": [
+            "image/r0x06001200/burro/room/burro_room_time_direct",
+            "cc.ImageAsset",
+            1
+        ],
+        "0235cded-6a98-4521-8633-fe775027d992@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_time_direct/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "0235cded-6a98-4521-8633-fe775027d992@f9941": [
+            "image/r0x06001200/burro/room/burro_room_time_direct/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ef62155d-71d8-450f-9a52-7cca4712fe4a": [
+            "image/r0x06001200/burro/room/burro_room_time_point",
+            "cc.ImageAsset",
+            1
+        ],
+        "ef62155d-71d8-450f-9a52-7cca4712fe4a@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_time_point/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "ef62155d-71d8-450f-9a52-7cca4712fe4a@f9941": [
+            "image/r0x06001200/burro/room/burro_room_time_point/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e4acb9a0-b4ac-453d-b51c-86f9ca1cabf8": [
+            "image/r0x06001200/burro/room/burro_room_time_point2",
+            "cc.ImageAsset",
+            1
+        ],
+        "e4acb9a0-b4ac-453d-b51c-86f9ca1cabf8@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_time_point2/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "e4acb9a0-b4ac-453d-b51c-86f9ca1cabf8@f9941": [
+            "image/r0x06001200/burro/room/burro_room_time_point2/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "1a85048f-1123-4be5-a034-f2c1380cea71": [
+            "image/r0x06001200/burro/room/burro_room_time_point3",
+            "cc.ImageAsset",
+            1
+        ],
+        "1a85048f-1123-4be5-a034-f2c1380cea71@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_time_point3/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "1a85048f-1123-4be5-a034-f2c1380cea71@f9941": [
+            "image/r0x06001200/burro/room/burro_room_time_point3/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "a65423b6-bcd0-46aa-90aa-814cce3839cf": [
+            "image/r0x06001200/burro/room/burro_room_tutorial_split",
+            "cc.ImageAsset",
+            1
+        ],
+        "a65423b6-bcd0-46aa-90aa-814cce3839cf@6c48a": [
+            "image/r0x06001200/burro/room/burro_room_tutorial_split/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "a65423b6-bcd0-46aa-90aa-814cce3839cf@f9941": [
+            "image/r0x06001200/burro/room/burro_room_tutorial_split/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "431cbb64-4fa1-4c21-ad17-6d792c92c5b2": [
+            "image/r0x06001200/burro/room/burro_table_bg",
+            "cc.ImageAsset",
+            1
+        ],
+        "431cbb64-4fa1-4c21-ad17-6d792c92c5b2@6c48a": [
+            "image/r0x06001200/burro/room/burro_table_bg/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "431cbb64-4fa1-4c21-ad17-6d792c92c5b2@f9941": [
+            "image/r0x06001200/burro/room/burro_table_bg/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "9d004f62-1868-4eb2-b539-5837da9acc67": [
+            "image/r0x06001200/burro/room/Smoke",
+            "cc.Asset",
+            1
+        ],
+        "b9057969-ea3b-4a2c-8020-013ad3db91c6": [
+            "image/r0x06001200/burro/room/Smoke",
+            "sp.SkeletonData",
+            1
+        ],
+        "4eb21b51-67d7-4d57-a304-3e00730c415a": [
+            "image/r0x06001200/burro/room/Smoke",
+            "cc.ImageAsset",
+            1
+        ],
+        "4eb21b51-67d7-4d57-a304-3e00730c415a@6c48a": [
+            "image/r0x06001200/burro/room/Smoke/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "4eb21b51-67d7-4d57-a304-3e00730c415a@f9941": [
+            "image/r0x06001200/burro/room/Smoke/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "4f4a4dd4-826f-4a94-94bc-2e7eed278e80": [
+            "sounds/android/0x06001200/burro/burro_bet",
+            "cc.AudioClip",
+            1
+        ],
+        "14b09e2d-3003-4796-98a3-af6fa5263c3b": [
+            "sounds/android/0x06001200/burro/burro_change",
+            "cc.AudioClip",
+            1
+        ],
+        "049f2964-676a-4f87-bc6f-d56ee3ccb440": [
+            "sounds/android/0x06001200/burro/burro_fapai",
+            "cc.AudioClip",
+            1
+        ],
+        "557bb738-1063-4890-9085-c46da0accc6e": [
+            "sounds/android/0x06001200/burro/burro_flush_card",
+            "cc.AudioClip",
+            1
+        ],
+        "8a82adcb-1096-434c-9d6e-21cec5f222ff": [
+            "sounds/android/0x06001200/burro/burro_lost",
+            "cc.AudioClip",
+            1
+        ],
+        "1418f2b5-076c-440c-951c-e842aea6a4c0": [
+            "sounds/android/0x06001200/burro/burro_max_poker",
+            "cc.AudioClip",
+            1
+        ],
+        "5d9b1a0e-7c72-446d-82d4-b3d7fcfa1ff9": [
+            "sounds/android/0x06001200/burro/burro_mult_value",
+            "cc.AudioClip",
+            1
+        ],
+        "ce16fb39-e01a-4fc1-8a35-924d7bdf07db": [
+            "sounds/android/0x06001200/burro/burro_my_turn",
+            "cc.AudioClip",
+            1
+        ],
+        "b64fd184-61c5-4eb4-a121-0b3bd603e7fc": [
+            "sounds/android/0x06001200/burro/burro_out_card",
+            "cc.AudioClip",
+            1
+        ],
+        "c5bcdd94-c114-476d-babb-0ebdef04a56f": [
+            "sounds/android/0x06001200/burro/burro_out_card2",
+            "cc.AudioClip",
+            1
+        ],
+        "24d0e176-d4f7-4d9e-a891-12725a6d95ff": [
+            "sounds/android/0x06001200/burro/burro_rank",
+            "cc.AudioClip",
+            1
+        ],
+        "61c8a464-f5c0-4a12-8a63-27b110b0dfa2": [
+            "sounds/android/0x06001200/burro/burro_ready_timelimit",
+            "cc.AudioClip",
+            1
+        ],
+        "1f08a2f9-1bf7-4d59-957f-f3621674b1f6": [
+            "sounds/android/0x06001200/burro/burro_selectcard",
+            "cc.AudioClip",
+            1
+        ],
+        "b6647cec-6d8c-4be9-8fef-8bcadc2b52f1": [
+            "sounds/android/0x06001200/burro/burro_sitdown",
+            "cc.AudioClip",
+            1
+        ],
+        "0b546014-5351-42b1-9df5-936f394c1d22": [
+            "sounds/android/0x06001200/burro/burro_timelimit",
+            "cc.AudioClip",
+            1
+        ],
+        "ebf6c10a-0ab3-4612-81e6-2d8e0f8a296d": [
+            "sounds/android/0x06001200/burro/burro_win",
+            "cc.AudioClip",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@10432": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_d",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@27344": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@48934": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@56388": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@76968": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@86823": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_d",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@96765": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_zero_figure_add",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@99761": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_2",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@ebeac": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_bg_zhezhao",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@38a93": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_blue_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@afd3c": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_burro",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@e4dce": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_item_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@cd05e": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lose_title_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@a9030": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@dc82c": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@14c1a": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@1b4aa": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@5b1c6": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@2cb38": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@f6043": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_B",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@dd43f": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_K",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@60eb0": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_M",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@3a116": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_T",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4941e": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_add",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@53e77": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_minus",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4d184": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_lost_figure_p",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@fc1da": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_orange_btn",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4c54c": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_own_item_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@1ea4c": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@fd320": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_1",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@4cbd6": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_3",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@abe01": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_4",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@6b99f": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_5",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@ba71d": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_6",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@91e4f": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_7",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@56c74": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_8",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@0873e": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_9",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@d16f0": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_B",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@579e1": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_K",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@ce325": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_M",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@819e7": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_T",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@e6d25": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_add",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@d29d2": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_figure_p",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@62a14": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_win_title_bg",
+            "cc.SpriteFrame",
+            1
+        ],
+        "3c81dd06-071e-49ad-aace-e7ed27067c66@6c8f2": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/burro_result_popup_zero_figure_0",
+            "cc.SpriteFrame",
+            1
+        ],
+        "9c3f3314-1159-4203-8665-c080c52e07c7": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup",
+            "cc.ImageAsset",
+            1
+        ],
+        "9c3f3314-1159-4203-8665-c080c52e07c7@6c48a": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "9c3f3314-1159-4203-8665-c080c52e07c7@f9941": [
+            "image/r0x06001200/burro/popup/result/burro_result_popup/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@25784": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_tutorial_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@97932": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_rank_3_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@cb3da": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_bankrupt_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@4324d": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_di_figure_title",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@2a6c5": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_first_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@99cc7": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_forth_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@f40b8": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_pass_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@4624c": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_player_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@c9a6e": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_player_mult_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@3eb5f": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_rank_1_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@58fcb": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_rank_2_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@91c84": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_second_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@262bb": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_third_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@88fbe": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_total_bet_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d94f8fa5-fc14-4731-bef8-fdfc941eba13@93e15": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/burro_room_total_di_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e992582b-88b6-49a1-82f5-b1135dd8f033": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff",
+            "cc.ImageAsset",
+            1
+        ],
+        "e992582b-88b6-49a1-82f5-b1135dd8f033@6c48a": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "e992582b-88b6-49a1-82f5-b1135dd8f033@f9941": [
+            "image/r0x06001200/burro/language/es_mx/room/burro_room_lang_diff/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910": [
+            "image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff",
+            "cc.SpriteAtlas",
+            1
+        ],
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@9134d": [
+            "image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/burro_result_popup_bankrupt_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@09dc9": [
+            "image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/burro_result_popup_you_lose_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@5a025": [
+            "image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/burro_result_popup_you_win_figure",
+            "cc.SpriteFrame",
+            1
+        ],
+        "4c0f4b44-af28-4946-b124-3707fdecc060": [
+            "image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff",
+            "cc.ImageAsset",
+            1
+        ],
+        "4c0f4b44-af28-4946-b124-3707fdecc060@6c48a": [
+            "image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "4c0f4b44-af28-4946-b124-3707fdecc060@f9941": [
+            "image/r0x06001200/burro/language/es_mx/popup/result/burro_result_popup_diff/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "4e9d53ec-17d5-4a78-a06f-ab6b9222024b": [
+            "image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_1",
+            "cc.ImageAsset",
+            1
+        ],
+        "4e9d53ec-17d5-4a78-a06f-ab6b9222024b@6c48a": [
+            "image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_1/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "4e9d53ec-17d5-4a78-a06f-ab6b9222024b@f9941": [
+            "image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_1/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d6a1affb-b76e-4df3-a2b8-9a2c5aa5bde0": [
+            "image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_2",
+            "cc.ImageAsset",
+            1
+        ],
+        "d6a1affb-b76e-4df3-a2b8-9a2c5aa5bde0@6c48a": [
+            "image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_2/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "d6a1affb-b76e-4df3-a2b8-9a2c5aa5bde0@f9941": [
+            "image/r0x06001200/burro/language/es_mx/popup/rule/burro_rule_popup_rule_2/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ]
+    },
+    "scenes": {},
+    "packs": {
+        "0d4f094f1": [
+            "0f935889-b7e7-41dd-8fd6-085da78f9755@6c48a",
+            "1a85048f-1123-4be5-a034-f2c1380cea71@6c48a",
+            "2ce1e1d1-41a4-410e-b9a1-a910d5b86f04@6c48a",
+            "4c0f4b44-af28-4946-b124-3707fdecc060@6c48a",
+            "4c873a97-3ed6-466d-bbb1-d91ea83fc9dd@6c48a",
+            "4e9d53ec-17d5-4a78-a06f-ab6b9222024b@6c48a",
+            "4eb21b51-67d7-4d57-a304-3e00730c415a@6c48a",
+            "8d1d65cc-d85e-4483-ac65-09a9cc743048@6c48a",
+            "9c3f3314-1159-4203-8665-c080c52e07c7@6c48a",
+            "67be8a15-0377-4acd-8513-821d2abfdef7@6c48a",
+            "85be34b0-c2a2-4c02-9ddf-eeac2befcf9c@6c48a",
+            "0235cded-6a98-4521-8633-fe775027d992@6c48a",
+            "431cbb64-4fa1-4c21-ad17-6d792c92c5b2@6c48a",
+            "756e203a-d2fa-4c30-b1d1-0d95c45a6f6c@6c48a",
+            "9123df4e-7bbb-4abb-a01f-7f2b39ea0c44@6c48a",
+            "074469d7-f5e8-4f3c-a389-26541b60084b@6c48a",
+            "856335ee-6084-4f6b-ba2e-a648d69569cb@6c48a",
+            "5833090b-caa8-4936-917a-0a0bb6cc69a1@6c48a",
+            "a607f61e-adcd-4dd7-908a-a85ebca91e76@6c48a",
+            "a65423b6-bcd0-46aa-90aa-814cce3839cf@6c48a",
+            "b2b8850c-7af4-4772-9a4b-f4e7a4e0534d@6c48a",
+            "c8f7aac7-61f7-4e34-90f4-a9c1b61de18c@6c48a",
+            "c999a25d-9ac7-46b2-9cc8-b7e80470d107@6c48a",
+            "c0776684-bf37-440a-b310-b40177fa6c6c@6c48a",
+            "d6a1affb-b76e-4df3-a2b8-9a2c5aa5bde0@6c48a",
+            "e4acb9a0-b4ac-453d-b51c-86f9ca1cabf8@6c48a",
+            "e6a43520-9738-4abc-a381-0ea80e12cad0@6c48a",
+            "e992582b-88b6-49a1-82f5-b1135dd8f033@6c48a",
+            "ef62155d-71d8-450f-9a52-7cca4712fe4a@6c48a"
+        ],
+        "0f10b170d": [
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@00235",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@0036f",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@0408b",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@0617d",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@07c8b",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@08245",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@09f41",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@0a8ac",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@101f5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@11214",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@128e5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@14999",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@177ab",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@19b8f",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@220f9",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@23bc5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@27060",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@28139",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@287ae",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@2a1f2",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@2a888",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@2c048",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@2f351",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@30996",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@3116f",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@31eed",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@33390",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@33efa",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@3a752",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@3aa45",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@3b719",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@42778",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@43aa1",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@44db4",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@47f20",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@4b45b",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@4c27e",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@4f19b",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@51f08",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@54d45",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@54e25",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@564c5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@56ad8",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@57ed6",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@58910",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@58f17",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@5f310",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@603d7",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@60465",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@644c4",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@64922",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@66cba",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@69402",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@6b4dc",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@6c2c5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@6c7fc",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@6cfba",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@6da8b",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@6f63c",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@76b03",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@786f8",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@7a233",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@7ce11",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@7d28f",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@7d610",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@7e037",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@7ffa3",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@827a8",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@84256",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@856a5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@86c36",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@871ff",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@8c946",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@91efa",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@96cdc",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@96f7c",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@98d3c",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@99388",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@995c6",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@9aa3d",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@9b5a1",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@9b914",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@9be93",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@9f961",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a1220",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a14da",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a3947",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a3e1d",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a4917",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a5b94",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a9049",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@a9289",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@aa654",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@ac539",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@aee98",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@af873",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@b3ecd",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@b47cd",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@b6422",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@b881b",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@b8d60",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@be51d",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@be5c4",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@c235a",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@c3e17",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@c4111",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@c4ced",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@c82eb",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@c93b0",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@cafad",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@d481a",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4854",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4b5c",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@d4f11",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@d51fc",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@d76b0",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@dc44f",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@dc7c6",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@df723",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@e1599",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@e1844",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@e67b2",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@e8242",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@e9a3a",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@ea9ec",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@eb811",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@ed2fc",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@ee449",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f0d62",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4509",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4855",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f4be4",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f64b5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f6bd5",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f764d",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f8168",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@f98fd",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@fb1e1",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@fca7a",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@fceb3",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@fdbde",
+            "2340f44d-96dd-4af9-b84a-690e2581f0f2@fecf4"
+        ],
+        "057fa3305": [
+            "3c81dd06-071e-49ad-aace-e7ed27067c66",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@0873e",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@10432",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@14c1a",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@1b4aa",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@1ea4c",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@27344",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@2cb38",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@38a93",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@3a116",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@48934",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@4941e",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@4c54c",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@4cbd6",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@4d184",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@53e77",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@56388",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@56c74",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@579e1",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@5b1c6",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@60eb0",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@62a14",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@6b99f",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@6c8f2",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@76968",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@819e7",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@86823",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@91e4f",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@96765",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@99761",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@a9030",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@abe01",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@afd3c",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@ba71d",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@cd05e",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@ce325",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@d16f0",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@d29d2",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@dc82c",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@dd43f",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@e4dce",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@e6d25",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@ebeac",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@f6043",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@fc1da",
+            "3c81dd06-071e-49ad-aace-e7ed27067c66@fd320"
+        ],
+        "05eee36d1": [
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@25784",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@262bb",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@2a6c5",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@3eb5f",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@4324d",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@4624c",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@58fcb",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@88fbe",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@91c84",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@93e15",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@97932",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@99cc7",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@c9a6e",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@cb3da",
+            "d94f8fa5-fc14-4731-bef8-fdfc941eba13@f40b8"
+        ],
+        "012c8ef52": [
+            "edd879f4-cd96-48b1-86e3-ecdf70554306",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@081fd",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@2e1b8",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@3d165",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@3e6f0",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@3ff48",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@5b8a2",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@5cc21",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@5d1e1",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@5ee7c",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@769a1",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@7fca5",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@83a13",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@8756c",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@8cd82",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@93f8a",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@94419",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@ab2dc",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@b1994",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@c5169",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@c8f0d",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@d3412",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@d3ec7",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@f0c2a",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@f6958",
+            "edd879f4-cd96-48b1-86e3-ecdf70554306@fe4ba"
+        ],
+        "043e734f9": [
+            "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910",
+            "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@09dc9",
+            "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@5a025",
+            "f05d0fe5-b692-4d00-aa1d-f01dbb7bf910@9134d"
+        ]
+    },
+    "versions": {
+        "import": [],
+        "native": []
+    },
+    "redirect": [],
+    "debug": true,
+    "extensionMap": {},
+    "hasPreloadScript": true,
+    "dependencyRelationships": {}
+}
