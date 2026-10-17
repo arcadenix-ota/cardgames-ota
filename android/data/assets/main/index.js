@@ -67367,7 +67367,7 @@ System.register("chunks:///_virtual/PropThrowView.ts", ['cc', './tableSocialLayo
           if (moveData !== null && a.moveSpine !== null) playSpine(node, moveData, {
             x: 0,
             y: 0
-          }, PROP_FLY.moveAnim[a.moveSpine] ?? 'animation', true, 'move');
+          }, PROP_FLY.moveAnim[a.moveSpine] ?? 'animation', true, 'move', true);
           const sec = flyDuration(to.x - from.x, to.y - from.y);
           const t = tween(node).delay(PROP_FLY.startDelay);
           if (a.rotate) {
@@ -67404,7 +67404,7 @@ System.register("chunks:///_virtual/PropThrowView.ts", ['cc', './tableSocialLayo
           const sk = playSpine(this.parent, data, {
             x: to.x + a.offset.x,
             y: to.y + a.offset.y
-          }, PROP_FLY.burstAnim, false, 'burst_' + id);
+          }, PROP_FLY.burstAnim, false, 'burst_' + id, true);
           const node = sk.node;
           this.live.add(node);
           tween(node).delay(PROP_FLY.burstSec).call(() => {
@@ -80108,12 +80108,15 @@ System.register("chunks:///_virtual/tableSocialFx.ts", ['cc', './langPath.ts', '
       }
       exports('SpineCache', SpineCache);
 
-      /** Node Spine chay `anim` mot lan (hoac lap) tai `pos`; khong co animation -> van tra node (log). */
-      function playSpine(parent, data, pos, anim, loop, name) {
+      /**
+       * Node Spine chay `anim` mot lan (hoac lap) tai `pos`; khong co animation -> van tra node (log).
+       * `pma`: texture da nhan alpha san (rules.mjs PMA_PNGS) — dao cu nem; khong thi alpha thang.
+       */
+      function playSpine(parent, data, pos, anim, loop, name, pma = false) {
         const n = child(parent, name, pos);
         n.getComponent(UITransform).setContentSize(0, 0);
         const sk = n.addComponent(sp.Skeleton);
-        sk.premultipliedAlpha = false;
+        sk.premultipliedAlpha = pma;
         sk.skeletonData = data;
         if (sk.setAnimation(0, anim, loop) === null) console.warn('[conquian] playSpine: khong co animation "' + anim + '" trong ' + name);
         return sk;
