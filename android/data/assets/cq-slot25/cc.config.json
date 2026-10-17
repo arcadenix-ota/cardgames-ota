@@ -585,31 +585,6 @@
         "ff11db3c-5f32-41c9-9bbd-fffc6648ef77@f9941"
     ],
     "paths": {
-        "68b1871e-7b2b-446a-a53a-ed3bce225231": [
-            "image/r0x06001200/slot25/bonus/beijingguang",
-            "cc.Asset",
-            1
-        ],
-        "b6b1f6f5-452d-40f7-8844-61a18d34cb26": [
-            "image/r0x06001200/slot25/bonus/beijingguang",
-            "sp.SkeletonData",
-            1
-        ],
-        "2632fde5-2200-4f96-8f29-24b44d6803e9": [
-            "image/r0x06001200/slot25/bonus/beijingguang",
-            "cc.ImageAsset",
-            1
-        ],
-        "2632fde5-2200-4f96-8f29-24b44d6803e9@6c48a": [
-            "image/r0x06001200/slot25/bonus/beijingguang/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "2632fde5-2200-4f96-8f29-24b44d6803e9@f9941": [
-            "image/r0x06001200/slot25/bonus/beijingguang/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "904de09c-f365-4784-9b11-8e2f48fd5d7e": [
             "image/r0x06001200/slot25/bonus/beijing_3",
             "cc.Asset",
@@ -657,6 +632,31 @@
         ],
         "d2543520-0edc-42a7-97cc-67295b3e1c05@f9941": [
             "image/r0x06001200/slot25/bonus/beijing_4/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "68b1871e-7b2b-446a-a53a-ed3bce225231": [
+            "image/r0x06001200/slot25/bonus/beijingguang",
+            "cc.Asset",
+            1
+        ],
+        "b6b1f6f5-452d-40f7-8844-61a18d34cb26": [
+            "image/r0x06001200/slot25/bonus/beijingguang",
+            "sp.SkeletonData",
+            1
+        ],
+        "2632fde5-2200-4f96-8f29-24b44d6803e9": [
+            "image/r0x06001200/slot25/bonus/beijingguang",
+            "cc.ImageAsset",
+            1
+        ],
+        "2632fde5-2200-4f96-8f29-24b44d6803e9@6c48a": [
+            "image/r0x06001200/slot25/bonus/beijingguang/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "2632fde5-2200-4f96-8f29-24b44d6803e9@f9941": [
+            "image/r0x06001200/slot25/bonus/beijingguang/spriteFrame",
             "cc.SpriteFrame",
             1
         ],
@@ -1100,31 +1100,6 @@
             "cc.SpriteFrame",
             1
         ],
-        "853d1666-4ee1-4ce5-9180-46dca2540630": [
-            "image/r0x06001200/slot25/poker/jita",
-            "cc.Asset",
-            1
-        ],
-        "ad70b156-a3a7-48bd-bd56-0f43777376a2": [
-            "image/r0x06001200/slot25/poker/jita",
-            "sp.SkeletonData",
-            1
-        ],
-        "40e3aeab-a2fe-4914-bf59-f151be2866b7": [
-            "image/r0x06001200/slot25/poker/jita",
-            "cc.ImageAsset",
-            1
-        ],
-        "40e3aeab-a2fe-4914-bf59-f151be2866b7@6c48a": [
-            "image/r0x06001200/slot25/poker/jita/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "40e3aeab-a2fe-4914-bf59-f151be2866b7@f9941": [
-            "image/r0x06001200/slot25/poker/jita/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "c2098b37-770e-4c6e-ad7e-43a4aa461cac": [
             "image/r0x06001200/slot25/poker/K",
             "cc.Asset",
@@ -1147,56 +1122,6 @@
         ],
         "959621bc-0d44-44b2-87a3-44fef6835807@f9941": [
             "image/r0x06001200/slot25/poker/K/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "b4cd0e92-4528-4fe7-b56a-7347e1faca76": [
-            "image/r0x06001200/slot25/poker/lajiao",
-            "cc.Asset",
-            1
-        ],
-        "b6893e6f-c50e-42a9-8a85-d00808727279": [
-            "image/r0x06001200/slot25/poker/lajiao",
-            "sp.SkeletonData",
-            1
-        ],
-        "88f8c1c6-2eb0-4a91-9fe1-95f3f1ca3966": [
-            "image/r0x06001200/slot25/poker/lajiao",
-            "cc.ImageAsset",
-            1
-        ],
-        "88f8c1c6-2eb0-4a91-9fe1-95f3f1ca3966@6c48a": [
-            "image/r0x06001200/slot25/poker/lajiao/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "88f8c1c6-2eb0-4a91-9fe1-95f3f1ca3966@f9941": [
-            "image/r0x06001200/slot25/poker/lajiao/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "d52bdf28-7257-47b8-b785-2d3f7fc68805": [
-            "image/r0x06001200/slot25/poker/maozi",
-            "cc.Asset",
-            1
-        ],
-        "25dd09dd-2995-4f01-a853-e09d79bfab67": [
-            "image/r0x06001200/slot25/poker/maozi",
-            "sp.SkeletonData",
-            1
-        ],
-        "0a79cca0-85c5-4bf7-a525-d464b987c667": [
-            "image/r0x06001200/slot25/poker/maozi",
-            "cc.ImageAsset",
-            1
-        ],
-        "0a79cca0-85c5-4bf7-a525-d464b987c667@6c48a": [
-            "image/r0x06001200/slot25/poker/maozi/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "0a79cca0-85c5-4bf7-a525-d464b987c667@f9941": [
-            "image/r0x06001200/slot25/poker/maozi/spriteFrame",
             "cc.SpriteFrame",
             1
         ],
@@ -1247,6 +1172,106 @@
         ],
         "a1445666-1b81-4b2f-b7f3-772a5ce6683e@f9941": [
             "image/r0x06001200/slot25/poker/SCATTER/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "443a485c-ab6d-4a1d-aa77-03a080b7d721": [
+            "image/r0x06001200/slot25/poker/WILD",
+            "cc.Asset",
+            1
+        ],
+        "b6a9d39e-82cb-426d-8f9b-89e57f458ec2": [
+            "image/r0x06001200/slot25/poker/WILD",
+            "sp.SkeletonData",
+            1
+        ],
+        "2ab8b51e-6859-4a18-bc41-6d2a67e3ead6": [
+            "image/r0x06001200/slot25/poker/WILD",
+            "cc.ImageAsset",
+            1
+        ],
+        "2ab8b51e-6859-4a18-bc41-6d2a67e3ead6@6c48a": [
+            "image/r0x06001200/slot25/poker/WILD/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "2ab8b51e-6859-4a18-bc41-6d2a67e3ead6@f9941": [
+            "image/r0x06001200/slot25/poker/WILD/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "853d1666-4ee1-4ce5-9180-46dca2540630": [
+            "image/r0x06001200/slot25/poker/jita",
+            "cc.Asset",
+            1
+        ],
+        "ad70b156-a3a7-48bd-bd56-0f43777376a2": [
+            "image/r0x06001200/slot25/poker/jita",
+            "sp.SkeletonData",
+            1
+        ],
+        "40e3aeab-a2fe-4914-bf59-f151be2866b7": [
+            "image/r0x06001200/slot25/poker/jita",
+            "cc.ImageAsset",
+            1
+        ],
+        "40e3aeab-a2fe-4914-bf59-f151be2866b7@6c48a": [
+            "image/r0x06001200/slot25/poker/jita/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "40e3aeab-a2fe-4914-bf59-f151be2866b7@f9941": [
+            "image/r0x06001200/slot25/poker/jita/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "b4cd0e92-4528-4fe7-b56a-7347e1faca76": [
+            "image/r0x06001200/slot25/poker/lajiao",
+            "cc.Asset",
+            1
+        ],
+        "b6893e6f-c50e-42a9-8a85-d00808727279": [
+            "image/r0x06001200/slot25/poker/lajiao",
+            "sp.SkeletonData",
+            1
+        ],
+        "88f8c1c6-2eb0-4a91-9fe1-95f3f1ca3966": [
+            "image/r0x06001200/slot25/poker/lajiao",
+            "cc.ImageAsset",
+            1
+        ],
+        "88f8c1c6-2eb0-4a91-9fe1-95f3f1ca3966@6c48a": [
+            "image/r0x06001200/slot25/poker/lajiao/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "88f8c1c6-2eb0-4a91-9fe1-95f3f1ca3966@f9941": [
+            "image/r0x06001200/slot25/poker/lajiao/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d52bdf28-7257-47b8-b785-2d3f7fc68805": [
+            "image/r0x06001200/slot25/poker/maozi",
+            "cc.Asset",
+            1
+        ],
+        "25dd09dd-2995-4f01-a853-e09d79bfab67": [
+            "image/r0x06001200/slot25/poker/maozi",
+            "sp.SkeletonData",
+            1
+        ],
+        "0a79cca0-85c5-4bf7-a525-d464b987c667": [
+            "image/r0x06001200/slot25/poker/maozi",
+            "cc.ImageAsset",
+            1
+        ],
+        "0a79cca0-85c5-4bf7-a525-d464b987c667@6c48a": [
+            "image/r0x06001200/slot25/poker/maozi/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "0a79cca0-85c5-4bf7-a525-d464b987c667@f9941": [
+            "image/r0x06001200/slot25/poker/maozi/spriteFrame",
             "cc.SpriteFrame",
             1
         ],
@@ -1380,31 +1405,6 @@
             "cc.SpriteFrame",
             1
         ],
-        "443a485c-ab6d-4a1d-aa77-03a080b7d721": [
-            "image/r0x06001200/slot25/poker/WILD",
-            "cc.Asset",
-            1
-        ],
-        "b6a9d39e-82cb-426d-8f9b-89e57f458ec2": [
-            "image/r0x06001200/slot25/poker/WILD",
-            "sp.SkeletonData",
-            1
-        ],
-        "2ab8b51e-6859-4a18-bc41-6d2a67e3ead6": [
-            "image/r0x06001200/slot25/poker/WILD",
-            "cc.ImageAsset",
-            1
-        ],
-        "2ab8b51e-6859-4a18-bc41-6d2a67e3ead6@6c48a": [
-            "image/r0x06001200/slot25/poker/WILD/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "2ab8b51e-6859-4a18-bc41-6d2a67e3ead6@f9941": [
-            "image/r0x06001200/slot25/poker/WILD/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "d4174114-1b2a-4859-989e-2c81e709cfcf": [
             "image/r0x06001200/slot25/poker/zhongjiang",
             "cc.Asset",
@@ -1427,6 +1427,56 @@
         ],
         "efa7a8ce-86ea-4210-b2f2-4f3cc4d430ea@f9941": [
             "image/r0x06001200/slot25/poker/zhongjiang/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "5b79f3ca-3687-4958-9d72-72bc1dda97ba": [
+            "image/r0x06001200/slot25/room/SPIN_anniu",
+            "cc.Asset",
+            1
+        ],
+        "83e22515-eb98-4e1d-b158-c740fdf2badf": [
+            "image/r0x06001200/slot25/room/SPIN_anniu",
+            "sp.SkeletonData",
+            1
+        ],
+        "b4e81031-8dc4-4cf1-ad88-c40611f8ef69": [
+            "image/r0x06001200/slot25/room/SPIN_anniu",
+            "cc.ImageAsset",
+            1
+        ],
+        "b4e81031-8dc4-4cf1-ad88-c40611f8ef69@6c48a": [
+            "image/r0x06001200/slot25/room/SPIN_anniu/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "b4e81031-8dc4-4cf1-ad88-c40611f8ef69@f9941": [
+            "image/r0x06001200/slot25/room/SPIN_anniu/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "e55db70b-4ac7-4bca-b471-a14e996c71d0": [
+            "image/r0x06001200/slot25/room/SPIN_lizi",
+            "cc.Asset",
+            1
+        ],
+        "e9b56f60-8250-45a1-9a07-b975a71f1e36": [
+            "image/r0x06001200/slot25/room/SPIN_lizi",
+            "sp.SkeletonData",
+            1
+        ],
+        "d7282a8d-781b-4964-af9e-f92e1a39566f": [
+            "image/r0x06001200/slot25/room/SPIN_lizi",
+            "cc.ImageAsset",
+            1
+        ],
+        "d7282a8d-781b-4964-af9e-f92e1a39566f@6c48a": [
+            "image/r0x06001200/slot25/room/SPIN_lizi/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "d7282a8d-781b-4964-af9e-f92e1a39566f@f9941": [
+            "image/r0x06001200/slot25/room/SPIN_lizi/spriteFrame",
             "cc.SpriteFrame",
             1
         ],
@@ -2610,56 +2660,6 @@
             "cc.SpriteFrame",
             1
         ],
-        "5b79f3ca-3687-4958-9d72-72bc1dda97ba": [
-            "image/r0x06001200/slot25/room/SPIN_anniu",
-            "cc.Asset",
-            1
-        ],
-        "83e22515-eb98-4e1d-b158-c740fdf2badf": [
-            "image/r0x06001200/slot25/room/SPIN_anniu",
-            "sp.SkeletonData",
-            1
-        ],
-        "b4e81031-8dc4-4cf1-ad88-c40611f8ef69": [
-            "image/r0x06001200/slot25/room/SPIN_anniu",
-            "cc.ImageAsset",
-            1
-        ],
-        "b4e81031-8dc4-4cf1-ad88-c40611f8ef69@6c48a": [
-            "image/r0x06001200/slot25/room/SPIN_anniu/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "b4e81031-8dc4-4cf1-ad88-c40611f8ef69@f9941": [
-            "image/r0x06001200/slot25/room/SPIN_anniu/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "e55db70b-4ac7-4bca-b471-a14e996c71d0": [
-            "image/r0x06001200/slot25/room/SPIN_lizi",
-            "cc.Asset",
-            1
-        ],
-        "e9b56f60-8250-45a1-9a07-b975a71f1e36": [
-            "image/r0x06001200/slot25/room/SPIN_lizi",
-            "sp.SkeletonData",
-            1
-        ],
-        "d7282a8d-781b-4964-af9e-f92e1a39566f": [
-            "image/r0x06001200/slot25/room/SPIN_lizi",
-            "cc.ImageAsset",
-            1
-        ],
-        "d7282a8d-781b-4964-af9e-f92e1a39566f@6c48a": [
-            "image/r0x06001200/slot25/room/SPIN_lizi/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "d7282a8d-781b-4964-af9e-f92e1a39566f@f9941": [
-            "image/r0x06001200/slot25/room/SPIN_lizi/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "46877600-08cb-4e21-a1a3-e861c82ee2ba": [
             "sounds/android/0x06001200/slot25/slot25_bet_add",
             "cc.AudioClip",
@@ -2700,6 +2700,16 @@
             "cc.AudioClip",
             1
         ],
+        "3ff7e306-2ab2-4598-a29c-66746103208f": [
+            "sounds/android/0x06001200/slot25/slot25_free_chip_bg_music",
+            "cc.AudioClip",
+            1
+        ],
+        "7059a580-84e4-4cd3-9775-8bdbfe812045": [
+            "sounds/android/0x06001200/slot25/slot25_free_game_bonus_appear",
+            "cc.AudioClip",
+            1
+        ],
         "f42ad679-8183-4dd2-a03d-1f5f75727669": [
             "sounds/android/0x06001200/slot25/slot25_freegame",
             "cc.AudioClip",
@@ -2712,16 +2722,6 @@
         ],
         "851487d1-1663-4850-b64d-1410c6d7901b": [
             "sounds/android/0x06001200/slot25/slot25_freegame_result",
-            "cc.AudioClip",
-            1
-        ],
-        "3ff7e306-2ab2-4598-a29c-66746103208f": [
-            "sounds/android/0x06001200/slot25/slot25_free_chip_bg_music",
-            "cc.AudioClip",
-            1
-        ],
-        "7059a580-84e4-4cd3-9775-8bdbfe812045": [
-            "sounds/android/0x06001200/slot25/slot25_free_game_bonus_appear",
             "cc.AudioClip",
             1
         ],
@@ -3115,31 +3115,6 @@
             "cc.SpriteFrame",
             1
         ],
-        "b1dd4b94-2ad4-4c32-bfcf-4035b9bde269": [
-            "image/r0x06001200/slot25/language/es_mx/room/freeGame",
-            "cc.Asset",
-            1
-        ],
-        "062e1c07-c482-4a19-b2bd-a45c81300b1b": [
-            "image/r0x06001200/slot25/language/es_mx/room/freeGame",
-            "sp.SkeletonData",
-            1
-        ],
-        "ca1e658c-558d-4e85-bdff-fc10125b276e": [
-            "image/r0x06001200/slot25/language/es_mx/room/freeGame",
-            "cc.ImageAsset",
-            1
-        ],
-        "ca1e658c-558d-4e85-bdff-fc10125b276e@6c48a": [
-            "image/r0x06001200/slot25/language/es_mx/room/freeGame/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "ca1e658c-558d-4e85-bdff-fc10125b276e@f9941": [
-            "image/r0x06001200/slot25/language/es_mx/room/freeGame/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "67ecdde8-5aca-4c1b-a35e-debf86042758": [
             "image/r0x06001200/slot25/language/es_mx/room/JACKPOT_wenzi",
             "cc.Asset",
@@ -3162,6 +3137,31 @@
         ],
         "cdd9072e-b0ac-487b-942f-7cbf7f15e3ed@f9941": [
             "image/r0x06001200/slot25/language/es_mx/room/JACKPOT_wenzi/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "b1dd4b94-2ad4-4c32-bfcf-4035b9bde269": [
+            "image/r0x06001200/slot25/language/es_mx/room/freeGame",
+            "cc.Asset",
+            1
+        ],
+        "062e1c07-c482-4a19-b2bd-a45c81300b1b": [
+            "image/r0x06001200/slot25/language/es_mx/room/freeGame",
+            "sp.SkeletonData",
+            1
+        ],
+        "ca1e658c-558d-4e85-bdff-fc10125b276e": [
+            "image/r0x06001200/slot25/language/es_mx/room/freeGame",
+            "cc.ImageAsset",
+            1
+        ],
+        "ca1e658c-558d-4e85-bdff-fc10125b276e@6c48a": [
+            "image/r0x06001200/slot25/language/es_mx/room/freeGame/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "ca1e658c-558d-4e85-bdff-fc10125b276e@f9941": [
+            "image/r0x06001200/slot25/language/es_mx/room/freeGame/spriteFrame",
             "cc.SpriteFrame",
             1
         ],

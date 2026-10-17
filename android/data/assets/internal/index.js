@@ -678,7 +678,7 @@ System.register("chunks:///_virtual/builtin-pipeline-types.ts", ['cc'], function
 });
 
 System.register("chunks:///_virtual/builtin-pipeline.ts", ['cc', './builtin-pipeline-types.ts'], function (exports) {
-  var cclegacy, Vec2, Vec4, gfx, Vec3, rendering, assert, renderer, warn, clamp, Material, Layers, PipelineEventType, geometry, sys, pipeline, makePipelineSettings, BloomType;
+  var cclegacy, Vec2, Vec4, gfx, Vec3, macro, rendering, assert, renderer, warn, clamp, Material, Layers, PipelineEventType, geometry, sys, pipeline, makePipelineSettings, BloomType;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -686,6 +686,7 @@ System.register("chunks:///_virtual/builtin-pipeline.ts", ['cc', './builtin-pipe
       Vec4 = module.Vec4;
       gfx = module.gfx;
       Vec3 = module.Vec3;
+      macro = module.macro;
       rendering = module.rendering;
       assert = module.assert;
       renderer = module.renderer;
@@ -755,6 +756,7 @@ System.register("chunks:///_virtual/builtin-pipeline.ts", ['cc', './builtin-pipe
         constructor() {
           this.isWeb = false;
           this.isWebGL1 = false;
+          this.isWebGL2 = false;
           this.isWebGPU = false;
           this.isMobile = false;
           this.isHDR = false;
@@ -778,6 +780,7 @@ System.register("chunks:///_virtual/builtin-pipeline.ts", ['cc', './builtin-pipe
         // Platform
         configs.isWeb = !sys.isNative;
         configs.isWebGL1 = device.gfxAPI === gfx.API.WEBGL;
+        configs.isWebGL2 = device.gfxAPI === gfx.API.WEBGL2;
         configs.isWebGPU = device.gfxAPI === gfx.API.WEBGPU;
         configs.isMobile = sys.isMobile;
 
@@ -1034,8 +1037,7 @@ System.register("chunks:///_virtual/builtin-pipeline.ts", ['cc', './builtin-pipe
           cameraConfigs.enablePlanarReflectionProbe = cameraConfigs.isMainGameWindow || camera.cameraUsage === CameraUsage.SCENE_VIEW || camera.cameraUsage === CameraUsage.GAME_VIEW;
 
           // MSAA
-          cameraConfigs.enableMSAA = cameraConfigs.settings.msaa.enabled && !cameraConfigs.enableStoreSceneDepth // Cannot store MS depth, resolve depth is also not cross-platform
-          && !pipelineConfigs.isWeb // TODO(zhouzhenglong): remove this constraint
+          cameraConfigs.enableMSAA = cameraConfigs.settings.msaa.enabled && (!pipelineConfigs.isWebGL2 || cameraConfigs.remainingPasses > 0 || !macro.ENABLE_WEBGL_ANTIALIAS && macro.ENABLE_TRANSPARENT_CANVAS) && !cameraConfigs.enableStoreSceneDepth // Cannot store MS depth, resolve depth is also not cross-platform
           && !pipelineConfigs.isWebGL1;
 
           // Forward rendering (Depend on MSAA and TBR)

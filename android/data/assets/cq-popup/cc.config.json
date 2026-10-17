@@ -2586,106 +2586,6 @@
             "cc.SpriteFrame",
             1
         ],
-        "ddace695-a5e7-4bc3-a87d-efcd0c18016d": [
-            "image/popup/piggyBank/beijing",
-            "cc.Asset",
-            1
-        ],
-        "605d314d-b76d-4236-b137-164074ca2c46": [
-            "image/popup/piggyBank/beijing",
-            "sp.SkeletonData",
-            1
-        ],
-        "30800762-0b9a-4de6-be72-651b3f838cdc": [
-            "image/popup/piggyBank/beijing",
-            "cc.ImageAsset",
-            1
-        ],
-        "30800762-0b9a-4de6-be72-651b3f838cdc@6c48a": [
-            "image/popup/piggyBank/beijing/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "30800762-0b9a-4de6-be72-651b3f838cdc@f9941": [
-            "image/popup/piggyBank/beijing/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "d68b6180-4d5c-44ee-a84b-1582be82e8bb": [
-            "image/popup/piggyBank/chouma",
-            "cc.Asset",
-            1
-        ],
-        "d61ee791-1c84-4122-a3f2-0ca8152dfa8b": [
-            "image/popup/piggyBank/chouma",
-            "sp.SkeletonData",
-            1
-        ],
-        "64393595-e372-41a5-ae15-974f929e4367": [
-            "image/popup/piggyBank/chouma",
-            "cc.ImageAsset",
-            1
-        ],
-        "64393595-e372-41a5-ae15-974f929e4367@6c48a": [
-            "image/popup/piggyBank/chouma/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "64393595-e372-41a5-ae15-974f929e4367@f9941": [
-            "image/popup/piggyBank/chouma/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "f0ecb79d-fbea-4dfe-a87d-9b49ad25f76f": [
-            "image/popup/piggyBank/jinzhu",
-            "cc.Asset",
-            1
-        ],
-        "c3399e60-7390-4093-b1a9-fe4aaa46118c": [
-            "image/popup/piggyBank/jinzhu",
-            "sp.SkeletonData",
-            1
-        ],
-        "8d874c4d-e1ab-4365-875d-871380e188fa": [
-            "image/popup/piggyBank/jinzhu",
-            "cc.ImageAsset",
-            1
-        ],
-        "8d874c4d-e1ab-4365-875d-871380e188fa@6c48a": [
-            "image/popup/piggyBank/jinzhu/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "8d874c4d-e1ab-4365-875d-871380e188fa@f9941": [
-            "image/popup/piggyBank/jinzhu/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "d1bcfde3-cbc4-4821-96d9-73194833cf77": [
-            "image/popup/piggyBank/jinzhu_tubiao",
-            "cc.Asset",
-            1
-        ],
-        "6be3882c-0799-47f6-bd58-4f7af34a5fd7": [
-            "image/popup/piggyBank/jinzhu_tubiao",
-            "sp.SkeletonData",
-            1
-        ],
-        "311cd4be-d629-483d-b17b-3fe73195aa2c": [
-            "image/popup/piggyBank/jinzhu_tubiao",
-            "cc.ImageAsset",
-            1
-        ],
-        "311cd4be-d629-483d-b17b-3fe73195aa2c@6c48a": [
-            "image/popup/piggyBank/jinzhu_tubiao/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "311cd4be-d629-483d-b17b-3fe73195aa2c@f9941": [
-            "image/popup/piggyBank/jinzhu_tubiao/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "a1775349-f52d-4833-9be7-8f2c3d6d5e58": [
             "image/popup/piggyBank/PiggyBankPop",
             "cc.SpriteAtlas",
@@ -3238,6 +3138,106 @@
         ],
         "f25611cd-20ed-4b35-8ae6-62e247fe9b2d@f9941": [
             "image/popup/piggyBank/PiggyBankPop/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "ddace695-a5e7-4bc3-a87d-efcd0c18016d": [
+            "image/popup/piggyBank/beijing",
+            "cc.Asset",
+            1
+        ],
+        "605d314d-b76d-4236-b137-164074ca2c46": [
+            "image/popup/piggyBank/beijing",
+            "sp.SkeletonData",
+            1
+        ],
+        "30800762-0b9a-4de6-be72-651b3f838cdc": [
+            "image/popup/piggyBank/beijing",
+            "cc.ImageAsset",
+            1
+        ],
+        "30800762-0b9a-4de6-be72-651b3f838cdc@6c48a": [
+            "image/popup/piggyBank/beijing/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "30800762-0b9a-4de6-be72-651b3f838cdc@f9941": [
+            "image/popup/piggyBank/beijing/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d68b6180-4d5c-44ee-a84b-1582be82e8bb": [
+            "image/popup/piggyBank/chouma",
+            "cc.Asset",
+            1
+        ],
+        "d61ee791-1c84-4122-a3f2-0ca8152dfa8b": [
+            "image/popup/piggyBank/chouma",
+            "sp.SkeletonData",
+            1
+        ],
+        "64393595-e372-41a5-ae15-974f929e4367": [
+            "image/popup/piggyBank/chouma",
+            "cc.ImageAsset",
+            1
+        ],
+        "64393595-e372-41a5-ae15-974f929e4367@6c48a": [
+            "image/popup/piggyBank/chouma/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "64393595-e372-41a5-ae15-974f929e4367@f9941": [
+            "image/popup/piggyBank/chouma/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "f0ecb79d-fbea-4dfe-a87d-9b49ad25f76f": [
+            "image/popup/piggyBank/jinzhu",
+            "cc.Asset",
+            1
+        ],
+        "c3399e60-7390-4093-b1a9-fe4aaa46118c": [
+            "image/popup/piggyBank/jinzhu",
+            "sp.SkeletonData",
+            1
+        ],
+        "8d874c4d-e1ab-4365-875d-871380e188fa": [
+            "image/popup/piggyBank/jinzhu",
+            "cc.ImageAsset",
+            1
+        ],
+        "8d874c4d-e1ab-4365-875d-871380e188fa@6c48a": [
+            "image/popup/piggyBank/jinzhu/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "8d874c4d-e1ab-4365-875d-871380e188fa@f9941": [
+            "image/popup/piggyBank/jinzhu/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "d1bcfde3-cbc4-4821-96d9-73194833cf77": [
+            "image/popup/piggyBank/jinzhu_tubiao",
+            "cc.Asset",
+            1
+        ],
+        "6be3882c-0799-47f6-bd58-4f7af34a5fd7": [
+            "image/popup/piggyBank/jinzhu_tubiao",
+            "sp.SkeletonData",
+            1
+        ],
+        "311cd4be-d629-483d-b17b-3fe73195aa2c": [
+            "image/popup/piggyBank/jinzhu_tubiao",
+            "cc.ImageAsset",
+            1
+        ],
+        "311cd4be-d629-483d-b17b-3fe73195aa2c@6c48a": [
+            "image/popup/piggyBank/jinzhu_tubiao/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "311cd4be-d629-483d-b17b-3fe73195aa2c@f9941": [
+            "image/popup/piggyBank/jinzhu_tubiao/spriteFrame",
             "cc.SpriteFrame",
             1
         ],

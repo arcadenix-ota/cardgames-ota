@@ -2315,6 +2315,56 @@
             "cc.SpriteFrame",
             1
         ],
+        "5187df51-d011-40c4-a241-dbc8775a14f6": [
+            "image/room/face_expression/Crazy",
+            "cc.Asset",
+            1
+        ],
+        "116f9868-0520-4d78-8f2f-a44967345063": [
+            "image/room/face_expression/Crazy",
+            "sp.SkeletonData",
+            1
+        ],
+        "000bf1d5-6592-4920-8556-f4de44db727c": [
+            "image/room/face_expression/Crazy",
+            "cc.ImageAsset",
+            1
+        ],
+        "000bf1d5-6592-4920-8556-f4de44db727c@6c48a": [
+            "image/room/face_expression/Crazy/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "000bf1d5-6592-4920-8556-f4de44db727c@f9941": [
+            "image/room/face_expression/Crazy/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "65135ede-84b0-48d6-80c0-30fa07400938": [
+            "image/room/face_expression/Thanks",
+            "cc.Asset",
+            1
+        ],
+        "eee16874-d092-45a2-9ae7-5a39376631c6": [
+            "image/room/face_expression/Thanks",
+            "sp.SkeletonData",
+            1
+        ],
+        "780f9137-ebba-4904-9797-7be017e029b5": [
+            "image/room/face_expression/Thanks",
+            "cc.ImageAsset",
+            1
+        ],
+        "780f9137-ebba-4904-9797-7be017e029b5@6c48a": [
+            "image/room/face_expression/Thanks/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "780f9137-ebba-4904-9797-7be017e029b5@f9941": [
+            "image/room/face_expression/Thanks/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
         "4261081a-9e97-460e-8856-6a37bfec1584": [
             "image/room/face_expression/anger",
             "cc.Asset",
@@ -2387,31 +2437,6 @@
         ],
         "5d31277f-1df8-4419-b07f-7170bac2f7a0@f9941": [
             "image/room/face_expression/bye/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "5187df51-d011-40c4-a241-dbc8775a14f6": [
-            "image/room/face_expression/Crazy",
-            "cc.Asset",
-            1
-        ],
-        "116f9868-0520-4d78-8f2f-a44967345063": [
-            "image/room/face_expression/Crazy",
-            "sp.SkeletonData",
-            1
-        ],
-        "000bf1d5-6592-4920-8556-f4de44db727c": [
-            "image/room/face_expression/Crazy",
-            "cc.ImageAsset",
-            1
-        ],
-        "000bf1d5-6592-4920-8556-f4de44db727c@6c48a": [
-            "image/room/face_expression/Crazy/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "000bf1d5-6592-4920-8556-f4de44db727c@f9941": [
-            "image/room/face_expression/Crazy/spriteFrame",
             "cc.SpriteFrame",
             1
         ],
@@ -2745,31 +2770,6 @@
             "cc.SpriteFrame",
             1
         ],
-        "65135ede-84b0-48d6-80c0-30fa07400938": [
-            "image/room/face_expression/Thanks",
-            "cc.Asset",
-            1
-        ],
-        "eee16874-d092-45a2-9ae7-5a39376631c6": [
-            "image/room/face_expression/Thanks",
-            "sp.SkeletonData",
-            1
-        ],
-        "780f9137-ebba-4904-9797-7be017e029b5": [
-            "image/room/face_expression/Thanks",
-            "cc.ImageAsset",
-            1
-        ],
-        "780f9137-ebba-4904-9797-7be017e029b5@6c48a": [
-            "image/room/face_expression/Thanks/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "780f9137-ebba-4904-9797-7be017e029b5@f9941": [
-            "image/room/face_expression/Thanks/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "663d6cb9-2212-43a6-bc2f-0c91e36b3326": [
             "image/room/face_expression/titter",
             "cc.Asset",
@@ -2792,6 +2792,31 @@
         ],
         "190fbcb0-bf4a-4f11-ab58-7c2e816a41a7@f9941": [
             "image/room/face_expression/titter/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "b9999428-8757-4c75-a9ea-03b25cbe0b0b": [
+            "image/room/vp_expression/OK",
+            "cc.Asset",
+            1
+        ],
+        "ab3b4d1b-0a82-4135-a6c9-77f7f7158c5b": [
+            "image/room/vp_expression/OK",
+            "sp.SkeletonData",
+            1
+        ],
+        "bb581b55-a5c7-4d2e-9caf-28441cfff3a2": [
+            "image/room/vp_expression/OK",
+            "cc.ImageAsset",
+            1
+        ],
+        "bb581b55-a5c7-4d2e-9caf-28441cfff3a2@6c48a": [
+            "image/room/vp_expression/OK/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "bb581b55-a5c7-4d2e-9caf-28441cfff3a2@f9941": [
+            "image/room/vp_expression/OK/spriteFrame",
             "cc.SpriteFrame",
             1
         ],
@@ -2942,31 +2967,6 @@
         ],
         "f812a9f7-9106-4b1a-a700-5245765f60c1@f9941": [
             "image/room/vp_expression/ku/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "b9999428-8757-4c75-a9ea-03b25cbe0b0b": [
-            "image/room/vp_expression/OK",
-            "cc.Asset",
-            1
-        ],
-        "ab3b4d1b-0a82-4135-a6c9-77f7f7158c5b": [
-            "image/room/vp_expression/OK",
-            "sp.SkeletonData",
-            1
-        ],
-        "bb581b55-a5c7-4d2e-9caf-28441cfff3a2": [
-            "image/room/vp_expression/OK",
-            "cc.ImageAsset",
-            1
-        ],
-        "bb581b55-a5c7-4d2e-9caf-28441cfff3a2@6c48a": [
-            "image/room/vp_expression/OK/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "bb581b55-a5c7-4d2e-9caf-28441cfff3a2@f9941": [
-            "image/room/vp_expression/OK/spriteFrame",
             "cc.SpriteFrame",
             1
         ],

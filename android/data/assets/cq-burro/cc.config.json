@@ -510,6 +510,31 @@
             "cc.SpriteFrame",
             1
         ],
+        "9d004f62-1868-4eb2-b539-5837da9acc67": [
+            "image/r0x06001200/burro/room/Smoke",
+            "cc.Asset",
+            1
+        ],
+        "b9057969-ea3b-4a2c-8020-013ad3db91c6": [
+            "image/r0x06001200/burro/room/Smoke",
+            "sp.SkeletonData",
+            1
+        ],
+        "4eb21b51-67d7-4d57-a304-3e00730c415a": [
+            "image/r0x06001200/burro/room/Smoke",
+            "cc.ImageAsset",
+            1
+        ],
+        "4eb21b51-67d7-4d57-a304-3e00730c415a@6c48a": [
+            "image/r0x06001200/burro/room/Smoke/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "4eb21b51-67d7-4d57-a304-3e00730c415a@f9941": [
+            "image/r0x06001200/burro/room/Smoke/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
         "9f1a630f-3eda-4755-88a5-62f885e50ca1": [
             "image/r0x06001200/burro/room/burro",
             "cc.Asset",
@@ -1617,31 +1642,6 @@
         ],
         "431cbb64-4fa1-4c21-ad17-6d792c92c5b2@f9941": [
             "image/r0x06001200/burro/room/burro_table_bg/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
-        "9d004f62-1868-4eb2-b539-5837da9acc67": [
-            "image/r0x06001200/burro/room/Smoke",
-            "cc.Asset",
-            1
-        ],
-        "b9057969-ea3b-4a2c-8020-013ad3db91c6": [
-            "image/r0x06001200/burro/room/Smoke",
-            "sp.SkeletonData",
-            1
-        ],
-        "4eb21b51-67d7-4d57-a304-3e00730c415a": [
-            "image/r0x06001200/burro/room/Smoke",
-            "cc.ImageAsset",
-            1
-        ],
-        "4eb21b51-67d7-4d57-a304-3e00730c415a@6c48a": [
-            "image/r0x06001200/burro/room/Smoke/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "4eb21b51-67d7-4d57-a304-3e00730c415a@f9941": [
-            "image/r0x06001200/burro/room/Smoke/spriteFrame",
             "cc.SpriteFrame",
             1
         ],

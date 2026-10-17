@@ -542,8 +542,10 @@ System.register("chunks:///_virtual/ad.ts", ['cc'], function (exports) {
     execute: function () {
       exports({
         adCancelled: adCancelled,
+        adUnavailable: adUnavailable,
         currentAdProvider: currentAdProvider,
         isAdCancelled: isAdCancelled,
+        isAdUnavailable: isAdUnavailable,
         makeDevAdProvider: makeDevAdProvider,
         registerAdProvider: registerAdProvider,
         resetAdProviders: resetAdProviders
@@ -552,7 +554,7 @@ System.register("chunks:///_virtual/ad.ts", ['cc'], function (exports) {
       /**
        * Cong quang cao video (spec D4b Q3, §3.1): AdProvider thay duoc nhu PaymentProvider D2. Server dev
        * (Colyseus) dung devAdProvider (platformBoot dang ky); ban phat hanh chua co provider nen an video.
-       * D sau cam AppLovin/AdMob vao day (khi do can xac minh phia server, spec §7).
+       * P1: AdMob that (admobProvider.ts) dang ky tren Android khi server.json co ads.admob.rewardedUnit.
        */
       function adCancelled() {
         return {
@@ -561,6 +563,17 @@ System.register("chunks:///_virtual/ad.ts", ['cc'], function (exports) {
       }
       function isAdCancelled(e) {
         return typeof e === 'object' && e !== null && e.adCancelled === true;
+      }
+
+      /** Spec P1 §4: khong nap duoc quang cao (no fill, mat mang) -> toast "khong co video", khong goi server. */
+
+      function adUnavailable() {
+        return {
+          adUnavailable: true
+        };
+      }
+      function isAdUnavailable(e) {
+        return typeof e === 'object' && e !== null && e.adUnavailable === true;
       }
       let current = null;
       function registerAdProvider(p) {
@@ -586,6 +599,173 @@ System.register("chunks:///_virtual/ad.ts", ['cc'], function (exports) {
 
       /** Spec D4b §3.1: "cho ~1 s roi tra 'dev'". */
       const devAdProvider = exports('devAdProvider', makeDevAdProvider(1000));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/admobBridge.ts", ['cc'], function (exports) {
+  var cclegacy, native;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+      native = module.native;
+    }],
+    execute: function () {
+      cclegacy._RF.push({}, "450d0dt6KpBP6ilLcKSVaCr", "admobBridge", undefined);
+
+      /**
+       * Cau noi JS <-> Java cho AdMob (spec P1 §3.4). Goi `com.cocos.game.AdMobBridge.showRewarded` qua
+       * native.reflection; Java goi nguoc `globalThis.__admob.<su kien>(...)` tren game thread
+       * (CocosHelper.runOnGameThread + CocosJavascriptJavaBridge.evalString). Chi dung tren Android native.
+       */
+
+      const TAG = '[conquian] admob';
+      let sink = null;
+      function install() {
+        const g = globalThis;
+        if (g.__admob !== undefined) return;
+        g.__admob = {
+          shown: t => {
+            var _sink;
+            console.log(TAG + ' shown ' + t);
+            (_sink = sink) == null || _sink.shown(t);
+          },
+          earned: t => {
+            var _sink2;
+            console.log(TAG + ' earned ' + t);
+            (_sink2 = sink) == null || _sink2.earned(t);
+          },
+          closed: (t, e) => {
+            var _sink3;
+            console.log(TAG + ' closed ' + t + ' earned=' + e);
+            (_sink3 = sink) == null || _sink3.closed(t, e === true);
+          },
+          failed: (t, c, m) => {
+            var _sink4;
+            console.warn(TAG + ' failed ' + t + ' ' + c + ' ' + m);
+            (_sink4 = sink) == null || _sink4.failed(t, c, m);
+          },
+          loadFailed: (t, c, m) => {
+            var _sink5;
+            console.warn(TAG + ' loadFailed ' + t + ' ' + c + ' ' + m);
+            (_sink5 = sink) == null || _sink5.loadFailed(t, c, m);
+          }
+        };
+      }
+      const nativeAdMobBridge = exports('nativeAdMobBridge', {
+        listen(s) {
+          install();
+          sink = s;
+          return () => {
+            if (sink === s) sink = null;
+          };
+        },
+        showRewarded(adUnit, userId, ticketId) {
+          console.log(TAG + ' showRewarded ' + ticketId);
+          native.reflection.callStaticMethod('com/cocos/game/AdMobBridge', 'showRewarded', '(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V', adUnit, userId, ticketId);
+        },
+        cancel(ticketId) {
+          console.log(TAG + ' cancel ' + ticketId);
+          native.reflection.callStaticMethod('com/cocos/game/AdMobBridge', 'cancel', '(Ljava/lang/String;)V', ticketId);
+        }
+      });
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/admobProvider.ts", ['cc', './ad.ts'], function (exports) {
+  var cclegacy, adCancelled, adUnavailable;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      adCancelled = module.adCancelled;
+      adUnavailable = module.adUnavailable;
+    }],
+    execute: function () {
+      exports('makeAdMobProvider', makeAdMobProvider);
+      cclegacy._RF.push({}, "e0684DlHRBPuZnVuZoOKdLb", "admobProvider", undefined);
+      const ADMOB_PROVIDER_ID = exports('ADMOB_PROVIDER_ID', 'admob');
+      const ADMOB_TIMEOUT_MS = exports('ADMOB_TIMEOUT_MS', 60000);
+
+      /** Su kien Java goi ve (AdMobBridge.java -> globalThis.__admob). */
+
+      function adFailed(why) {
+        return new Error('ad_failed ' + why);
+      }
+      function makeAdMobProvider(d) {
+        const timeoutMs = d.timeoutMs ?? ADMOB_TIMEOUT_MS;
+        let busy = false;
+        const watch = ticketId => new Promise((resolve, reject) => {
+          let earned = false;
+          let done = false;
+          let timer = null;
+          const stopTimer = () => {
+            if (timer !== null) clearTimeout(timer);
+            timer = null;
+          };
+          let unlisten = () => undefined;
+          const finish = (ok, v) => {
+            if (done) return;
+            done = true;
+            stopTimer();
+            unlisten();
+            if (ok) resolve(v);else reject(v);
+          };
+          const mine = t => !done && t === ticketId;
+          unlisten = d.bridge.listen({
+            shown: t => {
+              if (mine(t)) stopTimer();
+            },
+            earned: t => {
+              if (!mine(t)) return;
+              stopTimer();
+              earned = true;
+            },
+            closed: (t, e) => {
+              if (!mine(t)) return;
+              if (earned || e) finish(true, ticketId);else finish(false, adCancelled());
+            },
+            failed: (t, code, message) => {
+              if (mine(t)) finish(false, adFailed('show ' + code + ' ' + message));
+            },
+            loadFailed: t => {
+              if (mine(t)) finish(false, adUnavailable());
+            }
+          });
+          // Bo cuoc (timeout / bridge nem): bao Java huy ve de quang cao den muon khong bi hien ma khong co thuong.
+          const giveUp = why => {
+            if (done) return;
+            try {
+              d.bridge.cancel(ticketId);
+            } catch {
+              // bo qua: dang bo cuoc roi
+            }
+            finish(false, adFailed(why));
+          };
+          timer = setTimeout(() => giveUp('timeout'), timeoutMs);
+          try {
+            d.bridge.showRewarded(d.adUnit, d.session.userId(), ticketId);
+          } catch (e) {
+            giveUp('bridge ' + String(e));
+          }
+        });
+        return {
+          id: ADMOB_PROVIDER_ID,
+          async show(placement) {
+            if (busy) throw adFailed('busy');
+            busy = true;
+            try {
+              const ticketId = await d.session.adTicket(placement);
+              return await watch(ticketId);
+            } finally {
+              busy = false;
+            }
+          }
+        };
+      }
       cclegacy._RF.pop();
     }
   };
@@ -15534,25 +15714,437 @@ System.register("chunks:///_virtual/ApkTopTip.ts", ['cc', './topTip.ts', './apkR
   };
 });
 
-System.register("chunks:///_virtual/appContext.ts", ['cc', './clock2.ts', './release.ts'], function (exports) {
-  var cclegacy, ManualClock, storageKey;
+System.register("chunks:///_virtual/appConfig.ts", ['cc', './release.ts', './platformText.ts'], function (exports) {
+  var cclegacy, RELEASE, storageKey, platformText;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      RELEASE = module.RELEASE;
+      storageKey = module.storageKey;
+    }, function (module) {
+      platformText = module.platformText;
+    }],
+    execute: function () {
+      exports({
+        dayKey: dayKey,
+        isMaintenance: isMaintenance,
+        loginGate: loginGate,
+        markUpdateAsked: markUpdateAsked,
+        parseAppConfig: parseAppConfig,
+        parseFeatures: parseFeatures,
+        pickLangText: pickLangText
+      });
+      cclegacy._RF.push({}, "7989bMqmWVMNpapcBTg5ljf", "appConfig", undefined);
+      const FEATURE_KEYS = exports('FEATURE_KEYS', ['video', 'piggy', 'vip', 'invite', 'mall', 'firstCharge', 'wheel', 'tasks', 'friends', 'rank']);
+      function allOn() {
+        const f = {};
+        for (const k of FEATURE_KEYS) f[k] = true;
+        return f;
+      }
+      const ALL_FEATURES = exports('ALL_FEATURES', Object.freeze(allOn()));
+      const UPDATE_KINDS = ['none', 'optional', 'force'];
+
+      /** Chu server: chuoi da chon ngon ngu, hoac {es_mx, en} de client chon. */
+
+      const DEFAULT_APP_CONFIG = exports('DEFAULT_APP_CONFIG', {
+        update: 'none',
+        storeUrl: RELEASE.storeUrl,
+        updateText: '',
+        latestNative: '',
+        maintenance: {
+          on: false,
+          text: ''
+        },
+        features: ALL_FEATURES
+      });
+      const isObj = v => typeof v === 'object' && v !== null && !Array.isArray(v);
+      function langText(v) {
+        if (typeof v === 'string') return v;
+        if (!isObj(v)) return '';
+        const out = {};
+        if (typeof v.es_mx === 'string') out.es_mx = v.es_mx;
+        if (typeof v.en === 'string') out.en = v.en;
+        return out;
+      }
+
+      /** Chon chu theo ngon ngu; thieu thi lay ngon ngu kia; sai kieu -> ''. */
+      function pickLangText(t, lang) {
+        if (typeof t === 'string') return t;
+        if (!isObj(t)) return '';
+        const other = lang === 'en' ? 'es_mx' : 'en';
+        return t[lang] ?? t[other] ?? '';
+      }
+
+      /** Chi gia tri false moi tat; thieu / sai kieu -> bat. */
+      function parseFeatures(raw) {
+        const o = isObj(raw) ? raw : {};
+        const f = allOn();
+        for (const k of FEATURE_KEYS) if (o[k] === false) f[k] = false;
+        return f;
+      }
+      function parseAppConfig(raw) {
+        if (!isObj(raw)) return {
+          ...DEFAULT_APP_CONFIG
+        };
+        const m = isObj(raw.maintenance) ? raw.maintenance : {};
+        const update = UPDATE_KINDS.indexOf(raw.update) !== -1 ? raw.update : 'none';
+        return {
+          update,
+          storeUrl: typeof raw.storeUrl === 'string' && raw.storeUrl !== '' ? raw.storeUrl : RELEASE.storeUrl,
+          updateText: langText(raw.updateText),
+          latestNative: typeof raw.latestNative === 'string' ? raw.latestNative : '',
+          maintenance: {
+            on: m.on === true,
+            text: langText(m.text)
+          },
+          features: parseFeatures(raw.features)
+        };
+      }
+      /** Khoa localStorage "<askKey>|<ngay>" cua lan hoi cap nhat tuy chon gan nhat. */
+      const UPDATE_ASKED_KEY = exports('UPDATE_ASKED_KEY', storageKey('updateAsked'));
+
+      /** Ngay theo gio may (YYYY-MM-DD). */
+      function dayKey(ms) {
+        const d = new Date(ms);
+        const p = n => (n < 10 ? '0' : '') + n;
+        return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+      }
+      function askedToday(store, key, nowMs) {
+        if (store === null) return false;
+        try {
+          return store.getItem(UPDATE_ASKED_KEY) === key + '|' + dayKey(nowMs);
+        } catch {
+          return false;
+        }
+      }
+      function markUpdateAsked(store, key, nowMs) {
+        if (store === null) return;
+        try {
+          store.setItem(UPDATE_ASKED_KEY, key + '|' + dayKey(nowMs));
+        } catch {
+          // khong luu duoc thi lan sau hoi lai
+        }
+      }
+
+      /** Spec §4.1: cfg null = loi goi app_config -> vao Hall nhu cu. */
+      function loginGate(cfg, i) {
+        if (cfg === null) return {
+          kind: 'enter'
+        };
+        if (cfg.maintenance.on) {
+          const text = pickLangText(cfg.maintenance.text, i.lang);
+          return {
+            kind: 'maintenance',
+            text: text !== '' ? text : platformText(i.lang, 'gameMaintain')
+          };
+        }
+        if (!i.hasNative || cfg.update === 'none') return {
+          kind: 'enter'
+        };
+        const text = pickLangText(cfg.updateText, i.lang);
+        const url = cfg.storeUrl !== '' ? cfg.storeUrl : RELEASE.storeUrl;
+        if (cfg.update === 'force') return {
+          kind: 'force',
+          text,
+          url
+        };
+        const askKey = cfg.latestNative !== '' ? cfg.latestNative : text;
+        if (askedToday(i.store, askKey, i.nowMs)) return {
+          kind: 'enter'
+        };
+        return {
+          kind: 'optional',
+          text,
+          url,
+          askKey
+        };
+      }
+
+      /** Spec §4.3: loi `maintenance` tu quick_play / create_room / join / RPC tra tien (ma rieng, khong dinh chu khac). */
+      function isMaintenance(e) {
+        if (e.reason === 'network') return false;
+        return e.reason === 'maintenance' || /(^|[^A-Za-z0-9_])maintenance($|[^A-Za-z0-9_])/.test(e.detail);
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/appConfig2.ts", ['cc', './appConfig3.ts', './botRegistry.ts', './receipts.ts'], function (exports) {
+  var cclegacy, normalizeAppConfig, maintenanceFor, isBot, RECEIPTS_OWNER;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      normalizeAppConfig = module.normalizeAppConfig;
+      maintenanceFor = module.maintenanceFor;
+    }, function (module) {
+      isBot = module.isBot;
+    }, function (module) {
+      RECEIPTS_OWNER = module.RECEIPTS_OWNER;
+    }],
+    execute: function () {
+      exports({
+        appConfigWrite: appConfigWrite,
+        assertNotMaintenance: assertNotMaintenance,
+        inMaintenance: inMaintenance,
+        maintenanceJoinReject: maintenanceJoinReject,
+        readAppConfig: readAppConfig
+      });
+      cclegacy._RF.push({}, "ad309iEBs1BjYOLCQdUa72x", "appConfig", undefined);
+      const APP_CONFIG_COLLECTION = exports('APP_CONFIG_COLLECTION', 'platform_config');
+      const APP_CONFIG_KEY = exports('APP_CONFIG_KEY', 'app');
+      /** Mã lỗi RPC và rejectMessage của match khi bảo trì. */
+      const MAINTENANCE_ERROR = exports('MAINTENANCE_ERROR', 'maintenance');
+      function readAppConfig(nk, logger) {
+        if (typeof nk.storageRead !== 'function') {
+          return normalizeAppConfig(undefined);
+        }
+        try {
+          const objs = nk.storageRead([{
+            collection: APP_CONFIG_COLLECTION,
+            key: APP_CONFIG_KEY,
+            userId: RECEIPTS_OWNER
+          }]);
+          return normalizeAppConfig(objs.length > 0 ? objs[0].value : undefined);
+        } catch (e) {
+          logger.warn('không đọc được cấu hình app, dùng mặc định: %s', String(e));
+          return normalizeAppConfig(undefined);
+        }
+      }
+
+      /** Ghi đè cả bản ghi (không kiểm version: chỉ người vận hành / server dev ghi). */
+      function appConfigWrite(cfg) {
+        return {
+          collection: APP_CONFIG_COLLECTION,
+          key: APP_CONFIG_KEY,
+          userId: RECEIPTS_OWNER,
+          value: cfg,
+          permissionRead: 0,
+          permissionWrite: 0
+        };
+      }
+
+      /** Đang bảo trì với người này (không trong allowUserIds). */
+      function inMaintenance(nk, logger, userId) {
+        return maintenanceFor(readAppConfig(nk, logger), userId);
+      }
+
+      /** RPC trả tiền / vào bàn: bảo trì thì ném `maintenance`. */
+      function assertNotMaintenance(nk, logger, userId) {
+        if (inMaintenance(nk, logger, userId)) {
+          throw Error(MAINTENANCE_ERROR);
+        }
+      }
+
+      /**
+       * matchJoinAttempt: gọi SAU nhánh "đã có ghế / đang có presence" (vào lại luôn được). Bảo trì thì trả
+       * rejectMessage `maintenance`, không thì null. Bot của pool đi qua (bàn đang có người không bị bỏ đói bot).
+       */
+      function maintenanceJoinReject(nk, logger, userId) {
+        if (!inMaintenance(nk, logger, userId)) {
+          return null;
+        }
+        try {
+          if (isBot(nk, userId)) {
+            return null;
+          }
+        } catch (e) {
+          logger.warn('không kiểm được bot %s: %s', userId, String(e));
+        }
+        return MAINTENANCE_ERROR;
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/appConfig3.ts", ['cc'], function (exports) {
+  var cclegacy;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }],
+    execute: function () {
+      exports({
+        maintenanceFor: maintenanceFor,
+        normalizeAppConfig: normalizeAppConfig,
+        parseNative: parseNative,
+        updateKind: updateKind
+      });
+      cclegacy._RF.push({}, "d31b8Sjw5JGmrQ2BATtb2Q+", "appConfig", undefined);
+      /**
+       * Cấu hình app từ server (spec B13–B15 §3): phiên bản APK, bảo trì, cờ tính năng. Đây là giá trị mặc định và
+       * bộ chuẩn hoá thuần (không đụng Nakama); bản ghi hệ thống `platform_config/app` đọc ở platform/appConfig.ts.
+       * Thiếu bản ghi hay thiếu / sai trường nào thì trường đó lấy mặc định: bật hết, không bảo trì, min = latest = "1.0.0".
+       */
+      /** Chữ theo ngôn ngữ client (`es_mx`, `en`…). */
+      /** Spec §8.5: 10 cờ, mặc định bật hết. */
+      const FEATURE_KEYS = exports('FEATURE_KEYS', ['video', 'piggy', 'vip', 'invite', 'mall', 'firstCharge', 'wheel', 'tasks', 'friends', 'rank']);
+      const APP_CONFIG_DEFAULT = exports('APP_CONFIG_DEFAULT', {
+        minNative: '1.0.0',
+        latestNative: '1.0.0',
+        storeUrl: 'https://play.google.com/store/apps/details?id=com.arcadenix.conquian',
+        update: {
+          es_mx: 'Hay una nueva versión disponible. Actualiza para disfrutar de las últimas mejoras.',
+          en: 'A new version is available. Update to enjoy the latest improvements.'
+        },
+        maintenance: {
+          on: false,
+          text: {
+            es_mx: 'El juego está en mantenimiento, espere...',
+            en: 'The game is under maintenance, please wait...'
+          },
+          allowUserIds: []
+        },
+        features: {
+          video: true,
+          piggy: true,
+          vip: true,
+          invite: true,
+          mall: true,
+          firstCharge: true,
+          wheel: true,
+          tasks: true,
+          friends: true,
+          rank: true
+        }
+      });
+      function objOf(v) {
+        return typeof v === 'object' && v !== null && !(v instanceof Array) ? v : {};
+      }
+      const NATIVE_RE = /^(\d+)\.(\d+)\.(\d+)$/;
+
+      /** "A.B.C" (số nguyên không âm) -> [A, B, C]; sai dạng -> null. */
+      function parseNative(v) {
+        if (typeof v !== 'string') {
+          return null;
+        }
+        const m = NATIVE_RE.exec(v);
+        if (m === null) {
+          return null;
+        }
+        return [parseInt(m[1], 10), parseInt(m[2], 10), parseInt(m[3], 10)];
+      }
+
+      /** <0 nếu a < b, 0 nếu bằng, >0 nếu a > b. */
+      function cmpNative(a, b) {
+        for (let i = 0; i < 3; i++) {
+          if (a[i] !== b[i]) {
+            return a[i] - b[i];
+          }
+        }
+        return 0;
+      }
+
+      /** Dưới min -> force; từ min tới dưới latest -> optional; còn lại hoặc `native` hỏng / thiếu -> none. */
+      function updateKind(native, minNative, latestNative) {
+        const n = parseNative(native);
+        if (n === null) {
+          return 'none';
+        }
+        const min = parseNative(minNative) || [1, 0, 0];
+        const latest = parseNative(latestNative) || min;
+        if (cmpNative(n, min) < 0) {
+          return 'force';
+        }
+        return cmpNative(n, latest) < 0 ? 'optional' : 'none';
+      }
+      function copyText(t) {
+        const out = {};
+        for (const k in t) {
+          out[k] = t[k];
+        }
+        return out;
+      }
+
+      /** Chỉ giữ ngôn ngữ có chuỗi; không còn ngôn ngữ nào -> mặc định. */
+      function textOf(v, def) {
+        const o = objOf(v);
+        const out = {};
+        let any = false;
+        for (const k in o) {
+          if (typeof o[k] === 'string') {
+            out[k] = o[k];
+            any = true;
+          }
+        }
+        return any ? out : copyText(def);
+      }
+      function nativeOf(v, def) {
+        return parseNative(v) !== null ? v : def;
+      }
+
+      /** Bản ghi thô (có thể hỏng) -> cấu hình đầy đủ. Không ném; luôn trả object mới (không chung tham chiếu với mặc định). */
+      function normalizeAppConfig(raw) {
+        const o = objOf(raw);
+        const d = APP_CONFIG_DEFAULT;
+        const minNative = nativeOf(o.minNative, d.minNative);
+        let latestNative = nativeOf(o.latestNative, minNative);
+        if (cmpNative(parseNative(latestNative), parseNative(minNative)) < 0) {
+          latestNative = minNative;
+        }
+        const m = objOf(o.maintenance);
+        const allow = [];
+        const rawAllow = m.allowUserIds instanceof Array ? m.allowUserIds : [];
+        for (let i = 0; i < rawAllow.length; i++) {
+          if (typeof rawAllow[i] === 'string' && rawAllow[i] !== '') {
+            allow.push(rawAllow[i]);
+          }
+        }
+        const f = objOf(o.features);
+        const features = {};
+        for (let i = 0; i < FEATURE_KEYS.length; i++) {
+          const k = FEATURE_KEYS[i];
+          features[k] = typeof f[k] === 'boolean' ? f[k] : d.features[k];
+        }
+        return {
+          minNative: minNative,
+          latestNative: latestNative,
+          storeUrl: typeof o.storeUrl === 'string' && o.storeUrl !== '' ? o.storeUrl : d.storeUrl,
+          update: textOf(o.update, d.update),
+          maintenance: {
+            on: m.on === true,
+            text: textOf(m.text, d.maintenance.text),
+            allowUserIds: allow
+          },
+          features: features
+        };
+      }
+
+      /** Bảo trì có chặn người này không (QA trong allowUserIds đi qua). */
+      function maintenanceFor(cfg, userId) {
+        return cfg.maintenance.on && cfg.maintenance.allowUserIds.indexOf(userId) < 0;
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/appContext.ts", ['cc', './clock2.ts', './appConfig.ts', './release.ts'], function (exports) {
+  var cclegacy, ManualClock, ALL_FEATURES, storageKey;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
     }, function (module) {
       ManualClock = module.ManualClock;
     }, function (module) {
+      ALL_FEATURES = module.ALL_FEATURES;
+    }, function (module) {
       storageKey = module.storageKey;
     }],
     execute: function () {
       exports({
         getApp: getApp,
+        getNativeVersion: getNativeVersion,
         getRunningVersion: getRunningVersion,
         noteTableTried: noteTableTried,
         readLang: readLang,
         readMusic: readMusic,
         readSound: readSound,
         resetApp: resetApp,
+        setNativeVersion: setNativeVersion,
         setRunningVersion: setRunningVersion,
         takeNav: takeNav,
         versionText: versionText,
@@ -15580,6 +16172,9 @@ System.register("chunks:///_virtual/appContext.ts", ['cc', './clock2.ts', './rel
           video: null,
           games: [],
           levels: new Map(),
+          features: {
+            ...ALL_FEATURES
+          },
           lang,
           sound,
           music,
@@ -15682,6 +16277,18 @@ System.register("chunks:///_virtual/appContext.ts", ['cc', './clock2.ts', './rel
       /** Dong version o man Login; ban dev kem ten server de biet dang noi dau. */
       function versionText(release, serverName) {
         return 'v' + runningVersion + (release ? '' : ' · ' + serverName);
+      }
+      let nativeVersion = null;
+
+      /**
+       * Spec B13-B15 §4.1: version APK (A.B.C, tu apk.manifest) ma BootScene doc duoc; web / chua doc -> null
+       * (Login khong xet cap nhat). Bien cap module de song qua resetApp().
+       */
+      function setNativeVersion(v) {
+        nativeVersion = v;
+      }
+      function getNativeVersion() {
+        return nativeVersion;
       }
       cclegacy._RF.pop();
     }
@@ -16355,11 +16962,13 @@ System.register("chunks:///_virtual/applySafeEdges.ts", ['cc', './release.ts', '
   };
 });
 
-System.register("chunks:///_virtual/atomic.ts", ['cc', './rewardsStore.ts'], function (exports) {
-  var cclegacy, isVersionConflict;
+System.register("chunks:///_virtual/atomic.ts", ['cc', './rank2.ts', './rewardsStore.ts'], function (exports) {
+  var cclegacy, writeWealthOfWallets, isVersionConflict;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
+    }, function (module) {
+      writeWealthOfWallets = module.writeWealthOfWallets;
     }, function (module) {
       isVersionConflict = module.isVersionConflict;
     }],
@@ -16393,7 +17002,12 @@ System.register("chunks:///_virtual/atomic.ts", ['cc', './rewardsStore.ts'], fun
           }
 
           if (acks !== null) {
-            return step.finish(acks);
+            const out = step.finish(acks);
+            // P3: ví nền tảng vừa đổi -> bảng tài sản (lỗi chỉ warn, không làm hỏng giao dịch đã commit).
+            if (step.wallets.length > 0) {
+              writeWealthOfWallets(nk, logger, step.wallets);
+            }
+            return out;
           }
         }
         throw Error('busy');
@@ -16799,8 +17413,8 @@ System.register("chunks:///_virtual/BkPopup.ts", ['cc', './popupLayout.ts', './v
   };
 });
 
-System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts', './otaConfig.ts', './otaFlow.ts', './platformText.ts', './jsbOtaPort.ts'], function (exports) {
-  var cclegacy, Component, sys, director, view, Node, Layers, UITransform, Label, Color, Graphics, _decorator, readLang, setRunningVersion, BOOT_TRIES_KEY, runOta, platformText, JsbOtaPort, OtaConsoleLogger;
+System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts', './release.ts', './version.ts', './apkRes.ts', './platformAssets.ts', './PopupLayer.ts', './UpdateWindow.ts', './uiKit.ts', './otaConfig.ts', './otaFlow.ts', './platformText.ts', './jsbOtaPort.ts'], function (exports) {
+  var cclegacy, Component, sys, director, view, Node, Layers, UITransform, Label, Color, Graphics, _decorator, readLang, setRunningVersion, setNativeVersion, RELEASE, nativeOf, PlatformRes, PlatformAssets, PopupLayer, openUpdateWindow, onTap, BOOT_TRIES_KEY, otaEnabled, runOta, platformText, JsbOtaPort, OtaConsoleLogger;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -16818,8 +17432,24 @@ System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts',
     }, function (module) {
       readLang = module.readLang;
       setRunningVersion = module.setRunningVersion;
+      setNativeVersion = module.setNativeVersion;
+    }, function (module) {
+      RELEASE = module.RELEASE;
+    }, function (module) {
+      nativeOf = module.nativeOf;
+    }, function (module) {
+      PlatformRes = module.PlatformRes;
+    }, function (module) {
+      PlatformAssets = module.PlatformAssets;
+    }, function (module) {
+      PopupLayer = module.PopupLayer;
+    }, function (module) {
+      openUpdateWindow = module.openUpdateWindow;
+    }, function (module) {
+      onTap = module.onTap;
     }, function (module) {
       BOOT_TRIES_KEY = module.BOOT_TRIES_KEY;
+      otaEnabled = module.otaEnabled;
     }, function (module) {
       runOta = module.runOta;
     }, function (module) {
@@ -16856,6 +17486,19 @@ System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts',
           // Toi duoc day = script ban tai nap duoc va cong OTA chay duoc (reset / D+1 cuu duoc): xoa bo dem watchdog cua hook
           sys.localStorage.setItem(BOOT_TRIES_KEY, '0');
           const lang = readLang(sys.localStorage);
+          if (!otaEnabled(sys.localStorage)) {
+            // APK build --no-ota (chi ban debug): hook da xoa ban tai, chay noi dung APK, khong goi mang
+            console.log('[ota] tat (ban build --no-ota)');
+            const p0 = new JsbOtaPort(new OtaConsoleLogger(), {
+              onStatus: () => {},
+              onEnter: () => {}
+            });
+            const v = p0.effectiveVersion();
+            if (v !== null) setRunningVersion(v);
+            this.noteNative(p0);
+            director.loadScene('LoginScene');
+            return;
+          }
           this.buildUi();
           const port = new JsbOtaPort(new OtaConsoleLogger(), {
             onStatus: s => this.show(s, lang),
@@ -16867,7 +17510,51 @@ System.register("chunks:///_virtual/BootSceneRoot.ts", ['cc', './appContext.ts',
               director.loadScene('LoginScene');
             }
           });
-          void runOta(port);
+          this.noteNative(port);
+          void runOta(port).then(o => {
+            // Spec B13-B15 §4.4: APK thap hon minNativeVersion -> cua so cap nhat bat buoc, khong vao game.
+            if (o === 'store') void this.showStore(lang);
+          });
+        }
+
+        /** Spec B13-B15 §4.1: version APK A.B.C cho platform.app_config o Login; doc hong -> null (khong xet cap nhat). */
+        noteNative(port) {
+          try {
+            setNativeVersion(nativeOf(port.apkVersion()));
+          } catch {
+            setNativeVersion(null);
+          }
+        }
+
+        /** UpdateWindow bat buoc mo RELEASE.storeUrl; nap khung popup hong -> chu otaNeedStore bam duoc de mo store. */
+        async showStore(lang) {
+          const open = () => sys.openURL(RELEASE.storeUrl);
+          try {
+            const f = await new PlatformAssets(lang).frames({
+              bg: PlatformRes.Common_panelSmallBg,
+              close: PlatformRes.Common_closeBtn,
+              btn: PlatformRes.Common_btn_1_mid
+            });
+            if (!this.isValid) return;
+            const size = view.getVisibleSize();
+            const popups = new PopupLayer(this.node, {
+              w: size.width,
+              h: size.height
+            });
+            if (openUpdateWindow(popups, f, lang, {
+              force: true,
+              text: platformText(lang, 'otaNeedStore'),
+              onUpdate: open,
+              onLater: () => {}
+            })) {
+              if (this.bar !== null) this.bar.clear();
+              if (this.label !== null) this.label.string = '';
+              return;
+            }
+          } catch (e) {
+            console.warn('[ota] nap khung UpdateWindow hong', e);
+          }
+          if (this.label !== null && this.label.isValid) onTap(this.label.node, open);
         }
         buildUi() {
           const size = view.getVisibleSize();
@@ -25169,6 +25856,7 @@ System.register("chunks:///_virtual/catalog2.ts", ['cc', './shopRes.ts', './home
         parseProps: parseProps,
         parsePropsReply: parsePropsReply,
         parseShopWallet: parseShopWallet,
+        skuOfItem: skuOfItem,
         sortedPropEntries: sortedPropEntries
       });
       cclegacy._RF.push({}, "59f4bqPwT5J/LxYCBQncZaO", "catalog", undefined); // assets/scripts/core/platform/shop/catalog.ts
@@ -25283,13 +25971,23 @@ System.register("chunks:///_virtual/catalog2.ts", ['cc', './shopRes.ts', './home
       }
       function parseCatalog(raw) {
         const o = isObj(raw) ? raw : {};
-        return {
+        const c = {
           canPay: o.canPay === true,
           chip: parseItems(o.chip, 'chip'),
           gold: parseItems(o.gold, 'gold'),
           prop: parseItems(o.prop, 'prop'),
           props: parsePropDefs(o.props)
         };
+        if (typeof o.provider === 'string' && o.provider !== '') c.provider = o.provider;
+        if (isObj(o.skus)) {
+          const skus = {};
+          for (const k of Object.keys(o.skus)) {
+            const v = o.skus[k];
+            if (typeof v === 'string' && v !== '') skus[k] = v;
+          }
+          c.skus = skus;
+        }
+        return c;
       }
       function rpcError(detail) {
         return {
@@ -25342,6 +26040,13 @@ System.register("chunks:///_virtual/catalog2.ts", ['cc', './shopRes.ts', './home
       }
       function parsePropsReply(raw) {
         return parseProps(isObj(raw) ? raw.props : undefined);
+      }
+
+      /** B1 §5: sku cua mot goi tien that: catalog.skus (ca goi an first_charge), khong co thi sku cua mon; khong co -> null. */
+      function skuOfItem(c, itemId) {
+        if (c.skus !== undefined && Object.prototype.hasOwnProperty.call(c.skus, itemId)) return c.skus[itemId];
+        const it = c.chip.concat(c.gold, c.prop).find(x => x.id === itemId);
+        return it !== undefined ? it.sku : null;
       }
       cclegacy._RF.pop();
     }
@@ -26284,7 +26989,7 @@ System.register("chunks:///_virtual/colyseusErrors.ts", ['cc', './gatewayErrors.
       const COLYSEUS_INVALID_ROOM_ID = exports('COLYSEUS_INVALID_ROOM_ID', 4212);
 
       /** rejectMessage cua matchJoinAttempt ma server dev dua nguyen van vao ServerError(4002, ...). */
-      const PASSTHROUGH = ['not_enough_money', 'room_full', 'room_closed', 'wrong_password'];
+      const PASSTHROUGH = ['not_enough_money', 'room_full', 'room_closed', 'wrong_password', 'maintenance'];
       function colyseusReasonOf(code, message) {
         if (message === 'match_closed') return 'room_closed';
         if (PASSTHROUGH.indexOf(message) !== -1) return message;
@@ -26700,8 +27405,8 @@ System.register("chunks:///_virtual/config.ts", ['cc', './levels.ts'], function 
   };
 });
 
-System.register("chunks:///_virtual/conquianMatch.ts", ['cc', './constants2.ts', './gameMgr.ts', './botRegistry.ts', './config.ts', './tableSocialMatch.ts', './heldTable.ts'], function (exports) {
-  var cclegacy, MAX_PLAYER, TICK_RATE, DT, OpCode, GameMgr, isBot, CONQUIAN_GAME_ID, takeTableSocial, HELD_TTL_MS, writeHeldTables, clearHeldTables;
+System.register("chunks:///_virtual/conquianMatch.ts", ['cc', './constants2.ts', './gameMgr.ts', './botRegistry.ts', './appConfig2.ts', './config.ts', './tableSocialMatch.ts', './heldTable.ts'], function (exports) {
+  var cclegacy, MAX_PLAYER, TICK_RATE, DT, OpCode, GameMgr, isBot, maintenanceJoinReject, CONQUIAN_GAME_ID, takeTableSocial, HELD_TTL_MS, writeHeldTables, clearHeldTables;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -26714,6 +27419,8 @@ System.register("chunks:///_virtual/conquianMatch.ts", ['cc', './constants2.ts',
       GameMgr = module.GameMgr;
     }, function (module) {
       isBot = module.isBot;
+    }, function (module) {
+      maintenanceJoinReject = module.maintenanceJoinReject;
     }, function (module) {
       CONQUIAN_GAME_ID = module.CONQUIAN_GAME_ID;
     }, function (module) {
@@ -26944,6 +27651,15 @@ System.register("chunks:///_virtual/conquianMatch.ts", ['cc', './constants2.ts',
         // Đang ngồi trong phòng thì luôn cho vào lại (reconnect)
         const existing = mgr.playerOfUser(presence.userId);
         if (existing === null) {
+          // Spec B13–B15 §3: bảo trì không cho vào bàn mới (người đang ngồi ở trên vẫn vào lại được; bot đi qua).
+          const maint = maintenanceJoinReject(nk, logger, presence.userId);
+          if (maint !== null) {
+            return {
+              state: state,
+              accept: false,
+              rejectMessage: maint
+            };
+          }
           const joinerIsBot = isBot(nk, presence.userId);
           // Bàn đầy: chỉ người thật được vào, khi có bot nhường ghế (bàn chờ)
           if (!mgr.hasFreeSeat() && (joinerIsBot || !mgr.hasYieldableBot())) {
@@ -29821,6 +30537,8 @@ System.register("chunks:///_virtual/errors.ts", ['cc', './action.ts'], function 
         wrong_password: ErrorCode.WRONG_PASSWORD
       };
       const CONNECT_FAILED_TEXT = {
+        // Spec B13-B15 §4.3: APK POPUPFRAME.GAME_MAINTAIN
+        maintenance: ['The game is under maintenance, please wait...', 'El juego está en mantenimiento, espere...'],
         bad_server_key: ['Cannot connect to the server (client configuration).', 'No se puede conectar al servidor (configuración del cliente).'],
         network: ['Cannot connect to the server. Check your network.', 'No se puede conectar al servidor. Revisa tu conexión.'],
         unknown: ['Something went wrong. Please try again.', 'Algo salió mal. Inténtalo de nuevo.']
@@ -36068,6 +36786,942 @@ System.register("chunks:///_virtual/escobaTimeline.ts", ['cc'], function (export
   };
 });
 
+System.register("chunks:///_virtual/eventArt.ts", ['cc'], function (exports) {
+  var cclegacy;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }],
+    execute: function () {
+      exports('eventArt', eventArt);
+      cclegacy._RF.push({}, "658a10rhJRNELRJBzzVxiu6", "eventArt", undefined);
+      // assets/scripts/core/res/eventArt.ts
+      /** Spec E4 §4.2: khoa anh banner su kien (server) -> duong dan trong bundle cq-lobby; khoa la -> anh mac dinh. */
+      const EVENT_ART = exports('EVENT_ART', {
+        event_default: 'image/event/event_default',
+        event_welcome: 'image/event/event_welcome',
+        event_invite: 'image/event/event_invite'
+      });
+      function eventArt(key) {
+        return Object.prototype.hasOwnProperty.call(EVENT_ART, key) ? EVENT_ART[key] : EVENT_ART.event_default;
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/EventPopup.ts", ['cc', './socialLayout.ts', './eventPresenter.ts', './platformText.ts', './apkRes.ts', './eventArt.ts', './popupKit.ts', './scrollList.ts', './uiKit.ts', './GetRewardPopup.ts'], function (exports) {
+  var cclegacy, Sprite, UITransform, Label, messageLayout, EventPresenter, eventActionKey, platformText, PlatformRes, eventArt, panelBg, textButton, scrollList, sprite, onTap, sliced, child, label, openGetRewardPopup;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+      Sprite = module.Sprite;
+      UITransform = module.UITransform;
+      Label = module.Label;
+    }, function (module) {
+      messageLayout = module.messageLayout;
+    }, function (module) {
+      EventPresenter = module.EventPresenter;
+      eventActionKey = module.eventActionKey;
+    }, function (module) {
+      platformText = module.platformText;
+    }, function (module) {
+      PlatformRes = module.PlatformRes;
+    }, function (module) {
+      eventArt = module.eventArt;
+    }, function (module) {
+      panelBg = module.panelBg;
+      textButton = module.textButton;
+    }, function (module) {
+      scrollList = module.scrollList;
+    }, function (module) {
+      sprite = module.sprite;
+      onTap = module.onTap;
+      sliced = module.sliced;
+      child = module.child;
+      label = module.label;
+    }, function (module) {
+      openGetRewardPopup = module.openGetRewardPopup;
+    }],
+    execute: function () {
+      exports('openEventPopup', openEventPopup);
+      cclegacy._RF.push({}, "de8cagyz11E7ZuwhuaOrX0C", "EventPopup", undefined);
+      const EVENT_POPUP = exports('EVENT_POPUP', 'event');
+      const EVENT_FRAMES = {
+        bg: PlatformRes.Common_panelBigBg,
+        title: PlatformRes.Hall_activity_popup_title,
+        close: PlatformRes.Common_closeBtn,
+        content: PlatformRes.Common_contentBg,
+        row: PlatformRes.Common_colBg,
+        rowSel: PlatformRes.Hall_activity_popup_txt_bg,
+        hot: PlatformRes.Hall_activity_popup_hotIcon,
+        btn: PlatformRes.Common_btn_2_mid
+      };
+      /** Bo cuc trong o noi dung 931x492 (Common_contentBg): cot tab trai 260, phan phai noi dung. */
+      const LIST_W = 260;
+      const ROW_H = 74;
+      const PAD = 14;
+      const BANNER = {
+        w: 600,
+        h: 230
+      };
+      const BTN_DY = 40;
+
+      /** Spec E4 §4.1: tab 'jump' -> mo tinh nang dich (Hall cung cap). */
+
+      /** Anh banner trong cq-lobby (image/event/<khoa>); hong -> khong anh. */
+      function bannerEntry(key) {
+        return {
+          bundle: 'cq-lobby',
+          path: eventArt(key),
+          type: 'image'
+        };
+      }
+
+      /**
+       * Popup su kien (spec E4 §4.2): nen + tieu de Hall_activity_popup (APK), nut X, lop den mo, cham ngoai KHONG dong
+       * (quy uoc popup co X). Cot trai danh sach tab (chu tieu de, nhan "hot" khi con thuong); phai: banner + chu + nut
+       * (Recibir / Recibido xam / Terminado xam / Ir); 'notice' chi chu cuon duoc. Logic o EventPresenter.
+       */
+      function openEventPopup(h) {
+        let p = null;
+        return h.popups.open(EVENT_POPUP, async (root, close) => {
+          const F = await h.assets.frames(EVENT_FRAMES);
+          if (!root.isValid) return;
+          const L = messageLayout();
+          const lang = h.app.lang;
+          const t = k => platformText(lang, k);
+          panelBg(root, F.bg);
+          sprite(root, F.title, L.title, 1, 'title');
+          onTap(sprite(root, F.close, L.close, 1, 'close').node, close);
+          const C = L.contentSize;
+          const c = L.content;
+          sliced(root, F.content, c, C.w, C.h, {
+            x: 34,
+            y: 32
+          }, 'content');
+          const left = c.x - C.w / 2 + PAD;
+          const listCenter = {
+            x: left + LIST_W / 2,
+            y: c.y
+          };
+          const tabs = scrollList(root, 'tabs', listCenter, LIST_W, C.h - 2 * PAD, 'v');
+          const rightX = left + LIST_W + PAD;
+          const rightW = c.x + C.w / 2 - PAD - rightX;
+          const right = child(root, 'detail', {
+            x: rightX + rightW / 2,
+            y: c.y
+          }, rightW, C.h - 2 * PAD);
+          const top = (C.h - 2 * PAD) / 2;
+          let bannerKey = '';
+          const drawDetail = (it, busy) => {
+            right.destroyAllChildren();
+            const hasArt = it.kind !== 'notice';
+            if (hasArt) {
+              const holder = child(right, 'banner', {
+                x: 0,
+                y: top - BANNER.h / 2
+              }, BANNER.w, BANNER.h);
+              bannerKey = it.image;
+              void h.assets.frame(bannerEntry(it.image)).then(fr => {
+                if (!holder.isValid || bannerKey !== it.image) return;
+                const s = sprite(holder, fr, {
+                  x: 0,
+                  y: 0
+                }, 1, 'art');
+                s.sizeMode = Sprite.SizeMode.CUSTOM;
+                s.node.getComponent(UITransform).setContentSize(BANNER.w, BANNER.h);
+              }, () => undefined);
+            }
+            const titleY = hasArt ? top - BANNER.h - 30 : top - 24;
+            label(right, it.title, {
+              x: 0,
+              y: titleY
+            }, 30, L.textColor, {
+              width: rightW - 40
+            }).node.name = 'eventTitle';
+            const btnSpace = it.kind === 'notice' ? 0 : BTN_DY * 2;
+            const bodyTop = titleY - 26;
+            const bodyH = bodyTop + top - btnSpace;
+            const body = label(right, it.body, {
+              x: 0,
+              y: bodyTop - bodyH / 2
+            }, L.textSize, L.textColor, {
+              width: rightW - 40,
+              wrap: true
+            });
+            body.overflow = it.kind === 'notice' ? Label.Overflow.RESIZE_HEIGHT : Label.Overflow.SHRINK;
+            body.verticalAlign = Label.VerticalAlign.TOP;
+            body.node.getComponent(UITransform).setContentSize(rightW - 40, bodyH);
+            body.node.name = 'eventBody';
+            if (it.kind === 'notice') {
+              // Chu dai: cuon duoc trong vung noi dung.
+              const area = scrollList(right, 'scroll', {
+                x: 0,
+                y: bodyTop - bodyH / 2
+              }, rightW - 20, bodyH, 'v');
+              body.node.removeFromParent();
+              area.content.addChild(body.node);
+              body.node.setPosition(0, 0);
+              body.updateRenderData(true);
+              const hgt = body.node.getComponent(UITransform).height;
+              body.node.setPosition(0, -hgt / 2);
+              area.setLength(hgt);
+              return;
+            }
+            const key = eventActionKey(it);
+            if (key === null) return;
+            const btnAt = {
+              x: 0,
+              y: -top + BTN_DY
+            };
+            const b = textButton(right, F.btn, btnAt, t(key), 26, () => {
+              var _p;
+              return void ((_p = p) == null ? void 0 : _p.tapAction());
+            }, it.kind === 'jump' ? 'btnGo' : 'btnClaim');
+            // Da nhan / het han / dang gui: nut xam, presenter bo qua cham.
+            if (it.kind === 'reward' && (key !== 'eventClaim' || busy)) b.node.getComponent(Sprite).grayscale = true;
+          };
+          const view = {
+            render: (items, sel, busy) => {
+              if (!root.isValid) return;
+              tabs.clear();
+              items.forEach((it, k) => {
+                const y = -(k + 0.5) * ROW_H;
+                const row = child(tabs.content, 'tab_' + it.id, {
+                  x: 0,
+                  y
+                }, LIST_W, ROW_H - 6);
+                sliced(row, k === sel ? F.rowSel : F.row, {
+                  x: 0,
+                  y: 0
+                }, LIST_W - 8, ROW_H - 8, {
+                  x: 9,
+                  y: 9
+                }, 'bg');
+                label(row, it.title, {
+                  x: 0,
+                  y: 0
+                }, 22, L.textColor, {
+                  width: LIST_W - 40
+                }).node.name = 'tabTitle';
+                if (it.state === 'claimable') sprite(row, F.hot, {
+                  x: LIST_W / 2 - 22,
+                  y: ROW_H / 2 - 20
+                }, 0.8, 'hot');
+                onTap(row, () => {
+                  var _p2;
+                  return (_p2 = p) == null ? void 0 : _p2.select(k);
+                });
+              });
+              tabs.setLength(items.length * ROW_H);
+              const it = items[sel];
+              if (it !== undefined) drawDetail(it, busy);
+            },
+            close,
+            toast: text => h.toast(text),
+            showReward: d => {
+              openGetRewardPopup(h, d);
+            },
+            jump: target => h.jump(target)
+          };
+          p = new EventPresenter({
+            session: h.session,
+            lang
+          }, view);
+          await p.open();
+        }, {
+          onClosed: () => {
+            var _p3;
+            return (_p3 = p) == null ? void 0 : _p3.dispose();
+          }
+        });
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/eventPresenter.ts", ['cc', './platformErrors.ts', './platformText.ts'], function (exports) {
+  var cclegacy, eventFailOf, asGatewayError, platformText;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      eventFailOf = module.eventFailOf;
+      asGatewayError = module.asGatewayError;
+    }, function (module) {
+      platformText = module.platformText;
+    }],
+    execute: function () {
+      exports('eventActionKey', eventActionKey);
+      cclegacy._RF.push({}, "02516jr0HBA5qMj7v3sd3GP", "eventPresenter", undefined);
+      const DEFAULT_EVENT_TIMERS = {
+        set: (fn, ms) => setTimeout(fn, ms),
+        clear: h => clearTimeout(h)
+      };
+
+      /** Tai lai tre hon moc nextAt mot chut: tranh hoi dung luc server chua qua moc (lech dong ho). */
+      const NEXT_AT_SLACK_MS = 1000;
+      /** Chu nut cua tab: notice -> khong nut; reward het han (state 'none') -> "Da ket thuc", khong ghi "Da nhan". */
+      function eventActionKey(it) {
+        if (it.kind === 'notice') return null;
+        if (it.kind === 'jump') return 'eventGo';
+        if (it.state === 'claimable') return 'eventClaim';
+        return it.state === 'claimed' ? 'eventClaimed' : 'eventEnded';
+      }
+
+      /**
+       * Popup su kien (spec E4 §4.1): tai danh sach mot lan khi mo; tab dau con thuong duoc chon san. Nut cua tab:
+       * reward -> event_claim (khoa khi dang gui), jump -> dong popup roi mo dich, notice -> khong nut. Popup mo qua moc
+       * `nextAt` cua server (su kien bat dau / het han, nua dem cho thuong hang ngay) -> tai lai, giu tab dang chon theo id.
+       */
+      class EventPresenter {
+        constructor(d, view) {
+          this.items = [];
+          this.sel = 0;
+          this.busy = false;
+          this.disposed = false;
+          this.timer = null;
+          this.d = d;
+          this.view = view;
+        }
+        dispose() {
+          this.disposed = true;
+          this.clearTimer();
+        }
+        async open() {
+          const list = await this.fetch();
+          if (this.disposed) return;
+          if (list === null) {
+            this.view.toast(this.t('netError'));
+            this.view.close();
+            return;
+          }
+          if (list.items.length === 0) {
+            this.view.toast(this.t('eventNone'));
+            this.view.close();
+            return;
+          }
+          this.items = list.items;
+          const first = list.items.findIndex(x => x.state === 'claimable');
+          this.sel = first >= 0 ? first : 0;
+          this.render();
+          this.arm(list);
+        }
+
+        /** Qua moc: tai lai; loi mang thi giu danh sach cu (nut nhan van duoc server kiem lai). */
+        async reload() {
+          var _this$items$this$sel;
+          const list = await this.fetch();
+          if (this.disposed || list === null) return;
+          if (list.items.length === 0) {
+            this.view.toast(this.t('eventEnded'));
+            this.view.close();
+            return;
+          }
+          const selId = (_this$items$this$sel = this.items[this.sel]) == null ? void 0 : _this$items$this$sel.id;
+          this.items = list.items;
+          const k = list.items.findIndex(x => x.id === selId);
+          this.sel = k >= 0 ? k : 0;
+          this.render();
+          this.arm(list);
+        }
+        async fetch() {
+          try {
+            return await this.d.session.eventsList(this.d.lang);
+          } catch {
+            // mat mang / server cu chua co RPC: nhu danh sach hong
+            return null;
+          }
+        }
+        arm(list) {
+          this.clearTimer();
+          if (list.nextAt <= 0 || list.nextAt <= list.now) return;
+          this.timer = this.timers().set(() => {
+            this.timer = null;
+            void this.reload();
+          }, list.nextAt - list.now + NEXT_AT_SLACK_MS);
+        }
+        clearTimer() {
+          if (this.timer === null) return;
+          this.timers().clear(this.timer);
+          this.timer = null;
+        }
+        timers() {
+          return this.d.timers ?? DEFAULT_EVENT_TIMERS;
+        }
+        select(i) {
+          if (this.disposed || i < 0 || i >= this.items.length || i === this.sel) return;
+          this.sel = i;
+          this.render();
+        }
+        async tapAction() {
+          const it = this.items[this.sel];
+          if (this.disposed || this.busy || it === undefined) return;
+          if (it.kind === 'jump') {
+            if (it.target === null) return;
+            this.view.close();
+            this.view.jump(it.target);
+            return;
+          }
+          if (it.kind !== 'reward' || it.state !== 'claimable') return;
+          this.busy = true;
+          this.render();
+          try {
+            const c = await this.d.session.eventClaim(it.id);
+            if (this.disposed) return;
+            it.state = 'claimed';
+            this.view.showReward({
+              orderId: 'event:' + it.id,
+              itemId: it.id,
+              grant: c.reward,
+              wallet: c.wallet,
+              props: c.props ?? {}
+            });
+          } catch (e) {
+            if (this.disposed) return;
+            const f = eventFailOf(asGatewayError(e, 'rpc'));
+            if (f === 'already_claimed') it.state = 'claimed';else if (f === 'not_found') {
+              // Su kien vua het han giua luc mo popup va luc bam: khong con nhan duoc.
+              it.state = 'none';
+              this.view.toast(this.t('eventEnded'));
+            } else this.view.toast(this.t('netError'));
+          } finally {
+            this.busy = false;
+          }
+          if (!this.disposed) this.render();
+        }
+        render() {
+          this.view.render(this.items, this.sel, this.busy);
+        }
+        t(k) {
+          return platformText(this.d.lang, k);
+        }
+      }
+      exports('EventPresenter', EventPresenter);
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/events.ts", ['cc'], function (exports) {
+  var cclegacy;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }],
+    execute: function () {
+      cclegacy._RF.push({}, "9736dKv4ilN16KcFGCSrAQQ", "events", undefined);
+      /**
+       * Sự kiện tĩnh hiện ở icon Event của Hall (spec E4 §2). Sửa file này rồi push `dev` (CI deploy) để đổi sự kiện.
+       *
+       * - `kind`: 'reward' (cần `grant` {chip, gold, props} và `repeat` 'once' | 'daily'), 'jump' (cần `target`:
+       *   mall | task | invite | vip | wheel | game:<gameId>), 'notice' (chỉ chữ).
+       * - `start` < `end`, ISO 8601 có múi giờ; ngoài khoảng đó server không trả về.
+       * - `image`: khoá ảnh đóng gói trong client (cq-lobby image/event/); khoá lạ -> ảnh mặc định.
+       * - Chữ: `es_mx` bắt buộc, `en` tuỳ chọn.
+       */
+      const EVENTS_RAW = exports('EVENTS_RAW', {
+        events: [{
+          id: 'welcome-2026-10',
+          order: 1,
+          start: '2026-10-15T00:00:00-06:00',
+          end: '2026-11-15T00:00:00-06:00',
+          kind: 'reward',
+          image: 'event_welcome',
+          title: {
+            es_mx: '¡Bienvenido!',
+            en: 'Welcome!'
+          },
+          body: {
+            es_mx: 'Gracias por jugar con nosotros. Recibe 20 000 fichas de regalo.',
+            en: 'Thanks for playing with us. Get 20,000 chips as a gift.'
+          },
+          grant: {
+            chip: 20000,
+            gold: 0,
+            props: {}
+          },
+          repeat: 'once'
+        }, {
+          id: 'invite-promo',
+          order: 2,
+          start: '2026-10-15T00:00:00-06:00',
+          end: '2026-11-15T00:00:00-06:00',
+          kind: 'jump',
+          image: 'event_invite',
+          title: {
+            es_mx: 'Invita a tus amigos',
+            en: 'Invite your friends'
+          },
+          body: {
+            es_mx: 'Comparte tu código y gana fichas cuando tus amigos se unan.',
+            en: 'Share your code and earn chips when your friends join.'
+          },
+          target: 'invite'
+        }, {
+          id: 'notice-e4',
+          order: 3,
+          start: '2026-10-15T00:00:00-06:00',
+          end: '2026-11-15T00:00:00-06:00',
+          kind: 'notice',
+          title: {
+            es_mx: 'Novedades',
+            en: 'News'
+          },
+          body: {
+            es_mx: 'Nuevos juegos disponibles: Escoba, Burro y Texas Hold\'em. ¡Pruébalos desde el Hall!',
+            en: 'New games available: Escoba, Burro and Texas Hold\'em. Try them from the Hall!'
+          }
+        }]
+      });
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/events2.ts", ['cc', './day.ts'], function (exports) {
+  var cclegacy, dayKey, nextDayStartMs;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      dayKey = module.dayKey;
+      nextDayStartMs = module.nextDayStartMs;
+    }],
+    execute: function () {
+      exports({
+        activeEvents: activeEvents,
+        applyClaim: applyClaim,
+        claimState: claimState,
+        configIds: configIds,
+        eventDots: eventDots,
+        eventView: eventView,
+        eventsNextAt: eventsNextAt,
+        parseEvents: parseEvents
+      });
+      cclegacy._RF.push({}, "d150eTkiw9PqJbMNhG51qk+", "events", undefined);
+      const TARGET_RE = /^(mall|task|invite|vip|wheel|game:[a-z0-9_-]+)$/;
+      function isObj(v) {
+        return typeof v === 'object' && v !== null;
+      }
+      function locText(v) {
+        if (!isObj(v) || typeof v.es_mx !== 'string' || v.es_mx === '') {
+          return null;
+        }
+        const out = {
+          es_mx: v.es_mx
+        };
+        if (typeof v.en === 'string' && v.en !== '') {
+          out.en = v.en;
+        }
+        return out;
+      }
+      function isCount(n) {
+        return typeof n === 'number' && n >= 0 && Math.floor(n) === n;
+      }
+      function parseGrant(v) {
+        if (!isObj(v) || !isCount(v.chip) || !isCount(v.gold)) {
+          return null;
+        }
+        const props = {};
+        let total = v.chip + v.gold;
+        if (v.props !== undefined) {
+          if (!isObj(v.props)) {
+            return null;
+          }
+          for (const k in v.props) {
+            if (Object.prototype.hasOwnProperty.call(v.props, k)) {
+              const n = v.props[k];
+              if (!isCount(n)) {
+                return null;
+              }
+              if (n > 0) {
+                props[k] = n;
+                total += n;
+              }
+            }
+          }
+        }
+        return total > 0 ? {
+          chip: v.chip,
+          gold: v.gold,
+          props: props
+        } : null;
+      }
+
+      /** Lý do sự kiện hỏng, hoặc null nếu dựng được (ghi vào `out`). */
+      function parseOne(v, seen, out) {
+        if (!isObj(v) || typeof v.id !== 'string' || v.id === '') {
+          return 'thiếu id';
+        }
+        if (seen[v.id]) {
+          return 'trùng id';
+        }
+        if (typeof v.order !== 'number') {
+          return 'thiếu order';
+        }
+        const startMs = typeof v.start === 'string' ? Date.parse(v.start) : NaN;
+        const endMs = typeof v.end === 'string' ? Date.parse(v.end) : NaN;
+        if (!isFinite(startMs) || !isFinite(endMs) || startMs >= endMs) {
+          return 'ngày sai';
+        }
+        const kind = v.kind;
+        if (kind !== 'reward' && kind !== 'jump' && kind !== 'notice') {
+          return 'kind lạ';
+        }
+        const title = locText(v.title);
+        const body = locText(v.body);
+        if (title === null || body === null) {
+          return 'thiếu title/body es_mx';
+        }
+        const ev = {
+          id: v.id,
+          order: v.order,
+          startMs: startMs,
+          endMs: endMs,
+          kind: kind,
+          image: typeof v.image === 'string' ? v.image : '',
+          title: title,
+          body: body
+        };
+        if (kind === 'reward') {
+          const grant = parseGrant(v.grant);
+          if (grant === null) {
+            return 'grant sai';
+          }
+          if (v.repeat !== 'once' && v.repeat !== 'daily') {
+            return 'repeat sai';
+          }
+          ev.grant = grant;
+          ev.repeat = v.repeat;
+        } else if (kind === 'jump') {
+          if (typeof v.target !== 'string' || !TARGET_RE.test(v.target)) {
+            return 'target sai';
+          }
+          ev.target = v.target;
+        }
+        seen[v.id] = true;
+        out.push(ev);
+        return null;
+      }
+
+      /** Spec E4 §2: kiểm từng sự kiện; hỏng thì bỏ + `log`. */
+      function parseEvents(raw, log) {
+        const out = [];
+        if (!isObj(raw) || !Array.isArray(raw.events)) {
+          return out;
+        }
+        const seen = {};
+        for (let i = 0; i < raw.events.length; i++) {
+          const v = raw.events[i];
+          const why = parseOne(v, seen, out);
+          if (why !== null && log !== undefined) {
+            log('[events] bỏ qua ' + (isObj(v) && typeof v.id === 'string' ? v.id : '#' + i) + ': ' + why);
+          }
+        }
+        return out;
+      }
+
+      /**
+       * Mọi id (chuỗi, không rỗng, không trùng) trong cấu hình thô, KỂ CẢ sự kiện hỏng: `applyClaim` chỉ dọn khoá của
+       * id đã gỡ hẳn khỏi cấu hình, nên sửa cấu hình một sự kiện hỏng không cho nhận lại lần nữa.
+       */
+      function configIds(raw) {
+        const out = [];
+        if (!isObj(raw) || !Array.isArray(raw.events)) {
+          return out;
+        }
+        for (let i = 0; i < raw.events.length; i++) {
+          const v = raw.events[i];
+          if (isObj(v) && typeof v.id === 'string' && v.id !== '' && out.indexOf(v.id) === -1) {
+            out.push(v.id);
+          }
+        }
+        return out;
+      }
+
+      /** Bản ghi người chơi `platform/events`: id sự kiện -> 'once' hoặc khoá ngày đã nhận. */
+
+      /** Sự kiện đang chạy (start <= now < end), xếp `order` rồi `id`. */
+      function activeEvents(defs, nowMs) {
+        const out = [];
+        for (let i = 0; i < defs.length; i++) {
+          if (defs[i].startMs <= nowMs && nowMs < defs[i].endMs) {
+            out.push(defs[i]);
+          }
+        }
+        out.sort(function (a, b) {
+          return a.order !== b.order ? a.order - b.order : a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+        });
+        return out;
+      }
+      function claimState(ev, rec, day) {
+        if (ev.kind !== 'reward') {
+          return 'none';
+        }
+        const v = rec.claims[ev.id];
+        if (v === undefined) {
+          return 'claimable';
+        }
+        return ev.repeat === 'daily' && v !== day ? 'claimable' : 'claimed';
+      }
+
+      /** Ghi lần nhận; bỏ khoá của sự kiện không còn trong cấu hình (`liveIds` = `configIds` của cấu hình thô). */
+      function applyClaim(rec, ev, day, liveIds) {
+        const claims = {};
+        for (const k in rec.claims) {
+          if (Object.prototype.hasOwnProperty.call(rec.claims, k) && liveIds.indexOf(k) !== -1) {
+            claims[k] = rec.claims[k];
+          }
+        }
+        claims[ev.id] = ev.repeat === 'daily' ? day : 'once';
+        return {
+          claims: claims
+        };
+      }
+      function pick(t, lang) {
+        return lang === 'en' && t.en !== undefined ? t.en : t.es_mx;
+      }
+      function eventView(ev, state, lang) {
+        const v = {
+          id: ev.id,
+          kind: ev.kind,
+          image: ev.image,
+          title: pick(ev.title, lang),
+          body: pick(ev.body, lang),
+          end: ev.endMs,
+          state: state
+        };
+        if (ev.grant !== undefined) {
+          v.grant = ev.grant;
+        }
+        if (ev.repeat !== undefined) {
+          v.repeat = ev.repeat;
+        }
+        if (ev.target !== undefined) {
+          v.target = ev.target;
+        }
+        return v;
+      }
+
+      /**
+       * Mốc (ms) gần nhất sau `nowMs` mà danh sách / trạng thái nhận đổi: sự kiện bắt đầu hoặc hết hạn, và nửa đêm
+       * (múi nền tảng) khi có sự kiện thưởng hằng ngày đang chạy. 0 = không còn mốc nào. Client hẹn giờ làm mới theo nó.
+       */
+      function eventsNextAt(defs, nowMs) {
+        let next = 0;
+        const take = function (t) {
+          if (t > nowMs && (next === 0 || t < next)) {
+            next = t;
+          }
+        };
+        for (let i = 0; i < defs.length; i++) {
+          const d = defs[i];
+          take(d.startMs);
+          take(d.endMs);
+          if (d.kind === 'reward' && d.repeat === 'daily' && d.startMs <= nowMs && nowMs < d.endMs) {
+            take(nextDayStartMs(nowMs));
+          }
+        }
+        return next;
+      }
+      /** Spec E4 §3.3: chấm đỏ khi còn sự kiện nhận được; `eventCount` = số sự kiện đang chạy; `eventNextAt` xem eventsNextAt. */
+      function eventDots(defs, rec, nowMs) {
+        const live = activeEvents(defs, nowMs);
+        const day = dayKey(nowMs);
+        let event = false;
+        for (let i = 0; i < live.length; i++) {
+          if (claimState(live[i], rec, day) === 'claimable') {
+            event = true;
+          }
+        }
+        return {
+          event: event,
+          eventCount: live.length,
+          eventNextAt: eventsNextAt(defs, nowMs)
+        };
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/events3.ts", ['cc', './homeState.ts', './catalog2.ts'], function (exports) {
+  var cclegacy, parseWallet, parseGrant, parseProps;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      parseWallet = module.parseWallet;
+    }, function (module) {
+      parseGrant = module.parseGrant;
+      parseProps = module.parseProps;
+    }],
+    execute: function () {
+      exports({
+        parseEventClaim: parseEventClaim,
+        parseEventsList: parseEventsList
+      });
+      cclegacy._RF.push({}, "fc060PAv6pEYZzg3pLdgPjJ", "events", undefined); // assets/scripts/core/platform/social/events.ts
+      const isObj = v => typeof v === 'object' && v !== null && !Array.isArray(v);
+      const str = v => typeof v === 'string' ? v : '';
+
+      /** Danh sach + gio server + moc lam moi (ms server; 0 = khong co moc). Server cu thieu -> 0. */
+
+      const KINDS = ['reward', 'jump', 'notice'];
+      function parseItem(raw) {
+        if (!isObj(raw)) return null;
+        const id = str(raw.id);
+        const kind = KINDS.find(k => k === raw.kind);
+        if (id === '' || kind === undefined) return null;
+        const st = raw.state === 'claimable' || raw.state === 'claimed' ? raw.state : 'none';
+        return {
+          id,
+          kind,
+          image: str(raw.image),
+          title: str(raw.title),
+          body: str(raw.body),
+          grant: isObj(raw.grant) ? parseGrant(raw.grant) : null,
+          target: typeof raw.target === 'string' && raw.target !== '' ? raw.target : null,
+          end: typeof raw.end === 'number' && isFinite(raw.end) ? raw.end : 0,
+          state: st
+        };
+      }
+      const ms = v => typeof v === 'number' && isFinite(v) && v > 0 ? v : 0;
+
+      /** Danh sach su kien; phan tu hong bi bo; ca khoi hong -> null. */
+      function parseEventsList(raw) {
+        if (!isObj(raw) || !Array.isArray(raw.events)) return null;
+        const out = [];
+        for (const r of raw.events) {
+          const it = parseItem(r);
+          if (it !== null) out.push(it);
+        }
+        return {
+          items: out,
+          now: ms(raw.now),
+          nextAt: ms(raw.nextAt)
+        };
+      }
+
+      /** Phan hoi nhan thuong; thieu wallet -> nem (khong biet so du moi). */
+      function parseEventClaim(raw) {
+        const o = isObj(raw) ? raw : {};
+        const wallet = parseWallet(o.wallet);
+        if (wallet === null) {
+          const e = {
+            stage: 'rpc',
+            code: null,
+            reason: 'unknown',
+            detail: 'event_claim khong tra wallet'
+          };
+          throw e;
+        }
+        return {
+          reward: parseGrant(o.reward),
+          wallet,
+          props: isObj(o.props) ? parseProps(o.props) : null,
+          state: o.state === 'claimable' ? 'claimable' : 'claimed'
+        };
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/eventsStore.ts", ['cc', './events.ts', './events2.ts'], function (exports) {
+  var cclegacy, EVENTS_RAW, parseEvents, configIds;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      EVENTS_RAW = module.EVENTS_RAW;
+    }, function (module) {
+      parseEvents = module.parseEvents;
+      configIds = module.configIds;
+    }],
+    execute: function () {
+      exports({
+        eventsWrite: eventsWrite,
+        knownEventIds: knownEventIds,
+        liveEvents: liveEvents,
+        readEvents: readEvents
+      });
+      cclegacy._RF.push({}, "95b2b/fDyFJtpe2iYjqwn7F", "eventsStore", undefined);
+      const EVENTS_COLLECTION = exports('EVENTS_COLLECTION', 'platform');
+      const EVENTS_KEY = exports('EVENTS_KEY', 'events');
+      function normalize(v) {
+        const claims = {};
+        const raw = typeof v === 'object' && v !== null ? v.claims : null;
+        if (typeof raw === 'object' && raw !== null) {
+          const o = raw;
+          for (const k in o) {
+            if (Object.prototype.hasOwnProperty.call(o, k) && typeof o[k] === 'string') {
+              claims[k] = o[k];
+            }
+          }
+        }
+        return {
+          claims: claims
+        };
+      }
+      function readEvents(nk, userId) {
+        const objs = nk.storageRead([{
+          collection: EVENTS_COLLECTION,
+          key: EVENTS_KEY,
+          userId: userId
+        }]);
+        if (objs.length === 0) {
+          return {
+            rec: {
+              claims: {}
+            },
+            version: ''
+          };
+        }
+        return {
+          rec: normalize(objs[0].value),
+          version: objs[0].version
+        };
+      }
+
+      /** Yêu cầu ghi có điều kiện: version '' -> '*' (chỉ tạo). */
+      function eventsWrite(userId, rec, version) {
+        return {
+          collection: EVENTS_COLLECTION,
+          key: EVENTS_KEY,
+          userId: userId,
+          value: rec,
+          version: version === '' ? '*' : version,
+          permissionRead: 0,
+          permissionWrite: 0
+        };
+      }
+      let cache = null;
+
+      /** Cấu hình sự kiện đã kiểm (một lần mỗi module); sự kiện hỏng log error rồi bỏ. */
+      function liveEvents(logger) {
+        if (cache === null) {
+          cache = parseEvents(EVENTS_RAW, function (m) {
+            if (logger !== undefined) {
+              logger.error('%s', m);
+            }
+          });
+        }
+        return cache;
+      }
+
+      /** Id của mọi sự kiện trong cấu hình, kể cả sự kiện hỏng (xem `configIds`). */
+      function knownEventIds() {
+        return configIds(EVENTS_RAW);
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/ExitGamePopup.ts", ['cc', './popupLayout.ts', './exitGamePresenter.ts', './apkRes.ts', './popupKit.ts', './uiKit.ts'], function (exports) {
   var cclegacy, game, exitLayout, ExitGamePresenter, PlatformRes, panelBg, textButton, sprite, sliced, frameIn, label, onTap;
   return {
@@ -36301,6 +37955,136 @@ System.register("chunks:///_virtual/FaceAnimView.ts", ['cc', './tableSocialLayou
   };
 });
 
+System.register("chunks:///_virtual/fakeBilling.ts", ['cc', './googlePay.ts'], function (exports) {
+  var cclegacy, parsePurchase;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      parsePurchase = module.parsePurchase;
+    }],
+    execute: function () {
+      exports('makeFakeBilling', makeFakeBilling);
+      cclegacy._RF.push({}, "6f461oXrUtFuIFQ+3180FQ/", "fakeBilling", undefined); // assets/scripts/core/platform/shop/fakeBilling.ts
+      const FAKE_BILLING_KEY = exports('FAKE_BILLING_KEY', 'conquian.fakeBilling.v1');
+      const FAKE_LAUNCH_MS = exports('FAKE_LAUNCH_MS', 800);
+      const FAKE_PRICE_RATE = exports('FAKE_PRICE_RATE', 20);
+      function makeFakeBilling(d) {
+        const delayMs = d.delayMs ?? FAKE_LAUNCH_MS;
+        const store = d.store ?? null;
+        let sink = null;
+        let outcome = 'purchased';
+        /** Khong co store: giu trong bo nho. */
+        let mem = [];
+        const load = () => {
+          if (store === null) return mem;
+          try {
+            const v = JSON.parse(store.getItem(FAKE_BILLING_KEY) ?? '[]');
+            if (!Array.isArray(v)) return [];
+            const out = [];
+            for (const r of v) {
+              const p = parsePurchase(r);
+              if (p !== null) out.push(p);
+            }
+            return out;
+          } catch {
+            return [];
+          }
+        };
+        const save = list => {
+          mem = list;
+          if (store === null) return;
+          try {
+            store.setItem(FAKE_BILLING_KEY, JSON.stringify(list));
+          } catch {
+            // bo qua: trinh duyet chan storage -> chi con trong bo nho
+          }
+        };
+        const later = (ms, fn) => {
+          setTimeout(() => {
+            if (sink !== null) fn(sink);
+          }, ms);
+        };
+        const hex = n => {
+          let s = '';
+          for (let i = 0; i < n; i++) s += Math.floor(d.random() * 16).toString(16);
+          return s;
+        };
+        const uuid = () => hex(8) + '-' + hex(4) + '-' + hex(4) + '-' + hex(4) + '-' + hex(12);
+        return {
+          listen(s) {
+            sink = s;
+            return () => {
+              if (sink === s) sink = null;
+            };
+          },
+          connect() {
+            later(0, s => s.ready());
+          },
+          queryProducts(csv) {
+            const out = [];
+            for (const sku of csv.split(',')) {
+              const usd = sku === '' ? null : d.usdOf(sku);
+              if (usd === null || !(usd > 0)) continue;
+              const local = Math.round(usd * FAKE_PRICE_RATE * 100) / 100;
+              out.push({
+                productId: sku,
+                formattedPrice: 'MX$ ' + local.toFixed(2),
+                priceMicros: Math.round(local * 1e6),
+                currency: 'MXN'
+              });
+            }
+            const json = JSON.stringify(out);
+            later(0, s => s.products(json));
+          },
+          launch(sku, userId, orderId) {
+            const o = outcome;
+            if (o === 'cancelled') return later(delayMs, s => s.cancelled(sku));
+            if (o === 'error') return later(delayMs, s => s.error(6, 'launch: fake error'));
+            const list = load();
+            if (list.some(p => p.productId === sku)) return later(delayMs, s => s.error(7, 'launch: item already owned'));
+            const p = {
+              productId: sku,
+              purchaseToken: 'fake-' + uuid(),
+              orderId: 'GPA.fake-' + hex(16),
+              obfuscatedProfileId: orderId,
+              obfuscatedAccountId: userId,
+              purchaseState: o === 'pending' ? 'PENDING' : 'PURCHASED'
+            };
+            // Luu ngay nhu Google giu giao dich da tra: tat tab trong luc cho, mo lai queryPurchases van thay
+            save(list.concat([p]));
+            later(delayMs, s => {
+              if (o === 'pending') s.pending(JSON.stringify(p));else s.purchased(JSON.stringify(p));
+            });
+          },
+          queryPurchases() {
+            later(0, s => s.purchases(JSON.stringify(load())));
+          },
+          consume(token) {
+            later(0, s => {
+              const list = load();
+              const p = list.find(x => x.purchaseToken === token);
+              if (p === undefined || p.purchaseState !== 'PURCHASED') return s.error(8, 'consume: item not owned');
+              save(list.filter(x => x !== p));
+              s.consumed(token);
+            });
+          },
+          setOutcome(o) {
+            outcome = o;
+          },
+          settlePending() {
+            save(load().map(p => p.purchaseState === 'PENDING' ? {
+              ...p,
+              purchaseState: 'PURCHASED'
+            } : p));
+          }
+        };
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/FCPopup.ts", ['cc', './apkFormat.ts', './popupLayout.ts', './firstChargeSale.ts', './apkRes.ts', './popupKit.ts', './uiKit.ts', './GetRewardPopup.ts'], function (exports) {
   var cclegacy, UITransform, potText, fcLayout, fcGlyphs, fcDiscountPct, fcPriceText, PlatformRes, panelBg, frameRow, sprite, frameIn, child, sliced, onTap, openGetRewardPopup;
   return {
@@ -36516,7 +38300,7 @@ System.register("chunks:///_virtual/firstChargeSale.ts", ['cc', './platformError
               await this.refreshHome();
               return;
             }
-            this.view.toast(this.t(r.kind === 'cancelled' ? 'payCancelled' : r.kind === 'payFailed' ? 'payFailed' : 'comingSoon'));
+            this.view.toast(this.t(r.kind === 'cancelled' ? 'payCancelled' : r.kind === 'payFailed' ? 'payFailed' : r.kind === 'pending' ? 'payPending' : 'comingSoon'));
           } catch (e) {
             const f = shopFailOf(asGatewayError(e, 'rpc'));
             this.view.toast(shopFailText(this.d.app.lang, f));
@@ -36846,6 +38630,8 @@ System.register("chunks:///_virtual/FreeCoinPanel.ts", ['cc', './hallLayout.ts',
           this.gafLoading = false;
           this.lastOnline = null;
           this.lastDots = null;
+          /** Spec B13-B15 §4.2: co tinh nang vong quay (Hall dat, co the truoc khi panel dung xong). */
+          this.wheelOn = true;
           this.h = h;
         }
         get isOpen() {
@@ -36922,7 +38708,14 @@ System.register("chunks:///_virtual/FreeCoinPanel.ts", ['cc', './hallLayout.ts',
           // Hall co the da co home truoc khi panel dung xong.
           if (this.lastDots !== null) this.setRedDots(this.lastDots);
           if (this.lastOnline !== null) this.setOnline(this.lastOnline);
+          this.setWheelVisible(this.wheelOn);
           return true;
+        }
+
+        /** Spec B13-B15 §4.2: an / hien o vong quay theo co tinh nang wheel. */
+        setWheelVisible(on) {
+          this.wheelOn = on;
+          if (this.wheelCell !== null && this.wheelCell.isValid) this.wheelCell.active = on;
         }
         setRedDots(d) {
           this.lastDots = d;
@@ -37048,6 +38841,11 @@ System.register("chunks:///_virtual/freeCoinPresenter.ts", ['cc', './platformTex
             return;
           }
           if (c === 'wheel') {
+            // Spec B13-B15 §4.2: vong quay tat thi bao Proximamente (o da an, den qua duong khac).
+            if (!this.d.app.features.wheel) {
+              this.view.toast(platformText(this.d.app.lang, 'comingSoon'));
+              return;
+            }
             this.view.openWheel();
             return;
           }
@@ -44359,7 +46157,7 @@ System.register("chunks:///_virtual/gatewayErrors.ts", ['cc'], function (exports
       const isObj = v => typeof v === 'object' && v !== null;
 
       /** Ly do ma server gui nguyen van trong message (rejectMessage cua matchJoinAttempt, ten Error cua RPC). */
-      const PASSTHROUGH = ['not_enough_money', 'room_full', 'room_closed', 'wrong_password'];
+      const PASSTHROUGH = ['not_enough_money', 'room_full', 'room_closed', 'wrong_password', 'maintenance'];
       function isGatewayError(e) {
         return isObj(e) && typeof e.stage === 'string' && typeof e.reason === 'string' && typeof e.detail === 'string';
       }
@@ -44670,6 +46468,560 @@ System.register("chunks:///_virtual/getRewardPresenter.ts", ['cc', './platformTe
   };
 });
 
+System.register("chunks:///_virtual/googleBillingBridge.ts", ['cc'], function (exports) {
+  var cclegacy, native;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+      native = module.native;
+    }],
+    execute: function () {
+      cclegacy._RF.push({}, "70f24r5YG9CHaRrrK4oPQOw", "googleBillingBridge", undefined);
+      /**
+       * Cau noi JS <-> Java cho Google Play Billing (spec B1 §4, §5). Goi `com.cocos.game.GoogleBillingBridge`
+       * qua native.reflection; Java goi nguoc `globalThis.__gbilling.<su kien>(...)` tren game thread
+       * (CocosHelper.runOnGameThread + CocosJavascriptJavaBridge.evalString). Chi dung tren Android native.
+       * Log khong in purchaseToken day du.
+       */
+      const TAG = '[conquian] gbilling';
+      const CLASS = 'com/cocos/game/GoogleBillingBridge';
+      const S = 'Ljava/lang/String;';
+      let sink = null;
+      const short = s => {
+        const v = typeof s === 'string' ? s : String(s);
+        return v.length > 24 ? v.slice(0, 24) + '...' : v;
+      };
+      function install() {
+        const g = globalThis;
+        if (g.__gbilling !== undefined) return;
+        g.__gbilling = {
+          ready: () => {
+            var _sink;
+            console.log(TAG + ' ready');
+            (_sink = sink) == null || _sink.ready();
+          },
+          products: j => {
+            var _sink2;
+            console.log(TAG + ' products ' + j);
+            (_sink2 = sink) == null || _sink2.products(j);
+          },
+          purchased: j => {
+            var _sink3;
+            console.log(TAG + ' purchased');
+            (_sink3 = sink) == null || _sink3.purchased(j);
+          },
+          pending: j => {
+            var _sink4;
+            console.log(TAG + ' pending');
+            (_sink4 = sink) == null || _sink4.pending(j);
+          },
+          cancelled: s => {
+            var _sink5;
+            console.log(TAG + ' cancelled ' + s);
+            (_sink5 = sink) == null || _sink5.cancelled(s);
+          },
+          error: (c, m) => {
+            var _sink6;
+            console.warn(TAG + ' error ' + c + ' ' + m);
+            (_sink6 = sink) == null || _sink6.error(c, m);
+          },
+          purchases: j => {
+            var _sink7;
+            console.log(TAG + ' purchases ' + short(j));
+            (_sink7 = sink) == null || _sink7.purchases(j);
+          },
+          consumed: t => {
+            var _sink8;
+            console.log(TAG + ' consumed ' + short(t));
+            (_sink8 = sink) == null || _sink8.consumed(t);
+          }
+        };
+      }
+      function call(method, sig, ...args) {
+        native.reflection.callStaticMethod(CLASS, method, sig, ...args);
+      }
+      const nativeGoogleBillingBridge = exports('nativeGoogleBillingBridge', {
+        listen(s) {
+          install();
+          sink = s;
+          return () => {
+            if (sink === s) sink = null;
+          };
+        },
+        connect() {
+          console.log(TAG + ' connect');
+          call('connect', '()V');
+        },
+        queryProducts(skusCsv) {
+          console.log(TAG + ' queryProducts ' + skusCsv);
+          call('queryProducts', '(' + S + ')V', skusCsv);
+        },
+        launch(sku, userId, orderId) {
+          console.log(TAG + ' launch ' + sku + ' order ' + orderId);
+          call('launch', '(' + S + S + S + ')V', sku, userId, orderId);
+        },
+        queryPurchases() {
+          console.log(TAG + ' queryPurchases');
+          call('queryPurchases', '()V');
+        },
+        consume(purchaseToken) {
+          console.log(TAG + ' consume ' + short(purchaseToken));
+          call('consume', '(' + S + ')V', purchaseToken);
+        }
+      });
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/googlePay.ts", ['cc', './payment2.ts'], function (exports) {
+  var cclegacy, payPending, payCancelled;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      payPending = module.payPending;
+      payCancelled = module.payCancelled;
+    }],
+    execute: function () {
+      exports({
+        makeGooglePayProvider: makeGooglePayProvider,
+        parseProduct: parseProduct,
+        parsePurchase: parsePurchase,
+        parseReceipt: parseReceipt,
+        receiptOf: receiptOf
+      });
+      cclegacy._RF.push({}, "f38f7HPSUJOxpZfw94WZFcs", "googlePay", undefined);
+      const GOOGLE_PROVIDER_ID = exports('GOOGLE_PROVIDER_ID', 'google');
+      const BILLING_TIMEOUT_MS = exports('BILLING_TIMEOUT_MS', 15000);
+      /** Nguoi choi co the o lau trong bang thanh toan cua Google (nhap the...). */
+      const LAUNCH_TIMEOUT_MS = exports('LAUNCH_TIMEOUT_MS', 10 * 60000);
+      /** BillingResponseCode.SERVICE_DISCONNECTED: Java bao "chua noi"; lan sau connect lai. */
+      const BILLING_DISCONNECTED = exports('BILLING_DISCONNECTED', -1);
+      const isObj = v => typeof v === 'object' && v !== null && !Array.isArray(v);
+      const str = v => typeof v === 'string' ? v : '';
+      function parseJson(json) {
+        try {
+          return JSON.parse(json);
+        } catch {
+          return null;
+        }
+      }
+      function parsePurchase(raw) {
+        if (!isObj(raw) || typeof raw.purchaseToken !== 'string' || raw.purchaseToken === '' || typeof raw.productId !== 'string') return null;
+        return {
+          productId: raw.productId,
+          purchaseToken: raw.purchaseToken,
+          orderId: str(raw.orderId),
+          obfuscatedProfileId: str(raw.obfuscatedProfileId),
+          obfuscatedAccountId: str(raw.obfuscatedAccountId),
+          purchaseState: str(raw.purchaseState)
+        };
+      }
+      function parseList(json, one) {
+        const v = parseJson(json);
+        if (!Array.isArray(v)) return [];
+        const out = [];
+        for (const r of v) {
+          const x = one(r);
+          if (x !== null) out.push(x);
+        }
+        return out;
+      }
+      function parseProduct(raw) {
+        if (!isObj(raw) || typeof raw.productId !== 'string' || typeof raw.formattedPrice !== 'string' || raw.formattedPrice === '') return null;
+        const micros = typeof raw.priceMicros === 'number' && isFinite(raw.priceMicros) ? raw.priceMicros : 0;
+        return {
+          productId: raw.productId,
+          formatted: raw.formattedPrice,
+          micros,
+          currency: str(raw.currency)
+        };
+      }
+
+      /** Bien lai gui purchase_complete (spec B1 §3); thu tu truong co dinh. */
+      function receiptOf(p) {
+        return JSON.stringify({
+          productId: p.productId,
+          purchaseToken: p.purchaseToken,
+          orderId: p.orderId,
+          obfuscatedProfileId: p.obfuscatedProfileId
+        });
+      }
+      function parseReceipt(receipt) {
+        const v = parseJson(receipt);
+        if (!isObj(v) || typeof v.purchaseToken !== 'string' || v.purchaseToken === '') return null;
+        return {
+          purchaseToken: v.purchaseToken,
+          obfuscatedProfileId: str(v.obfuscatedProfileId)
+        };
+      }
+      function billingError(op, why) {
+        return new Error('billing_' + op + ' ' + why);
+      }
+      function makeGooglePayProvider(d) {
+        const timeoutMs = d.timeoutMs ?? BILLING_TIMEOUT_MS;
+        const launchTimeoutMs = d.launchTimeoutMs ?? LAUNCH_TIMEOUT_MS;
+        const waiters = new Set();
+        /** Don da launch trong phien ma chua giao xong (afterDelivered): settleOrphans khong duoc consume. */
+        const undelivered = new Set();
+        const priceCache = {};
+        let ready = false;
+        let chain = Promise.resolve();
+        const dispatch = e => {
+          if (e.t === 'ready') ready = true;
+          if (e.t === 'error' && e.code === BILLING_DISCONNECTED) ready = false;
+          for (const w of Array.from(waiters)) w(e);
+        };
+        const one = json => parsePurchase(parseJson(json));
+        d.bridge.listen({
+          ready: () => dispatch({
+            t: 'ready'
+          }),
+          products: j => dispatch({
+            t: 'products',
+            list: parseList(j, parseProduct)
+          }),
+          purchased: j => {
+            const p = one(j);
+            if (p !== null) dispatch({
+              t: 'purchased',
+              p
+            });
+          },
+          pending: j => {
+            const p = one(j);
+            if (p !== null) dispatch({
+              t: 'pending',
+              p
+            });
+          },
+          cancelled: sku => dispatch({
+            t: 'cancelled',
+            sku: str(sku)
+          }),
+          error: (code, msg) => {
+            const m = str(msg);
+            const i = m.indexOf(':');
+            dispatch({
+              t: 'error',
+              op: i === -1 ? '' : m.slice(0, i).trim(),
+              code: typeof code === 'number' ? code : 0,
+              msg: i === -1 ? m : m.slice(i + 1).trim()
+            });
+          },
+          purchases: j => dispatch({
+            t: 'purchases',
+            list: parseList(j, parsePurchase)
+          }),
+          consumed: token => dispatch({
+            t: 'consumed',
+            token: str(token)
+          })
+        });
+
+        /** Chay lenh `start`, cho su kien `on` goi ok/fail; error cung op -> Error; het gio -> Error. */
+        const wait = (op, start, on, ms) => new Promise((resolve, reject) => {
+          let done = false;
+          let timer = null;
+          const finish = (ok, v) => {
+            if (done) return;
+            done = true;
+            if (timer !== null) clearTimeout(timer);
+            waiters.delete(w);
+            if (ok) resolve(v);else reject(v);
+          };
+          const w = e => {
+            if (done) return;
+            if (e.t === 'error' && e.op === op) {
+              finish(false, billingError(op, e.code + ' ' + e.msg));
+              return;
+            }
+            on(e, v => finish(true, v), x => finish(false, x));
+          };
+          waiters.add(w);
+          timer = setTimeout(() => finish(false, billingError(op, 'timeout')), ms);
+          try {
+            start();
+          } catch (x) {
+            finish(false, billingError(op, 'bridge ' + String(x)));
+          }
+        });
+
+        /** Moi lan mot thao tac. */
+        const serial = fn => {
+          const r = chain.then(fn, fn);
+          chain = r.catch(() => undefined);
+          return r;
+        };
+        const ensureReady = async () => {
+          if (ready) return;
+          await wait('connect', () => d.bridge.connect(), (e, ok) => {
+            if (e.t === 'ready') ok(undefined);
+          }, timeoutMs);
+          ready = true;
+        };
+        const queryPurchases = () => wait('purchases', () => d.bridge.queryPurchases(), (e, ok) => {
+          if (e.t === 'purchases') ok(e.list);
+        }, timeoutMs);
+        const consume = token => wait('consume', () => d.bridge.consume(token), (e, ok) => {
+          if (e.t === 'consumed' && e.token === token) ok(undefined);
+        }, timeoutMs);
+        const launch = (sku, orderId) => {
+          const mine = p => p.obfuscatedProfileId === orderId || p.obfuscatedProfileId === '' && p.productId === sku;
+          return wait('launch', () => d.bridge.launch(sku, d.userId(), orderId), (e, ok, fail) => {
+            if (e.t === 'purchased' && mine(e.p)) ok(e.p);else if (e.t === 'pending' && mine(e.p)) fail(payPending());else if (e.t === 'cancelled' && e.sku === sku) fail(payCancelled());
+          }, launchTimeoutMs);
+        };
+        return {
+          id: GOOGLE_PROVIDER_ID,
+          async pay(order) {
+            const sku = await d.skuOf(order.itemId);
+            if (sku === null || sku === '') throw billingError('launch', 'khong co sku cho ' + order.itemId);
+            return serial(async () => {
+              await ensureReady();
+              undelivered.add(order.orderId);
+              try {
+                return receiptOf(await launch(sku, order.orderId));
+              } catch (e) {
+                undelivered.delete(order.orderId);
+                throw e;
+              }
+            });
+          },
+          restore(order) {
+            return serial(async () => {
+              await ensureReady();
+              const p = (await queryPurchases()).find(x => x.obfuscatedProfileId === order.orderId && x.purchaseState === 'PURCHASED');
+              return p === undefined ? null : receiptOf(p);
+            });
+          },
+          async afterDelivered(receipt) {
+            const r = parseReceipt(receipt);
+            if (r === null) throw billingError('consume', 'bien lai sai dang');
+            await serial(async () => {
+              await ensureReady();
+              await consume(r.purchaseToken);
+            });
+            undelivered.delete(r.obfuscatedProfileId);
+          },
+          settleOrphans(pendingOrderIds) {
+            return serial(async () => {
+              await ensureReady();
+              const me = d.userId();
+              for (const p of await queryPurchases()) {
+                if (p.purchaseState !== 'PURCHASED') continue;
+                if (pendingOrderIds.indexOf(p.obfuscatedProfileId) !== -1 || undelivered.has(p.obfuscatedProfileId)) continue;
+                if (p.obfuscatedAccountId !== '' && p.obfuscatedAccountId !== me) continue;
+                try {
+                  await consume(p.purchaseToken);
+                } catch {
+                  // bo qua: lan mo app sau thu lai
+                }
+              }
+            });
+          },
+          prices(skus) {
+            return serial(async () => {
+              const missing = skus.filter((s, i) => skus.indexOf(s) === i && !Object.prototype.hasOwnProperty.call(priceCache, s));
+              if (missing.length > 0) {
+                await ensureReady();
+                const list = await wait('products', () => d.bridge.queryProducts(missing.join(',')), (e, ok) => {
+                  if (e.t === 'products') ok(e.list);
+                }, timeoutMs);
+                for (const p of list) priceCache[p.productId] = {
+                  formatted: p.formatted,
+                  micros: p.micros,
+                  currency: p.currency
+                };
+              }
+              const out = {};
+              for (const s of skus) if (Object.prototype.hasOwnProperty.call(priceCache, s)) out[s] = priceCache[s];
+              return out;
+            });
+          }
+        };
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/googlePay2.ts", ['cc'], function (exports) {
+  var cclegacy;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }],
+    execute: function () {
+      exports({
+        googleIapMode: googleIapMode,
+        parseGoogleReceipt: parseGoogleReceipt
+      });
+      cclegacy._RF.push({}, "fca82uEs5pOlaLxlmuvWE2T", "googlePay", undefined);
+      /**
+       * B1: verifier `google` cho Google Play Billing (spec 2026-10-16-b1-google-play-iap-design §3).
+       *
+       * Bật theo runtime env của Nakama `ctx.env.GOOGLE_IAP_MODE` = `fake` | `real` (thiếu hoặc giá trị khác
+       * = tắt), đọc mỗi request như ADMOB_MODE của P1 (RPC chạy trên VM khác InitModule nên không đăng ký
+       * vào registry lúc khởi động). `payment.activeVerifier(env)` ưu tiên google trước registry, nên server
+       * dev đặt GOOGLE_IAP_MODE thì google là verifier của đơn mới dù đã đăng ký `dev`.
+       *
+       * Biên lai client gửi là chuỗi JSON { productId, purchaseToken, orderId, obfuscatedProfileId }. Hai chế độ
+       * đều kiểm productId === order.sku và obfuscatedProfileId === orderId của mình; mỗi purchaseToken chỉ cho
+       * một đơn (receiptKeyOf trả token, shopRpc ghi `platform_receipts` key `google:<token>`).
+       * - fake: token phải bắt đầu bằng `fake-`; đơn ghi `fake: true`. Chỉ đặt trên server dev / VPS dev.
+       * - real: `nk.purchaseValidateGoogle` của Nakama 3.40 (gọi Android Publisher purchases.products.get).
+       *   Nakama chỉ kiểm purchaseState trong biên lai CLIENT gửi lên (không kiểm câu trả lời của Google), nên
+       *   ở đây đọc `providerResponse` (ProductPurchase của Google) để lấy purchaseState và
+       *   obfuscatedExternalProfileId: 0 = PURCHASED (nhận), 2 = PENDING ('pending' -> pay_pending), khác = từ chối.
+       */
+      const GOOGLE_PROVIDER = exports('GOOGLE_PROVIDER', 'google');
+      /** Tiền tố token của cầu nối Billing giả (client fakeBilling). */
+      const FAKE_TOKEN_PREFIX = exports('FAKE_TOKEN_PREFIX', 'fake-');
+      /** Package của app trên Play Console (spec §8); ghi đè bằng env GOOGLE_IAP_PACKAGE. */
+      const DEFAULT_PACKAGE = exports('DEFAULT_PACKAGE', 'com.arcadenix.conquian');
+
+      /** purchaseState của Android Publisher ProductPurchase. */
+      const STATE_PURCHASED = 0;
+      const STATE_PENDING = 2;
+      function trim(s) {
+        return s.replace(/^\s+|\s+$/g, '');
+      }
+      function envStr(env, key) {
+        return env !== undefined && env !== null && typeof env[key] === 'string' ? env[key] : '';
+      }
+
+      /** env.GOOGLE_IAP_MODE: 'fake' | 'real' (bỏ khoảng trắng, không phân biệt hoa thường); khác -> null (tắt). */
+      function googleIapMode(env) {
+        const m = trim(envStr(env, 'GOOGLE_IAP_MODE')).toLowerCase();
+        return m === 'fake' || m === 'real' ? m : null;
+      }
+      function nonEmpty(v) {
+        return typeof v === 'string' && v !== '' ? v : '';
+      }
+
+      /** Biên lai JSON của client; thiếu productId, purchaseToken hoặc obfuscatedProfileId -> null. */
+      function parseGoogleReceipt(receipt) {
+        let raw;
+        try {
+          raw = JSON.parse(receipt);
+        } catch (e) {
+          return null;
+        }
+        if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) {
+          return null;
+        }
+        const o = raw;
+        const out = {
+          productId: nonEmpty(o.productId),
+          purchaseToken: nonEmpty(o.purchaseToken),
+          orderId: typeof o.orderId === 'string' ? o.orderId : '',
+          obfuscatedProfileId: nonEmpty(o.obfuscatedProfileId)
+        };
+        if (out.productId === '' || out.purchaseToken === '' || out.obfuscatedProfileId === '') {
+          return null;
+        }
+        return out;
+      }
+
+      /** Khoá service account trong env thường dán từ file JSON (xuống dòng viết `\n`): đổi về xuống dòng thật. */
+      function pemOf(raw) {
+        return raw.split('\\n').join('\n');
+      }
+      function providerPurchase(raw) {
+        if (typeof raw !== 'string' || raw === '') {
+          return null;
+        }
+        let p;
+        try {
+          p = JSON.parse(raw);
+        } catch (e) {
+          return null;
+        }
+        if (typeof p !== 'object' || p === null) {
+          return null;
+        }
+        const o = p;
+        // Thiếu purchaseState -> -1 (từ chối): tiền thật thì đóng cửa khi không chắc.
+        const state = typeof o.purchaseState === 'number' ? o.purchaseState : -1;
+        return {
+          purchaseState: state,
+          profile: nonEmpty(o.obfuscatedExternalProfileId),
+          productId: nonEmpty(o.productId)
+        };
+      }
+
+      /** Chế độ real: hỏi Google qua Nakama. Lỗi của Nakama (Google trả non-200, chưa cấu hình) ném ra ngoài. */
+      function verifyReal(order, r, call) {
+        const pkg = trim(envStr(call.env, 'GOOGLE_IAP_PACKAGE')) || DEFAULT_PACKAGE;
+        // Nakama đọc packageName/productId/purchaseToken; không gửi purchaseState (Nakama coi thiếu là 0).
+        const purchase = JSON.stringify({
+          packageName: pkg,
+          productId: r.productId,
+          purchaseToken: r.purchaseToken
+        });
+        const email = trim(envStr(call.env, 'GOOGLE_IAP_CLIENT_EMAIL'));
+        const key = envStr(call.env, 'GOOGLE_IAP_PRIVATE_KEY');
+        // Có đủ cặp khoá trong runtime env thì truyền override; không thì Nakama dùng iap.google.* của config.
+        const res = email !== '' && trim(key) !== '' ? call.nk.purchaseValidateGoogle(call.userId, purchase, true, email, pemOf(key)) : call.nk.purchaseValidateGoogle(call.userId, purchase, true);
+        const list = res && res.validatedPurchases ? res.validatedPurchases : [];
+        for (let i = 0; i < list.length; i++) {
+          const v = list[i];
+          if (v.productId !== order.sku) {
+            continue;
+          }
+          const p = providerPurchase(v.providerResponse);
+          if (p === null) {
+            call.logger.warn('google_iap: providerResponse hỏng, đơn %s', call.orderId);
+            return false;
+          }
+          if (p.productId !== '' && p.productId !== order.sku) {
+            return false;
+          }
+          // Google là nguồn đúng của obfuscatedProfileId (biên lai client có thể bị sửa): bắt buộc khớp đơn.
+          if (p.profile !== call.orderId) {
+            call.logger.warn('google_iap: obfuscatedExternalProfileId lệch đơn %s', call.orderId);
+            return false;
+          }
+          if (p.purchaseState === STATE_PENDING) {
+            return 'pending';
+          }
+          if (p.purchaseState !== STATE_PURCHASED) {
+            call.logger.warn('google_iap: purchaseState=%s, đơn %s', String(p.purchaseState), call.orderId);
+            return false;
+          }
+          return true;
+        }
+        call.logger.warn('google_iap: Nakama không trả giao dịch của sku %s, đơn %s', order.sku, call.orderId);
+        return false;
+      }
+      const googleVerifier = exports('googleVerifier', {
+        provider: GOOGLE_PROVIDER,
+        verify: function (order, receipt, call) {
+          if (call === undefined) {
+            return false;
+          }
+          const mode = googleIapMode(call.env);
+          const r = parseGoogleReceipt(receipt);
+          if (mode === null || r === null || r.productId !== order.sku || r.obfuscatedProfileId !== call.orderId) {
+            return false;
+          }
+          if (mode === 'fake') {
+            return r.purchaseToken.indexOf(FAKE_TOKEN_PREFIX) === 0;
+          }
+          return verifyReal(order, r, call);
+        },
+        receiptKeyOf: function (receipt) {
+          const r = parseGoogleReceipt(receipt);
+          return r === null ? receipt : r.purchaseToken;
+        }
+      });
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/hallLayout.ts", ['cc', './platformScreen.ts'], function (exports) {
   var cclegacy, DESIGN, edges, apkToCanvas, childOf;
   return {
@@ -44816,6 +47168,7 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
         backAction: backAction,
         chipText: chipText,
         displayName: displayName,
+        hallButtonFeature: hallButtonFeature,
         hallTiles: hallTiles,
         tileCaption: tileCaption
       });
@@ -44825,6 +47178,23 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
       const HALL_TOP_ICONS = exports('HALL_TOP_ICONS', ['invite', 'activity', 'vip', 'rewardVideo', 'piggyBank', 'firstCharge', 'limitSale']);
       /** Moi nut cua Hall (Q2): 'mall' va 'chipAdd' mo Mall (spec D2), 'task' va 'piggyBank' (spec D4a), 'rewardVideo' (spec D4b), 'vip' (spec D4c), 'firstCharge' (spec A3), 'avatar'/'rank'/'message' (spec E1), 'friend'/'invite' (spec E2), con lai "sap co". */
       const HALL_BUTTONS = exports('HALL_BUTTONS', [...HALL_TOP_ICONS, 'message', 'task', 'rank', 'friend', 'mall', 'chipAdd', 'avatar', 'otherGame', 'arrowLeft', 'arrowRight', 'moreFeedback']);
+
+      /** Spec B13-B15 §4.2: nut Hall -> co tinh nang server; nut khong thuoc co nao -> null. */
+      const BUTTON_FEATURE = {
+        invite: 'invite',
+        vip: 'vip',
+        rewardVideo: 'video',
+        piggyBank: 'piggy',
+        firstCharge: 'firstCharge',
+        task: 'tasks',
+        rank: 'rank',
+        friend: 'friends',
+        mall: 'mall',
+        chipAdd: 'mall'
+      };
+      function hallButtonFeature(b) {
+        return BUTTON_FEATURE[b] ?? null;
+      }
 
       /** So o luoi Hall (HCV:52-58 m_configPosArray) = so neo tile0..3 trong HallView.prefab (HALL_BINDINGS). */
       const HALL_GRID_SIZE = exports('HALL_GRID_SIZE', 4);
@@ -44895,6 +47265,8 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
           this.dots = NO_RED_DOTS;
           this.online = null;
           this.lastOnline = '';
+          /** Gio may (ms) cua moc eventNextAt; 0 = khong hen. */
+          this.eventRefreshAt = 0;
           this.queue = void 0;
           /** Dang goi vip_info (khong goi chong). */
           this.vipLoading = false;
@@ -44902,6 +47274,10 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
           this.forceResume = false;
           /** Dang cho phien online (whenOnline); stop() goi de bo cho. */
           this.stopWaitOnline = null;
+          /** Spec B13-B15: gia tri server cua icon video / First charge (truoc khi ap co tinh nang). */
+          this.videoOn = null;
+          this.fcOn = null;
+          this.featuresKey = '';
           this.view = view;
           this.d = d;
           this.queue = new PopupQueue({
@@ -44913,6 +47289,7 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
           this.renderBar();
           this.renderTiles();
           this.renderAvatar();
+          this.applyFeatures();
           const want = this.d.app.nav.openLobby;
           const bankruptDone = this.d.app.nav.bankruptDone;
           this.forceResume = this.d.app.nav.resumeTable;
@@ -44932,20 +47309,27 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
             onWallet: () => this.renderBar(),
             onRedDots: d => this.setDots(d),
             onHome: h => {
+              // bindHome (dang ky truoc) da ghi app.features tu h.features
+              this.applyFeatures();
               this.setOnline(h);
               this.setFirstCharge(h);
+              this.setEventIcon(h);
             },
             onVideo: v => this.setVideo(v.available),
             onVip: b => this.setVip(b),
             onProfile: p => this.setProfile(p)
           });
-          this.stopTick = this.d.app.clock.onTick(() => this.renderOnline());
+          this.stopTick = this.d.app.clock.onTick(() => {
+            this.renderOnline();
+            this.checkEventRefresh();
+          });
           const cached = this.d.app.home;
           if (cached !== null) {
             this.setDots(cached.redDots);
             this.setOnline(cached);
             this.setVip(cached.vip);
             this.setFirstCharge(cached);
+            this.setEventIcon(cached);
           }
           if (this.d.app.video !== null) this.setVideo(this.d.app.video.available);
           void this.loadHome();
@@ -45064,7 +47448,28 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
         }
         setVideo(on) {
           if (this.stopped) return;
-          this.view.setVideoIcon(on);
+          this.videoOn = on;
+          this.view.setVideoIcon(on && this.d.app.features.video);
+        }
+
+        /** Spec B13-B15 §4.2: ve co tinh nang khi doi (lan dau luon ve); ve lai icon video / First charge theo co moi. */
+        applyFeatures() {
+          if (this.stopped) return;
+          const f = this.d.app.features;
+          const key = JSON.stringify(f);
+          if (key === this.featuresKey) return;
+          const first = this.featuresKey === '';
+          this.featuresKey = key;
+          this.view.setFeatures({
+            ...f
+          });
+          if (first) return;
+          if (this.videoOn !== null) this.view.setVideoIcon(this.videoOn && f.video);
+          if (this.fcOn !== null) this.view.setFirstChargeIcon(this.fcOn && f.firstCharge);
+        }
+        featureOff(b) {
+          const k = hallButtonFeature(b);
+          return k !== null && !this.d.app.features[k];
         }
 
         /** Spec D4c §3.2: tai vip_info nen cho popup Sign/Online/Mall/Bk; dang tai thi bo qua; loi chi bo qua (lech spec 13). */
@@ -45098,10 +47503,26 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
           this.renderOnline();
         }
 
+        /** Spec E4 §4.2: an icon Event khi khong co su kien dang chay. Ghi moc eventNextAt (gio may) de tick goi lai home_state. */
+        setEventIcon(h) {
+          if (this.stopped) return;
+          this.view.setEventIcon(h.eventCount > 0);
+          const at = this.d.app.homeAt > 0 ? this.d.app.homeAt : this.now();
+          this.eventRefreshAt = h.eventNextAt > 0 && h.serverNow > 0 ? at + (h.eventNextAt - h.serverNow) : 0;
+        }
+
+        /** Qua moc su kien (bat dau / het han / nua dem): goi lai home_state mot lan -> icon + cham do moi. */
+        checkEventRefresh() {
+          if (this.stopped || this.eventRefreshAt <= 0 || this.now() < this.eventRefreshAt) return;
+          this.eventRefreshAt = 0;
+          this.d.session.fetchHome().catch(() => undefined);
+        }
+
         /** Spec A3 §3.2: icon First charge theo goi dang moi; mua xong fetchHome lam icon bien mat. */
         setFirstCharge(h) {
           if (this.stopped) return;
-          this.view.setFirstChargeIcon(fcOffer(h) !== null);
+          this.fcOn = fcOffer(h) !== null;
+          this.view.setFirstChargeIcon(this.fcOn && this.d.app.features.firstCharge);
         }
 
         /** Moi tick: ve dong ho khi doi; het gio thi sang cham do ngay (spec §4 buoc 4). */
@@ -45158,11 +47579,16 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
         }
         tap(b) {
           this.closeMore();
+          // Spec B13-B15 §4.2: tinh nang server tat (icon da an, den qua duong khac) -> Proximamente.
+          if (this.featureOff(b)) {
+            this.view.toast(platformText(this.d.app.lang, 'comingSoon'));
+            return;
+          }
           // Spec D2 §3.2: Tienda va "+" o chip mo Mall tab Chips; D4a: Nhiem vu, heo dat; D4b: video; D4c: VIP; nut khac van thuoc D/E.
           if (b === 'mall' || b === 'chipAdd') this.view.openMall('chip');else if (b === 'task') this.view.openTask();else if (b === 'piggyBank') this.view.openPiggy();else if (b === 'rewardVideo') this.view.openRewardVideo();else if (b === 'vip') this.view.openVip();else if (b === 'avatar') this.view.openUserInfo();else if (b === 'rank') this.view.openRank();else if (b === 'message') this.view.openMessage({
             news: this.dots.messageNews,
             notice: this.dots.messageNotice
-          });else if (b === 'friend') this.view.openFriend(this.dots.friend);else if (b === 'invite') this.view.openInviteHub();else if (b === 'firstCharge') this.tapFirstCharge();else if (b === 'arrowLeft' || b === 'arrowRight') {
+          });else if (b === 'friend') this.view.openFriend(this.dots.friend);else if (b === 'invite') this.view.openInviteHub();else if (b === 'activity') this.view.openEvent();else if (b === 'firstCharge') this.tapFirstCharge();else if (b === 'arrowLeft' || b === 'arrowRight') {
             // Luoi nhieu hon 4 o: mui ten chuyen trang (khong con o nao bi cat).
             this.tilePage += b === 'arrowRight' ? 1 : -1;
             this.renderTiles();
@@ -45257,7 +47683,7 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
 });
 
 System.register("chunks:///_virtual/HallRankPopup.ts", ['cc', './socialLayout.ts', './vipLayout.ts', './rankPresenter.ts', './rank.ts', './apkRes.ts', './popupKit.ts', './scrollList.ts', './uiKit.ts', './UserDetailPopup.ts', './UserInfoPopup.ts'], function (exports) {
-  var cclegacy, rankLayout, rankPlaceFrame, rankDigitFrame, albumSideScale, avatarFaceKey, albumVipScale, vipAlbumFrame, RankPresenter, RANK_TABS, PlatformRes, panelBg, tabPanel, album, setAlbumSide, scrollList, sprite, onTap, sliced, child, label, spinner, frameIn, numberImage, openUserDetailPopup, openUserInfoPopup;
+  var cclegacy, rankLayout, rankPlaceFrame, rankDigitFrame, albumSideScale, avatarFaceKey, albumVipScale, rankOnlineFrame, vipAlbumFrame, RankPresenter, RANK_TABS, PlatformRes, panelBg, tabPanel, album, setAlbumSide, scrollList, sprite, onTap, sliced, child, label, spinner, frameIn, numberImage, openUserDetailPopup, openUserInfoPopup;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -45268,6 +47694,7 @@ System.register("chunks:///_virtual/HallRankPopup.ts", ['cc', './socialLayout.ts
       albumSideScale = module.albumSideScale;
       avatarFaceKey = module.avatarFaceKey;
       albumVipScale = module.albumVipScale;
+      rankOnlineFrame = module.rankOnlineFrame;
     }, function (module) {
       vipAlbumFrame = module.vipAlbumFrame;
     }, function (module) {
@@ -45316,7 +47743,7 @@ System.register("chunks:///_virtual/HallRankPopup.ts", ['cc', './socialLayout.ts
         faceWoman: PlatformRes.Common_default_woman,
         spinner: PlatformRes.Common_loadingCircle
       };
-      /** Mot hang (HallRankWinJuNode / WinMoneyNode / WinPropertyNode sourceDelegate): hang, avatar + khung VIP, ten, gia tri. */
+      /** Mot hang (HallRankWinJuNode / WinMoneyNode / WinPropertyNode sourceDelegate): hang, avatar + khung VIP, ten, gia tri, online. */
       function drawRow(parent, r, y, tab, F, atlas, vipAtlas, L, onRow) {
         const n = child(parent, 'row_' + r.rank, {
           x: 0,
@@ -45341,13 +47768,17 @@ System.register("chunks:///_virtual/HallRankPopup.ts", ['cc', './socialLayout.ts
         label(n, r.valueText, L.value, L.valueSize, L.valueColor, {
           anchorX: 0
         }).node.name = 'value';
+        sprite(n, frameIn(atlas, rankOnlineFrame(r.online)), L.onlineIcon, 1, 'onlineIcon');
+        label(n, r.onlineText, L.onlineText, L.onlineSize, r.online ? L.onlineColor : L.offlineColor, {
+          anchorX: 0
+        }).node.name = 'online';
         onTap(n, () => onRow(r.userId), 1);
       }
 
       /**
        * HallRankPopup (spec E1 §3.3; HallRankPopup.lua + HallRankPopupConfig0x06001200.lua): TabPanel big 3 tab
        * (Victorias / Ganadores de hoy / Ranking), khung noi dung, danh sach cuon hang 912x125, dong "hang cua
-       * minh" ghim duoi (lech spec 5); khong ve Online/Offline (lech spec 6). Logic o RankPresenter.
+       * minh" ghim duoi (lech spec 5); P3: cham Online/Offline moi hang (anh + chu nhu APK). Logic o RankPresenter.
        */
       function openRankPopup(h) {
         let p = null;
@@ -45440,8 +47871,8 @@ System.register("chunks:///_virtual/HallRankPopup.ts", ['cc', './socialLayout.ts
   };
 });
 
-System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLayout.ts', './appContext.ts', './platformBindings.ts', './freeCoinPresenter.ts', './firstChargeSale.ts', './hallPresenter.ts', './rewardFx.ts', './platformText.ts', './apkRes.ts', './platformExtraRes.ts', './vipLayout.ts', './FreeCoinPanel.ts', './LobbyLayer.ts', './ExitGamePopup.ts', './GetRewardPopup.ts', './MallPopup.ts', './FCPopup.ts', './SettingPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './RewardVideoPopup.ts', './TaskPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './HallRankPopup.ts', './MessagePopup.ts', './UserInfoPopup.ts', './FriendPopup.ts', './NewInviteFriendPopup.ts', './BroadProp.ts', './marqueePresenter.ts', './tableInvitePresenter.ts', './MarqueeBar.ts', './InviteBanner.ts', './navigation.ts', './SceneCover2.ts', './SignPopup.ts', './platformAssets.ts', './platformBoot.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SimplePopup.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './SafeEdge.ts', './uiKit.ts', './viewBind.ts'], function (exports) {
-  var cclegacy, Component, sys, input, Input, view, Tween, UITransform, Vec3, tween, Color, KeyCode, Sprite, Label, _decorator, DEBUG, packSlots, readSound, readMusic, getApp, HALL_BINDINGS, FreeCoinPresenter, FirstChargeSale, HallPresenter, tileCaption, HALL_TOP_ICONS, countUpValue, COUNT_SEC, countUpText, rewardFx, platformText, PlatformRes, PlatformExtraRes, vipAlbumFrame, FreeCoinPanel, LobbyLayer, openExitGamePopup, openGetRewardPopup, openMallPopup, firstChargeView, openSettingPopup, NEWBIE_POPUP, openNewbiePopup, openOnlineRewardPopup, openPiggyBankPop, openRewardVideoPopup, openTaskPopup, openVipInfoPopup, openWheelPopup, openRankPopup, openMessagePopup, openUserInfoPopup, openFriendPopup, openInviteHub, openBroadProp, MarqueePresenter, TableInvitePresenter, inviteAndPlay, MarqueeBar, InviteBanner, toLogin, toHall, enterTable, enterSlot, holdSceneCover, releaseAfter, cancelSceneCover, prepareSceneCover, SIGN_POPUP, openSignPopup, PlatformAssets, screenOf, PlatformSound, PopupLayer, RewardRain, buildSimplePopup, openNetLostBox, Toast, applyLangSprites, applySafeEdges, SafeEdge, errorRetry, frameIn, sprite, label, reconnectBlocker, coverNode, onTap, tapArea, loadPrefabView, bind, bindNode;
+System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLayout.ts', './appContext.ts', './platformBindings.ts', './freeCoinPresenter.ts', './firstChargeSale.ts', './hallPresenter.ts', './rewardFx.ts', './platformText.ts', './appConfig.ts', './apkRes.ts', './platformExtraRes.ts', './vipLayout.ts', './FreeCoinPanel.ts', './LobbyLayer.ts', './ExitGamePopup.ts', './GetRewardPopup.ts', './MallPopup.ts', './FCPopup.ts', './SettingPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './RewardVideoPopup.ts', './TaskPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './EventPopup.ts', './HallRankPopup.ts', './MessagePopup.ts', './UserInfoPopup.ts', './FriendPopup.ts', './NewInviteFriendPopup.ts', './BroadProp.ts', './marqueePresenter.ts', './tableInvitePresenter.ts', './MarqueeBar.ts', './InviteBanner.ts', './navigation.ts', './SceneCover2.ts', './SignPopup.ts', './platformAssets.ts', './platformBoot.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SimplePopup.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './SafeEdge.ts', './uiKit.ts', './viewBind.ts'], function (exports) {
+  var cclegacy, Component, sys, input, Input, view, Tween, UITransform, Vec3, tween, Color, KeyCode, Sprite, instantiate, Label, _decorator, DEBUG, packSlots, readSound, readMusic, getApp, HALL_BINDINGS, FreeCoinPresenter, FirstChargeSale, HallPresenter, tileCaption, HALL_TOP_ICONS, countUpValue, COUNT_SEC, countUpText, rewardFx, platformText, ALL_FEATURES, PlatformRes, PlatformExtraRes, vipAlbumFrame, FreeCoinPanel, LobbyLayer, openExitGamePopup, openGetRewardPopup, openMallPopup, firstChargeView, openSettingPopup, NEWBIE_POPUP, openNewbiePopup, openOnlineRewardPopup, openPiggyBankPop, openRewardVideoPopup, openTaskPopup, openVipInfoPopup, openWheelPopup, openEventPopup, openRankPopup, openMessagePopup, openUserInfoPopup, openFriendPopup, openInviteHub, openBroadProp, MarqueePresenter, TableInvitePresenter, inviteAndPlay, MarqueeBar, InviteBanner, toLogin, toHall, enterTable, enterSlot, holdSceneCover, releaseAfter, cancelSceneCover, prepareSceneCover, SIGN_POPUP, openSignPopup, PlatformAssets, screenOf, PlatformSound, PopupLayer, RewardRain, buildSimplePopup, openNetLostBox, Toast, applyLangSprites, applySafeEdges, SafeEdge, errorRetry, frameIn, sprite, label, reconnectBlocker, coverNode, onTap, tapArea, loadPrefabView, bind, bindNode;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -45457,6 +47888,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
       Color = module.Color;
       KeyCode = module.KeyCode;
       Sprite = module.Sprite;
+      instantiate = module.instantiate;
       Label = module.Label;
       _decorator = module._decorator;
     }, function (module) {
@@ -45484,6 +47916,8 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
       rewardFx = module.rewardFx;
     }, function (module) {
       platformText = module.platformText;
+    }, function (module) {
+      ALL_FEATURES = module.ALL_FEATURES;
     }, function (module) {
       PlatformRes = module.PlatformRes;
     }, function (module) {
@@ -45519,6 +47953,8 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
       openVipInfoPopup = module.openVipInfoPopup;
     }, function (module) {
       openWheelPopup = module.openWheelPopup;
+    }, function (module) {
+      openEventPopup = module.openEventPopup;
     }, function (module) {
       openRankPopup = module.openRankPopup;
     }, function (module) {
@@ -45676,12 +48112,24 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           this.videoIcon = null;
           /** Spec A3 §3.2: icon First charge hang tren (an toi khi home_state moi); doc qua CDP luc nghiem thu. */
           this.fcIcon = null;
+          /** Spec E4: icon Event (activity) + cham do (con su kien nhan thuong). */
+          this.eventIcon = null;
+          this.eventDot = null;
           /**
            * Hang icon tren theo thu tu HALL_TOP_ICONS + mep trai goc cac o trong prefab (packSlots don icon an). Don qua
            * SafeEdge.baseLeft (khong sua Widget.left thang) de applySafeEdges luc doi co van cong tai tho ma khong mat don.
            */
           this.topIcons = [];
+          /** Spec B13-B15 §4.2: co tinh nang dang ap va node an/hien theo co (icon hang tren, nut thanh duoi, "+" chip). */
+          this.features = {
+            ...ALL_FEATURES
+          };
+          this.featureNodes = [];
+          this.lastDots = null;
           this.topSlots = [];
+          /** Hang nut thanh duoi theo thu tu x tang (message, task, rank, friend, more, mall) + x goc cua prefab (packSlots don nut an). */
+          this.bottomRow = [];
+          this.bottomSlots = [];
           this.fcRunning = false;
           /** Khung avatar thuong (con cuoi cua node avatar) va khung VIP (spec D4c §3.3, lech spec 19). */
           this.albumSide = null;
@@ -45836,6 +48284,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
             }
           });
           this.freePanel = freePanel;
+          freePanel.setWheelVisible(this.features.wheel);
           void freePanel.build();
           this.presenter = new HallPresenter(this, {
             session,
@@ -45923,11 +48372,13 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
         }
         renderRedDots(d) {
           // Lech spec 18: nut Gold-free sang ca khi con luot quay (BottomManager.lua:995-1003, 1244).
-          if (this.freeDot !== null && this.freeDot.isValid) this.freeDot.active = d.freeCoin || d.wheel;
+          this.lastDots = d;
+          if (this.freeDot !== null && this.freeDot.isValid) this.freeDot.active = d.freeCoin || d.wheel && this.features.wheel;
           if (this.taskDot !== null && this.taskDot.isValid) this.taskDot.active = d.task;
           if (this.piggyDot !== null && this.piggyDot.isValid) this.piggyDot.active = d.piggy;
           if (this.messageDot !== null && this.messageDot.isValid) this.messageDot.active = d.messageNews || d.messageNotice;
           if (this.friendDot !== null && this.friendDot.isValid) this.friendDot.active = d.friend;
+          if (this.eventDot !== null && this.eventDot.isValid) this.eventDot.active = d.event;
           if (this.freePanel !== null) this.freePanel.setRedDots(d);
         }
         renderOnlineBox(v) {
@@ -46090,12 +48541,14 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** Tienda, "+" o chip (Hall/Lobby), "+" o Gold (Lobby) (spec D2 §3.2). */
         openMall(tab) {
+          if (!this.featureOn('mall')) return;
           const h = this.rewardHost();
           if (h !== null) openMallPopup(h, tab);
         }
 
         /** Nut Nhiem vu (spec D4a §3.3). */
         openTask() {
+          if (!this.featureOn('tasks')) return;
           const h = this.rewardHost();
           if (h !== null) openTaskPopup({
             ...h,
@@ -46105,6 +48558,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** Icon heo Hall tren va Lobby (spec D4a §3.3). */
         openPiggy() {
+          if (!this.featureOn('piggy')) return;
           const h = this.rewardHost();
           if (h !== null) openPiggyBankPop({
             ...h,
@@ -46118,10 +48572,64 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           this.layoutTopIcons();
         }
 
+        /** Spec E4 §4.2: icon Event chi hien khi co su kien dang chay. */
+        setEventIcon(on) {
+          if (this.eventIcon !== null && this.eventIcon.isValid) this.eventIcon.active = on;
+          this.layoutTopIcons();
+        }
+
+        /** Spec E4: popup su kien; tab 'jump' mo tinh nang dich. */
+        openEvent() {
+          const h = this.rewardHost();
+          if (h !== null) openEventPopup({
+            ...h,
+            jump: target => this.eventJump(target)
+          });
+        }
+
+        /** Spec E4 §2: target mall | task | invite | vip | wheel | game:<gameId>; la -> bo qua. */
+        eventJump(target) {
+          var _this$presenter11;
+          if (target === 'mall') this.openMall('chip');else if (target === 'task') this.openTask();else if (target === 'invite') this.openInviteHub();else if (target === 'vip') this.openVip();else if (target === 'wheel') this.openWheel();else if (target.indexOf('game:') === 0) (_this$presenter11 = this.presenter) == null || _this$presenter11.tapGame(target.slice(5));
+        }
+
         /** Icon First charge hang tren (spec A3 §3.2). */
         setFirstChargeIcon(on) {
           if (this.fcIcon !== null && this.fcIcon.isValid) this.fcIcon.active = on;
           this.layoutTopIcons();
+        }
+
+        /**
+         * Spec B13-B15 §4.2: an icon / nut cua tinh nang tat (icon hang tren don bang packSlots); video / First charge
+         * do presenter goi setVideoIcon / setFirstChargeIcon. Popup dang mo khong dong (spec §7).
+         */
+        setFeatures(f) {
+          this.features = {
+            ...f
+          };
+          for (const e of this.featureNodes) if (e.node.isValid) e.node.active = f[e.key];
+          if (this.freePanel !== null) this.freePanel.setWheelVisible(f.wheel);
+          if (this.lastDots !== null) this.renderRedDots(this.lastDots);
+          this.layoutTopIcons();
+          this.layoutBottomRow();
+        }
+
+        /** Nut thanh duoi dang hien don vao cac o dau (task / rank / friend / mall an khong de lo). Du nut thi giu dung x prefab. */
+        layoutBottomRow() {
+          const slots = packSlots(this.bottomRow.map(b => b.isValid && b.active), this.bottomSlots);
+          this.bottomRow.forEach((b, k) => {
+            const x = slots[k];
+            if (x === null || !b.isValid) return;
+            const p = b.position;
+            if (p.x !== x) b.setPosition(x, p.y, p.z);
+          });
+        }
+
+        /** Loi vao qua duong khac (Lobby, popup) cua tinh nang tat -> toast Proximamente. */
+        featureOn(k) {
+          if (this.features[k]) return true;
+          this.toast(platformText(getApp().lang, 'comingSoon'));
+          return false;
         }
 
         /** Icon dang hien don vao cac o dau (khong de lo khi icon video / First charge an). */
@@ -46136,6 +48644,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** Icon First charge -> FCPopup mot minh (spec A3 §3.2); mua xong FirstChargeSale goi fetchHome -> icon an. */
         openFirstCharge(offer) {
+          if (!this.featureOn('firstCharge')) return;
           const h = this.rewardHost();
           if (h === null || this.fcRunning) return;
           this.fcRunning = true;
@@ -46152,12 +48661,14 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** Icon video thuong -> RewardVideoPopup (spec D4b §3.3). */
         openRewardVideo() {
+          if (!this.featureOn('video')) return;
           const h = this.rewardHost();
           if (h !== null) openRewardVideoPopup(h);
         }
 
         /** Icon VIP hang tren (HeaderManager.lua:478-479): VIPInfoPopup (spec D4c §3.3). */
         openVip() {
+          if (!this.featureOn('vip')) return;
           const h = this.rewardHost();
           if (h !== null) openVipInfoPopup(h);
         }
@@ -46170,6 +48681,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** Nut Rank (BottomManager.lua:374-383): HallRankPopup. */
         openRank() {
+          if (!this.featureOn('rank')) return;
           const h = this.rewardHost();
           if (h !== null) openRankPopup(h);
         }
@@ -46182,12 +48694,14 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** Nut Friend (BottomManager.lua:406-425): FriendPopup; Invitar -> vao ban + moi (spec E2 §3.2). */
         openFriend(dot) {
+          if (!this.featureOn('friends')) return;
           const h = this.rewardHost();
           if (h !== null) openFriendPopup(h, dot, id => this.inviteFriend(id));
         }
 
         /** Icon invite hang tren: hub moi (spec E2 §3.3). */
         openInviteHub() {
+          if (!this.featureOn('invite')) return;
           const h = this.rewardHost();
           if (h !== null) openInviteHub(h);
         }
@@ -46245,6 +48759,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** O vong quay o panel Free coin (IFreeCoinView, spec D4b §3.3; BottomManager.lua:1011-1013). */
         openWheel() {
+          if (!this.featureOn('wheel')) return;
           const h = this.rewardHost();
           if (h !== null) openWheelPopup({
             ...h,
@@ -46341,11 +48856,11 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           return this.popups !== null && this.popups.count > 0 || this.lobby !== null && this.lobby.isOpen;
         }
         openAuto(kind) {
-          var _this$presenter11;
+          var _this$presenter12;
           const h = this.rewardHost();
           const ok = h !== null && (kind === 'newbie' ? openNewbiePopup(h) : openSignPopup(h));
           // Khong mo duoc (Hall chua dung xong): hang khong ket o popup nay.
-          if (!ok) (_this$presenter11 = this.presenter) == null || _this$presenter11.autoClosed(kind);
+          if (!ok) (_this$presenter12 = this.presenter) == null || _this$presenter12.autoClosed(kind);
         }
         closeLobby() {
           if (this.lobby !== null) this.lobby.close();
@@ -46362,21 +48877,21 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
 
         /** Nut back Android (va Esc tren desktop) theo thu tu KeypadManager (spec C2+D1 §4 buoc 5). */
         onKey(e) {
-          var _this$presenter12;
+          var _this$presenter13;
           if (e.keyCode !== KeyCode.MOBILE_BACK && e.keyCode !== KeyCode.ESCAPE) return;
           const lobby = this.lobby;
-          (_this$presenter12 = this.presenter) == null || _this$presenter12.back({
+          (_this$presenter13 = this.presenter) == null || _this$presenter13.back({
             lobbyBusy: lobby !== null && lobby.isOpen && lobby.isBusy,
             popupOpen: this.popups !== null && this.popups.count > 0,
             lobbyOpen: lobby !== null && lobby.isOpen
           });
         }
         onLobbyOpen(open) {
-          var _this$presenter13, _this$presenter14;
-          if (open) (_this$presenter13 = this.presenter) == null || _this$presenter13.closeFreeCoin();
+          var _this$presenter14, _this$presenter15;
+          if (open) (_this$presenter14 = this.presenter) == null || _this$presenter14.closeFreeCoin();
           for (const n of this.hallLayers) n.active = !open;
           if (this.marqueeBar !== null) this.marqueeBar.setLobby(open);
-          if (!open) (_this$presenter14 = this.presenter) == null || _this$presenter14.pokeQueue();
+          if (!open) (_this$presenter15 = this.presenter) == null || _this$presenter15.pokeQueue();
           if (this.moreNode !== null) this.moreNode.active = false;
         }
 
@@ -46421,20 +48936,24 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           this.arrowLeft.active = false;
           this.arrowRight.active = false;
           onTap(this.arrowLeft, () => {
-            var _this$presenter15;
-            return (_this$presenter15 = this.presenter) == null ? void 0 : _this$presenter15.tap('arrowLeft');
+            var _this$presenter16;
+            return (_this$presenter16 = this.presenter) == null ? void 0 : _this$presenter16.tap('arrowLeft');
           });
           onTap(this.arrowRight, () => {
-            var _this$presenter16;
-            return (_this$presenter16 = this.presenter) == null ? void 0 : _this$presenter16.tap('arrowRight');
+            var _this$presenter17;
+            return (_this$presenter17 = this.presenter) == null ? void 0 : _this$presenter17.tap('arrowRight');
           });
 
           // Hang icon tren (HTC:8-114)
           for (const name of HALL_TOP_ICONS) {
             const area = n(B[TOP_KEYS[name]]);
             onTap(area, () => {
-              var _this$presenter17;
-              return (_this$presenter17 = this.presenter) == null ? void 0 : _this$presenter17.tap(name);
+              var _this$presenter18;
+              return (_this$presenter18 = this.presenter) == null ? void 0 : _this$presenter18.tap(name);
+            });
+            if (name === 'invite' || name === 'vip' || name === 'piggyBank') this.featureNodes.push({
+              key: name === 'piggyBank' ? 'piggy' : name,
+              node: area
             });
             const edge = area.getComponent(SafeEdge);
             // capture() nho Widget.left goc cua prefab mot lan (idempotent): do la o cua icon nay.
@@ -46456,7 +48975,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
                 if (dot.isValid) dot.setSiblingIndex(area.children.length - 1);
               });
             } else {
-              void a.gaf(area, TOP_GAF[name], {
+              const gafLoaded = a.gaf(area, TOP_GAF[name], {
                 x: 0,
                 y: 0
               });
@@ -46469,6 +48988,22 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
               if (name === 'firstCharge') {
                 area.active = false;
                 this.fcIcon = area;
+              }
+              // Spec E4 §4.2: icon Event an toi khi home_state.eventCount > 0; cham do lay mau cham heo.
+              if (name === 'activity') {
+                area.active = false;
+                this.eventIcon = area;
+                const src = n(B.piggyDot);
+                const dot = instantiate(src);
+                dot.name = 'eventDot';
+                dot.active = false;
+                area.addChild(dot);
+                dot.setPosition(src.position);
+                this.eventDot = dot;
+                // GAF them sau: dua cham len tren khi nap xong.
+                void gafLoaded.then(() => {
+                  if (dot.isValid) dot.setSiblingIndex(area.children.length - 1);
+                });
               }
               // Time limited (APK LSPopup: goi nap that co dem nguoc) can thanh toan that (D3) -> an toi khi co IAP.
               if (name === 'limitSale') area.active = false;
@@ -46483,23 +49018,39 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
             x: 0,
             y: 0
           });
-          for (const k of ['message', 'task', 'rank', 'friend']) onTap(n(B[k]), () => {
-            var _this$presenter18;
-            return (_this$presenter18 = this.presenter) == null ? void 0 : _this$presenter18.tap(k);
-          });
+          for (const k of ['message', 'task', 'rank', 'friend']) {
+            const btn = n(B[k]);
+            onTap(btn, () => {
+              var _this$presenter19;
+              return (_this$presenter19 = this.presenter) == null ? void 0 : _this$presenter19.tap(k);
+            });
+            if (k !== 'message') this.featureNodes.push({
+              key: k === 'task' ? 'tasks' : k === 'friend' ? 'friends' : 'rank',
+              node: btn
+            });
+          }
           // Cham do nhiem vu (HBVC:114-126), Message (lech spec 10), Friend (spec E2 §3.3): con cua nut.
           this.taskDot = n(B.taskDot);
           this.messageDot = n(B.messageDot);
           this.friendDot = n(B.friendDot);
-          onTap(n(B.moreBtn), () => {
-            var _this$presenter19;
-            return (_this$presenter19 = this.presenter) == null ? void 0 : _this$presenter19.tapMore();
+          const moreBtn = n(B.moreBtn);
+          onTap(moreBtn, () => {
+            var _this$presenter20;
+            return (_this$presenter20 = this.presenter) == null ? void 0 : _this$presenter20.tapMore();
           });
           const mall = n(B.mall);
           onTap(mall, () => {
-            var _this$presenter20;
-            return (_this$presenter20 = this.presenter) == null ? void 0 : _this$presenter20.tap('mall');
+            var _this$presenter21;
+            return (_this$presenter21 = this.presenter) == null ? void 0 : _this$presenter21.tap('mall');
           });
+          this.featureNodes.push({
+            key: 'mall',
+            node: mall
+          });
+          // Hang nut duoi: x goc lay mot lan tu prefab (setFeatures don lai khi co tinh nang tat).
+          this.bottomRow = [n(B.message), n(B.task), n(B.rank), n(B.friend), moreBtn, mall];
+          this.bottomSlots = this.bottomRow.map(b => b.position.x);
+          this.layoutBottomRow();
           void a.gaf(mall, PlatformRes.Hall_bottom_mallAnim, {
             x: 0,
             y: 0
@@ -46515,8 +49066,8 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
             woman: f.face
           };
           onTap(album, () => {
-            var _this$presenter21;
-            return (_this$presenter21 = this.presenter) == null ? void 0 : _this$presenter21.tap('avatar');
+            var _this$presenter22;
+            return (_this$presenter22 = this.presenter) == null ? void 0 : _this$presenter22.tap('avatar');
           });
           // Spec D4c §3.3: khung VIP thay khung thuong, an toi khi renderVipAvatar.
           this.albumSide = n(B.albumSide);
@@ -46525,19 +49076,24 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           this.albumSide.active = true;
           this.nameLabel = bind(v, B.name, Label, P);
           this.chipLabel = bind(v, B.chipText, Label, P);
-          onTap(n(B.chipAdd), () => {
-            var _this$presenter22;
-            return (_this$presenter22 = this.presenter) == null ? void 0 : _this$presenter22.tap('chipAdd');
+          const chipAdd = n(B.chipAdd);
+          onTap(chipAdd, () => {
+            var _this$presenter23;
+            return (_this$presenter23 = this.presenter) == null ? void 0 : _this$presenter23.tap('chipAdd');
+          });
+          this.featureNodes.push({
+            key: 'mall',
+            node: chipAdd
           });
 
           // Menu More (HBC:160-196)
           onTap(n(B.moreFeedback), () => {
-            var _this$presenter23;
-            return (_this$presenter23 = this.presenter) == null ? void 0 : _this$presenter23.tap('moreFeedback');
+            var _this$presenter24;
+            return (_this$presenter24 = this.presenter) == null ? void 0 : _this$presenter24.tap('moreFeedback');
           });
           onTap(n(B.moreSetting), () => {
-            var _this$presenter24;
-            return (_this$presenter24 = this.presenter) == null ? void 0 : _this$presenter24.tapMoreSetting();
+            var _this$presenter25;
+            return (_this$presenter25 = this.presenter) == null ? void 0 : _this$presenter25.tapMoreSetting();
           });
           const more = n(B.more);
           more.active = false;
@@ -47221,6 +49777,10 @@ System.register("chunks:///_virtual/homeBinding.ts", ['cc', './appContext.ts'], 
             const a = getApp();
             a.home = h;
             a.homeAt = nowMs();
+            // Spec B13-B15 §4.2: server cu khong tra features -> giu co hien tai.
+            if (h.features !== null) a.features = {
+              ...h.features
+            };
           }
         });
       }
@@ -47229,8 +49789,8 @@ System.register("chunks:///_virtual/homeBinding.ts", ['cc', './appContext.ts'], 
   };
 });
 
-System.register("chunks:///_virtual/homeState.ts", ['cc', './parse.ts', './vip2.ts'], function (exports) {
-  var cclegacy, DEFAULT_BANKRUPT, parseVipBrief;
+System.register("chunks:///_virtual/homeState.ts", ['cc', './parse.ts', './vip2.ts', './appConfig.ts'], function (exports) {
+  var cclegacy, DEFAULT_BANKRUPT, parseVipBrief, parseFeatures;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -47238,6 +49798,8 @@ System.register("chunks:///_virtual/homeState.ts", ['cc', './parse.ts', './vip2.
       DEFAULT_BANKRUPT = module.DEFAULT_BANKRUPT;
     }, function (module) {
       parseVipBrief = module.parseVipBrief;
+    }, function (module) {
+      parseFeatures = module.parseFeatures;
     }],
     execute: function () {
       exports({
@@ -47269,7 +49831,8 @@ System.register("chunks:///_virtual/homeState.ts", ['cc', './parse.ts', './vip2.
         wheel: false,
         messageNews: false,
         messageNotice: false,
-        friend: false
+        friend: false,
+        event: false
       });
       /** Spec A3 §3.1: saleType 1 = moi goi First charge truoc BkPopup; 0 = khong goi nao. */
       const SALE_FC = exports('SALE_FC', 1);
@@ -47305,7 +49868,8 @@ System.register("chunks:///_virtual/homeState.ts", ['cc', './parse.ts', './vip2.
           wheel: bool(o.wheel, false),
           messageNews: bool(o.messageNews, false),
           messageNotice: bool(o.messageNotice, false),
-          friend: bool(o.friend, false)
+          friend: bool(o.friend, false),
+          event: bool(o.event, false)
         };
       }
 
@@ -47386,7 +49950,10 @@ System.register("chunks:///_virtual/homeState.ts", ['cc', './parse.ts', './vip2.
           bankrupt: parseBankrupt(o.bankrupt),
           newbie: parseNewbie(o.newbie),
           vip: parseVipBrief(o.vip),
-          firstCharge: parseFirstCharge(o.firstCharge)
+          firstCharge: parseFirstCharge(o.firstCharge),
+          features: isObj(o.features) ? parseFeatures(o.features) : null,
+          eventCount: num(o.eventCount, 0),
+          eventNextAt: num(o.eventNextAt, 0)
         };
       }
 
@@ -47419,11 +49986,13 @@ System.register("chunks:///_virtual/homeState.ts", ['cc', './parse.ts', './vip2.
   };
 });
 
-System.register("chunks:///_virtual/homeState2.ts", ['cc', './bankrupt.ts', './checkin.ts', './newbie.ts', './onlineBox.ts', './payFlags.ts'], function (exports) {
-  var cclegacy, bankruptState, checkinState, newbieState, onlineState, onlineReady, firstChargeOffer;
+System.register("chunks:///_virtual/homeState2.ts", ['cc', './appConfig3.ts', './bankrupt.ts', './checkin.ts', './newbie.ts', './onlineBox.ts', './payFlags.ts'], function (exports) {
+  var cclegacy, APP_CONFIG_DEFAULT, bankruptState, checkinState, newbieState, onlineState, onlineReady, firstChargeOffer;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
+    }, function (module) {
+      APP_CONFIG_DEFAULT = module.APP_CONFIG_DEFAULT;
     }, function (module) {
       bankruptState = module.bankruptState;
     }, function (module) {
@@ -47439,12 +50008,20 @@ System.register("chunks:///_virtual/homeState2.ts", ['cc', './bankrupt.ts', './c
     execute: function () {
       exports('buildHomeState', buildHomeState);
       cclegacy._RF.push({}, "c17a1Gl5TlAI6zOtFo3dp52", "homeState", undefined);
+      function copyFeatures(f) {
+        const out = {};
+        for (const k in f) {
+          out[k] = f[k];
+        }
+        return out;
+      }
       /**
        * `rec` đã qua ensureOnlineDay (rpcHomeState). `gold` = ví Gold (spec D2), thiếu thì 0. `vip` thiếu = chưa VIP.
        * `inbox` (spec E1 §2.5) thiếu = không chấm hộp thư; `inbox.friend` (spec E2 §2.8) thiếu = không chấm Friend.
        * `fcEligible` (spec A3 §3.1) thiếu = không mời First charge (saleType 0, firstCharge.eligible false).
+       * `features` (spec B13–B15 §3) thiếu = mặc định (bật hết).
        */
-      function buildHomeState(rec, chip, nowMs, gold, dots, vip, inbox, fcEligible) {
+      function buildHomeState(rec, chip, nowMs, gold, dots, vip, inbox, fcEligible, features, ev) {
         const checkin = checkinState(rec, nowMs);
         const newbie = newbieState(rec, nowMs);
         const online = onlineState(rec, nowMs);
@@ -47472,7 +50049,8 @@ System.register("chunks:///_virtual/homeState2.ts", ['cc', './bankrupt.ts', './c
             wheel: dots ? dots.wheel : false,
             messageNews: inbox ? inbox.news : false,
             messageNotice: inbox ? inbox.notice : false,
-            friend: inbox ? inbox.friend === true : false
+            friend: inbox ? inbox.friend === true : false,
+            event: ev ? ev.event : false
           },
           onlineBox: online,
           bankrupt: bankruptState(rec, chip, nowMs, fcEligible === true),
@@ -47484,7 +50062,10 @@ System.register("chunks:///_virtual/homeState2.ts", ['cc', './bankrupt.ts', './c
             level: 0,
             invalid: -1
           },
-          firstCharge: firstChargeOffer(fcEligible === true)
+          firstCharge: firstChargeOffer(fcEligible === true),
+          features: features ? features : copyFeatures(APP_CONFIG_DEFAULT.features),
+          eventCount: ev ? ev.eventCount : 0,
+          eventNextAt: ev ? ev.eventNextAt : 0
         };
       }
       cclegacy._RF.pop();
@@ -47616,10 +50197,12 @@ System.register("chunks:///_virtual/inbox.ts", ['cc', './social.ts', './atomic.t
       const INBOX_COLLECTION = exports('INBOX_COLLECTION', 'platform');
       const INBOX_KEY = exports('INBOX_KEY', 'inbox');
 
-      /** Spec E2: 'friend' (dòng Noticias quà bạn / đã thành bạn), 'invite' (quà mã mời). */
+      /** Spec E2: 'friend' (dòng Noticias quà bạn / đã thành bạn), 'invite' (quà mã mời). P4: 'win' (nhật ký thắng). */
 
       const INBOX_TABS = exports('INBOX_TABS', ['news', 'notice']);
-      const KINDS = ['welcome', 'system', 'level', 'dev', 'friend', 'invite'];
+      const KINDS = ['welcome', 'system', 'level', 'dev', 'friend', 'invite', 'win'];
+
+      /** P4: số liệu của dòng nhật ký thắng (client dựng chữ theo ngôn ngữ; `text` là bản dự phòng). */
 
       /** Tin mới để gửi (sendInbox / pushItem). */
 
@@ -47639,6 +50222,17 @@ System.register("chunks:///_virtual/inbox.ts", ['cc', './social.ts', './atomic.t
           en: typeof o.en === 'string' ? o.en : '',
           es_mx: typeof o.es_mx === 'string' ? o.es_mx : ''
         };
+      }
+
+      /** WinInfo hợp lệ (chip > 0, game là chuỗi khác rỗng) hoặc null. */
+      function winOrNull(raw) {
+        const o = obj(raw);
+        const chip = count(o.chip);
+        return chip > 0 && typeof o.game === 'string' && o.game !== '' ? {
+          chip: chip,
+          game: o.game,
+          level: count(o.level)
+        } : null;
       }
 
       /** Quà đủ ba trường, số nguyên dương; rỗng (không chip, không Gold, không đạo cụ) -> null. */
@@ -47677,6 +50271,13 @@ System.register("chunks:///_virtual/inbox.ts", ['cc', './social.ts', './atomic.t
           };
           if (item.status === 2 && typeof it.claimedAt === 'number') {
             item.claimedAt = count(it.claimedAt);
+          }
+          if (typeof it.ref === 'string' && it.ref !== '') {
+            item.ref = it.ref;
+          }
+          const win = winOrNull(it.win);
+          if (win !== null) {
+            item.win = win;
           }
           items.push(item);
         }
@@ -47719,23 +50320,29 @@ System.register("chunks:///_virtual/inbox.ts", ['cc', './social.ts', './atomic.t
           permissionWrite: 0
         };
       }
-      function countTab(items, tab) {
+
+      /** Nhóm cắt riêng: news thường, news nhật ký thắng (P4, trần riêng), notice. */
+
+      function groupOf(it) {
+        return it.tab === 'notice' ? 'notice' : it.kind === 'win' ? 'win' : 'news';
+      }
+      function countGroup(items, g) {
         let n = 0;
         for (let i = 0; i < items.length; i++) {
-          if (items[i].tab === tab) {
+          if (groupOf(items[i]) === g) {
             n++;
           }
         }
         return n;
       }
 
-      /** Bỏ tin cũ nhất của `tab` thoả `can` cho tới khi tab còn `max` tin (hoặc hết tin bỏ được). */
-      function trimTab(rec, tab, max, can) {
-        let over = countTab(rec.items, tab) - max;
+      /** Bỏ tin cũ nhất của nhóm `g` thoả `can` cho tới khi nhóm còn `max` tin (hoặc hết tin bỏ được). */
+      function trimTab(rec, g, max, can) {
+        let over = countGroup(rec.items, g) - max;
         const kept = [];
         for (let i = 0; i < rec.items.length; i++) {
           const it = rec.items[i];
-          if (over > 0 && it.tab === tab && can(it)) {
+          if (over > 0 && groupOf(it) === g && can(it)) {
             over--;
             continue;
           }
@@ -47745,7 +50352,8 @@ System.register("chunks:///_virtual/inbox.ts", ['cc', './social.ts', './atomic.t
       }
 
       /**
-       * Thêm tin (id = 'm' + seq, giờ = nowMs) rồi cắt: news giữ INBOX.maxNews tin mới nhất; notice giữ
+       * Thêm tin (id = 'm' + seq, giờ = nowMs) rồi cắt: news giữ INBOX.maxNews tin mới nhất (không tính dòng
+       * thắng: kind 'win' giữ INBOX.maxWinLog dòng mới nhất, P4); notice giữ
        * maxNotice nhưng KHÔNG bỏ tin còn quà chưa nhận; tổng vượt hardMax thì bỏ tin cũ nhất bất kể (đếm quà mất).
        */
       function pushItem(rec, msg, nowMs) {
@@ -47763,8 +50371,21 @@ System.register("chunks:///_virtual/inbox.ts", ['cc', './social.ts', './atomic.t
           reward: reward,
           status: reward === null ? 0 : 1
         };
+        if (msg.ref !== undefined && msg.ref !== '') {
+          item.ref = msg.ref;
+        }
+        if (msg.win !== undefined) {
+          item.win = {
+            chip: msg.win.chip,
+            game: msg.win.game,
+            level: msg.win.level
+          };
+        }
         rec.items.push(item);
         trimTab(rec, 'news', INBOX.maxNews, function () {
+          return true;
+        });
+        trimTab(rec, 'win', INBOX.maxWinLog, function () {
           return true;
         });
         trimTab(rec, 'notice', INBOX.maxNotice, function (it) {
@@ -47899,6 +50520,9 @@ System.register("chunks:///_virtual/inbox2.ts", ['cc', './homeState.ts', './cata
       const INBOX_TABS = exports('INBOX_TABS', ['news', 'notice']);
       /** Phut lech UTC cua gio nen tang (backend DAY_TZ_OFFSET_MIN). */
       const PLATFORM_TZ_OFFSET_MIN = exports('PLATFORM_TZ_OFFSET_MIN', -360);
+
+      /** P4: so lieu dong nhat ky thang (kind 'win'); client dung chu theo ngon ngu, text server la du phong. */
+
       const NO_INBOX_DOTS = exports('NO_INBOX_DOTS', {
         news: false,
         notice: false
@@ -47922,7 +50546,7 @@ System.register("chunks:///_virtual/inbox2.ts", ['cc', './homeState.ts', './cata
         const t = isObj(raw.text) ? raw.text : {};
         const reward = rewardOf(raw.reward);
         const status = reward === null ? 0 : raw.status === 2 ? 2 : 1;
-        return {
+        const item = {
           id: raw.id,
           time: count(raw.time),
           text: {
@@ -47931,6 +50555,19 @@ System.register("chunks:///_virtual/inbox2.ts", ['cc', './homeState.ts', './cata
           },
           reward,
           status
+        };
+        const win = raw.kind === 'win' ? winOf(raw.win) : null;
+        if (win !== null) item.win = win;
+        return item;
+      }
+
+      /** win hop le: chip > 0 va game khac rong; con lai null. */
+      function winOf(raw) {
+        if (!isObj(raw) || count(raw.chip) === 0 || str(raw.game) === '') return null;
+        return {
+          chip: count(raw.chip),
+          game: str(raw.game),
+          level: count(raw.level)
         };
       }
       function parseInboxList(raw, tab) {
@@ -49290,6 +51927,11 @@ System.register("chunks:///_virtual/LobbyLayer.ts", ['cc', './lobbyTest.ts', './
           const ui = this.ui;
           if (gen !== this.gen || ui === null || !ui.root.isValid) return;
           void this.setTitle(gameId, gen);
+          // Spec B13-B15 §4.2: co tinh nang tai thoi diem mo Lobby.
+          const ft = this.h.app.features;
+          ui.piggy.active = ft.piggy;
+          ui.chipAdd.active = ft.mall;
+          ui.goldAdd.active = ft.mall;
           ui.root.active = true;
           Tween.stopAllByTarget(ui.opacity);
           Tween.stopAllByTarget(ui.quick);
@@ -49827,15 +52469,15 @@ System.register("chunks:///_virtual/LobbyLayer.ts", ['cc', './lobbyTest.ts', './
           });
           const name = bind(v, B.name, Label, P);
           const chip = bind(v, B.chipText, Label, P);
-          onTap(n(B.chipAdd), () => {
+          const chipAdd = onTap(n(B.chipAdd), () => {
             var _this$presenter15;
             return (_this$presenter15 = this.presenter) == null ? void 0 : _this$presenter15.tapChipAdd();
-          });
+          }).node;
           const gold = bind(v, B.goldText, Label, P);
-          onTap(n(B.goldAdd), () => {
+          const goldAdd = onTap(n(B.goldAdd), () => {
             var _this$presenter16;
             return (_this$presenter16 = this.presenter) == null ? void 0 : _this$presenter16.tapGoldAdd();
-          });
+          }).node;
 
           // Quick Start GAF (GLV:552-558): prefab dat o vi tri hien, Widget da can theo day man.
           const quick = n(B.quickStart);
@@ -49883,6 +52525,9 @@ System.register("chunks:///_virtual/LobbyLayer.ts", ['cc', './lobbyTest.ts', './
             titleRoot,
             tag: f.tag,
             piggyDot,
+            piggy,
+            chipAdd,
+            goldAdd,
             seatTabs,
             frames: f
           };
@@ -50557,7 +53202,7 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
             if (blocked !== null) {
               this.setBusy(false);
               const f = lobbyFailOf(asGatewayError(e, 'rpc'));
-              if (f === 'network') this.view.toast(this.t('netError'));else if (f === 'chip_locked') this.view.toast(chipLockedText(this.d.app.lang));else this.block(blocked);
+              if (f === 'network') this.view.toast(this.t('netError'));else if (f === 'chip_locked') this.view.toast(chipLockedText(this.d.app.lang));else if (f === 'maintenance') this.view.toast(this.t('gameMaintain'));else this.block(blocked);
               return;
             }
             // Giu khoa toi khi tai lai xong, tranh quick_play thu hai.
@@ -50586,6 +53231,11 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
           // G2 §3.5: chip dang khoa o ban Burro -> bao ro, khong tai lai (vi chi con phan vuot, popup thieu tien sai).
           if (f === 'chip_locked') {
             this.view.toast(chipLockedText(this.d.app.lang));
+            return;
+          }
+          // Spec B13-B15 §4.3: server dang bao tri -> toast GAME_MAINTAIN, khong tai lai.
+          if (f === 'maintenance') {
+            this.view.toast(this.t('gameMaintain'));
             return;
           }
           if (!(await this.reload())) return;
@@ -51606,6 +54256,9 @@ System.register("chunks:///_virtual/localNakama.ts", ['cc', './economy2.ts', './
         leaderboardRecordWrite() {
           throw new Error('local: leaderboardRecordWrite khong ho tro');
         }
+        purchaseValidateGoogle() {
+          throw new Error('local: purchaseValidateGoogle khong ho tro');
+        }
         uuidv4() {
           this.uuidSeq++;
           return 'local-' + this.uuidSeq;
@@ -51982,8 +54635,8 @@ System.register("chunks:///_virtual/loginLayout.ts", ['cc'], function (exports) 
   };
 });
 
-System.register("chunks:///_virtual/loginPresenter.ts", ['cc', './appContext.ts', './gameRegistry.ts', './platformErrors.ts', './release.ts', './platformText.ts'], function (exports) {
-  var cclegacy, writeLang, playableGames, getGame, asGatewayError, storageKey, platformText;
+System.register("chunks:///_virtual/loginPresenter.ts", ['cc', './appContext.ts', './gameRegistry.ts', './platformErrors.ts', './release.ts', './platformText.ts', './appConfig.ts'], function (exports) {
+  var cclegacy, writeLang, playableGames, getGame, asGatewayError, storageKey, platformText, ALL_FEATURES, loginGate, markUpdateAsked;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -51998,6 +54651,10 @@ System.register("chunks:///_virtual/loginPresenter.ts", ['cc', './appContext.ts'
       storageKey = module.storageKey;
     }, function (module) {
       platformText = module.platformText;
+    }, function (module) {
+      ALL_FEATURES = module.ALL_FEATURES;
+      loginGate = module.loginGate;
+      markUpdateAsked = module.markUpdateAsked;
     }],
     execute: function () {
       exports({
@@ -52005,6 +54662,7 @@ System.register("chunks:///_virtual/loginPresenter.ts", ['cc', './appContext.ts'
         readAgreed: readAgreed
       });
       cclegacy._RF.push({}, "d8922PKqoBGLIfjnB7qoX7z", "loginPresenter", undefined); // assets/scripts/core/presenter/platform/loginPresenter.ts
+
       /** Nho tick dieu khoan (APK GameState "Privacy_status", LV:1150-1155). */
       const AGREED_KEY = exports('AGREED_KEY', storageKey('agreed'));
       /** Bam dong version 5 lan mo popup chon server (spec C1 M2). */
@@ -52129,6 +54787,13 @@ System.register("chunks:///_virtual/loginPresenter.ts", ['cc', './appContext.ts'
 
         /** Spec P0 §5 buoc 1: ho so + danh sach game song song, roi bang muc tung game choi duoc. */
         async afterLogin() {
+          if (!(await this.gate())) {
+            if (!this.disposed) this.update({
+              busy: false
+            });
+            return;
+          }
+          if (this.disposed) return;
           try {
             const s = this.d.session;
             const [profile, serverGames] = await Promise.all([s.fetchProfile(), s.fetchGames()]);
@@ -52162,6 +54827,67 @@ System.register("chunks:///_virtual/loginPresenter.ts", ['cc', './appContext.ts'
             });
           }
         }
+
+        /**
+         * Spec B13-B15 §4.1: app_config truoc Hall. Bao tri -> NoticePopup, o lai Login; bat buoc -> UpdateWindow
+         * khong dong duoc; tuy chon (moi latestNative mot lan moi ngay) -> UpdateWindow, dong thi di tiep;
+         * loi RPC -> bo qua, co tinh nang bat het. false = dung o Login.
+         */
+        async gate() {
+          const native = this.d.nativeVersion ?? null;
+          let cfg = null;
+          try {
+            cfg = await this.d.session.appConfig(native);
+          } catch (e) {
+            var _this$d$log3;
+            (_this$d$log3 = this.d.log) == null || _this$d$log3.warn('app_config hong, bo qua: ' + asGatewayError(e, 'rpc').detail);
+          }
+          if (this.disposed) return false;
+          this.d.app.features = cfg !== null ? {
+            ...cfg.features
+          } : {
+            ...ALL_FEATURES
+          };
+          const now = this.d.nowMs !== undefined ? this.d.nowMs() : Date.now();
+          const g = loginGate(cfg, {
+            lang: this.s.lang,
+            hasNative: native !== null,
+            store: this.d.store,
+            nowMs: now
+          });
+          if (g.kind === 'enter') return true;
+          if (g.kind === 'maintenance') {
+            this.view.showNotice(g.text);
+            return false;
+          }
+          const url = g.url;
+          if (g.kind === 'force') {
+            this.view.showUpdate({
+              force: true,
+              text: g.text
+            }, {
+              update: () => this.view.openUrl(url),
+              later: () => undefined
+            });
+            return false;
+          }
+          markUpdateAsked(this.d.store, g.askKey, now);
+          await new Promise(resolve => {
+            let done = false;
+            this.view.showUpdate({
+              force: false,
+              text: g.text
+            }, {
+              update: () => this.view.openUrl(url),
+              later: () => {
+                if (done) return;
+                done = true;
+                resolve();
+              }
+            });
+          });
+          return !this.disposed;
+        }
         errorText(e) {
           return this.t(e.reason === 'network' ? 'netError' : 'loginFailed');
         }
@@ -52186,8 +54912,8 @@ System.register("chunks:///_virtual/loginPresenter.ts", ['cc', './appContext.ts'
   };
 });
 
-System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts', './loginLayout.ts', './platformBindings.ts', './platformScreen.ts', './gameRegistry.ts', './loginPresenter.ts', './platformText.ts', './apkRes.ts', './platformAssets.ts', './navigation.ts', './SceneCover2.ts', './platformBoot.ts', './applyLang.ts', './applySafeEdges.ts', './logger.ts', './Toast.ts', './uiKit.ts', './viewBind.ts'], function (exports) {
-  var cclegacy, Component, sys, view, Sprite, Label, tween, UITransform, _decorator, readLang, getApp, PRIVACY_GAP, LOGIN_BINDINGS, DESIGN, listGames, LoginPresenter, platformText, PlatformRes, PlatformAssets, toLogin, toHall, holdSceneCover, releaseAfter, cancelSceneCover, ensureSession, screenOf, switchServer, applyLangPos, applyLangSprites, applySafeEdges, ConsoleLogger, Toast, label, errorRetry, child, dim, onTap, coverNode, loadPrefabView, bind, bindNode;
+System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts', './loginLayout.ts', './platformBindings.ts', './platformScreen.ts', './gameRegistry.ts', './loginPresenter.ts', './platformText.ts', './apkRes.ts', './platformAssets.ts', './navigation.ts', './SceneCover2.ts', './platformBoot.ts', './applyLang.ts', './applySafeEdges.ts', './logger.ts', './Toast.ts', './PopupLayer.ts', './UpdateWindow.ts', './uiKit.ts', './viewBind.ts'], function (exports) {
+  var cclegacy, Component, sys, view, Sprite, Label, tween, UITransform, _decorator, readLang, getNativeVersion, getApp, PRIVACY_GAP, LOGIN_BINDINGS, DESIGN, listGames, LoginPresenter, platformText, PlatformRes, PlatformAssets, toLogin, toHall, holdSceneCover, releaseAfter, cancelSceneCover, ensureSession, screenOf, switchServer, applyLangPos, applyLangSprites, applySafeEdges, ConsoleLogger, Toast, PopupLayer, openNoticePopup, openUpdateWindow, label, errorRetry, child, dim, onTap, coverNode, loadPrefabView, bind, bindNode;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -52201,6 +54927,7 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
       _decorator = module._decorator;
     }, function (module) {
       readLang = module.readLang;
+      getNativeVersion = module.getNativeVersion;
       getApp = module.getApp;
     }, function (module) {
       PRIVACY_GAP = module.PRIVACY_GAP;
@@ -52239,6 +54966,11 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
     }, function (module) {
       Toast = module.Toast;
     }, function (module) {
+      PopupLayer = module.PopupLayer;
+    }, function (module) {
+      openNoticePopup = module.openNoticePopup;
+      openUpdateWindow = module.openUpdateWindow;
+    }, function (module) {
       label = module.label;
       errorRetry = module.errorRetry;
       child = module.child;
@@ -52263,7 +54995,11 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
         radioOff: PlatformRes.Common_single_switch_radio_btn_unselect,
         checkOn: PlatformRes.Login_checkBtn_on,
         checkOff: PlatformRes.Login_checkBtn_off,
-        toastBg: PlatformRes.Common_top_tip_bg
+        toastBg: PlatformRes.Common_top_tip_bg,
+        // Spec B13-B15: NoticePopup / UpdateWindow (SimplePopup)
+        popupBg: PlatformRes.Common_panelSmallBg,
+        popupClose: PlatformRes.Common_closeBtn,
+        popupBtn: PlatformRes.Common_btn_1_mid
       };
       const PRIVACY_KEYS = ['privacy1', 'privacy2', 'privacy3', 'privacy4', 'privacy5'];
       const PREFAB = 'LoginView';
@@ -52282,6 +55018,9 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
           this.picker = null;
           /** Nen phu man: phong lai moi lan canvas-resize. */
           this.bg = null;
+          /** Spec B13-B15: lop popup cho NoticePopup / UpdateWindow (public cho CDP). */
+          this.popups = null;
+          this.popupFrames = null;
         }
         onLoad() {
           // Man che chuyen scene (toLogin) giu toi khi man Login ve xong lan dau, thay vi Canvas den luc nap asset.
@@ -52324,6 +55063,12 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
           }
           if (!this.isValid) return;
           this.ui = ui;
+          this.popups = new PopupLayer(this.node, this.screen);
+          this.popupFrames = {
+            bg: f.popupBg,
+            close: f.popupClose,
+            btn: f.popupBtn
+          };
           this.toastView = new Toast(this.node, f.toastBg, this.screen);
           this.presenter = new LoginPresenter(this, {
             session: boot.session,
@@ -52332,7 +55077,8 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
             dev: boot.dev,
             version: boot.version,
             clientGames: listGames().map(m => m.gameId),
-            log: new ConsoleLogger('[conquian] login')
+            log: new ConsoleLogger('[conquian] login'),
+            nativeVersion: getNativeVersion()
           });
           void this.presenter.start();
         }
@@ -52369,6 +55115,25 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
           if (this.toastView !== null) this.toastView.show(text);
         }
 
+        /** Spec B14: NoticePopup bao tri; khong dung duoc popup thi toast. */
+        showNotice(text) {
+          if (this.popups === null || this.popupFrames === null || !openNoticePopup(this.popups, this.popupFrames, getApp().lang, text)) this.toast(text);
+        }
+
+        /** Spec B13: UpdateWindow; da mo (bat buoc) thi giu cua so cu, tuy chon mo khong duoc thi di tiep. */
+        showUpdate(u, a) {
+          const ok = this.popups !== null && this.popupFrames !== null && openUpdateWindow(this.popups, this.popupFrames, getApp().lang, {
+            force: u.force,
+            text: u.text,
+            onUpdate: () => a.update(),
+            onLater: () => a.later()
+          });
+          if (!ok && !u.force) a.later();
+        }
+        openUrl(url) {
+          sys.openURL(url);
+        }
+
         /** Thay ServerSetPopup cua APK (M2): ban dev bam version 5 lan. */
         showServerPicker(names, current) {
           if (this.picker !== null && this.picker.isValid) this.picker.destroy();
@@ -52393,6 +55158,7 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
         onResize() {
           this.screen = screenOf();
           if (this.bg !== null && this.bg.isValid) coverNode(this.bg, this.screen);
+          if (this.popups !== null) this.popups.resize(this.screen);
           applySafeEdges(this.node);
         }
         goHall() {
@@ -52504,9 +55270,9 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
   };
 });
 
-System.register("chunks:///_virtual/main", ['./appContext.ts', './homeBinding.ts', './launchRequest.ts', './lobbyTest.ts', './release.ts', './buildGameContainer.ts', './container.ts', './token.ts', './tokens.ts', './errors.ts', './logger.ts', './action.ts', './actionBuilder.ts', './cutAction.ts', './dumpAction.ts', './flipAction.ts', './forceAction.ts', './index.ts', './meldAction.ts', './passAction.ts', './swapAction.ts', './card2.ts', './cardGroup2.ts', './debug.ts', './gameConstants.ts', './gameHelper2.ts', './actionErrorData.ts', './autoStartData.ts', './chatEntry.ts', './cheatData.ts', './endGameData.ts', './endRoundData.ts', './forceInfo.ts', './gameStateData.ts', './index3.ts', './invitePlayerData.ts', './nocData.ts', './playerData.ts', './playerEngGameInfo.ts', './playerMoneyData.ts', './playerOutData.ts', './playerReadyData.ts', './playerRegisterOutData.ts', './playerResultRegOutData.ts', './playerRobotData.ts', './playerWinMoneyData.ts', './requestTopupMoneyData.ts', './responseInvitePlayerData.ts', './responseInvitePlayersData.ts', './responseTopupMoneyData.ts', './roomGameData.ts', './startGameData.ts', './swapResultData.ts', './userChat.ts', './userMessage.ts', './userMoneyTopupData.ts', './userThrowChat.ts', './playerRef.ts', './validCardGroup2.ts', './botDriver.ts', './clock2.ts', './colyseusErrors.ts', './colyseusJsGateway.ts', './colyseusLib.ts', './httpJson.ts', './localTransport.ts', './localMatchDispatcher.ts', './localNakama.ts', './nkLogger.ts', './deviceId.ts', './gateway.ts', './gatewayErrors.ts', './nakamaJsGateway.ts', './nakamaTransport.ts', './parseServerConfig.ts', './serverConfig.ts', './utf8.ts', './wireDecoder.ts', './wireEncoder.ts', './platformTap.ts', './serverEvents.ts', './transport.ts', './requestActionData.ts', './constants.ts', './types3.ts', './backoff.ts', './decide.ts', './manifestRewrite.ts', './md5.ts', './otaConfig.ts', './otaFlow.ts', './pointer.ts', './version.ts', './ad.ts', './video.ts', './createSessionGateway.ts', './gameModule.ts', './gameRegistry.ts', './matchSocket.ts', './roundHook.ts', './stateSnapshot.ts', './tableNav.ts', './tableReconnect.ts', './homeState.ts', './platformEvents.ts', './index2.ts', './parse.ts', './platformErrors.ts', './platformSession.ts', './platformText.ts', './serverPick.ts', './sessionGateway.ts', './sessionGuard.ts', './catalog2.ts', './payment2.ts', './slotProtocol.ts', './friends.ts', './inbox2.ts', './invite.ts', './marquee2.ts', './profile2.ts', './rank.ts', './tableInvite.ts', './chatMute.ts', './seatBubbles.ts', './tableChannel.ts', './tableSocial.ts', './tableSocialGames.ts', './tasks2.ts', './types.ts', './vip2.ts', './vipText.ts', './wheel2.ts', './actionAvailability.ts', './affine.ts', './animCatalogue.ts', './apkRhythm.ts', './bezier.ts', './catchUp.ts', './coinPlan.ts', './dealSchedule.ts', './gafJson.ts', './gafTimeline.ts', './jumpPlan.ts', './rng.ts', './skew.ts', './soundPolicy.ts', './tableRhythm.ts', './apkButtons.ts', './apkClock.ts', './apkFormat.ts', './endPanel.ts', './format.ts', './gameTablePresenter.ts', './apkSort.ts', './dragGesture.ts', './dropIndex.ts', './apkLayout.ts', './apkScreen.ts', './friendLayout.ts', './hallLayout.ts', './lobbyLayout.ts', './loginLayout.ts', './nodePath.ts', './platformBindings.ts', './platformScreen.ts', './popupLayout.ts', './shopLayout.ts', './socialLayout.ts', './tableLayout.ts', './tableSocialLayout.ts', './taskLayout.ts', './vipLayout.ts', './wheelLayout.ts', './bankruptFlow.ts', './broadPresenter.ts', './checkinPresenter.ts', './exitGamePresenter.ts', './firstChargeSale.ts', './freeCoinPresenter.ts', './friendPresenter.ts', './getRewardPresenter.ts', './hallPresenter.ts', './inviteHubPresenter.ts', './lobbyPresenter.ts', './loginPresenter.ts', './mallPresenter.ts', './marqueePresenter.ts', './messagePresenter.ts', './newbiePresenter.ts', './onlineBoxPresenter.ts', './piggyPresenter.ts', './popupQueue.ts', './popupStack.ts', './propBagPresenter.ts', './rankPresenter.ts', './rewardFx.ts', './rewardText.ts', './sceneCover.ts', './settingPresenter.ts', './shopText.ts', './socialText.ts', './tableBankrupt.ts', './tableInvitePresenter.ts', './tablePlatformPresenter.ts', './tableSocialPresenter.ts', './taskPresenter.ts', './userDetailPresenter.ts', './userInfoPresenter.ts', './videoPresenter.ts', './vipPresenter.ts', './wheelPresenter.ts', './seat.ts', './settlement.ts', './tableHints.ts', './tableMarks.ts', './tableText.ts', './topTip.ts', './views.ts', './apkAudio.ts', './apkCard.ts', './apkRes.ts', './apkResTypes.ts', './burroRes.ts', './escobaRes.ts', './langPath.ts', './platformAudio.ts', './platformExtraRes.ts', './shopRes.ts', './slot25Res.ts', './tableSocialRes.ts', './texasRes.ts', './catalog.ts', './economy.ts', './piggy.ts', './social.ts', './tasks.ts', './vip3.ts', './wheel.ts', './constants2.ts', './config.ts', './botBrain.ts', './botMemory.ts', './card.ts', './cardGroup.ts', './gameHelper.ts', './gameMgr.ts', './player.ts', './validCardGroup.ts', './conquianMatch.ts', './dispatcher.ts', './env.ts', './atomic.ts', './bankrupt.ts', './botRegistry.ts', './checkin.ts', './chipLock.ts', './clock.ts', './day.ts', './economy2.ts', './friends2.ts', './heldTable.ts', './homeState2.ts', './inbox.ts', './levels.ts', './marquee.ts', './newbie.ts', './onlineBox.ts', './orders.ts', './payFlags.ts', './payment.ts', './piggy2.ts', './presence.ts', './props.ts', './rank2.ts', './receipts.ts', './rewardsRpc.ts', './rewardsStore.ts', './rounds.ts', './rpcArgs.ts', './seatMoney.ts', './shop.ts', './shopRpc.ts', './socialHome.ts', './tableInvite2.ts', './tableSocial2.ts', './tableSocialMatch.ts', './taskDots.ts', './tasks3.ts', './vip.ts', './wallet.ts', './wheelStore.ts', './types2.ts', './profile.ts', './apply.ts', './gameStore.ts', './builtin.ts', './burroHand.ts', './burroLayout.ts', './burroProtocol.ts', './burroRules.ts', './burroState.ts', './burroTablePresenter.ts', './burroText.ts', './burroTimeline.ts', './module4.ts', './module2.ts', './demoProtocol.ts', './demoTablePresenter.ts', './module.ts', './escobaHandHit.ts', './escobaLayout.ts', './escobaProtocol.ts', './escobaRules.ts', './escobaSelection.ts', './escobaState.ts', './escobaTablePresenter.ts', './escobaText.ts', './escobaTimeline.ts', './module3.ts', './module6.ts', './slot25Layout.ts', './slot25Presenter.ts', './slot25Rules.ts', './slot25Text.ts', './slot25Timeline.ts', './module5.ts', './texasActions.ts', './texasLayout.ts', './texasProtocol.ts', './texasRules.ts', './texasState.ts', './texasTablePresenter.ts', './texasText.ts', './texasTimeline.ts', './ActionBar.ts', './CardView.ts', './CornerButtons.ts', './CountdownView.ts', './DealFlyLayer.ts', './EndGamePanel.ts', './GameSceneRoot.ts', './HandView.ts', './LobbyTestRoot.ts', './NocView.ts', './PlayerView.ts', './PotView.ts', './RoomInfoView.ts', './StartFxLayer.ts', './StatusView.ts', './TableView.ts', './AnimRunner.ts', './CardSkew.ts', './FlyLayer.ts', './GafPlayer.ts', './SpineFxView.ts', './canvasPoint.ts', './ApkActionBar.ts', './ApkCardView.ts', './ApkDiscardPopup.ts', './ApkGameSceneRoot.ts', './ApkHandView.ts', './ApkMeldsView.ts', './ApkNocView.ts', './ApkPitView.ts', './ApkReadyClock.ts', './ApkRulePopup.ts', './ApkSeatClock.ts', './ApkSeatsView.ts', './ApkSettlementView.ts', './ApkSound.ts', './ApkStartCountdown.ts', './ApkStartFx.ts', './ApkTableMenu.ts', './ApkTableView.ts', './ApkTopTip.ts', './apkAssets.ts', './apkContext.ts', './apkFx.ts', './apkScroll.ts', './apkSprite.ts', './gameBoot.ts', './ApkAssetGalleryRoot.ts', './BurroAssets.ts', './BurroCardView.ts', './BurroCenterView.ts', './BurroFx.ts', './BurroHandView.ts', './BurroResultPopup.ts', './BurroRulePopup.ts', './BurroSeatsView.ts', './BurroSound.ts', './BurroTableMenu.ts', './BurroTableSceneRoot.ts', './DemoTableSceneRoot.ts', './EscobaAssets.ts', './EscobaCardView.ts', './EscobaFx.ts', './EscobaHandView.ts', './EscobaPotView.ts', './EscobaRulePopup.ts', './EscobaScoreboardView.ts', './EscobaSeatsView.ts', './EscobaSound.ts', './EscobaTableGrid.ts', './EscobaTableMenu.ts', './EscobaTableSceneRoot.ts', './Slot25Assets.ts', './Slot25Bar.ts', './Slot25BonusView.ts', './Slot25Fx.ts', './Slot25Popups.ts', './Slot25ReelsView.ts', './Slot25SceneRoot.ts', './Slot25Sound.ts', './TexasAssets.ts', './TexasBottomView.ts', './TexasBuyInPopup.ts', './TexasCardView.ts', './TexasCenterView.ts', './TexasFx.ts', './TexasRaisePopup.ts', './TexasRulePopup.ts', './TexasSeatsView.ts', './TexasSound.ts', './TexasTableMenu.ts', './TexasTableSceneRoot.ts', './BootSceneRoot.ts', './jsbOtaPort.ts', './FreeCoinPanel.ts', './HallSceneRoot.ts', './LobbyLayer.ts', './LoginSceneRoot.ts', './SceneCover2.ts', './caRoots.ts', './keepScreenOn.ts', './lobbyRules.ts', './nativeWssCa.ts', './nativeXhrShim.ts', './navigation.ts', './platformAssets.ts', './platformBoot.ts', './BkPopup.ts', './BroadProp.ts', './ExitGamePopup.ts', './FCPopup.ts', './FriendPopup.ts', './GetRewardPopup.ts', './HallRankPopup.ts', './MallPopup.ts', './MessagePopup.ts', './NewInviteFriendPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './PiggyRulePopup.ts', './PropPopup.ts', './RewardVideoPopup.ts', './SettingPopup.ts', './SignPopup.ts', './TaskPopup.ts', './UserDetailPopup.ts', './UserInfoPopup.ts', './VIPInfoHelpPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './screenPolicy.ts', './tablePreload.ts', './ChatBubbleView.ts', './FaceAnimView.ts', './OnlinePopup.ts', './PropThrowView.ts', './RoomChatPopup.ts', './RoomOnlineBox.ts', './RoomUserPopup.ts', './TablePlatformRoot.ts', './TableSocialLayer.ts', './tableSocialFx.ts', './InviteBanner.ts', './LangPos.ts', './LangSprite.ts', './MarqueeBar.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SafeEdge.ts', './SimplePopup.ts', './SliceInset.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './popupKit.ts', './progressBar.ts', './scrollList.ts', './uiKit.ts', './viewBind.ts'], function () {
+System.register("chunks:///_virtual/main", ['./appContext.ts', './homeBinding.ts', './launchRequest.ts', './lobbyTest.ts', './release.ts', './buildGameContainer.ts', './container.ts', './token.ts', './tokens.ts', './errors.ts', './logger.ts', './action.ts', './actionBuilder.ts', './cutAction.ts', './dumpAction.ts', './flipAction.ts', './forceAction.ts', './index.ts', './meldAction.ts', './passAction.ts', './swapAction.ts', './card2.ts', './cardGroup2.ts', './debug.ts', './gameConstants.ts', './gameHelper2.ts', './actionErrorData.ts', './autoStartData.ts', './chatEntry.ts', './cheatData.ts', './endGameData.ts', './endRoundData.ts', './forceInfo.ts', './gameStateData.ts', './index3.ts', './invitePlayerData.ts', './nocData.ts', './playerData.ts', './playerEngGameInfo.ts', './playerMoneyData.ts', './playerOutData.ts', './playerReadyData.ts', './playerRegisterOutData.ts', './playerResultRegOutData.ts', './playerRobotData.ts', './playerWinMoneyData.ts', './requestTopupMoneyData.ts', './responseInvitePlayerData.ts', './responseInvitePlayersData.ts', './responseTopupMoneyData.ts', './roomGameData.ts', './startGameData.ts', './swapResultData.ts', './userChat.ts', './userMessage.ts', './userMoneyTopupData.ts', './userThrowChat.ts', './playerRef.ts', './validCardGroup2.ts', './botDriver.ts', './clock2.ts', './colyseusErrors.ts', './colyseusJsGateway.ts', './colyseusLib.ts', './httpJson.ts', './localMatchDispatcher.ts', './localNakama.ts', './nkLogger.ts', './localTransport.ts', './deviceId.ts', './gateway.ts', './gatewayErrors.ts', './nakamaJsGateway.ts', './nakamaTransport.ts', './parseServerConfig.ts', './serverConfig.ts', './utf8.ts', './wireDecoder.ts', './wireEncoder.ts', './platformTap.ts', './serverEvents.ts', './transport.ts', './requestActionData.ts', './constants.ts', './types3.ts', './backoff.ts', './decide.ts', './manifestRewrite.ts', './md5.ts', './otaConfig.ts', './otaFlow.ts', './pointer.ts', './version.ts', './ad.ts', './admobProvider.ts', './video.ts', './appConfig.ts', './createSessionGateway.ts', './gameModule.ts', './gameRegistry.ts', './matchSocket.ts', './roundHook.ts', './stateSnapshot.ts', './tableNav.ts', './tableReconnect.ts', './homeState.ts', './platformEvents.ts', './index2.ts', './parse.ts', './platformErrors.ts', './platformSession.ts', './platformText.ts', './serverPick.ts', './sessionGateway.ts', './sessionGuard.ts', './catalog2.ts', './fakeBilling.ts', './googlePay.ts', './payment2.ts', './storePrice.ts', './slotProtocol.ts', './events3.ts', './friends.ts', './inbox2.ts', './invite.ts', './marquee2.ts', './profile2.ts', './rank.ts', './tableInvite.ts', './chatMute.ts', './seatBubbles.ts', './tableChannel.ts', './tableSocial.ts', './tableSocialGames.ts', './tasks2.ts', './types.ts', './vip2.ts', './vipText.ts', './wheel2.ts', './actionAvailability.ts', './affine.ts', './animCatalogue.ts', './apkRhythm.ts', './bezier.ts', './catchUp.ts', './coinPlan.ts', './dealSchedule.ts', './gafJson.ts', './gafTimeline.ts', './jumpPlan.ts', './rng.ts', './skew.ts', './soundPolicy.ts', './tableRhythm.ts', './apkButtons.ts', './apkClock.ts', './apkFormat.ts', './endPanel.ts', './format.ts', './gameTablePresenter.ts', './apkSort.ts', './dragGesture.ts', './dropIndex.ts', './apkLayout.ts', './apkScreen.ts', './friendLayout.ts', './hallLayout.ts', './lobbyLayout.ts', './loginLayout.ts', './nodePath.ts', './platformBindings.ts', './platformScreen.ts', './popupLayout.ts', './shopLayout.ts', './socialLayout.ts', './tableLayout.ts', './tableSocialLayout.ts', './taskLayout.ts', './vipLayout.ts', './wheelLayout.ts', './bankruptFlow.ts', './broadPresenter.ts', './checkinPresenter.ts', './eventPresenter.ts', './exitGamePresenter.ts', './firstChargeSale.ts', './freeCoinPresenter.ts', './friendPresenter.ts', './getRewardPresenter.ts', './hallPresenter.ts', './inviteHubPresenter.ts', './lobbyPresenter.ts', './loginPresenter.ts', './mallPresenter.ts', './marqueePresenter.ts', './messagePresenter.ts', './newbiePresenter.ts', './onlineBoxPresenter.ts', './piggyPresenter.ts', './popupQueue.ts', './popupStack.ts', './propBagPresenter.ts', './rankPresenter.ts', './rewardFx.ts', './rewardText.ts', './sceneCover.ts', './settingPresenter.ts', './shopText.ts', './socialText.ts', './tableBankrupt.ts', './tableInvitePresenter.ts', './tablePlatformPresenter.ts', './tableSocialPresenter.ts', './taskPresenter.ts', './userDetailPresenter.ts', './userInfoPresenter.ts', './videoPresenter.ts', './vipPresenter.ts', './wheelPresenter.ts', './seat.ts', './settlement.ts', './tableHints.ts', './tableMarks.ts', './tableText.ts', './topTip.ts', './views.ts', './apkAudio.ts', './apkCard.ts', './apkRes.ts', './apkResTypes.ts', './burroRes.ts', './escobaRes.ts', './eventArt.ts', './langPath.ts', './platformAudio.ts', './platformExtraRes.ts', './shopRes.ts', './slot25Res.ts', './tableSocialRes.ts', './texasRes.ts', './appConfig3.ts', './catalog.ts', './economy.ts', './events.ts', './piggy.ts', './social.ts', './tasks.ts', './vip3.ts', './wheel.ts', './constants2.ts', './config.ts', './botBrain.ts', './botMemory.ts', './card.ts', './cardGroup.ts', './gameHelper.ts', './gameMgr.ts', './player.ts', './validCardGroup.ts', './conquianMatch.ts', './dispatcher.ts', './env.ts', './appConfig2.ts', './atomic.ts', './bankrupt.ts', './botRegistry.ts', './checkin.ts', './chipLock.ts', './clock.ts', './day.ts', './economy2.ts', './events2.ts', './eventsStore.ts', './friends2.ts', './googlePay2.ts', './heldTable.ts', './homeState2.ts', './inbox.ts', './levels.ts', './marquee.ts', './newbie.ts', './onlineBox.ts', './orders.ts', './payFlags.ts', './payment.ts', './piggy2.ts', './presence.ts', './props.ts', './rank2.ts', './receipts.ts', './rewardsRpc.ts', './rewardsStore.ts', './rounds.ts', './rpcArgs.ts', './seatMoney.ts', './shop.ts', './shopRpc.ts', './socialHome.ts', './tableInvite2.ts', './tableSocial2.ts', './tableSocialMatch.ts', './taskDots.ts', './tasks3.ts', './vip.ts', './wallet.ts', './wheelStore.ts', './types2.ts', './profile.ts', './apply.ts', './gameStore.ts', './builtin.ts', './burroHand.ts', './burroLayout.ts', './burroProtocol.ts', './burroRules.ts', './burroState.ts', './burroTablePresenter.ts', './burroText.ts', './burroTimeline.ts', './module4.ts', './module2.ts', './demoProtocol.ts', './demoTablePresenter.ts', './module.ts', './escobaHandHit.ts', './escobaLayout.ts', './escobaProtocol.ts', './escobaRules.ts', './escobaSelection.ts', './escobaState.ts', './escobaTablePresenter.ts', './escobaText.ts', './escobaTimeline.ts', './module3.ts', './module6.ts', './slot25Layout.ts', './slot25Presenter.ts', './slot25Rules.ts', './slot25Text.ts', './slot25Timeline.ts', './module5.ts', './texasActions.ts', './texasLayout.ts', './texasProtocol.ts', './texasRules.ts', './texasState.ts', './texasTablePresenter.ts', './texasText.ts', './texasTimeline.ts', './ActionBar.ts', './CardView.ts', './CornerButtons.ts', './CountdownView.ts', './DealFlyLayer.ts', './EndGamePanel.ts', './GameSceneRoot.ts', './HandView.ts', './LobbyTestRoot.ts', './NocView.ts', './PlayerView.ts', './PotView.ts', './RoomInfoView.ts', './StartFxLayer.ts', './StatusView.ts', './TableView.ts', './AnimRunner.ts', './CardSkew.ts', './FlyLayer.ts', './GafPlayer.ts', './SpineFxView.ts', './canvasPoint.ts', './ApkActionBar.ts', './ApkCardView.ts', './ApkDiscardPopup.ts', './ApkGameSceneRoot.ts', './ApkHandView.ts', './ApkMeldsView.ts', './ApkNocView.ts', './ApkPitView.ts', './ApkReadyClock.ts', './ApkRulePopup.ts', './ApkSeatClock.ts', './ApkSeatsView.ts', './ApkSettlementView.ts', './ApkSound.ts', './ApkStartCountdown.ts', './ApkStartFx.ts', './ApkTableMenu.ts', './ApkTableView.ts', './ApkTopTip.ts', './apkAssets.ts', './apkContext.ts', './apkFx.ts', './apkScroll.ts', './apkSprite.ts', './gameBoot.ts', './ApkAssetGalleryRoot.ts', './BurroAssets.ts', './BurroCardView.ts', './BurroCenterView.ts', './BurroFx.ts', './BurroHandView.ts', './BurroResultPopup.ts', './BurroRulePopup.ts', './BurroSeatsView.ts', './BurroSound.ts', './BurroTableMenu.ts', './BurroTableSceneRoot.ts', './DemoTableSceneRoot.ts', './EscobaAssets.ts', './EscobaCardView.ts', './EscobaFx.ts', './EscobaHandView.ts', './EscobaPotView.ts', './EscobaRulePopup.ts', './EscobaScoreboardView.ts', './EscobaSeatsView.ts', './EscobaSound.ts', './EscobaTableGrid.ts', './EscobaTableMenu.ts', './EscobaTableSceneRoot.ts', './Slot25Assets.ts', './Slot25Bar.ts', './Slot25BonusView.ts', './Slot25Fx.ts', './Slot25Popups.ts', './Slot25ReelsView.ts', './Slot25SceneRoot.ts', './Slot25Sound.ts', './TexasAssets.ts', './TexasBottomView.ts', './TexasBuyInPopup.ts', './TexasCardView.ts', './TexasCenterView.ts', './TexasFx.ts', './TexasRaisePopup.ts', './TexasRulePopup.ts', './TexasSeatsView.ts', './TexasSound.ts', './TexasTableMenu.ts', './TexasTableSceneRoot.ts', './BootSceneRoot.ts', './jsbOtaPort.ts', './FreeCoinPanel.ts', './HallSceneRoot.ts', './LobbyLayer.ts', './LoginSceneRoot.ts', './SceneCover2.ts', './admobBridge.ts', './caRoots.ts', './googleBillingBridge.ts', './keepScreenOn.ts', './lobbyRules.ts', './nativeWssCa.ts', './nativeXhrShim.ts', './navigation.ts', './platformAssets.ts', './platformBoot.ts', './BkPopup.ts', './BroadProp.ts', './EventPopup.ts', './ExitGamePopup.ts', './FCPopup.ts', './FriendPopup.ts', './GetRewardPopup.ts', './HallRankPopup.ts', './MallPopup.ts', './MessagePopup.ts', './NewInviteFriendPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './PiggyRulePopup.ts', './PropPopup.ts', './RewardVideoPopup.ts', './SettingPopup.ts', './SignPopup.ts', './TaskPopup.ts', './UpdateWindow.ts', './UserDetailPopup.ts', './UserInfoPopup.ts', './VIPInfoHelpPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './screenPolicy.ts', './ChatBubbleView.ts', './FaceAnimView.ts', './OnlinePopup.ts', './PropThrowView.ts', './RoomChatPopup.ts', './RoomOnlineBox.ts', './RoomUserPopup.ts', './TablePlatformRoot.ts', './TableSocialLayer.ts', './tableSocialFx.ts', './tablePreload.ts', './InviteBanner.ts', './LangPos.ts', './LangSprite.ts', './MarqueeBar.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SafeEdge.ts', './SimplePopup.ts', './SliceInset.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './popupKit.ts', './progressBar.ts', './scrollList.ts', './uiKit.ts', './viewBind.ts'], function () {
   return {
-    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
   };
 });
@@ -52859,8 +55625,8 @@ System.register("chunks:///_virtual/MallPopup.ts", ['cc', './shopLayout.ts', './
   };
 });
 
-System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.ts', './platformText.ts', './catalog2.ts', './payment2.ts', './vip2.ts', './vipText.ts', './apkFormat.ts', './shopText.ts'], function (exports) {
-  var cclegacy, asGatewayError, shopFailOf, platformText, SHOP_TABS, langText, EMPTY_CATALOG, currentProvider, maxRebate, pctText, rebateOf, vipText, potText, abbreviateCoins, shopFailText;
+System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.ts', './platformText.ts', './catalog2.ts', './payment2.ts', './storePrice.ts', './vip2.ts', './vipText.ts', './apkFormat.ts', './shopText.ts'], function (exports) {
+  var cclegacy, asGatewayError, shopFailOf, platformText, SHOP_TABS, langText, EMPTY_CATALOG, currentProvider, scaledOrigText, maxRebate, pctText, rebateOf, vipText, potText, abbreviateCoins, shopFailText;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -52875,6 +55641,8 @@ System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.
       EMPTY_CATALOG = module.EMPTY_CATALOG;
     }, function (module) {
       currentProvider = module.currentProvider;
+    }, function (module) {
+      scaledOrigText = module.scaledOrigText;
     }, function (module) {
       maxRebate = module.maxRebate;
       pctText = module.pctText;
@@ -52934,8 +55702,12 @@ System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.
         return '$' + v.toFixed(2);
       }
 
-      /** Hang cua mot tab (plan D2 quyet dinh 5, 7): anh chip/gold theo thu tu trong tab nhu sortId APK. */
-      function mallRows(c, tab, lang) {
+      /**
+       * Hang cua mot tab (plan D2 quyet dinh 5, 7): anh chip/gold theo thu tu trong tab nhu sortId APK.
+       * B1 §5: sku co gia Store thi hien formattedPrice, gia goc gach doi theo ti le gia Store / gia USD;
+       * khong co gia Store thi usdText nhu cu.
+       */
+      function mallRows(c, tab, lang, prices = {}) {
         return c[tab].map((it, i) => {
           if (tab === 'prop') {
             return {
@@ -52950,14 +55722,16 @@ System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.
           }
           const chip = tab === 'chip';
           const price = it.priceUsd ?? 0;
+          const store = it.sku !== null && Object.prototype.hasOwnProperty.call(prices, it.sku) ? prices[it.sku] : null;
+          const orig = it.origPriceUsd !== null && it.origPriceUsd > price ? it.origPriceUsd : null;
           return {
             id: it.id,
             icon: (chip ? 'common_chip_chip' : 'common_chip_gold_chip') + Math.min(i + 1, 6),
             title: chip ? potText(it.grant.chip) : potText(it.grant.gold) + ' ' + platformText(lang, 'goldUnit'),
             desc: '',
             bonusText: it.bonusPct > 0 ? '+' + it.bonusPct + '%' : null,
-            origText: it.origPriceUsd !== null && it.origPriceUsd > price ? usdText(it.origPriceUsd) : null,
-            priceText: usdText(price)
+            origText: orig === null ? null : store !== null ? scaledOrigText(store, price, orig) : usdText(orig),
+            priceText: store !== null ? store.formatted : usdText(price)
           };
         });
       }
@@ -52971,6 +55745,7 @@ System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.
         constructor(view, d) {
           this.tab = 'chip';
           this.catalog = null;
+          this.prices = {};
           this.loading = false;
           this.busy = false;
           this.disposed = false;
@@ -53005,6 +55780,22 @@ System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.
           }
           this.loading = false;
           this.renderList();
+          this.loadPrices();
+        }
+
+        /** B1 §5: hoi gia Store cho moi sku chip + gold (provider luu tam trong phien); hong thi giu USD, im lang. */
+        loadPrices() {
+          const c = this.catalog;
+          const p = currentProvider();
+          if (this.disposed || c === null || !c.canPay || p === null || p.prices === undefined) return;
+          const skus = [];
+          for (const it of c.chip.concat(c.gold)) if (it.sku !== null && skus.indexOf(it.sku) === -1) skus.push(it.sku);
+          if (skus.length === 0) return;
+          p.prices(skus).then(m => {
+            if (this.disposed) return;
+            this.prices = m;
+            this.renderList();
+          }).catch(() => undefined);
         }
         selectTab(tab) {
           if (this.disposed || tab === this.tab) return;
@@ -53035,7 +55826,7 @@ System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.
           try {
             const r = await this.d.session.buy(item.id);
             if (this.disposed) return;
-            if (r.kind === 'delivered') this.view.showReward(r.order);else if (r.kind === 'cancelled') this.view.toast(this.t('payCancelled'));else if (r.kind === 'payFailed') this.view.toast(this.t('payFailed'));else this.view.toast(this.t('comingSoon'));
+            if (r.kind === 'delivered') this.view.showReward(r.order);else if (r.kind === 'cancelled') this.view.toast(this.t('payCancelled'));else if (r.kind === 'payFailed') this.view.toast(this.t('payFailed'));else if (r.kind === 'pending') this.view.toast(this.t('payPending'));else this.view.toast(this.t('comingSoon'));
           } catch (e) {
             if (this.disposed) return;
             this.view.toast(shopFailText(this.d.app.lang, shopFailOf(asGatewayError(e, 'rpc'))));
@@ -53093,7 +55884,7 @@ System.register("chunks:///_virtual/mallPresenter.ts", ['cc', './platformErrors.
         }
         renderList() {
           if (this.disposed) return;
-          const rows = this.catalog !== null ? mallRows(this.catalog, this.tab, this.d.app.lang) : [];
+          const rows = this.catalog !== null ? mallRows(this.catalog, this.tab, this.d.app.lang, this.prices) : [];
           this.view.renderList({
             tab: this.tab,
             rows,
@@ -54071,8 +56862,8 @@ System.register("chunks:///_virtual/MessagePopup.ts", ['cc', './socialLayout.ts'
   };
 });
 
-System.register("chunks:///_virtual/messagePresenter.ts", ['cc', './platformErrors.ts', './platformText.ts', './inbox2.ts', './getRewardPresenter.ts'], function (exports) {
-  var cclegacy, asGatewayError, inboxFailOf, platformText, canDelete, inboxText, msgTimeText, msgDateText, rewardItems;
+System.register("chunks:///_virtual/messagePresenter.ts", ['cc', './platformErrors.ts', './platformText.ts', './inbox2.ts', './apkFormat.ts', './getRewardPresenter.ts'], function (exports) {
+  var cclegacy, asGatewayError, inboxFailOf, platformText, canDelete, inboxText, msgTimeText, msgDateText, potText, rewardItems;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -54087,12 +56878,15 @@ System.register("chunks:///_virtual/messagePresenter.ts", ['cc', './platformErro
       msgTimeText = module.msgTimeText;
       msgDateText = module.msgDateText;
     }, function (module) {
+      potText = module.potText;
+    }, function (module) {
       rewardItems = module.rewardItems;
     }],
     execute: function () {
       exports({
         inboxRewardOrder: inboxRewardOrder,
-        initialMessageTab: initialMessageTab
+        initialMessageTab: initialMessageTab,
+        winLogText: winLogText
       });
       cclegacy._RF.push({}, "40b719gB21H7YdxWwWkwS7d", "messagePresenter", undefined); // assets/scripts/core/presenter/platform/messagePresenter.ts
 
@@ -54101,6 +56895,26 @@ System.register("chunks:///_virtual/messagePresenter.ts", ['cc', './platformErro
       /** BottomManager.lua:346-351: co tin ca nhan moi -> Noticias; chi tin he thong -> Anuncio; khong co -> Noticias. */
       function initialMessageTab(d) {
         return !d.news && d.notice ? 'notice' : 'news';
+      }
+
+      /** P4: ten game cua dong nhat ky thang (giong nhau o hai ngon ngu); game la -> gameId. */
+      const WIN_GAME_NAMES = {
+        conquian: 'Conquian',
+        escoba: 'Escoba',
+        burro: 'Burro',
+        texas: 'Texas'
+      };
+
+      /** P4: "Ganaste X fichas en Juego (mesa N)" / "You won X chips in Game (table N)". */
+      function winLogText(w, lang) {
+        const args = [potText(w.chip), WIN_GAME_NAMES[w.game] ?? w.game, String(w.level)];
+        let i = 0;
+        return platformText(lang, 'msgWinLog').replace(/%s/g, () => args[i++] ?? '');
+      }
+
+      /** Chu cua tin: dong thang dung chu client, tin khac chu server. */
+      function itemText(x, lang) {
+        return x.win !== undefined ? winLogText(x.win, lang) : inboxText(x, lang);
       }
 
       /** Qua cua tin duoi dang don da giao de dung lai GetRewardPopup. */
@@ -54260,7 +57074,7 @@ System.register("chunks:///_virtual/messagePresenter.ts", ['cc', './platformErro
         newsRow(x, lang) {
           return {
             id: x.id,
-            text: inboxText(x, lang),
+            text: itemText(x, lang),
             dateText: msgDateText(x.time),
             selectable: this.deleting && canDelete(x),
             selected: this.selected.has(x.id)
@@ -56308,7 +59122,7 @@ System.register("chunks:///_virtual/onlineBoxPresenter.ts", ['cc', './platformEr
         /** ORP:973-990: hien khi co video, con luot, hop dang cho (khong ready/xong), khong o trong ban. */
         videoState(s) {
           const v = this.d.app.video;
-          if (this.d.inRoom === true || v === null || !v.available || v.boxLeft <= 0 || s.ready || s.done) return NO_VIDEO_BUTTON;
+          if (this.d.inRoom === true || !this.d.app.features.video || v === null || !v.available || v.boxLeft <= 0 || s.ready || s.done) return NO_VIDEO_BUTTON;
           const lang = this.d.app.lang;
           return {
             show: true,
@@ -56880,6 +59694,9 @@ System.register("chunks:///_virtual/orders.ts", ['cc', './shop.ts'], function (e
         if (typeof o.vipBonus === 'number') {
           out.vipBonus = toCount(o.vipBonus);
         }
+        if (o.fake === true) {
+          out.fake = true;
+        }
         return out;
       }
 
@@ -56967,6 +59784,7 @@ System.register("chunks:///_virtual/otaConfig.ts", ['cc'], function (exports) {
       cclegacy = module.cclegacy;
     }],
     execute: function () {
+      exports('otaEnabled', otaEnabled);
       cclegacy._RF.push({}, "5f774LtJt9EmK4mh2zaY4hN", "otaConfig", undefined);
       /**
        * Cau hinh hot update Android (spec OTA1 §3.4). Phai khop tools/hot-update/ota.config.json
@@ -56986,6 +59804,13 @@ System.register("chunks:///_virtual/otaConfig.ts", ['cc'], function (exports) {
       const SEARCH_PATHS_KEY = exports('SEARCH_PATHS_KEY', 'HotUpdateSearchPaths');
       /** Bo dem khoi dong ma hook main.js tang moi lan dat search path; BootSceneRoot dat ve '0' (spec §5 watchdog). */
       const BOOT_TRIES_KEY = exports('BOOT_TRIES_KEY', 'HotUpdateBootTries');
+      /** Hook main.js cua APK build --no-ota dat '1'; ban thuong xoa khoa nay (spec §5). */
+      const OTA_DISABLED_KEY = exports('OTA_DISABLED_KEY', 'HotUpdateDisabled');
+
+      /** OTA bat tru khi hook bao ban build --no-ota. store = sys.localStorage. */
+      function otaEnabled(store) {
+        return store.getItem(OTA_DISABLED_KEY) !== '1';
+      }
       /** Timeout moi URL con tro (spec §4.4). */
       const POINTER_TIMEOUT_MS = exports('POINTER_TIMEOUT_MS', 6000);
       /** Thoi gian toi khi biet ban tren mang moi hon (con tro + version.manifest) (spec §4.4 b). */
@@ -56994,15 +59819,13 @@ System.register("chunks:///_virtual/otaConfig.ts", ['cc'], function (exports) {
       const MANIFEST_BUDGET_MS = exports('MANIFEST_BUDGET_MS', 60000);
       /** Khong co su kien nao trong khoang nay = loi (spec §4.4 a). */
       const STALL_MS = exports('STALL_MS', 30000);
-      /** Giu chu "co ban moi tren cua hang" (spec §4.3 dong 4). */
-      const NEED_STORE_HOLD_MS = exports('NEED_STORE_HOLD_MS', 2000);
       cclegacy._RF.pop();
     }
   };
 });
 
 System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decide.ts', './otaConfig.ts', './pointer.ts', './version.ts'], function (exports) {
-  var cclegacy, retryDelay, decide, NEED_STORE_HOLD_MS, PRE_DOWNLOAD_BUDGET_MS, STALL_MS, MANIFEST_BUDGET_MS, OTA_CONFIG, POINTER_TIMEOUT_MS, parsePointer, pickEffective;
+  var cclegacy, retryDelay, decide, PRE_DOWNLOAD_BUDGET_MS, STALL_MS, MANIFEST_BUDGET_MS, OTA_CONFIG, POINTER_TIMEOUT_MS, parsePointer, pickEffective;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -57011,7 +59834,6 @@ System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decid
     }, function (module) {
       decide = module.decide;
     }, function (module) {
-      NEED_STORE_HOLD_MS = module.NEED_STORE_HOLD_MS;
       PRE_DOWNLOAD_BUDGET_MS = module.PRE_DOWNLOAD_BUDGET_MS;
       STALL_MS = module.STALL_MS;
       MANIFEST_BUDGET_MS = module.MANIFEST_BUDGET_MS;
@@ -57025,6 +59847,9 @@ System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decid
     execute: function () {
       exports('runOta', runOta);
       cclegacy._RF.push({}, "f8952wAUMhIm5itvYZ6v+x/", "otaFlow", undefined);
+
+      /** 'store': APK thap hon minNativeVersion, khong goi enterGame / restart (spec B13-B15 §4.4). */
+
       async function fetchPointer(port) {
         for (const url of OTA_CONFIG.pointerUrls) {
           const text = await port.fetchText(url, POINTER_TIMEOUT_MS);
@@ -57063,9 +59888,7 @@ System.register("chunks:///_virtual/otaFlow.ts", ['cc', './backoff.ts', './decid
             port.setStatus({
               phase: 'needStore'
             });
-            await new Promise(r => {
-              port.schedule(NEED_STORE_HOLD_MS, r);
-            });
+            return 'store';
           } else if (d.kind === 'update') {
             const left = PRE_DOWNLOAD_BUDGET_MS - (port.now() - t0);
             if (left > 0) return await runUpdate(port, d.pointer, left);
@@ -57375,30 +60198,85 @@ System.register("chunks:///_virtual/parseServerConfig.ts", ['cc'], function (exp
         if (typeof o.host !== 'string' || o.host === '') return bad(where + ' thieu host');
         if (typeof o.port !== 'number' || !Number.isInteger(o.port) || o.port <= 0) return bad(where + ': port khong hop le');
         if (typeof o.useSSL !== 'boolean') return bad(where + ' thieu useSSL (true/false)');
+        let iap;
+        if (o.iap !== undefined) {
+          const r = parseIap(o.iap, where);
+          if (!r.ok) return r;
+          iap = r.value;
+        }
         if (backend === 'colyseus') {
+          const c = {
+            name,
+            backend,
+            host: o.host,
+            port: o.port,
+            useSSL: o.useSSL
+          };
+          if (iap !== undefined) c.iap = iap;
           return {
             ok: true,
-            value: {
-              name,
-              backend,
-              host: o.host,
-              port: o.port,
-              useSSL: o.useSSL
-            }
+            value: c
           };
         }
         if (typeof o.serverKey !== 'string' || o.serverKey === '' || o.serverKey.charAt(0) === '<') {
           return bad(where + ': serverKey chua dien — ' + KEY_HINT);
         }
+        const value = {
+          name,
+          backend,
+          host: o.host,
+          port: o.port,
+          useSSL: o.useSSL,
+          serverKey: o.serverKey
+        };
+        if (o.ads !== undefined) {
+          const ads = parseAds(o.ads, where);
+          if (!ads.ok) return ads;
+          value.ads = ads.value;
+        }
+        if (iap !== undefined) value.iap = iap;
+        return {
+          ok: true,
+          value
+        };
+      }
+
+      /** Spec B1 §5: iap: { google: { mode: 'fake' | 'real' } } (ca nakama lan colyseus); {} hop le (khong Google). */
+      function parseIap(v, where) {
+        const msg = where + ": iap phai la { google: { mode: 'fake' | 'real' } }";
+        if (!isObj(v)) return bad(msg);
+        if (v.google === undefined) return {
+          ok: true,
+          value: {}
+        };
+        const g = v.google;
+        if (!isObj(g) || g.mode !== 'fake' && g.mode !== 'real') return bad(msg);
         return {
           ok: true,
           value: {
-            name,
-            backend,
-            host: o.host,
-            port: o.port,
-            useSSL: o.useSSL,
-            serverKey: o.serverKey
+            google: {
+              mode: g.mode
+            }
+          }
+        };
+      }
+
+      /** Spec P1 §3.5: `ads: { admob: { rewardedUnit } }` cua dong nakama; `{}` hop le (tat AdMob). */
+      function parseAds(v, where) {
+        const msg = where + ': ads phai la { admob: { rewardedUnit: "ca-app-pub-..." } }';
+        if (!isObj(v)) return bad(msg);
+        if (v.admob === undefined) return {
+          ok: true,
+          value: {}
+        };
+        const a = v.admob;
+        if (!isObj(a) || typeof a.rewardedUnit !== 'string' || a.rewardedUnit === '' || a.rewardedUnit.charAt(0) === '<') return bad(msg);
+        return {
+          ok: true,
+          value: {
+            admob: {
+              rewardedUnit: a.rewardedUnit
+            }
           }
         };
       }
@@ -57608,9 +60486,12 @@ System.register("chunks:///_virtual/payFlags.ts", ['cc', './payment.ts', './shop
         return canPay && f.firstPaidAt === null && !f.fcDone;
       }
 
-      /** Cho home_state / bankrupt_claim: không verifier thì không đọc storage; đọc lỗi -> không mời (log warn). */
-      function safeFcEligible(nk, logger, userId) {
-        if (activeVerifier() === null) {
+      /**
+       * Cho home_state / bankrupt_claim: không verifier thì không đọc storage; đọc lỗi -> không mời (log warn).
+       * `env` = ctx.env của request (B1: GOOGLE_IAP_MODE bật verifier google).
+       */
+      function safeFcEligible(nk, logger, userId, env) {
+        if (activeVerifier(env) === null) {
           return false;
         }
         try {
@@ -57646,11 +60527,15 @@ System.register("chunks:///_virtual/payFlags.ts", ['cc', './payment.ts', './shop
   };
 });
 
-System.register("chunks:///_virtual/payment.ts", ['cc'], function (exports) {
-  var cclegacy;
+System.register("chunks:///_virtual/payment.ts", ['cc', './googlePay2.ts'], function (exports) {
+  var cclegacy, GOOGLE_PROVIDER, googleIapMode, googleVerifier;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
+    }, function (module) {
+      GOOGLE_PROVIDER = module.GOOGLE_PROVIDER;
+      googleIapMode = module.googleIapMode;
+      googleVerifier = module.googleVerifier;
     }],
     execute: function () {
       exports({
@@ -57660,17 +60545,22 @@ System.register("chunks:///_virtual/payment.ts", ['cc'], function (exports) {
         registerVerifier: registerVerifier
       });
       cclegacy._RF.push({}, "201aeVfPuFHMbl/PgJ4ThUQ", "payment", undefined);
-      /**
-       * Cổng xác thực thanh toán (spec D2 §2.2, Q1). Registry nạp ở CẤP MODULE như registry game (P0):
-       * Nakama chạy RPC trên VM khác VM chạy InitModule. Bản phát hành KHÔNG đăng ký verifier nào
-       * (catalog.canPay = false, nút mua báo Próximamente). Server dev đăng ký `devVerifier`
-       * (dev/devPayment.ts) lúc khởi động; D3 cắm Google Play / FB Instant vào đây.
-       * `registerVerifier`/`clearVerifiers` chỉ server dev (Node) và test gọi.
-       */
+
+      /** ctx.env của Nakama (runtime.env); test và đường cũ có thể không truyền. */
+
+      /** Ngữ cảnh của một lần xác minh: provider thật cần nk (gọi cửa hàng), người mua, mã đơn và env. */
+
+      /** true = nhận; false = từ chối (verify_failed); 'pending' = cửa hàng chưa thu tiền (pay_pending, đơn vẫn treo). */
+
       /** Provider "nạp thử" của server dev: sổ cái ghi dev_purchase. */
       const DEV_PROVIDER = exports('DEV_PROVIDER', 'dev');
       let verifiers = [];
-      function getVerifier(provider) {
+
+      /** Verifier theo tên provider; `env` bật GOOGLE_IAP_MODE thì có cả `google`. */
+      function getVerifier(provider, env) {
+        if (provider === GOOGLE_PROVIDER && googleIapMode(env) !== null) {
+          return googleVerifier;
+        }
         for (let i = 0; i < verifiers.length; i++) {
           if (verifiers[i].provider === provider) {
             return verifiers[i];
@@ -57685,8 +60575,11 @@ System.register("chunks:///_virtual/payment.ts", ['cc'], function (exports) {
         verifiers.push(v);
       }
 
-      /** Verifier cho đơn mới: cái đăng ký đầu tiên; null = chưa nhận thanh toán. */
-      function activeVerifier() {
+      /** Verifier cho đơn mới: google nếu `env` bật GOOGLE_IAP_MODE, không thì cái đăng ký đầu tiên; null = chưa nhận thanh toán. */
+      function activeVerifier(env) {
+        if (googleIapMode(env) !== null) {
+          return googleVerifier;
+        }
         return verifiers.length > 0 ? verifiers[0] : null;
       }
       function clearVerifiers() {
@@ -57707,7 +60600,9 @@ System.register("chunks:///_virtual/payment2.ts", ['cc'], function (exports) {
       exports({
         currentProvider: currentProvider,
         isPayCancelled: isPayCancelled,
+        isPayPending: isPayPending,
         payCancelled: payCancelled,
+        payPending: payPending,
         registerProvider: registerProvider,
         resetProviders: resetProviders
       });
@@ -57717,6 +60612,8 @@ System.register("chunks:///_virtual/payment2.ts", ['cc'], function (exports) {
        * devProvider "nap thu" (platformBoot dang ky, giong cach bat demo); ban phat hanh chua co provider
        * nen nut mua bao "Proximamente". D3 cam Google Play / FB Instant vao day.
        */
+      /** B1 §5: gia mot sku tu Store (Google Play). micros = gia x 1e6. */
+      /** { [sku]: gia Store }. */
       function payCancelled() {
         return {
           payCancelled: true
@@ -57724,6 +60621,17 @@ System.register("chunks:///_virtual/payment2.ts", ['cc'], function (exports) {
       }
       function isPayCancelled(e) {
         return typeof e === 'object' && e !== null && e.payCancelled === true;
+      }
+
+      /** B1 §6: giao dich Store dang cho tra tien (PENDING); don treo, giao khi chuyen PURCHASED. */
+
+      function payPending() {
+        return {
+          payPending: true
+        };
+      }
+      function isPayPending(e) {
+        return typeof e === 'object' && e !== null && e.payPending === true;
       }
       let current = null;
       function registerProvider(p) {
@@ -59021,8 +61929,8 @@ System.register("chunks:///_virtual/platformBindings.ts", ['cc'], function (expo
   };
 });
 
-System.register("chunks:///_virtual/platformBoot.ts", ['cc', './env', './appContext.ts', './homeBinding.ts', './payment2.ts', './ad.ts', './builtin.ts', './logger.ts', './deviceId.ts', './parseServerConfig.ts', './createSessionGateway.ts', './platformSession.ts', './serverPick.ts', './navigation.ts', './nativeXhrShim.ts', './nativeWssCa.ts', './screenPolicy.ts', './keepScreenOn.ts'], function (exports) {
-  var cclegacy, view, resources, JsonAsset, sys, DEBUG, versionText, resetApp, getApp, bindHome, resetProviders, registerProvider, devProvider, resetAdProviders, registerAdProvider, devAdProvider, registerBuiltinGames, ConsoleLogger, resolveDeviceId, parseServerConfig, createSessionGateway, PlatformSession, pickPlatformServer, rememberServer, toLogin, installNativeXhrShim, installNativeWssCa, installScreenPolicy, installKeepScreenOn;
+System.register("chunks:///_virtual/platformBoot.ts", ['cc', './env', './appContext.ts', './homeBinding.ts', './payment2.ts', './ad.ts', './admobProvider.ts', './admobBridge.ts', './googlePay.ts', './fakeBilling.ts', './catalog2.ts', './googleBillingBridge.ts', './builtin.ts', './logger.ts', './deviceId.ts', './parseServerConfig.ts', './createSessionGateway.ts', './platformSession.ts', './serverPick.ts', './navigation.ts', './nativeXhrShim.ts', './nativeWssCa.ts', './screenPolicy.ts', './keepScreenOn.ts'], function (exports) {
+  var cclegacy, view, resources, JsonAsset, sys, DEBUG, versionText, resetApp, getApp, bindHome, resetProviders, registerProvider, devProvider, resetAdProviders, registerAdProvider, devAdProvider, makeAdMobProvider, nativeAdMobBridge, makeGooglePayProvider, makeFakeBilling, skuOfItem, nativeGoogleBillingBridge, registerBuiltinGames, ConsoleLogger, resolveDeviceId, parseServerConfig, createSessionGateway, PlatformSession, pickPlatformServer, rememberServer, toLogin, installNativeXhrShim, installNativeWssCa, installScreenPolicy, installKeepScreenOn;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -59046,6 +61954,18 @@ System.register("chunks:///_virtual/platformBoot.ts", ['cc', './env', './appCont
       resetAdProviders = module.resetAdProviders;
       registerAdProvider = module.registerAdProvider;
       devAdProvider = module.devAdProvider;
+    }, function (module) {
+      makeAdMobProvider = module.makeAdMobProvider;
+    }, function (module) {
+      nativeAdMobBridge = module.nativeAdMobBridge;
+    }, function (module) {
+      makeGooglePayProvider = module.makeGooglePayProvider;
+    }, function (module) {
+      makeFakeBilling = module.makeFakeBilling;
+    }, function (module) {
+      skuOfItem = module.skuOfItem;
+    }, function (module) {
+      nativeGoogleBillingBridge = module.nativeGoogleBillingBridge;
     }, function (module) {
       registerBuiltinGames = module.registerBuiltinGames;
     }, function (module) {
@@ -59116,6 +62036,7 @@ System.register("chunks:///_virtual/platformBoot.ts", ['cc', './env', './appCont
         const release = !DEBUG;
         const app = getApp();
         if (app.session === null || app.server === null) {
+          var _server$ads;
           const list = await loadServerList();
           if (typeof list === 'string') return {
             ok: false,
@@ -59147,6 +62068,17 @@ System.register("chunks:///_virtual/platformBoot.ts", ['cc', './env', './appCont
             logger
           });
           bindHome(app.session.events);
+          // Spec P1 §3.4: AdMob that chi tren Android native, server Nakama co ads.admob.rewardedUnit.
+          const unit = server.backend === 'nakama' ? (_server$ads = server.ads) == null || (_server$ads = _server$ads.admob) == null ? void 0 : _server$ads.rewardedUnit : undefined;
+          if (unit !== undefined && sys.isNative && sys.os === sys.OS.ANDROID) {
+            registerAdProvider(makeAdMobProvider({
+              bridge: nativeAdMobBridge,
+              session: app.session,
+              adUnit: unit
+            }));
+            console.log('[conquian] admob: dang ky provider, unit ' + unit);
+          }
+          registerGooglePay(server.iap, app.session);
         }
         const current = app.serverNames.indexOf(app.server.name);
         return {
@@ -59158,6 +62090,54 @@ System.register("chunks:///_virtual/platformBoot.ts", ['cc', './env', './appCont
           },
           version: versionText(release, app.server.name)
         };
+      }
+
+      /** fake: ?fakeiap=cancelled|pending|error doi ket qua launch (mac dinh purchased). */
+      function fakeOutcomeOf(search) {
+        const m = /[?&]fakeiap=(\w+)/.exec(search ?? '');
+        const v = m !== null ? m[1] : '';
+        return v === 'cancelled' || v === 'pending' || v === 'error' ? v : 'purchased';
+      }
+
+      /**
+       * Spec B1 §5: server.json iap.google.mode. fake -> cau noi Billing gia (web + native; globalThis.__fakeBilling
+       * de doi ket qua / settlePending khi nghiem thu); real -> Billing that, chi Android native. Thieu -> giu nhu cu.
+       */
+      function registerGooglePay(iap, session) {
+        var _iap$google;
+        const mode = iap == null || (_iap$google = iap.google) == null ? void 0 : _iap$google.mode;
+        if (mode === undefined) return;
+        const app = getApp();
+        const catalog = async () => {
+          if (app.catalog === null) app.catalog = await session.catalog();
+          return app.catalog;
+        };
+        let bridge;
+        if (mode === 'fake') {
+          const fake = makeFakeBilling({
+            store: sys.localStorage,
+            random: Math.random,
+            usdOf: sku => {
+              const c = app.catalog;
+              const it = c === null ? undefined : c.chip.concat(c.gold).find(x => x.sku === sku);
+              return it !== undefined ? it.priceUsd : null;
+            }
+          });
+          fake.setOutcome(fakeOutcomeOf(urlSearch()));
+          globalThis.__fakeBilling = fake;
+          bridge = fake;
+        } else if (sys.isNative && sys.os === sys.OS.ANDROID) {
+          bridge = nativeGoogleBillingBridge;
+        } else {
+          console.warn('[conquian] iap: google real chi chay tren Android native, bo qua');
+          return;
+        }
+        registerProvider(makeGooglePayProvider({
+          bridge,
+          userId: () => session.userId(),
+          skuOf: async itemId => skuOfItem(await catalog(), itemId)
+        }));
+        console.log('[conquian] iap: dang ky provider google (' + mode + ')');
       }
 
       /** Popup dev chon server: nho lua chon, bo phien cu, mo lai LoginScene. */
@@ -59184,6 +62164,7 @@ System.register("chunks:///_virtual/platformErrors.ts", ['cc', './gatewayErrors.
     execute: function () {
       exports({
         asGatewayError: asGatewayError,
+        eventFailOf: eventFailOf,
         inboxFailOf: inboxFailOf,
         isAuthError: isAuthError,
         lobbyFailOf: lobbyFailOf,
@@ -59214,11 +62195,12 @@ System.register("chunks:///_virtual/platformErrors.ts", ['cc', './gatewayErrors.
         for (const name of REWARD_DETAIL) if (hasCode(e.detail, name)) return name;
         return 'unknown';
       }
-      const SHOP_DETAIL = ['unknown_item', 'payment_unavailable', 'not_found', 'verify_failed', 'not_enough_gold', 'fc_used', 'busy'];
+      const SHOP_DETAIL = ['unknown_item', 'payment_unavailable', 'not_found', 'verify_failed', 'pay_pending', 'not_enough_gold', 'fc_used', 'busy', 'maintenance'];
 
-      /** Loi RPC Mall (spec D2 §2.3) -> ma cho presenter; ma la -> unknown. */
+      /** Loi RPC Mall (spec D2 §2.3) -> ma cho presenter; ma la -> unknown. B13 §4.3: maintenance tu server -> GAME_MAINTAIN. */
       function shopFailOf(e) {
         if (e.reason === 'network') return 'network';
+        if (e.reason === 'maintenance') return 'maintenance';
         for (const name of SHOP_DETAIL) if (hasCode(e.detail, name)) return name;
         return 'unknown';
       }
@@ -59238,7 +62220,7 @@ System.register("chunks:///_virtual/platformErrors.ts", ['cc', './gatewayErrors.
         for (const name of WHEEL_DETAIL) if (hasCode(e.detail, name)) return name;
         return 'unknown';
       }
-      const VIDEO_DETAIL = ['ad_unavailable', 'verify_failed', 'video_limit', 'box_ready', 'done_today', 'busy'];
+      const VIDEO_DETAIL = ['ad_unavailable', 'verify_failed', 'video_limit', 'box_ready', 'done_today', 'busy', 'ssv_pending'];
 
       /** Loi RPC video thuong / hop online (spec D4b §2.5) -> ma cho presenter; ma la -> unknown. */
       function videoFailOf(e) {
@@ -59262,6 +62244,15 @@ System.register("chunks:///_virtual/platformErrors.ts", ['cc', './gatewayErrors.
         for (const name of INBOX_DETAIL) if (hasCode(e.detail, name)) return name;
         return 'unknown';
       }
+
+      /** Spec E4 §3.2: loi platform.event_claim. */
+
+      const EVENT_DETAIL = ['not_found', 'not_reward', 'already_claimed', 'busy'];
+      function eventFailOf(e) {
+        if (e.reason === 'network') return 'network';
+        for (const name of EVENT_DETAIL) if (hasCode(e.detail, name)) return name;
+        return 'unknown';
+      }
       const SOCIAL_DETAIL = ['self', 'not_found', 'already_friend', 'already_sent', 'too_many_pending', 'my_full', 'their_full', 'their_pending_full', 'no_request', 'empty', 'too_long', 'not_friend', 'already_gifted', 'day_limit', 'their_day_limit', 'low_balance', 'chip_locked', 'offline', 'room_gone', 'too_fast', 'expired', 'not_enough_money', 'bad_code', 'already_bound', 'cycle', 'text_empty', 'text_too_long', 'text_bad_chars', 'no_speaker', 'busy'];
 
       /** Loi RPC ban be / tang chip / ma moi / loa / moi vao ban (spec E2 §2) -> ma cho presenter; ma la -> unknown. */
@@ -59274,9 +62265,10 @@ System.register("chunks:///_virtual/platformErrors.ts", ['cc', './gatewayErrors.
 
       /** Loi RPC slot.* (spec G6 §3.7). */
 
-      const SLOT_DETAIL = ['chip_locked', 'low_balance', 'wheel_pending', 'no_wheel', 'stale_seq', 'bad_bet', 'busy', 'unknown_game'];
+      const SLOT_DETAIL = ['chip_locked', 'low_balance', 'wheel_pending', 'no_wheel', 'stale_seq', 'bad_bet', 'busy', 'unknown_game', 'maintenance'];
       function slotFailOf(e) {
         if (e.reason === 'network') return 'network';
+        if (e.reason === 'maintenance') return 'maintenance';
         for (const name of SLOT_DETAIL) if (hasCode(e.detail, name)) return name;
         return 'unknown';
       }
@@ -59301,6 +62293,8 @@ System.register("chunks:///_virtual/platformErrors.ts", ['cc', './gatewayErrors.
        */
       function lobbyFailOf(e) {
         if (e.reason === 'network') return 'network';
+        // Spec B13-B15 §4.3
+        if (e.reason === 'maintenance' || hasCode(e.detail, 'maintenance')) return 'maintenance';
         if (hasCode(e.detail, 'chip_locked')) return 'chip_locked';
         if (e.reason === 'not_enough_money') return 'not_enough_money';
         for (const name of BY_DETAIL) {
@@ -59552,11 +62546,13 @@ System.register("chunks:///_virtual/platformScreen.ts", ['cc'], function (export
   };
 });
 
-System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts', './gatewayErrors.ts', './homeState.ts', './platformEvents.ts', './parse.ts', './release.ts', './platformErrors.ts', './catalog2.ts', './payment2.ts', './ad.ts', './video.ts', './wheel2.ts', './slotProtocol.ts', './vip2.ts', './profile2.ts', './friends.ts', './invite.ts', './marquee2.ts', './tableInvite.ts', './tableSocial.ts', './rank.ts', './inbox2.ts', './tasks2.ts'], function (exports) {
-  var cclegacy, devQuickPlayPayload, isGatewayError, NO_RED_DOTS, parseHomeState, parseCheckin, parseBankrupt, parseOnlineBox, parseNewbie, parseClaim, PlatformEventHub, parseGames, parseProfile, parseTableLevels, parseQuickPlay, parseHeldTable, parseDevDeckList, storageKey, asGatewayError, isAuthError, parseCatalog, parsePropsReply, parseShopWallet, parseCreatedOrder, parsePendingOrders, parseDelivery, isPayCancelled, currentProvider, currentAdProvider, isAdCancelled, parseVideoInfo, parseVideoReward, parseBoxVideo, parseWheel, parseWheelSpin, parseSlotEnter, SLOT_RPC, parseSlotSpin, parseSlotWheel, parseSlotJackpot, parseVipInfo, briefOf, parseMyProfile, parsePublicProfile, parseFriendList, parseInteract, parseAddState, parseAnswerState, parseFriendSearch, parseRecommend, parseGift, parseInviteInfo, parseInviteLookup, parseInviteBound, parseSpeakerSent, parseMarqueeList, parseSocialPoll, parseInviteAccepted, parseTableSocialInfo, parseRankList, parseInboxList, parseInboxClaim, parseInboxDeleted, parseTaskList, parseTaskClaim, parsePiggy, parsePiggyBreak;
+System.register("chunks:///_virtual/platformSession.ts", ['cc', './appConfig.ts', './lobbyTest.ts', './gatewayErrors.ts', './homeState.ts', './platformEvents.ts', './parse.ts', './release.ts', './platformErrors.ts', './catalog2.ts', './payment2.ts', './ad.ts', './video.ts', './wheel2.ts', './slotProtocol.ts', './vip2.ts', './profile2.ts', './friends.ts', './invite.ts', './marquee2.ts', './tableInvite.ts', './tableSocial.ts', './rank.ts', './events3.ts', './inbox2.ts', './tasks2.ts'], function (exports) {
+  var cclegacy, parseAppConfig, devQuickPlayPayload, isGatewayError, NO_RED_DOTS, parseHomeState, parseCheckin, parseBankrupt, parseOnlineBox, parseNewbie, parseClaim, PlatformEventHub, parseGames, parseProfile, parseTableLevels, parseQuickPlay, parseHeldTable, parseDevDeckList, storageKey, asGatewayError, videoFailOf, isAuthError, parseCatalog, parsePropsReply, parseShopWallet, parseCreatedOrder, parsePendingOrders, parseDelivery, isPayCancelled, isPayPending, currentProvider, currentAdProvider, isAdCancelled, isAdUnavailable, DEV_AD_PROVIDER_ID, parseVideoInfo, parseVideoReward, parseBoxVideo, parseWheel, parseWheelSpin, parseSlotEnter, SLOT_RPC, parseSlotSpin, parseSlotWheel, parseSlotJackpot, parseVipInfo, briefOf, parseMyProfile, parsePublicProfile, parseFriendList, parseInteract, parseAddState, parseAnswerState, parseFriendSearch, parseRecommend, parseGift, parseInviteInfo, parseInviteLookup, parseInviteBound, parseSpeakerSent, parseMarqueeList, parseSocialPoll, parseInviteAccepted, parseTableSocialInfo, parseRankList, parseEventsList, parseEventClaim, parseInboxList, parseInboxClaim, parseInboxDeleted, parseTaskList, parseTaskClaim, parsePiggy, parsePiggyBreak;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
+    }, function (module) {
+      parseAppConfig = module.parseAppConfig;
     }, function (module) {
       devQuickPlayPayload = module.devQuickPlayPayload;
     }, function (module) {
@@ -59582,6 +62578,7 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
       storageKey = module.storageKey;
     }, function (module) {
       asGatewayError = module.asGatewayError;
+      videoFailOf = module.videoFailOf;
       isAuthError = module.isAuthError;
     }, function (module) {
       parseCatalog = module.parseCatalog;
@@ -59592,10 +62589,13 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
       parseDelivery = module.parseDelivery;
     }, function (module) {
       isPayCancelled = module.isPayCancelled;
+      isPayPending = module.isPayPending;
       currentProvider = module.currentProvider;
     }, function (module) {
       currentAdProvider = module.currentAdProvider;
       isAdCancelled = module.isAdCancelled;
+      isAdUnavailable = module.isAdUnavailable;
+      DEV_AD_PROVIDER_ID = module.DEV_AD_PROVIDER_ID;
     }, function (module) {
       parseVideoInfo = module.parseVideoInfo;
       parseVideoReward = module.parseVideoReward;
@@ -59638,6 +62638,9 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
     }, function (module) {
       parseRankList = module.parseRankList;
     }, function (module) {
+      parseEventsList = module.parseEventsList;
+      parseEventClaim = module.parseEventClaim;
+    }, function (module) {
       parseInboxList = module.parseInboxList;
       parseInboxClaim = module.parseInboxClaim;
       parseInboxDeleted = module.parseInboxDeleted;
@@ -59648,10 +62651,57 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
       parsePiggyBreak = module.parsePiggyBreak;
     }],
     execute: function () {
+      exports('jwtUserId', jwtUserId);
       cclegacy._RF.push({}, "2cba2Sl3hJCnpw7Rm9H84bh", "platformSession", undefined);
       const SESSION_KEY = exports('SESSION_KEY', storageKey('session'));
       /** Giay cho truoc moi lan noi lai socket sanh (spec C1 §2.1). */
       const RECONNECT_DELAYS = exports('RECONNECT_DELAYS', [1, 2, 4]);
+
+      /** Spec P1 §3.2: video_reward / online_box_video tra ssv_pending -> thu lai sau 2 s, toi da 10 lan. */
+      const SSV_RETRY_MS = exports('SSV_RETRY_MS', 2000);
+      const SSV_RETRIES = exports('SSV_RETRIES', 10);
+
+      /** Token da xem quang cao + provider da cho token (de chon payload). */
+
+      /** Giai base64url (JWT) ra chuoi UTF-8; hong -> null. Tu viet: core khong dung atob/Buffer. */
+      function base64UrlText(b64) {
+        const abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+        let bits = 0;
+        let acc = 0;
+        let pct = '';
+        for (let i = 0; i < b64.length; i++) {
+          const ch = b64.charAt(i);
+          if (ch === '=') break;
+          const v = abc.indexOf(ch === '+' ? '-' : ch === '/' ? '_' : ch);
+          if (v < 0) return null;
+          acc = (acc << 6 | v) & 0xffffff;
+          bits += 6;
+          if (bits >= 8) {
+            bits -= 8;
+            const byte = acc >> bits & 0xff;
+            pct += '%' + (byte < 16 ? '0' : '') + byte.toString(16);
+          }
+        }
+        try {
+          return decodeURIComponent(pct);
+        } catch {
+          return null;
+        }
+      }
+
+      /** Spec P1 §3.4: Nakama userId nam o claim `uid` cua JWT phien; hong -> ''. */
+      function jwtUserId(token) {
+        const parts = token.split('.');
+        if (parts.length < 2) return '';
+        const text = base64UrlText(parts[1]);
+        if (text === null) return '';
+        try {
+          const o = JSON.parse(text);
+          return typeof o.uid === 'string' ? o.uid : '';
+        } catch {
+          return '';
+        }
+      }
 
       /** Ban luu trong localStorage: kem server va device de khong dung nham tai khoan. */
 
@@ -59769,6 +62819,11 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
         async fetchGames() {
           return parseGames(await this.call('platform.games', {}));
         }
+        async appConfig(native) {
+          return parseAppConfig(await this.call('platform.app_config', native !== null ? {
+            native
+          } : {}));
+        }
         async fetchProfile() {
           return parseProfile(await this.call('platform.user_info', {}));
         }
@@ -59875,6 +62930,10 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
               kind: 'cancelled',
               orderId: order.orderId
             };
+            if (isPayPending(e)) return {
+              kind: 'pending',
+              orderId: order.orderId
+            };
             this.d.logger.warn('PlatformSession: thanh toan hong ' + order.orderId + ': ' + String(e));
             return {
               kind: 'payFailed',
@@ -59882,6 +62941,8 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
             };
           }
           const done = await this.complete(order.orderId, itemId, receipt);
+          // Khong cho consume: popup thuong hien ngay (afterDelivered tu bat loi).
+          void this.afterDelivered(provider, order.orderId, receipt);
           // Final review A3 I1: server vua ghi pay_flags (het moi First charge) -> home_state nen, loi chi log.
           this.refreshHome('platform.purchase_complete');
           return {
@@ -59901,13 +62962,32 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
               const receipt = await provider.restore(o);
               if (receipt === null) continue;
               out.push(await this.complete(o.orderId, o.itemId, receipt));
+              await this.afterDelivered(provider, o.orderId, receipt);
             } catch (e) {
               this.d.logger.warn('PlatformSession: giao lai don ' + o.orderId + ' hong: ' + (isGatewayError(e) ? e.detail : String(e)));
+            }
+          }
+          // B1 §5: giao dich Store da tra tien ma server khong con don treo khop (da giao) -> provider consume.
+          if (provider.settleOrphans !== undefined) {
+            try {
+              await provider.settleOrphans(pending.map(o => o.orderId));
+            } catch (e) {
+              this.d.logger.warn('PlatformSession: don mo coi hong: ' + String(e));
             }
           }
           // Final review A3 I1: co don giao thi home_state nen mot lan (icon First charge, app.home).
           if (out.length > 0) this.refreshHome('platform.purchase_complete');
           return out;
+        }
+
+        /** B1 §5: hook sau giao (Google consume). Hang da giao nen loi chi log; lan mo app sau settleOrphans consume lai. */
+        async afterDelivered(provider, orderId, receipt) {
+          if (provider.afterDelivered === undefined) return;
+          try {
+            await provider.afterDelivered(receipt);
+          } catch (e) {
+            this.d.logger.warn('PlatformSession: afterDelivered don ' + orderId + ' hong: ' + String(e));
+          }
         }
         async complete(orderId, itemId, receipt) {
           const r = parseDelivery(await this.call('platform.purchase_complete', {
@@ -60011,11 +63091,9 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
 
         /** Spec D4b §3.1: provider.show -> video_reward; huy/khong co provider/SDK loi -> khong goi server. */
         async watchVideo() {
-          const token = await this.showAd('video');
-          if (typeof token !== 'string') return token;
-          const r = parseVideoReward(await this.call('platform.video_reward', {
-            token
-          }));
+          const ad = await this.showAd('video');
+          if (!('token' in ad)) return ad;
+          const r = parseVideoReward(await this.callAdReward('platform.video_reward', ad));
           this.events.wallet(r.wallet);
           this.events.video(r.info);
           this.refreshHome('platform.video_reward');
@@ -60027,11 +63105,9 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
 
         /** Lech spec 17: CHO home_state moi (gio cho hop online moi) truoc khi tra; home_state loi chi log. */
         async watchBoxVideo() {
-          const token = await this.showAd('box');
-          if (typeof token !== 'string') return token;
-          const r = parseBoxVideo(await this.call('platform.online_box_video', {
-            token
-          }));
+          const ad = await this.showAd('box');
+          if (!('token' in ad)) return ad;
+          const r = parseBoxVideo(await this.callAdReward('platform.online_box_video', ad));
           this.events.video(r.info);
           try {
             await this.fetchHome();
@@ -60042,6 +63118,30 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
             kind: 'reduced',
             ...r
           };
+        }
+
+        /** Spec P1 §3.1: lay ve quang cao (token chong dung lai) truoc khi mo AdMob. Thieu ticketId -> nem. */
+        async adTicket(placement) {
+          const r = await this.call('platform.ad_ticket', {
+            placement
+          });
+          const id = typeof r === 'object' && r !== null ? r.ticketId : undefined;
+          if (typeof id !== 'string' || id === '') {
+            const e = {
+              stage: 'rpc',
+              code: null,
+              reason: 'unknown',
+              detail: 'platform.ad_ticket tra hong'
+            };
+            throw e;
+          }
+          return id;
+        }
+
+        /** Spec P1 §3.4: Nakama userId cua phien (claim uid trong JWT); chua co phien -> ''. */
+        userId() {
+          const t = this.d.gateway.exportSession();
+          return t === null ? '' : jwtUserId(t.token);
         }
 
         /** Spec D4c §3.1: vip_info; hong -> null (cache cung null). Loi RPC nem, giu cache cu. */
@@ -60100,6 +63200,24 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
           this.events.wallet(r.wallet);
           this.events.props(r.props);
           this.noteInboxDots(r.dots);
+          return r;
+        }
+
+        /** Spec E4 §4.1: platform.events_list; hong -> null. */
+        async eventsList(lang) {
+          return parseEventsList(await this.call('platform.events_list', {
+            lang
+          }));
+        }
+
+        /** Spec E4 §4.1: platform.event_claim: phat onWallet, onProps; home_state nen tat cham do Event. */
+        async eventClaim(id) {
+          const r = parseEventClaim(await this.call('platform.event_claim', {
+            id
+          }));
+          this.events.wallet(r.wallet);
+          if (r.props !== null) this.events.props(r.props);
+          this.refreshHome('platform.event_claim');
           return r;
         }
         async deleteInbox(ids) {
@@ -60247,22 +63365,54 @@ System.register("chunks:///_virtual/platformSession.ts", ['cc', './lobbyTest.ts'
           if (!same || force) this.events.vip(b);
         }
 
-        /** Hien quang cao: khong co provider -> unavailable; nguoi choi huy -> cancelled; loi khac -> failed (log). */
+        /**
+         * Hien quang cao: khong co provider / khong nap duoc quang cao -> unavailable; nguoi choi huy -> cancelled;
+         * loi khac -> failed (log).
+         */
         async showAd(placement) {
           const p = currentAdProvider();
           if (p === null) return {
             kind: 'unavailable'
           };
           try {
-            return await p.show(placement);
+            return {
+              token: await p.show(placement),
+              provider: p.id
+            };
           } catch (e) {
             if (isAdCancelled(e)) return {
               kind: 'cancelled'
+            };
+            if (isAdUnavailable(e)) return {
+              kind: 'unavailable'
             };
             this.d.logger.warn('PlatformSession: quang cao ' + placement + ' hong: ' + String(e));
             return {
               kind: 'failed'
             };
+          }
+        }
+
+        /**
+         * RPC nhan thuong video (spec P1 §3.2): provider dev giu payload cu {token}; provider khac gui them
+         * `provider`. ssv_pending -> cho SSV_RETRY_MS roi thu lai, toi da SSV_RETRIES lan; het thi nem loi cuoi.
+         */
+        async callAdReward(id, ad) {
+          const payload = ad.provider === DEV_AD_PROVIDER_ID ? {
+            token: ad.token
+          } : {
+            token: ad.token,
+            provider: ad.provider
+          };
+          const sleep = this.d.sleepMs ?? (ms => new Promise(r => setTimeout(r, ms)));
+          for (let i = 0;; i++) {
+            try {
+              return await this.call(id, payload);
+            } catch (e) {
+              if (i >= SSV_RETRIES || videoFailOf(asGatewayError(e, 'rpc')) !== 'ssv_pending') throw e;
+              this.d.logger.warn('PlatformSession: ' + id + ' ssv_pending, thu lai lan ' + (i + 1));
+            }
+            await sleep(SSV_RETRY_MS);
           }
         }
 
@@ -60664,13 +63814,15 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
     execute: function () {
       exports('platformText', platformText);
       cclegacy._RF.push({}, "29f4494A/lJ272bX9VCj1Nq", "platformText", undefined);
-      const TEXT_KEYS = exports('TEXT_KEYS', ['privacyTips', 'privacy1', 'privacy2', 'privacy3', 'privacy4', 'privacy5', 'loginGuest', 'loginFacebook', 'langEn', 'langEs', 'comingSoon', 'netError', 'loginFailed', 'sessionLost', 'tipsTitle', 'seatPeople', 'notEnoughBody', 'tooMuchBody', 'btnOk', 'btnBuy', 'btnGoHigh', 'levelGone', 'enterFailed', 'enteringRoom', 'loggingIn', 'loggingOut', 'leavingGame', 'setAccount', 'setSound', 'setMusic', 'setLike', 'setVersion', 'btnCancel', 'logoutConfirm', 'exitBody', 'exitAward', 'btnExit', 'btnStay', 'getCoin', 'alreadyClaimed', 'notBankrupt', 'bankruptNoLeft', 'onlineNotReady', 'onlineDone', 'signReceive', 'signTomorrow', 'onlineReceive', 'onlineNext', 'newbieReceive', 'newbieDone', 'newbieTips', 'mallEmpty', 'chipUnit', 'goldUnit', 'notEnoughGold', 'payCancelled', 'payFailed', 'orderFailed', 'orderResumed', 'fcUsed', 'tableRefilled', 'resumingTable', 'reconnecting', 'buyPropOk', 'rewardGain', 'propBag', 'propCount', 'propNone', 'taskEmpty', 'taskReceive', 'taskGo', 'taskNotCompleted', 'piggyNotReady', 'piggyConfirm', 'piggyLoadFail', 'piggyRule1', 'piggyRule2', 'piggyRule3', 'piggyRule4', 'wheelFree', 'wheelLoadFail', 'wheelGot', 'videoNotSurplus', 'videoNotSupport', 'videoUnavailable', 'onlineVideoMin', 'onlineCanWatch', 'onlineVideoMsg', 'onlineVideoSecMsg', 'onlineVideoFail', 'onlineBoxReady', 'userId', 'userGift', 'userProps', 'userGiftSoon', 'userNamePrompt', 'userNameEmpty', 'userNameLong', 'userNameBadChars', 'userTotal', 'userRate', 'userMaxWin', 'userNone', 'rankWins', 'rankWinMoney', 'rankWealth', 'rankRound', 'rankNone', 'rankMine', 'rankUnranked', 'msgNews', 'msgNotice', 'msgNone', 'msgGain', 'msgGained', 'msgDelete', 'msgClaimFail', 'friendTabList', 'friendTabAdd', 'friendTabMsg', 'friendNum', 'friendNone', 'friendOnline', 'friendOffline', 'friendGiftBtn', 'friendRecommend', 'friendChange', 'friendInputId', 'friendSearch', 'friendIdTooLong', 'friendNoRecommend', 'friendAdd', 'friendNotFound', 'friendIdEmpty', 'friendNoMsg', 'friendRefuse', 'friendAgree', 'friendGiftMsg', 'friendAddBtn', 'friendRemove', 'friendAddedYou', 'friendMsgDone', 'friendRemoved', 'friendAddSent', 'friendMsgTotal', 'friendGiftOk', 'friendIsFriend', 'broadNone', 'broadPrompt', 'broadSubmit', 'broadSystem', 'broadLaba', 'broadMaxLen', 'broadNoSpeaker', 'propUse', 'invitedIgnore', 'invitedConfirm', 'invitedContent', 'followGone', 'inviteCard1', 'inviteCard2', 'inviteCard3', 'inviteFriends', 'inviteChips', 'inviteBindBtn', 'inviteInputTip', 'inviteInputOk', 'inviterTitle', 'inviterYes', 'inviterNo', 'bindOk', 'copyOk', 'friendInvite', 'friendPending', 'friendPendingFull', 'giftDone', 'giftDayLimit', 'giftTheirLimit', 'giftLowBalance', 'friendFull', 'friendTheirFull', 'inviteSendFail', 'inviteOffline', 'inviteSent', 'bindExpired', 'bindAlready', 'bindSelf', 'bindCycle', 'bindNotFound', 'inviteGiftInInbox', 'speakerTooFast', 'speakerBadChars', 'socialBusy', 'notSitChat', 'notSitExpress', 'playerNotHere', 'limitMoneyProp', 'notVipExpress', 'moneyNotEnough', 'vipPrompt', 'vipPromptOk', 'vipPromptCancel', 'chatInputPrompt', 'chatSend', 'chatNoHistory', 'chatMe', 'chatInputEmpty', 'chatTabNormal', 'chatTabVip', 'userShield', 'userCancelShield', 'everyPropCoin', 'chatHideAll', 'chatTooFast', 'propPaid', 'muteDone', 'unmuteDone',
+      const TEXT_KEYS = exports('TEXT_KEYS', ['privacyTips', 'privacy1', 'privacy2', 'privacy3', 'privacy4', 'privacy5', 'loginGuest', 'loginFacebook', 'langEn', 'langEs', 'comingSoon', 'eventTitle', 'eventClaim', 'eventClaimed', 'eventGo', 'eventNone', 'eventEnded', 'netError', 'loginFailed', 'sessionLost', 'tipsTitle', 'seatPeople', 'notEnoughBody', 'tooMuchBody', 'btnOk', 'btnBuy', 'btnGoHigh', 'levelGone', 'enterFailed', 'enteringRoom', 'loggingIn', 'loggingOut', 'leavingGame', 'setAccount', 'setSound', 'setMusic', 'setLike', 'setVersion', 'btnCancel', 'logoutConfirm', 'exitBody', 'exitAward', 'btnExit', 'btnStay', 'getCoin', 'alreadyClaimed', 'notBankrupt', 'bankruptNoLeft', 'onlineNotReady', 'onlineDone', 'signReceive', 'signTomorrow', 'onlineReceive', 'onlineNext', 'newbieReceive', 'newbieDone', 'newbieTips', 'mallEmpty', 'chipUnit', 'goldUnit', 'notEnoughGold', 'payCancelled', 'payFailed', 'payPending', 'orderFailed', 'orderResumed', 'fcUsed', 'tableRefilled', 'resumingTable', 'reconnecting', 'buyPropOk', 'rewardGain', 'propBag', 'propCount', 'propNone', 'taskEmpty', 'taskReceive', 'taskGo', 'taskNotCompleted', 'piggyNotReady', 'piggyConfirm', 'piggyLoadFail', 'piggyRule1', 'piggyRule2', 'piggyRule3', 'piggyRule4', 'wheelFree', 'wheelLoadFail', 'wheelGot', 'videoNotSurplus', 'videoNotSupport', 'videoUnavailable', 'onlineVideoMin', 'onlineCanWatch', 'onlineVideoMsg', 'onlineVideoSecMsg', 'onlineVideoFail', 'onlineBoxReady', 'userId', 'userGift', 'userProps', 'userGiftSoon', 'userNamePrompt', 'userNameEmpty', 'userNameLong', 'userNameBadChars', 'userTotal', 'userRate', 'userMaxWin', 'userNone', 'rankWins', 'rankWinMoney', 'rankWealth', 'rankRound', 'rankNone', 'rankMine', 'rankUnranked', 'msgNews', 'msgNotice', 'msgNone', 'msgGain', 'msgGained', 'msgDelete', 'msgClaimFail', 'msgWinLog', 'friendTabList', 'friendTabAdd', 'friendTabMsg', 'friendNum', 'friendNone', 'friendOnline', 'friendOffline', 'friendGiftBtn', 'friendRecommend', 'friendChange', 'friendInputId', 'friendSearch', 'friendIdTooLong', 'friendNoRecommend', 'friendAdd', 'friendNotFound', 'friendIdEmpty', 'friendNoMsg', 'friendRefuse', 'friendAgree', 'friendGiftMsg', 'friendAddBtn', 'friendRemove', 'friendAddedYou', 'friendMsgDone', 'friendRemoved', 'friendAddSent', 'friendMsgTotal', 'friendGiftOk', 'friendIsFriend', 'broadNone', 'broadPrompt', 'broadSubmit', 'broadSystem', 'broadLaba', 'broadMaxLen', 'broadNoSpeaker', 'propUse', 'invitedIgnore', 'invitedConfirm', 'invitedContent', 'followGone', 'inviteCard1', 'inviteCard2', 'inviteCard3', 'inviteFriends', 'inviteChips', 'inviteBindBtn', 'inviteInputTip', 'inviteInputOk', 'inviterTitle', 'inviterYes', 'inviterNo', 'bindOk', 'copyOk', 'friendInvite', 'friendPending', 'friendPendingFull', 'giftDone', 'giftDayLimit', 'giftTheirLimit', 'giftLowBalance', 'friendFull', 'friendTheirFull', 'inviteSendFail', 'inviteOffline', 'inviteSent', 'bindExpired', 'bindAlready', 'bindSelf', 'bindCycle', 'bindNotFound', 'inviteGiftInInbox', 'speakerTooFast', 'speakerBadChars', 'socialBusy', 'notSitChat', 'notSitExpress', 'playerNotHere', 'limitMoneyProp', 'notVipExpress', 'moneyNotEnough', 'vipPrompt', 'vipPromptOk', 'vipPromptCancel', 'chatInputPrompt', 'chatSend', 'chatNoHistory', 'chatMe', 'chatInputEmpty', 'chatTabNormal', 'chatTabVip', 'userShield', 'userCancelShield', 'everyPropCoin', 'chatHideAll', 'chatTooFast', 'propPaid', 'muteDone', 'unmuteDone',
       // G2 §3.5: chip dang khoa o ban game khoa tien (tu dat); %s = ten game (chipLockedText), Any = khong ro game.
       'chipLocked', 'chipLockedAny',
       // OTA1 §4.5: chu BootScene (tu dat)
       'otaChecking', 'otaPreparing', 'otaDownloading', 'otaNeedStore',
       // Mat ket noi ngoai ban (Hall/Lobby/Slot25): nut hop sessionLost (tu dat)
-      'btnRetry', 'btnRelogin']);
+      'btnRetry', 'btnRelogin',
+      // B13-B15 §4.5: UPDATE.TITLE, UPDATE.BTNTXT, POPUPFRAME.TOMORROW_SAY, NOTICE.TITLE, NOTICE.BTNTXT, POPUPFRAME.GAME_MAINTAIN
+      'updateTitle', 'updateBtn', 'updateLater', 'noticeTitle', 'noticeBtn', 'gameMaintain']);
       const EN = {
         // LOGIN.PRIVACY_TIPS, PRIVACY_1..5 (android en)
         privacyTips: 'Please check to agree to the privacy policy and terms of service agreement below to enter the game',
@@ -60685,6 +63837,13 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         langEn: 'English',
         langEs: 'Español',
         comingSoon: 'Coming soon',
+        // Spec E4 §4.3 (tu dat)
+        eventTitle: 'Events',
+        eventClaim: 'Claim',
+        eventClaimed: 'Claimed',
+        eventGo: 'Go',
+        eventNone: 'There are no events right now',
+        eventEnded: 'This event has ended',
         // SERVER.TIMEOUT, LOGIN.FAILEDLOGIN, SERVER.TIME_DISCONNECT
         netError: 'The server connection failed, please check the network and try again',
         loginFailed: 'Operation failed, please try again later',
@@ -60740,6 +63899,8 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         notEnoughGold: 'You currently have insufficient gold coins, are you going to buy more gold coins?',
         payCancelled: 'Payment Canceled',
         payFailed: 'Payment Failure',
+        // Spec B1 §6: chu tu dat, giao dich Google dang cho tra tien
+        payPending: 'Your payment is pending',
         orderFailed: 'Order Failed',
         orderResumed: 'The system detected that you have an unshipped order, and is processing for you...',
         // Spec A3 §3.3: chu tu dat cho ma loi fc_used
@@ -60810,6 +63971,7 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         msgGain: 'Receive',
         msgGained: 'Received',
         msgDelete: 'Delete',
+        msgWinLog: 'You won %s chips in %s (table %s)',
         msgClaimFail: 'Could not claim, please try again',
         friendTabList: 'Friends List',
         friendTabAdd: 'Add Friends',
@@ -60855,7 +64017,7 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         followGone: 'Sorry, your friend has left the room',
         inviteCard1: 'Invite friends',
         inviteCard2: 'Friends bind\nyour invitation code',
-        inviteCard3: 'Your reward from\neach ivited player',
+        inviteCard3: 'Your reward after each\nfriend plays 3 rounds',
         inviteFriends: 'Friends invited:',
         inviteChips: 'Chips obtained:',
         inviteBindBtn: 'Bind',
@@ -60918,7 +64080,13 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         otaDownloading: 'Downloading update... %s%',
         otaNeedStore: 'A new version is available in the store',
         btnRetry: 'Retry',
-        btnRelogin: 'Log in'
+        btnRelogin: 'Log in',
+        updateTitle: 'New Version',
+        updateBtn: 'Upgrade',
+        updateLater: 'Next Time',
+        noticeTitle: 'System Anouncement',
+        noticeBtn: 'Yes',
+        gameMaintain: 'The game is under maintenance, please wait...'
       };
       const ES = {
         privacyTips: 'Marque para aceptar la política de privacidad y el acuerdo de términos de servicio a continuación para ingresar al juego',
@@ -60932,6 +64100,12 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         langEn: 'English',
         langEs: 'Español',
         comingSoon: 'Próximamente',
+        eventTitle: 'Eventos',
+        eventClaim: 'Recibir',
+        eventClaimed: 'Recibido',
+        eventGo: 'Ir',
+        eventNone: 'No hay eventos por ahora',
+        eventEnded: 'El evento terminó',
         netError: 'La conexión del servidor falló, verifique la red e intente nuevamente',
         loginFailed: 'La operación falló. Inténtalo más tarde',
         sessionLost: 'Su red parece inestable, verifique el estado de su red e intente iniciar sesión nuevamente',
@@ -60978,6 +64152,7 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         notEnoughGold: 'Actualmente no tienes suficientes monedas de oro, ¿vas a comprar más monedas de oro?',
         payCancelled: 'Pago cancelado',
         payFailed: 'Error de pago',
+        payPending: 'Tu pago está pendiente',
         orderFailed: 'Error en el pedido',
         orderResumed: 'Detectado que tiene un pedido sin enviar y lo está procesando por usted...',
         // Spec A3 §3.3: chu tu dat cho ma loi fc_used
@@ -61041,6 +64216,7 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         msgGain: 'Recibir',
         msgGained: 'Recibido',
         msgDelete: 'Eliminar',
+        msgWinLog: 'Ganaste %s fichas en %s (mesa %s)',
         msgClaimFail: 'No se pudo recibir, inténtalo de nuevo',
         friendTabList: 'Lista de amigos',
         friendTabAdd: 'Invitar a amigos',
@@ -61086,7 +64262,7 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         followGone: 'Lo sentimos, tu amigo ha salido de la habitación',
         inviteCard1: 'Invitar a amigos',
         inviteCard2: 'Los amigos vinculan\ntu código de invitación',
-        inviteCard3: 'Tu recompensa de\ncada jugador invitado',
+        inviteCard3: 'Tu recompensa cuando\ntu amigo juegue 3 partidas',
         inviteFriends: 'Amigos invitados:',
         inviteChips: 'Fichas obtenidas:',
         inviteBindBtn: 'Vincular',
@@ -61149,7 +64325,13 @@ System.register("chunks:///_virtual/platformText.ts", ['cc', './release.ts'], fu
         otaDownloading: 'Descargando actualización... %s%',
         otaNeedStore: 'Hay una nueva versión disponible en la tienda',
         btnRetry: 'Reintentar',
-        btnRelogin: 'Iniciar sesión'
+        btnRelogin: 'Iniciar sesión',
+        updateTitle: 'Nueva versión',
+        updateBtn: 'Actualizar',
+        updateLater: 'La próxima vez',
+        noticeTitle: 'Anuncio del sistema',
+        noticeBtn: 'Confirmar',
+        gameMaintain: 'El juego está en mantenimiento, espere...'
       };
       function platformText(lang, key, arg) {
         const s = (lang === 'en' ? EN : ES)[key];
@@ -64217,7 +67399,8 @@ System.register("chunks:///_virtual/rank.ts", ['cc'], function (exports) {
             name: str(r.name),
             avatar: str(r.avatar),
             vip: count(r.vip),
-            value: count(r.value)
+            value: count(r.value),
+            online: r.online === true
           });
         }
         const me = isObj(raw.me) && count(raw.me.rank) > 0 ? {
@@ -64256,7 +67439,8 @@ System.register("chunks:///_virtual/rank2.ts", ['cc', './social.ts', './clock.ts
         ensureLeaderboards: ensureLeaderboards,
         rankMeta: rankMeta,
         writeRank: writeRank,
-        writeWealth: writeWealth
+        writeWealth: writeWealth,
+        writeWealthOfWallets: writeWealthOfWallets
       });
       cclegacy._RF.push({}, "8b077dVmNxM07N/mg4nMGnS", "rank", undefined);
       const RANK_TABS = exports('RANK_TABS', ['wins', 'winMoney', 'wealth']);
@@ -64326,18 +67510,42 @@ System.register("chunks:///_virtual/rank2.ts", ['cc', './social.ts', './clock.ts
       function writeWealth(nk, logger, userId) {
         writeRank(nk, logger, 'wealth', userId, 0);
       }
+
+      /** gameId sổ cái của tiền nền tảng (= REWARD_GAME của rewardsRpc.ts; không import để tránh vòng phụ thuộc). */
+      const PLATFORM_LEDGER_GAME = exports('PLATFORM_LEDGER_GAME', 'platform');
+
+      /**
+       * P3: chốt chặn làm tươi bảng tài sản khi ví đổi NGOÀI ván. runAtomic gọi sau multiUpdate thành công:
+       * mỗi người có thay đổi ví sổ cái `game: 'platform'` (Mall, hộp thư, quà bạn, video, vòng quay, nhiệm vụ,
+       * heo đất...) ghi một lần. Ví của game (khoá chip, trả giữa ván) bỏ qua: số dư lúc đó thiếu phần đang khoá,
+       * bảng tài sản cập nhật sau ván ở socialRound. Lỗi chỉ log warn (writeRank), không bao giờ ném.
+       */
+      function writeWealthOfWallets(nk, logger, wallets) {
+        const done = {};
+        for (let i = 0; i < wallets.length; i++) {
+          const w = wallets[i];
+          const meta = w.metadata || {};
+          if (meta.game !== PLATFORM_LEDGER_GAME || typeof w.userId !== 'string' || w.userId === '' || done[w.userId] === true) {
+            continue;
+          }
+          done[w.userId] = true;
+          writeWealth(nk, logger, w.userId);
+        }
+      }
       cclegacy._RF.pop();
     }
   };
 });
 
-System.register("chunks:///_virtual/rankPresenter.ts", ['cc', './platformText.ts', './profile2.ts', './rank.ts', './apkFormat.ts'], function (exports) {
-  var cclegacy, platformText, avatarFrame, RANK_TABS, potText;
+System.register("chunks:///_virtual/rankPresenter.ts", ['cc', './platformText.ts', './friends.ts', './profile2.ts', './rank.ts', './apkFormat.ts'], function (exports) {
+  var cclegacy, platformText, onlineText, avatarFrame, RANK_TABS, potText;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
     }, function (module) {
       platformText = module.platformText;
+    }, function (module) {
+      onlineText = module.onlineText;
     }, function (module) {
       avatarFrame = module.avatarFrame;
     }, function (module) {
@@ -64366,7 +67574,9 @@ System.register("chunks:///_virtual/rankPresenter.ts", ['cc', './platformText.ts
           vip: r.vip,
           valueText: l.tab === 'wins' ? platformText(lang, 'rankRound', String(r.value)) : potText(r.value),
           valueKind: l.tab === 'wins' ? 'round' : 'chip',
-          mine: r.userId === myId
+          mine: r.userId === myId,
+          online: r.online,
+          onlineText: onlineText(r.online, lang)
         }));
       }
       function rankMineText(l, lang) {
@@ -64544,7 +67754,7 @@ System.register("chunks:///_virtual/release.ts", ['cc', './platformExtraRes.ts']
         storagePrefix: 'conquian',
         // G1: Escoba, G2: Burro la game that (spec G1 §7.5, G2 §7.9), khong con o "sap co".
         comingSoon: [PlatformExtraRes.Hall_viuda_content_spine, PlatformExtraRes.Hall_halfpastseven_content_gaf],
-        storeUrl: '',
+        storeUrl: 'https://play.google.com/store/apps/details?id=com.arcadenix.conquian',
         safeArea: false
       });
       function storageKey(name) {
@@ -64766,11 +67976,18 @@ System.register("chunks:///_virtual/RewardRain.ts", ['cc', './rewardFx.ts', './u
   };
 });
 
-System.register("chunks:///_virtual/rewardsRpc.ts", ['cc', './bankrupt.ts', './checkin.ts', './clock.ts', './chipLock.ts', './economy2.ts', './homeState2.ts', './newbie.ts', './onlineBox.ts', './payFlags.ts', './rewardsStore.ts', './socialHome.ts', './taskDots.ts', './vip.ts', './wallet.ts', './seatMoney.ts'], function (exports) {
-  var cclegacy, bankruptState, applyBankruptClaim, checkinState, applyCheckinClaim, platformNow, releaseDeadLocks, hasLiveLockStrict, lockedChipStrict, readBalance, buildHomeState, newbieState, applyNewbieClaim, ensureOnlineDay, onlineState, applyOnlineClaim, safeFcEligible, mutateRewards, readRewards, writeRewards, socialHomeDots, readTaskDots, safeVipBrief, vipStatus, readVip, vipBonus, readWallet, creditChipMeta, notifySeatMoney;
+System.register("chunks:///_virtual/rewardsRpc.ts", ['cc', './events2.ts', './eventsStore.ts', './appConfig2.ts', './bankrupt.ts', './checkin.ts', './clock.ts', './chipLock.ts', './economy2.ts', './homeState2.ts', './newbie.ts', './onlineBox.ts', './payFlags.ts', './rank2.ts', './rewardsStore.ts', './socialHome.ts', './taskDots.ts', './vip.ts', './wallet.ts', './seatMoney.ts'], function (exports) {
+  var cclegacy, eventDots, liveEvents, readEvents, readAppConfig, bankruptState, applyBankruptClaim, checkinState, applyCheckinClaim, platformNow, releaseDeadLocks, hasLiveLockStrict, lockedChipStrict, readBalance, buildHomeState, newbieState, applyNewbieClaim, ensureOnlineDay, onlineState, applyOnlineClaim, safeFcEligible, writeWealth, mutateRewards, readRewards, writeRewards, socialHomeDots, readTaskDots, safeVipBrief, vipStatus, readVip, vipBonus, readWallet, creditChipMeta, notifySeatMoney;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
+    }, function (module) {
+      eventDots = module.eventDots;
+    }, function (module) {
+      liveEvents = module.liveEvents;
+      readEvents = module.readEvents;
+    }, function (module) {
+      readAppConfig = module.readAppConfig;
     }, function (module) {
       bankruptState = module.bankruptState;
       applyBankruptClaim = module.applyBankruptClaim;
@@ -64796,6 +68013,8 @@ System.register("chunks:///_virtual/rewardsRpc.ts", ['cc', './bankrupt.ts', './c
       applyOnlineClaim = module.applyOnlineClaim;
     }, function (module) {
       safeFcEligible = module.safeFcEligible;
+    }, function (module) {
+      writeWealth = module.writeWealth;
     }, function (module) {
       mutateRewards = module.mutateRewards;
       readRewards = module.readRewards;
@@ -64874,6 +68093,8 @@ System.register("chunks:///_virtual/rewardsRpc.ts", ['cc', './bankrupt.ts', './c
           revertRewards(nk, logger, userId, before, written);
           throw Error('credit_failed');
         }
+        // P3: bảng tài sản = số dư mới (điểm danh, hộp online, phá sản, tân thủ); lỗi chỉ warn trong writeRank.
+        writeWealth(nk, logger, userId);
         // Đang ngồi bàn Conquian: ghế đọc lại ví ngay (3127); không bao giờ làm hỏng lần nhận.
         notifySeatMoney(nk, logger, userId);
         return JSON.stringify({
@@ -64891,7 +68112,21 @@ System.register("chunks:///_virtual/rewardsRpc.ts", ['cc', './bankrupt.ts', './c
         });
       }
 
-      /** Lần đầu trong ngày đặt mốc hộp online (chỉ ghi storage khi bản ghi đổi). Spec D4c: kèm `vip` (chỉ đọc). Spec E1: tin chào mừng, bảng tài sản, chấm hộp thư. */
+      /** Spec E4 §3.3: lỗi đọc cấu hình / bản ghi sự kiện không làm hỏng home_state. */
+      function safeEventDots(nk, logger, userId, now) {
+        try {
+          return eventDots(liveEvents(logger), readEvents(nk, userId).rec, now);
+        } catch (e) {
+          logger.error('home_state: đọc sự kiện lỗi user=%s: %s', userId, String(e));
+          return {
+            event: false,
+            eventCount: 0,
+            eventNextAt: 0
+          };
+        }
+      }
+
+      /** Lần đầu trong ngày đặt mốc hộp online (chỉ ghi storage khi bản ghi đổi). Spec D4c: kèm `vip` (chỉ đọc). Spec E1: tin chào mừng, bảng tài sản, chấm hộp thư. Spec E4: chấm sự kiện. */
       const rpcHomeState = exports('rpcHomeState', function (ctx, logger, nk) {
         const userId = userOf(ctx);
         // G2 §3.5: khóa tiền của bàn Burro đã chết trả lại trước khi đọc ví.
@@ -64902,7 +68137,7 @@ System.register("chunks:///_virtual/rewardsRpc.ts", ['cc', './bankrupt.ts', './c
           return r;
         }, logger);
         const w = readWallet(nk, userId);
-        return JSON.stringify(buildHomeState(rec, w.chip, now, w.gold, readTaskDots(nk, logger, userId, rec, now), safeVipBrief(nk, logger, userId, now), socialHomeDots(nk, logger, userId), safeFcEligible(nk, logger, userId)));
+        return JSON.stringify(buildHomeState(rec, w.chip, now, w.gold, readTaskDots(nk, logger, userId, rec, now), safeVipBrief(nk, logger, userId, now), socialHomeDots(nk, logger, userId), safeFcEligible(nk, logger, userId, ctx.env), readAppConfig(nk, logger).features, safeEventDots(nk, logger, userId, now)));
       });
       const rpcBankruptClaim = exports('rpcBankruptClaim', function (ctx, logger, nk) {
         const userId = userOf(ctx);
@@ -64917,7 +68152,7 @@ System.register("chunks:///_virtual/rewardsRpc.ts", ['cc', './bankrupt.ts', './c
           return applyBankruptClaim(r, chip, now);
         }, function (r, chip, now) {
           // Spec A3 §3.1: state.saleType theo cờ đã nạp như home_state.
-          return bankruptState(r, chip, now, safeFcEligible(nk, logger, userId));
+          return bankruptState(r, chip, now, safeFcEligible(nk, logger, userId, ctx.env));
         });
       });
       const rpcCheckinInfo = exports('rpcCheckinInfo', function (ctx, _logger, nk) {
@@ -67036,6 +70271,8 @@ System.register("chunks:///_virtual/serverConfig.ts", ['cc'], function (exports)
       exports('firstNakama', firstNakama);
       cclegacy._RF.push({}, "916d0EUsqZPg4QRXZge2pUS", "serverConfig", undefined);
       /** Hinh dang cua assets/resources/config/server.json (spec SP2 Colyseus §4). */
+      /** Spec P1 §3.5: muc `ads` cua mot server Nakama trong server.json. */
+      /** Spec B1 §5: muc iap cua mot server. fake = cau noi Billing gia (web + Android); real = Billing that (chi Android). */
       /** Server Colyseus dev cua backend — khong co serverKey, token chinh la device id. */
       /** Dong nakama dau tien — GameScene chay thang (khong qua lobby test) dung cai nay. */
       function firstNakama(list) {
@@ -67724,9 +70961,25 @@ System.register("chunks:///_virtual/shop.ts", ['cc', './catalog.ts'], function (
         }
         return out;
       }
-      function catalogFor(canPay) {
+
+      /** sku của mọi gói tiền thật theo thứ tự CATALOG (gồm gói ẩn). */
+      function skuMap() {
+        const out = {};
+        for (let i = 0; i < CATALOG.length; i++) {
+          const sku = CATALOG[i].sku;
+          if (typeof sku === 'string' && sku !== '') {
+            out[CATALOG[i].id] = sku;
+          }
+        }
+        return out;
+      }
+
+      /** `provider` = provider của verifier đang bật ('' hoặc thiếu = không có). */
+      function catalogFor(canPay, provider) {
         return {
           canPay: canPay,
+          provider: canPay && provider ? provider : '',
+          skus: skuMap(),
           chip: tabItems('chip'),
           gold: tabItems('gold'),
           prop: tabItems('prop'),
@@ -68181,11 +71434,13 @@ System.register("chunks:///_virtual/shopRes.ts", ['cc', './apkRes.ts'], function
   };
 });
 
-System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.ts', './economy2.ts', './orders.ts', './payFlags.ts', './payment.ts', './props.ts', './receipts.ts', './rpcArgs.ts', './rewardsRpc.ts', './shop.ts', './wallet.ts', './vip.ts', './seatMoney.ts'], function (exports) {
-  var cclegacy, runAtomic, platformNow, WALLET_CHIP, orderWrite, readOrder, pendingOrders, FC_ITEM_ID, fcEligible, readPayFlags, applyDelivered, payFlagsWrite, activeVerifier, DEV_PROVIDER, getVerifier, readProps, propsWrite, receiptState, receiptWrite, str, parsePayload, hasKeys, userOf, REWARD_GAME, catalogFor, findItem, grantOf, hasProps, applyGrantToProps, canAfford, readWallet, grantChangeset, walletOf, WALLET_GOLD, vipBrief, readVip, vipStatus, vipBonus, applyPaid, vipWrite, notifySeatMoney;
+System.register("chunks:///_virtual/shopRpc.ts", ['cc', './appConfig2.ts', './atomic.ts', './clock.ts', './economy2.ts', './orders.ts', './payFlags.ts', './googlePay2.ts', './payment.ts', './props.ts', './receipts.ts', './rpcArgs.ts', './rewardsRpc.ts', './shop.ts', './wallet.ts', './vip.ts', './seatMoney.ts'], function (exports) {
+  var cclegacy, assertNotMaintenance, runAtomic, platformNow, WALLET_CHIP, orderWrite, readOrder, pendingOrders, FC_ITEM_ID, fcEligible, readPayFlags, applyDelivered, payFlagsWrite, GOOGLE_PROVIDER, googleIapMode, activeVerifier, DEV_PROVIDER, getVerifier, readProps, propsWrite, receiptState, receiptWrite, str, parsePayload, hasKeys, userOf, REWARD_GAME, catalogFor, findItem, grantOf, hasProps, applyGrantToProps, canAfford, readWallet, grantChangeset, walletOf, WALLET_GOLD, vipBrief, readVip, vipStatus, vipBonus, applyPaid, vipWrite, notifySeatMoney;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
+    }, function (module) {
+      assertNotMaintenance = module.assertNotMaintenance;
     }, function (module) {
       runAtomic = module.runAtomic;
     }, function (module) {
@@ -68202,6 +71457,9 @@ System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.
       readPayFlags = module.readPayFlags;
       applyDelivered = module.applyDelivered;
       payFlagsWrite = module.payFlagsWrite;
+    }, function (module) {
+      GOOGLE_PROVIDER = module.GOOGLE_PROVIDER;
+      googleIapMode = module.googleIapMode;
     }, function (module) {
       activeVerifier = module.activeVerifier;
       DEV_PROVIDER = module.DEV_PROVIDER;
@@ -68250,30 +71508,40 @@ System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.
         return m.indexOf('negative') >= 0 || m.indexOf('insufficient') >= 0 || m.indexOf('balance') >= 0;
       }
 
-      /** Verifier của đơn; không có hoặc ném lỗi -> false (lỗi được log). */
-      function verified(logger, order, receipt) {
-        const v = getVerifier(order.provider);
+      /** Verifier của đơn; không có hoặc ném lỗi -> false (lỗi được log). Chỉ true hoặc 'pending' được giữ nguyên. */
+      function verified(order, receipt, call) {
+        const v = getVerifier(order.provider, call.env);
         if (v === null) {
           return false;
         }
         try {
-          return v.verify(order, receipt) === true;
+          const r = v.verify(order, receipt, call);
+          return r === true || r === 'pending' ? r : false;
         } catch (e) {
-          logger.error('shop: verify lỗi provider=%s: %s', order.provider, e instanceof Error ? e.message : String(e));
+          call.logger.error('shop: verify lỗi provider=%s: %s', order.provider, e instanceof Error ? e.message : String(e));
           return false;
         }
       }
+
+      /** Khoá chống dùng lại của biên lai theo verifier của đơn (google: purchaseToken); mặc định nguyên chuỗi. */
+      function receiptIdOf(order, receipt, env) {
+        const v = getVerifier(order.provider, env);
+        return v !== null && v.receiptKeyOf ? v.receiptKeyOf(receipt) : receipt;
+      }
       const rpcCatalog = exports('rpcCatalog', function (ctx) {
         userOf(ctx);
-        return JSON.stringify(catalogFor(activeVerifier() !== null));
+        const v = activeVerifier(ctx.env);
+        return JSON.stringify(catalogFor(v !== null, v !== null ? v.provider : ''));
       });
-      const rpcPurchaseCreate = exports('rpcPurchaseCreate', function (ctx, _logger, nk, payload) {
+      const rpcPurchaseCreate = exports('rpcPurchaseCreate', function (ctx, logger, nk, payload) {
         const userId = userOf(ctx);
+        // Spec B13–B15 §3: bảo trì không tạo đơn mới (purchase_complete vẫn chạy: đơn đã trả tiền phải giao).
+        assertNotMaintenance(nk, logger, userId);
         const item = findItem(str(parsePayload(payload).itemId));
         if (item === null) {
           throw Error('unknown_item');
         }
-        const v = activeVerifier();
+        const v = activeVerifier(ctx.env);
         if (v === null || !item.sku) {
           throw Error('payment_unavailable');
         }
@@ -68291,6 +71559,9 @@ System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.
           grant: grantOf(item),
           priceUsd: item.priceUsd || 0
         };
+        if (v.provider === GOOGLE_PROVIDER && googleIapMode(ctx.env) === 'fake') {
+          order.fake = true;
+        }
         nk.storageWrite([orderWrite(userId, orderId, order, '')]);
         return JSON.stringify({
           orderId: orderId,
@@ -68310,7 +71581,19 @@ System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.
         if (first === null) {
           throw Error('not_found');
         }
-        const okReceipt = first.order.status === 'pending' ? verified(logger, first.order, receipt) : false;
+        const env = ctx.env;
+        const outcome = first.order.status === 'pending' ? verified(first.order, receipt, {
+          nk: nk,
+          logger: logger,
+          userId: userId,
+          orderId: orderId,
+          env: env
+        }) : false;
+        if (first.order.status === 'pending' && outcome === 'pending') {
+          // Google chưa thu tiền (PENDING): đơn vẫn treo, client thử lại khi chuyển PURCHASED.
+          throw Error('pay_pending');
+        }
+        const okReceipt = outcome === true;
         if (first.order.status === 'pending' && !okReceipt) {
           throw Error('verify_failed');
         }
@@ -68355,16 +71638,20 @@ System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.
             vipLevel: before.effective,
             vipBonus: bonus
           };
+          if (order.fake === true) {
+            delivered.fake = true;
+          }
           const writes = [orderWrite(userId, orderId, delivered, cur.version)];
           if (order.provider !== DEV_PROVIDER) {
             // Biên lai provider thật chỉ dùng được cho một đơn: bản ghi tạo-một-lần đi chung multiUpdate.
-            const st = receiptState(nk, order.provider, receipt, orderId);
+            const rid = receiptIdOf(order, receipt, env);
+            const st = receiptState(nk, order.provider, rid, orderId);
             // st 'same' (đơn này đã giữ biên lai, đang pending): không ghi lại; chống giao hai lần là nhờ kiểm version của bản ghi đơn (biên lai chỉ chặn giữa các đơn khác nhau).
             if (st === 'other') {
               throw Error('verify_failed');
             }
             if (st === 'free') {
-              writes.push(receiptWrite(order.provider, receipt, orderId, userId));
+              writes.push(receiptWrite(order.provider, rid, orderId, userId));
             }
           }
           // Điểm + hạn VIP ghi CÙNG multiUpdate (version của platform/vip, '*' khi chưa có): hai đơn giao song
@@ -68399,16 +71686,23 @@ System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.
           }
           const wallets = [];
           if (hasKeys(change)) {
+            const meta = {
+              action: order.provider === DEV_PROVIDER ? 'dev_purchase' : 'purchase',
+              game: REWARD_GAME,
+              order_id: orderId,
+              vip_level: before.effective,
+              vip_bonus: bonus
+            };
+            if (order.provider === GOOGLE_PROVIDER) {
+              meta.provider = GOOGLE_PROVIDER;
+            }
+            if (order.fake === true) {
+              meta.fake = true;
+            }
             wallets.push({
               userId: userId,
               changeset: change,
-              metadata: {
-                action: order.provider === DEV_PROVIDER ? 'dev_purchase' : 'purchase',
-                game: REWARD_GAME,
-                order_id: orderId,
-                vip_level: before.effective,
-                vip_bonus: bonus
-              }
+              metadata: meta
             });
           }
           const vipAfter = vipBrief(after, now);
@@ -68439,6 +71733,7 @@ System.register("chunks:///_virtual/shopRpc.ts", ['cc', './atomic.ts', './clock.
       });
       const rpcBuyProp = exports('rpcBuyProp', function (ctx, logger, nk, payload) {
         const userId = userOf(ctx);
+        assertNotMaintenance(nk, logger, userId);
         const item = findItem(str(parsePayload(payload).itemId));
         if (item === null || item.tab !== 'prop' || !item.priceGold) {
           throw Error('unknown_item');
@@ -68511,10 +71806,14 @@ System.register("chunks:///_virtual/shopText.ts", ['cc', './platformText.ts'], f
         payment_unavailable: 'comingSoon',
         not_found: 'orderFailed',
         verify_failed: 'payFailed',
+        // B1 §6: Google tra PENDING (tra cham) -> don treo, giao khi PURCHASED.
+        pay_pending: 'payPending',
         not_enough_gold: 'notEnoughGold',
         // Spec A3 §3.3: goi First charge da het moi (da nap o may khac).
         fc_used: 'fcUsed',
         busy: 'enterFailed',
+        // B13 §4.3: server dang bao tri -> GAME_MAINTAIN.
+        maintenance: 'gameMaintain',
         network: 'netError',
         unknown: 'enterFailed'
       };
@@ -68776,7 +72075,8 @@ System.register("chunks:///_virtual/SimplePopup.ts", ['cc', './platformScreen.ts
       cclegacy._RF.push({}, "e3661u7kNBMvZvIQ83y4yJQ", "SimplePopup", undefined); // assets/scripts/view/platform/ui/SimplePopup.ts
       /**
        * Popup chung C1 trong PopupLayer: tieu de, noi dung, 1-2 nut, nut dong (plan C1 quyet dinh 13).
-       * Lop phu do PopupLayer ve; nen chan cham de cham len nen khong dong popup.
+       * Lop phu do PopupLayer ve; nen chan cham de cham len nen khong dong popup. onClose null = khong co nut X
+       * (cua so cap nhat bat buoc, spec B13-B15 §4.1).
        */
       function buildSimplePopup(root, f, title, body, buttons, onClose) {
         const P = POPUP_LAYOUT;
@@ -68786,7 +72086,7 @@ System.register("chunks:///_virtual/SimplePopup.ts", ['cc', './platformScreen.ts
           width: P.bodyWidth,
           wrap: true
         });
-        onTap(sprite(root, f.close, P.close, 1, 'close').node, onClose);
+        if (onClose !== null) onTap(sprite(root, f.close, P.close, 1, 'close').node, onClose);
         buttons.forEach((b, i) => {
           const x = buttons.length === 1 ? 0 : i === 0 ? -P.buttonGapX : P.buttonGapX;
           const btn = sprite(root, f.btn, {
@@ -71021,7 +74321,8 @@ System.register("chunks:///_virtual/slot25Presenter.ts", ['cc', './platformError
             return;
           }
           if (f === 'busy') this.view.toast(this.t('busy'));
-          const ans = await this.view.askRetry(this.t('rpcError'));
+          // B13 §4.3: bao tri -> chu GAME_MAINTAIN thay cho loi chung.
+          const ans = await this.view.askRetry(f === 'maintenance' ? platformText(this.d.app.lang, 'gameMaintain') : this.t('rpcError'));
           if (this.disposed) return;
           if (ans === 'exit') {
             this.phase = 'closed';
@@ -71072,6 +74373,7 @@ System.register("chunks:///_virtual/slot25Presenter.ts", ['cc', './platformError
         }
         failText(f) {
           if (f === 'network') return platformText(this.d.app.lang, 'netError');
+          if (f === 'maintenance') return platformText(this.d.app.lang, 'gameMaintain');
           return this.t('rpcError');
         }
         t(k) {
@@ -73076,7 +76378,8 @@ System.register("chunks:///_virtual/social.ts", ['cc'], function (exports) {
       const INBOX = exports('INBOX', {
         maxNotice: 50,
         maxNews: 30,
-        hardMax: 100
+        hardMax: 100,
+        maxWinLog: 20
       });
       const WELCOME = exports('WELCOME', {
         text: {
@@ -73096,6 +76399,12 @@ System.register("chunks:///_virtual/social.ts", ['cc'], function (exports) {
       const LEVEL_UP_TEXT = exports('LEVEL_UP_TEXT', {
         en: 'You reached level %s!',
         es_mx: '¡Subiste al nivel %s!'
+      });
+
+      /** P4: dòng nhật ký thắng ở tab "Noticias"; `%s` = chip thắng (có dấu phẩy nghìn), tên game, cấp bàn. */
+      const WIN_LOG_TEXT = exports('WIN_LOG_TEXT', {
+        en: 'You won %s chips in %s (table %s)',
+        es_mx: 'Ganaste %s fichas en %s (mesa %s)'
       });
 
       // ---------------------------------------------------------------- Bạn bè (spec E2 §2.1)
@@ -73124,7 +76433,8 @@ System.register("chunks:///_virtual/social.ts", ['cc'], function (exports) {
         bindDays: 7,
         inviterReward: 50000,
         inviteeReward: 20000,
-        inviterDailyCap: 10
+        inviterDailyCap: 10,
+        inviterRounds: 3
       });
       const SPEAKER = exports('SPEAKER', {
         propId: '400',
@@ -73151,13 +76461,13 @@ System.register("chunks:///_virtual/social.ts", ['cc'], function (exports) {
           en: "You joined with %s's invite code. Here is your gift!",
           es_mx: 'Te uniste con el código de %s. ¡Aquí tienes tu regalo!'
         },
-        inviterGift: {
-          en: '%s joined with your invite code. Here is your reward!',
-          es_mx: '%s se unió con tu código de invitación. ¡Aquí tienes tu recompensa!'
+        inviterJoined: {
+          en: '%s joined with your invite code. You will get your reward once they play %s rounds.',
+          es_mx: '%s se unió con tu código de invitación. Recibirás tu recompensa cuando juegue %s partidas.'
         },
-        inviterNoGift: {
-          en: '%s joined with your invite code (daily reward limit reached).',
-          es_mx: '%s se unió con tu código (límite diario de recompensas alcanzado).'
+        inviterGift: {
+          en: '%s played %s rounds with your invite code. Here is your reward!',
+          es_mx: '%s ya jugó %s partidas con tu código de invitación. ¡Aquí tienes tu recompensa!'
         }
       });
 
@@ -73369,6 +76679,7 @@ System.register("chunks:///_virtual/socialLayout.ts", ['cc', './platformScreen.t
         messageLayout: messageLayout,
         rankDigitFrame: rankDigitFrame,
         rankLayout: rankLayout,
+        rankOnlineFrame: rankOnlineFrame,
         rankPlaceFrame: rankPlaceFrame,
         tabBarLayout: tabBarLayout,
         userDetailLayout: userDetailLayout,
@@ -73695,6 +77006,12 @@ System.register("chunks:///_virtual/socialLayout.ts", ['cc', './platformScreen.t
           value: row(555, 0),
           valueSize: 26,
           coin: row(531, 0),
+          /** P3: HallRankPopupConfig listView.item.online: sprite x 772 offsetY -3, chu x 787 neo trai chu 26. */
+          onlineIcon: row(772, -3),
+          onlineText: row(787, 0),
+          onlineSize: 26,
+          onlineColor: [2, 153, 68],
+          offlineColor: [144, 107, 88],
           mineSize: 28,
           noneSize: 28,
           textColor: TEXT_BROWN,
@@ -73705,6 +77022,11 @@ System.register("chunks:///_virtual/socialLayout.ts", ['cc', './platformScreen.t
       /** Frame hang 1..3 (Hall_rank_popup_placeFrontThree 'hall_rank_popup_place_%d'). */
       function rankPlaceFrame(rank) {
         return 'hall_rank_popup_place_' + rank;
+      }
+
+      /** P3: frame cham online trong atlas hall_rank_popup (Hall_rank_popup_online / offline). */
+      function rankOnlineFrame(online) {
+        return online ? 'hall_rank_popup_online' : 'hall_rank_popup_offline';
       }
 
       /** Chu so hang (Hall_rank_popup_figures, nk.ui.NumberImage). */
@@ -74415,6 +77737,86 @@ System.register("chunks:///_virtual/StatusView.ts", ['./rollupPluginModLoBabelHe
           return null;
         }
       }), _class2)) || _class));
+      cclegacy._RF.pop();
+    }
+  };
+});
+
+System.register("chunks:///_virtual/storePrice.ts", ['cc'], function (exports) {
+  var cclegacy;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }],
+    execute: function () {
+      exports({
+        formatLike: formatLike,
+        scaledOrigText: scaledOrigText
+      });
+      cclegacy._RF.push({}, "c8abd9t/1ZKm6sjNbokaPA6", "storePrice", undefined); // assets/scripts/core/platform/shop/storePrice.ts
+      /**
+       * Gia tu Store (spec B1 §5). THUAN. Google tra formattedPrice da dinh dang theo tien te nguoi choi
+       * ("MX$ 39.80", "1.234,50 €", "¥120") va priceMicros. formatLike viet mot so khac theo dung cach do
+       * (ky hieu, dau thap phan, dau nhom hang nghin, so chu so le) - dung cho gia goc gach ngang.
+       */
+      const RUN = /\d(?:[\d.,  ' ]*\d)?/;
+      function digitsOf(run) {
+        return run.replace(/\D/g, '');
+      }
+      function firstSep(s) {
+        const m = /[^\d]/.exec(s);
+        return m === null ? null : m[0];
+      }
+      /** Doan cach viet so tu chuoi gia, doi chieu voi micros; khong khop -> null. */
+      function shapeOf(run, value) {
+        const n = Number(digitsOf(run));
+        const last = Math.max(run.lastIndexOf('.'), run.lastIndexOf(','));
+        if (last !== -1) {
+          const k = run.length - last - 1;
+          if (k >= 1 && k <= 3 && /^\d+$/.test(run.slice(last + 1)) && Math.abs(n / Math.pow(10, k) - value) < 0.5 * Math.pow(10, -k) + 1e-9) {
+            return {
+              decimals: k,
+              decSep: run.charAt(last),
+              groupSep: firstSep(run.slice(0, last))
+            };
+          }
+        }
+        if (Math.abs(n - value) < 0.5 + 1e-9) return {
+          decimals: 0,
+          decSep: '.',
+          groupSep: firstSep(run)
+        };
+        return null;
+      }
+      function group(int, sep) {
+        let out = '';
+        for (let i = 0; i < int.length; i++) {
+          if (i > 0 && (int.length - i) % 3 === 0) out += sep;
+          out += int.charAt(i);
+        }
+        return out;
+      }
+
+      /** Viet `amount` theo cach viet cua `price.formatted`; khong doc duoc so trong chuoi -> null. */
+      function formatLike(price, amount) {
+        const m = RUN.exec(price.formatted);
+        if (m === null || !(amount >= 0) || !isFinite(amount)) return null;
+        const shape = shapeOf(m[0], price.micros / 1e6);
+        if (shape === null) return null;
+        const fixed = amount.toFixed(shape.decimals);
+        const dot = fixed.indexOf('.');
+        const int = dot === -1 ? fixed : fixed.slice(0, dot);
+        const frac = dot === -1 ? '' : fixed.slice(dot + 1);
+        const sep = shape.groupSep ?? (shape.decSep === ',' ? '.' : ',');
+        const num = group(int, sep) + (frac !== '' ? shape.decSep + frac : '');
+        return price.formatted.slice(0, m.index) + num + price.formatted.slice(m.index + m[0].length);
+      }
+
+      /** Gia goc gach ngang theo tien Store: origUsd x (gia Store / gia USD). Thieu du lieu -> null. */
+      function scaledOrigText(price, priceUsd, origUsd) {
+        if (!(priceUsd > 0) || !(price.micros > 0)) return null;
+        return formatLike(price, origUsd * price.micros / 1e6 / priceUsd);
+      }
       cclegacy._RF.pop();
     }
   };
@@ -76004,8 +79406,8 @@ System.register("chunks:///_virtual/tableReconnect.ts", ['cc'], function (export
       /** Cho giua hai lan thu. */
       const TABLE_RETRY_MS = exports('TABLE_RETRY_MS', 2000);
 
-      /** Ly do vao match bi tu choi han (match dong / het cho / ghe da mat): thu lai vo ich. */
-      const FATAL = ['room_not_found', 'room_closed', 'room_full', 'not_enough_money', 'wrong_password'];
+      /** Ly do vao match bi tu choi han (match dong / het cho / ghe da mat / bao tri ma khong con ghe): thu lai vo ich. */
+      const FATAL = ['room_not_found', 'room_closed', 'room_full', 'not_enough_money', 'wrong_password', 'maintenance'];
       function isFatalRejoin(reason) {
         return FATAL.indexOf(reason) !== -1;
       }
@@ -87789,6 +91191,62 @@ System.register("chunks:///_virtual/uiKit.ts", ['cc', './apkScreen.ts', './apkSp
   };
 });
 
+System.register("chunks:///_virtual/UpdateWindow.ts", ['cc', './platformText.ts', './SimplePopup.ts'], function (exports) {
+  var cclegacy, platformText, buildSimplePopup;
+  return {
+    setters: [function (module) {
+      cclegacy = module.cclegacy;
+    }, function (module) {
+      platformText = module.platformText;
+    }, function (module) {
+      buildSimplePopup = module.buildSimplePopup;
+    }],
+    execute: function () {
+      exports({
+        openNoticePopup: openNoticePopup,
+        openUpdateWindow: openUpdateWindow
+      });
+      cclegacy._RF.push({}, "94343JUIcFO76ISzJPFnJQI", "UpdateWindow", undefined);
+      const UPDATE_WINDOW = exports('UPDATE_WINDOW', 'updateWindow');
+      const NOTICE_POPUP = exports('NOTICE_POPUP', 'noticePopup');
+      /**
+       * UpdateWindow (APK UpdateWindow.lua, spec B13-B15 §4.1, §4.4): "Nueva version", noi dung, nut "Actualizar".
+       * Bat buoc: chi mot nut, khong X, Back khong dong. Tuy chon: them "La proxima vez" ben trai (APK -156 / +156).
+       * Bundle chua co khung UpdateWindow cua APK -> dung SimplePopup (spec §4.6).
+       */
+      function openUpdateWindow(popups, f, lang, o) {
+        const t = k => platformText(lang, k);
+        const update = {
+          label: t('updateBtn'),
+          onTap: () => o.onUpdate()
+        };
+        return popups.open(UPDATE_WINDOW, (root, close) => {
+          if (o.force) buildSimplePopup(root, f, t('updateTitle'), o.text, [update], null);else buildSimplePopup(root, f, t('updateTitle'), o.text, [{
+            label: t('updateLater'),
+            onTap: close
+          }, update], close);
+        }, o.force ? {
+          closeOnBack: false,
+          closeOnOutside: false
+        } : {
+          onClosed: () => o.onLater()
+        });
+      }
+
+      /** NoticePopup (APK NOTICE, spec B13-B15 §4.1): "Anuncio del sistema", chu server, nut "Confirmar". */
+      function openNoticePopup(popups, f, lang, text) {
+        return popups.open(NOTICE_POPUP, (root, close) => {
+          buildSimplePopup(root, f, platformText(lang, 'noticeTitle'), text, [{
+            label: platformText(lang, 'noticeBtn'),
+            onTap: close
+          }], close);
+        });
+      }
+      cclegacy._RF.pop();
+    }
+  };
+});
+
 System.register("chunks:///_virtual/userChat.ts", ['cc'], function (exports) {
   var cclegacy;
   return {
@@ -89156,6 +92614,8 @@ System.register("chunks:///_virtual/videoPresenter.ts", ['cc', './platformErrors
         box_ready: 'onlineBoxReady',
         done_today: 'onlineDone',
         busy: 'enterFailed',
+        // Spec P1 §4: SSV cham qua 10 lan thu -> "Intentalo mas tarde"; ve con han nen mo lai van nhan tiep.
+        ssv_pending: 'enterFailed',
         network: 'netError',
         unknown: 'enterFailed'
       };
