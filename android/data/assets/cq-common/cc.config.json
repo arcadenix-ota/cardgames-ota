@@ -999,26 +999,6 @@
             "cc.SpriteFrame",
             1
         ],
-        "a20e96ff-5286-40a3-84c7-a46fc24e5532": [
-            "image/expressions/express_giftbox_anim.gaf",
-            "cc.JsonAsset",
-            1
-        ],
-        "cf9c8ad8-de5e-48f0-bd65-b87e035cae82": [
-            "image/expressions/express_giftbox_anim",
-            "cc.ImageAsset",
-            1
-        ],
-        "cf9c8ad8-de5e-48f0-bd65-b87e035cae82@6c48a": [
-            "image/expressions/express_giftbox_anim/texture",
-            "cc.Texture2D",
-            1
-        ],
-        "cf9c8ad8-de5e-48f0-bd65-b87e035cae82@f9941": [
-            "image/expressions/express_giftbox_anim/spriteFrame",
-            "cc.SpriteFrame",
-            1
-        ],
         "c4a9b343-7d26-4353-b56b-9e0ceb44591e": [
             "image/expressions/expression_1",
             "cc.SpriteAtlas",
@@ -1911,6 +1891,26 @@
         ],
         "2998f3c9-0692-495e-a9cb-dc90dc104cf6@f9941": [
             "image/expressions/expression_9/spriteFrame",
+            "cc.SpriteFrame",
+            1
+        ],
+        "a20e96ff-5286-40a3-84c7-a46fc24e5532": [
+            "image/expressions/express_giftbox_anim.gaf",
+            "cc.JsonAsset",
+            1
+        ],
+        "cf9c8ad8-de5e-48f0-bd65-b87e035cae82": [
+            "image/expressions/express_giftbox_anim",
+            "cc.ImageAsset",
+            1
+        ],
+        "cf9c8ad8-de5e-48f0-bd65-b87e035cae82@6c48a": [
+            "image/expressions/express_giftbox_anim/texture",
+            "cc.Texture2D",
+            1
+        ],
+        "cf9c8ad8-de5e-48f0-bd65-b87e035cae82@f9941": [
+            "image/expressions/express_giftbox_anim/spriteFrame",
             "cc.SpriteFrame",
             1
         ],

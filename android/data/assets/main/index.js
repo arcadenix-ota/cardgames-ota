@@ -1070,7 +1070,7 @@ System.register("chunks:///_virtual/AnimRunner.ts", ['cc'], function (exports) {
             decoEntry.tween = tw;
             return Promise.resolve();
           }
-          const seconds = o.seconds * this.scale;
+          const seconds = o.fixed === true && this.scale > 0 ? o.seconds : o.seconds * this.scale;
 
           // He so 0 = nhay thang trang thai cuoi. Toi day chi con blocking —
           // trang tri da re nhanh rieng o tren, khong con nhan he so nay.
@@ -2556,6 +2556,7 @@ System.register("chunks:///_virtual/apkContext.ts", ['cc', './apkCard.ts', './ap
             target: node,
             kind,
             seconds,
+            fixed: o.fixed,
             build: (t, s) => t.to(s, {
               position,
               scale,
@@ -2575,6 +2576,7 @@ System.register("chunks:///_virtual/apkContext.ts", ['cc', './apkCard.ts', './ap
           target: box,
           kind,
           seconds,
+          fixed: o.fixed,
           build: (t, s) => t.to(s, {
             k: 1
           }, {
@@ -2664,9 +2666,9 @@ System.register("chunks:///_virtual/apkContext.ts", ['cc', './apkCard.ts', './ap
 
       /**
        * La tren ban co skew phoi canh (ba tang nhu DealFlyLayer: holder -> outer -> inner, CardSkew):
-       * `holder` nhan vi tri/scale/goc, ApkCardView nam o `inner`.
+       * `holder` nhan vi tri/scale/goc, ApkCardView nam o `inner`. `flat`: giu ba tang nhung khong skew (la thang).
        */
-      function makeSkewCard(atlases, parent, id, slot) {
+      function makeSkewCard(atlases, parent, id, slot, flat = false) {
         const holder = child(parent, id === null ? 'tableBack' : 'table' + id);
         placeNode(holder, slot);
         const outer = child(holder, 'outer');
@@ -2675,6 +2677,10 @@ System.register("chunks:///_virtual/apkContext.ts", ['cc', './apkCard.ts', './ap
         const view = inner.addComponent(ApkCardView);
         view.setup(atlases);
         view.setCard(id);
+        if (flat) return {
+          holder,
+          view
+        };
         const skew = holder.addComponent(CardSkew);
         skew.outer = outer;
         skew.inner = inner;
@@ -3304,7 +3310,8 @@ System.register("chunks:///_virtual/ApkGameSceneRoot.ts", ['cc', './apkRes.ts', 
             startBankrupt: () => void this.runBankrupt(),
             reconnecting: n => this.reconnecting(n),
             reconnectFailed: () => this.reconnectFailed(),
-            kicked: text => this.leaveTable(false, text ?? undefined)
+            kicked: text => this.leaveTable(false, text ?? undefined),
+            toast: platform !== null ? text => platform.toast(text) : undefined
           }, anim, p => {
             hand.bind(p);
             noc.bind(p);
@@ -4048,6 +4055,7 @@ System.register("chunks:///_virtual/apkLayout.ts", ['cc'], function (exports) {
         remainHandSlots: remainHandSlots,
         remainNocSlots: remainNocSlots,
         rulePopupX: rulePopupX,
+        sameSpeedSeconds: sameSpeedSeconds,
         screenToCanvas: screenToCanvas,
         seatCanvas: seatCanvas,
         seatCupCanvas: seatCupCanvas,
@@ -4485,16 +4493,19 @@ System.register("chunks:///_virtual/apkLayout.ts", ['cc'], function (exports) {
       };
       /** outCards ghe minh (APK ghe 4), Loc:252-282: o theo SO NHOM, y = 0. */
       const OUT_ME = [[[-24, -12, 0, 12, 24]], [[-64, -52, -40, -28, -16], [16, 28, 40, 52, 64]], [[-69, -57, -45], [-13, -1, 11], [43, 55, 67]]];
-      /** Scale va goc (angle Creator) theo hang/nhom, giu tu B1 (AM:2733-2851); chi so = ghe hien thi. */
+      /**
+       * Scale va goc (angle Creator) theo hang/nhom, giu tu B1 (AM:2733-2851); chi so = ghe hien thi.
+       * Sua 2026-10-17: phom doi thu de thang (APK nghieng 3 / 4 / 4 va -3 / -4 / -4, nhin kho chiu).
+       */
       const MELD_LOOK = [{
         scale: [0.27, 0.27, 0.27],
         angle: [0, 0, 0]
       }, {
         scale: [0.22, 0.23, 0.24],
-        angle: [3, 4, 4]
+        angle: [0, 0, 0]
       }, {
         scale: [0.22, 0.22, 0.24],
-        angle: [-3, -4, -4]
+        angle: [0, 0, 0]
       }];
 
       /** H3 (spec B3): phom >= 6 la. Doi thu: moi doan 5 la mot hang nhom; ghe minh: hang phu thap hon 40 px. */
@@ -4800,6 +4811,19 @@ System.register("chunks:///_virtual/apkLayout.ts", ['cc'], function (exports) {
         scale: 0.27,
         angle: 0
       });
+
+      /**
+       * Sua 2026-10-17: la doi thu bo / doi bay tu quat ghe ben (xa hon tay minh) nen cung `base` giay thi nhanh hon.
+       * Doi thoi luong theo quang duong de toc do bang la cua minh (tam tay + `lift` -> DUMP_FLY trong `base` giay);
+       * khong ngan hon `base`, khong dai qua 2.5 x `base`.
+       */
+      function sameSpeedSeconds(from, to, base, lift) {
+        const ref = Math.hypot(DUMP_FLY.x - HAND.center.x, DUMP_FLY.y - (HAND.center.y + lift));
+        const dist = Math.hypot(to.x - from.x, to.y - from.y);
+        if (!(ref > 0)) return base;
+        const s = base * dist / ref;
+        return s < base ? base : s > base * 2.5 ? base * 2.5 : s;
+      }
 
       /**
        * RV:1610-1697 Loc:109-128 dstPos (3D) cua la ve tu ho — chi phu thuoc ghe NHAN. Ghe minh:
@@ -5204,7 +5228,7 @@ System.register("chunks:///_virtual/apkLayout.ts", ['cc'], function (exports) {
 });
 
 System.register("chunks:///_virtual/ApkMeldsView.ts", ['cc', './apkLayout.ts', './apkRhythm.ts', './apkCard.ts', './apkSprite.ts', './apkContext.ts'], function (exports) {
-  var cclegacy, UIOpacity, Vec3, PUBLIC_CARD, meldLayoutApk, APK3D, DUMP_FLY, FX, APK, meldLightTrack, CARD_FRONT, addSprite, makeCard, child, flyNode, slotOf, makeSkewCard, originSlot, liftedOriginSlot, placeNode;
+  var cclegacy, UIOpacity, Vec3, PUBLIC_CARD, meldLayoutApk, APK3D, sameSpeedSeconds, DUMP_FLY, FX, APK, meldLightTrack, CARD_FRONT, addSprite, makeCard, child, flyNode, slotOf, makeSkewCard, originSlot, liftedOriginSlot, placeNode;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -5214,6 +5238,7 @@ System.register("chunks:///_virtual/ApkMeldsView.ts", ['cc', './apkLayout.ts', '
       PUBLIC_CARD = module.PUBLIC_CARD;
       meldLayoutApk = module.meldLayoutApk;
       APK3D = module.APK3D;
+      sameSpeedSeconds = module.sameSpeedSeconds;
       DUMP_FLY = module.DUMP_FLY;
       FX = module.FX;
     }, function (module) {
@@ -5305,7 +5330,8 @@ System.register("chunks:///_virtual/ApkMeldsView.ts", ['cc', './apkLayout.ts', '
                 flights.push(flyNode(this.ctx.anim, h, slotOf(h), slot, APK.meld.shift));
               }
             } else {
-              c = makeSkewCard(this.ctx.atlases, layer, id, slot);
+              // Sua 2026-10-17: phom doi thu (ghe 1, 2 o mep ban) khong skew phoi canh — de thang
+              c = makeSkewCard(this.ctx.atlases, layer, id, slot, seat !== 0);
               c.view.setMeldedStrip(true);
               fresh.add(id);
               const o = origins === undefined ? undefined : origins.get(id);
@@ -5452,7 +5478,12 @@ System.register("chunks:///_virtual/ApkMeldsView.ts", ['cc', './apkLayout.ts', '
             placeNode(v.node, PUBLIC_SLOT);
             return Promise.resolve();
           }
-          return flyNode(this.ctx.anim, v.node, begin, DUMP_FLY, APK.out.fly).then(() => {
+          // La doi thu (tu quat): cung toc do la cua minh, khong rut ngan theo duoi kip (sua 2026-10-17)
+          const opp = start !== undefined && start !== null;
+          const sec = opp ? sameSpeedSeconds(begin, DUMP_FLY, APK.out.fly, APK.out.lift) : APK.out.fly;
+          return flyNode(this.ctx.anim, v.node, begin, DUMP_FLY, sec, {
+            fixed: opp
+          }).then(() => {
             if (v.isValid) placeNode(v.node, PUBLIC_SLOT);
           });
         }
@@ -5836,13 +5867,14 @@ System.register("chunks:///_virtual/ApkNocView.ts", ['cc', './apkLayout.ts', './
 });
 
 System.register("chunks:///_virtual/ApkPitView.ts", ['cc', './apkLayout.ts', './apkRhythm.ts', './apkSprite.ts', './apkContext.ts'], function (exports) {
-  var cclegacy, UIOpacity, SWAP_PIT, SWAP_OUT, APK3D, SWAP_BACK_TO, APK, addSprite, liftedOriginSlot, makeCard, flyNode;
+  var cclegacy, UIOpacity, SWAP_PIT, sameSpeedSeconds, SWAP_OUT, APK3D, SWAP_BACK_TO, APK, addSprite, liftedOriginSlot, makeCard, flyNode;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
       UIOpacity = module.UIOpacity;
     }, function (module) {
       SWAP_PIT = module.SWAP_PIT;
+      sameSpeedSeconds = module.sameSpeedSeconds;
       SWAP_OUT = module.SWAP_OUT;
       APK3D = module.APK3D;
       SWAP_BACK_TO = module.SWAP_BACK_TO;
@@ -5915,7 +5947,12 @@ System.register("chunks:///_virtual/ApkPitView.ts", ['cc', './apkLayout.ts', './
             return;
           }
           const flyer = makeCard(this.ctx.atlases, this.ctx.layers.melds, id, begin);
-          await flyNode(this.ctx.anim, flyer.node, begin, SWAP_OUT[seat], APK.out.fly);
+          // La doi thu (tu quat): cung toc do la cua minh, khong rut ngan theo duoi kip (sua 2026-10-17)
+          const opp = start !== undefined && start !== null;
+          const sec = opp ? sameSpeedSeconds(begin, SWAP_OUT[seat], APK.out.fly, APK.out.lift) : APK.out.fly;
+          await flyNode(this.ctx.anim, flyer.node, begin, SWAP_OUT[seat], sec, {
+            fixed: opp
+          });
           if (flyer.isValid) flyer.node.destroy();
           // Ho da duoc don (ket qua / ket van) trong luc la bay: khong de la nam lai trong ho.
           if (gen !== this.pitGen[seat] || !this.pits[seat].isValid) return;
@@ -45122,7 +45159,8 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
               v.table.showTurnArrows([seat]);
             }
             this.pulseIfMyTurn(v, d);
-            v.hand.setSelectable(t !== null && this.store.isMe(t.position) ? this.store.myHand : []);
+            // Sua 2026-10-17: chua toi luot van chon / bo chon la (nang len, ha xuong); nut chi bat khi toi luot (availableActions)
+            v.hand.setSelectable(this.store.myHand);
             if (d.actionID === SWAP_ACTION && !this.swapSlotsShown) {
               this.swapSlotsShown = true;
               v.table.showSwapSlots(this.store.players.filter(s => s.handCount > 0).map(s => this.seat(s.position)).sort((a, b) => a - b));
@@ -45219,8 +45257,8 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
               const cardId = a.cardID;
               if (this.store.isMe(pos)) {
                 // Final review, finding 1a: phai go la vua doi khoi hand view (apply.ts
-                // da tru khoi store.myHand). setSelectable([]) vi luot SWAP cua minh vua
-                // duoc apply.ts dong (turn=null) — xem applyPlayerAction SWAP branch.
+                // da tru khoi store.myHand). sua 2026-10-17: van cho chon la con lai (nut tat vi luot SWAP cua minh vua
+                // duoc apply.ts dong, turn=null) — xem applyPlayerAction SWAP branch.
                 const place = v.hand.cardPlace(cardId) ?? null;
                 this.mySwapCard = cardId;
                 const order = this.resortHand();
@@ -45228,7 +45266,7 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
                   kind: 'hand',
                   place
                 } : undefined), v.hand.removeCard(cardId), v.hand.arrange(order)]);
-                v.hand.setSelectable([]);
+                v.hand.setSelectable(this.store.myHand);
               } else {
                 const seat = this.seat(pos);
                 await Promise.all([v.table.swapOut(seat, 'back', {
@@ -45676,7 +45714,8 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
             v.table.setActiveSeats([], 0, 0);
             v.table.showTurnArrows([]);
           }
-          v.hand.setSelectable(t !== null && st.isMe(t.position) ? st.myHand : []);
+          // Sua 2026-10-17: chua toi luot van chon / bo chon la; nut chi bat khi toi luot (availableActions)
+          v.hand.setSelectable(st.myHand);
         }
         onPlayerOut(d) {
           // Spec A1b §4.1: bi moi ra (het tien A2, xin ra) -> 'closed' ngay sau do khong noi lai. Dong bo vi transport dong ngay.
@@ -45705,11 +45744,14 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
         }
         onPlayerRegisterOut(d) {
           this.push('onPlayerRegisterOut', async () => {
-            var _this$v9;
             applyPlayerRegisterOut(this.store, d, this.logger);
             // Thoat giua van: bao minh se roi sau van / da huy (server dao co moi lan bam).
+            // Sua 2026-10-17: toast chung tu an sau vai giay (dong trang thai cu nam mai khong mat).
             if (!this.store.isMe(d.playerPosition)) return;
-            (_this$v9 = this.v()) == null || _this$v9.table.showStatus(this.errors.status(d.registered ? 'leaveAfter' : 'leaveCancel'));
+            const v = this.v();
+            if (v === null) return;
+            const text = this.errors.status(d.registered ? 'leaveAfter' : 'leaveCancel');
+            if (v.toast !== undefined) v.toast(text);else v.table.showStatus(text);
           });
         }
         onPlayerResultRegisterOut(d) {
@@ -45819,11 +45861,11 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
           const msg = this.errors.text(d.error);
           if (msg !== '') this.logger.warn('server bao loi: ' + msg);
           this.push('onError', async () => {
-            var _this$v10;
+            var _this$v9;
             // Spec B3 §2.1: view APK dang an nut cho tra loi — bao lai nut sau job nay. C6: ca loi
             // khong co chu (vd SWAP = ma 0) cung phai bao lai de view APK thoat "dang cho".
             this.lastAvailable = null;
-            if (msg !== '') (_this$v10 = this.v()) == null || _this$v10.table.showStatus(msg);
+            if (msg !== '') (_this$v9 = this.v()) == null || _this$v9.table.showStatus(msg);
           });
         }
 
@@ -46092,8 +46134,8 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
           const t = this.store.turn;
           if (t === null || !this.store.isMe(t.position) || t.actionID !== SWAP_ACTION) return false;
           if (cardIds.length !== 1 || this.store.myHand.indexOf(cardIds[0]) === -1) {
-            var _this$v11;
-            (_this$v11 = this.v()) == null || _this$v11.actions.showTip('swapNoCard');
+            var _this$v10;
+            (_this$v10 = this.v()) == null || _this$v10.actions.showTip('swapNoCard');
             return false;
           }
           return this.playerSwap(cardIds[0]);
@@ -46105,8 +46147,8 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
           const t = this.store.turn;
           if (t === null || !this.store.isMe(t.position) || t.actionID !== DUMP_ACTION) return false;
           if (cardIds.length !== 1 || this.store.myHand.indexOf(cardIds[0]) === -1) {
-            var _this$v12;
-            (_this$v12 = this.v()) == null || _this$v12.actions.showTip('dumpNoCard');
+            var _this$v11;
+            (_this$v11 = this.v()) == null || _this$v11.actions.showTip('dumpNoCard');
             return false;
           }
           return this.playerDump(cardIds[0]);
@@ -55270,7 +55312,7 @@ System.register("chunks:///_virtual/LoginSceneRoot.ts", ['cc', './appContext.ts'
   };
 });
 
-System.register("chunks:///_virtual/main", ['./appContext.ts', './homeBinding.ts', './launchRequest.ts', './lobbyTest.ts', './release.ts', './buildGameContainer.ts', './container.ts', './token.ts', './tokens.ts', './errors.ts', './logger.ts', './action.ts', './actionBuilder.ts', './cutAction.ts', './dumpAction.ts', './flipAction.ts', './forceAction.ts', './index.ts', './meldAction.ts', './passAction.ts', './swapAction.ts', './card2.ts', './cardGroup2.ts', './debug.ts', './gameConstants.ts', './gameHelper2.ts', './actionErrorData.ts', './autoStartData.ts', './chatEntry.ts', './cheatData.ts', './endGameData.ts', './endRoundData.ts', './forceInfo.ts', './gameStateData.ts', './index3.ts', './invitePlayerData.ts', './nocData.ts', './playerData.ts', './playerEngGameInfo.ts', './playerMoneyData.ts', './playerOutData.ts', './playerReadyData.ts', './playerRegisterOutData.ts', './playerResultRegOutData.ts', './playerRobotData.ts', './playerWinMoneyData.ts', './requestTopupMoneyData.ts', './responseInvitePlayerData.ts', './responseInvitePlayersData.ts', './responseTopupMoneyData.ts', './roomGameData.ts', './startGameData.ts', './swapResultData.ts', './userChat.ts', './userMessage.ts', './userMoneyTopupData.ts', './userThrowChat.ts', './playerRef.ts', './validCardGroup2.ts', './botDriver.ts', './clock2.ts', './colyseusErrors.ts', './colyseusJsGateway.ts', './colyseusLib.ts', './httpJson.ts', './localMatchDispatcher.ts', './localNakama.ts', './nkLogger.ts', './localTransport.ts', './deviceId.ts', './gateway.ts', './gatewayErrors.ts', './nakamaJsGateway.ts', './nakamaTransport.ts', './parseServerConfig.ts', './serverConfig.ts', './utf8.ts', './wireDecoder.ts', './wireEncoder.ts', './platformTap.ts', './serverEvents.ts', './transport.ts', './requestActionData.ts', './constants.ts', './types3.ts', './backoff.ts', './decide.ts', './manifestRewrite.ts', './md5.ts', './otaConfig.ts', './otaFlow.ts', './pointer.ts', './version.ts', './ad.ts', './admobProvider.ts', './video.ts', './appConfig.ts', './createSessionGateway.ts', './gameModule.ts', './gameRegistry.ts', './matchSocket.ts', './roundHook.ts', './stateSnapshot.ts', './tableNav.ts', './tableReconnect.ts', './homeState.ts', './platformEvents.ts', './index2.ts', './parse.ts', './platformErrors.ts', './platformSession.ts', './platformText.ts', './serverPick.ts', './sessionGateway.ts', './sessionGuard.ts', './catalog2.ts', './fakeBilling.ts', './googlePay.ts', './payment2.ts', './storePrice.ts', './slotProtocol.ts', './events3.ts', './friends.ts', './inbox2.ts', './invite.ts', './marquee2.ts', './profile2.ts', './rank.ts', './tableInvite.ts', './chatMute.ts', './seatBubbles.ts', './tableChannel.ts', './tableSocial.ts', './tableSocialGames.ts', './tasks2.ts', './types.ts', './vip2.ts', './vipText.ts', './wheel2.ts', './actionAvailability.ts', './affine.ts', './animCatalogue.ts', './apkRhythm.ts', './bezier.ts', './catchUp.ts', './coinPlan.ts', './dealSchedule.ts', './gafJson.ts', './gafTimeline.ts', './jumpPlan.ts', './rng.ts', './skew.ts', './soundPolicy.ts', './tableRhythm.ts', './apkButtons.ts', './apkClock.ts', './apkFormat.ts', './endPanel.ts', './format.ts', './gameTablePresenter.ts', './apkSort.ts', './dragGesture.ts', './dropIndex.ts', './apkLayout.ts', './apkScreen.ts', './friendLayout.ts', './hallLayout.ts', './lobbyLayout.ts', './loginLayout.ts', './nodePath.ts', './platformBindings.ts', './platformScreen.ts', './popupLayout.ts', './shopLayout.ts', './socialLayout.ts', './tableLayout.ts', './tableSocialLayout.ts', './taskLayout.ts', './vipLayout.ts', './wheelLayout.ts', './bankruptFlow.ts', './broadPresenter.ts', './checkinPresenter.ts', './eventPresenter.ts', './exitGamePresenter.ts', './firstChargeSale.ts', './freeCoinPresenter.ts', './friendPresenter.ts', './getRewardPresenter.ts', './hallPresenter.ts', './inviteHubPresenter.ts', './lobbyPresenter.ts', './loginPresenter.ts', './mallPresenter.ts', './marqueePresenter.ts', './messagePresenter.ts', './newbiePresenter.ts', './onlineBoxPresenter.ts', './piggyPresenter.ts', './popupQueue.ts', './popupStack.ts', './propBagPresenter.ts', './rankPresenter.ts', './rewardFx.ts', './rewardText.ts', './sceneCover.ts', './settingPresenter.ts', './shopText.ts', './socialText.ts', './tableBankrupt.ts', './tableInvitePresenter.ts', './tablePlatformPresenter.ts', './tableSocialPresenter.ts', './taskPresenter.ts', './userDetailPresenter.ts', './userInfoPresenter.ts', './videoPresenter.ts', './vipPresenter.ts', './wheelPresenter.ts', './seat.ts', './settlement.ts', './tableHints.ts', './tableMarks.ts', './tableText.ts', './topTip.ts', './views.ts', './apkAudio.ts', './apkCard.ts', './apkRes.ts', './apkResTypes.ts', './burroRes.ts', './escobaRes.ts', './eventArt.ts', './langPath.ts', './platformAudio.ts', './platformExtraRes.ts', './shopRes.ts', './slot25Res.ts', './tableSocialRes.ts', './texasRes.ts', './appConfig3.ts', './catalog.ts', './economy.ts', './events.ts', './piggy.ts', './social.ts', './tasks.ts', './vip3.ts', './wheel.ts', './constants2.ts', './config.ts', './botBrain.ts', './botMemory.ts', './card.ts', './cardGroup.ts', './gameHelper.ts', './gameMgr.ts', './player.ts', './validCardGroup.ts', './conquianMatch.ts', './dispatcher.ts', './env.ts', './appConfig2.ts', './atomic.ts', './bankrupt.ts', './botRegistry.ts', './checkin.ts', './chipLock.ts', './clock.ts', './day.ts', './economy2.ts', './events2.ts', './eventsStore.ts', './friends2.ts', './googlePay2.ts', './heldTable.ts', './homeState2.ts', './inbox.ts', './levels.ts', './marquee.ts', './newbie.ts', './onlineBox.ts', './orders.ts', './payFlags.ts', './payment.ts', './piggy2.ts', './presence.ts', './props.ts', './rank2.ts', './receipts.ts', './rewardsRpc.ts', './rewardsStore.ts', './rounds.ts', './rpcArgs.ts', './seatMoney.ts', './shop.ts', './shopRpc.ts', './socialHome.ts', './tableInvite2.ts', './tableSocial2.ts', './tableSocialMatch.ts', './taskDots.ts', './tasks3.ts', './vip.ts', './wallet.ts', './wheelStore.ts', './types2.ts', './profile.ts', './apply.ts', './gameStore.ts', './builtin.ts', './burroHand.ts', './burroLayout.ts', './burroProtocol.ts', './burroRules.ts', './burroState.ts', './burroTablePresenter.ts', './burroText.ts', './burroTimeline.ts', './module4.ts', './module2.ts', './demoProtocol.ts', './demoTablePresenter.ts', './module.ts', './escobaHandHit.ts', './escobaLayout.ts', './escobaProtocol.ts', './escobaRules.ts', './escobaSelection.ts', './escobaState.ts', './escobaTablePresenter.ts', './escobaText.ts', './escobaTimeline.ts', './module3.ts', './module6.ts', './slot25Layout.ts', './slot25Presenter.ts', './slot25Rules.ts', './slot25Text.ts', './slot25Timeline.ts', './module5.ts', './texasActions.ts', './texasLayout.ts', './texasProtocol.ts', './texasRules.ts', './texasState.ts', './texasTablePresenter.ts', './texasText.ts', './texasTimeline.ts', './ActionBar.ts', './CardView.ts', './CornerButtons.ts', './CountdownView.ts', './DealFlyLayer.ts', './EndGamePanel.ts', './GameSceneRoot.ts', './HandView.ts', './LobbyTestRoot.ts', './NocView.ts', './PlayerView.ts', './PotView.ts', './RoomInfoView.ts', './StartFxLayer.ts', './StatusView.ts', './TableView.ts', './AnimRunner.ts', './CardSkew.ts', './FlyLayer.ts', './GafPlayer.ts', './SpineFxView.ts', './canvasPoint.ts', './ApkActionBar.ts', './ApkCardView.ts', './ApkDiscardPopup.ts', './ApkGameSceneRoot.ts', './ApkHandView.ts', './ApkMeldsView.ts', './ApkNocView.ts', './ApkPitView.ts', './ApkReadyClock.ts', './ApkRulePopup.ts', './ApkSeatClock.ts', './ApkSeatsView.ts', './ApkSettlementView.ts', './ApkSound.ts', './ApkStartCountdown.ts', './ApkStartFx.ts', './ApkTableMenu.ts', './ApkTableView.ts', './ApkTopTip.ts', './apkAssets.ts', './apkContext.ts', './apkFx.ts', './apkScroll.ts', './apkSprite.ts', './gameBoot.ts', './ApkAssetGalleryRoot.ts', './BurroAssets.ts', './BurroCardView.ts', './BurroCenterView.ts', './BurroFx.ts', './BurroHandView.ts', './BurroResultPopup.ts', './BurroRulePopup.ts', './BurroSeatsView.ts', './BurroSound.ts', './BurroTableMenu.ts', './BurroTableSceneRoot.ts', './DemoTableSceneRoot.ts', './EscobaAssets.ts', './EscobaCardView.ts', './EscobaFx.ts', './EscobaHandView.ts', './EscobaPotView.ts', './EscobaRulePopup.ts', './EscobaScoreboardView.ts', './EscobaSeatsView.ts', './EscobaSound.ts', './EscobaTableGrid.ts', './EscobaTableMenu.ts', './EscobaTableSceneRoot.ts', './Slot25Assets.ts', './Slot25Bar.ts', './Slot25BonusView.ts', './Slot25Fx.ts', './Slot25Popups.ts', './Slot25ReelsView.ts', './Slot25SceneRoot.ts', './Slot25Sound.ts', './TexasAssets.ts', './TexasBottomView.ts', './TexasBuyInPopup.ts', './TexasCardView.ts', './TexasCenterView.ts', './TexasFx.ts', './TexasRaisePopup.ts', './TexasRulePopup.ts', './TexasSeatsView.ts', './TexasSound.ts', './TexasTableMenu.ts', './TexasTableSceneRoot.ts', './BootSceneRoot.ts', './jsbOtaPort.ts', './FreeCoinPanel.ts', './HallSceneRoot.ts', './LobbyLayer.ts', './LoginSceneRoot.ts', './SceneCover2.ts', './admobBridge.ts', './caRoots.ts', './googleBillingBridge.ts', './keepScreenOn.ts', './lobbyRules.ts', './nativeWssCa.ts', './nativeXhrShim.ts', './navigation.ts', './platformAssets.ts', './platformBoot.ts', './BkPopup.ts', './BroadProp.ts', './EventPopup.ts', './ExitGamePopup.ts', './FCPopup.ts', './FriendPopup.ts', './GetRewardPopup.ts', './HallRankPopup.ts', './MallPopup.ts', './MessagePopup.ts', './NewInviteFriendPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './PiggyRulePopup.ts', './PropPopup.ts', './RewardVideoPopup.ts', './SettingPopup.ts', './SignPopup.ts', './TaskPopup.ts', './UpdateWindow.ts', './UserDetailPopup.ts', './UserInfoPopup.ts', './VIPInfoHelpPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './screenPolicy.ts', './ChatBubbleView.ts', './FaceAnimView.ts', './OnlinePopup.ts', './PropThrowView.ts', './RoomChatPopup.ts', './RoomOnlineBox.ts', './RoomUserPopup.ts', './TablePlatformRoot.ts', './TableSocialLayer.ts', './tableSocialFx.ts', './tablePreload.ts', './InviteBanner.ts', './LangPos.ts', './LangSprite.ts', './MarqueeBar.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SafeEdge.ts', './SimplePopup.ts', './SliceInset.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './popupKit.ts', './progressBar.ts', './scrollList.ts', './uiKit.ts', './viewBind.ts'], function () {
+System.register("chunks:///_virtual/main", ['./appContext.ts', './homeBinding.ts', './launchRequest.ts', './lobbyTest.ts', './release.ts', './buildGameContainer.ts', './container.ts', './token.ts', './tokens.ts', './errors.ts', './logger.ts', './action.ts', './actionBuilder.ts', './cutAction.ts', './dumpAction.ts', './flipAction.ts', './forceAction.ts', './index.ts', './meldAction.ts', './passAction.ts', './swapAction.ts', './card2.ts', './cardGroup2.ts', './debug.ts', './gameConstants.ts', './gameHelper2.ts', './actionErrorData.ts', './autoStartData.ts', './chatEntry.ts', './cheatData.ts', './endGameData.ts', './endRoundData.ts', './forceInfo.ts', './gameStateData.ts', './index3.ts', './invitePlayerData.ts', './nocData.ts', './playerData.ts', './playerEngGameInfo.ts', './playerMoneyData.ts', './playerOutData.ts', './playerReadyData.ts', './playerRegisterOutData.ts', './playerResultRegOutData.ts', './playerRobotData.ts', './playerWinMoneyData.ts', './requestTopupMoneyData.ts', './responseInvitePlayerData.ts', './responseInvitePlayersData.ts', './responseTopupMoneyData.ts', './roomGameData.ts', './startGameData.ts', './swapResultData.ts', './userChat.ts', './userMessage.ts', './userMoneyTopupData.ts', './userThrowChat.ts', './playerRef.ts', './validCardGroup2.ts', './botDriver.ts', './clock2.ts', './colyseusErrors.ts', './colyseusJsGateway.ts', './colyseusLib.ts', './httpJson.ts', './localTransport.ts', './localMatchDispatcher.ts', './localNakama.ts', './nkLogger.ts', './deviceId.ts', './gateway.ts', './gatewayErrors.ts', './nakamaJsGateway.ts', './nakamaTransport.ts', './parseServerConfig.ts', './serverConfig.ts', './utf8.ts', './wireDecoder.ts', './wireEncoder.ts', './platformTap.ts', './serverEvents.ts', './transport.ts', './requestActionData.ts', './constants.ts', './types3.ts', './backoff.ts', './decide.ts', './manifestRewrite.ts', './md5.ts', './otaConfig.ts', './otaFlow.ts', './pointer.ts', './version.ts', './ad.ts', './admobProvider.ts', './video.ts', './appConfig.ts', './createSessionGateway.ts', './gameModule.ts', './gameRegistry.ts', './matchSocket.ts', './roundHook.ts', './stateSnapshot.ts', './tableNav.ts', './tableReconnect.ts', './homeState.ts', './platformEvents.ts', './index2.ts', './parse.ts', './platformErrors.ts', './platformSession.ts', './platformText.ts', './serverPick.ts', './sessionGateway.ts', './sessionGuard.ts', './catalog2.ts', './fakeBilling.ts', './googlePay.ts', './payment2.ts', './storePrice.ts', './slotProtocol.ts', './events3.ts', './friends.ts', './inbox2.ts', './invite.ts', './marquee2.ts', './profile2.ts', './rank.ts', './tableInvite.ts', './chatMute.ts', './seatBubbles.ts', './tableChannel.ts', './tableSocial.ts', './tableSocialGames.ts', './tasks2.ts', './types.ts', './vip2.ts', './vipText.ts', './wheel2.ts', './actionAvailability.ts', './affine.ts', './animCatalogue.ts', './apkRhythm.ts', './bezier.ts', './catchUp.ts', './coinPlan.ts', './dealSchedule.ts', './gafJson.ts', './gafTimeline.ts', './jumpPlan.ts', './rng.ts', './skew.ts', './soundPolicy.ts', './tableRhythm.ts', './apkButtons.ts', './apkClock.ts', './apkFormat.ts', './endPanel.ts', './format.ts', './gameTablePresenter.ts', './apkSort.ts', './dragGesture.ts', './dropIndex.ts', './apkLayout.ts', './apkScreen.ts', './friendLayout.ts', './hallLayout.ts', './lobbyLayout.ts', './loginLayout.ts', './nodePath.ts', './platformBindings.ts', './platformScreen.ts', './popupLayout.ts', './shopLayout.ts', './socialLayout.ts', './tableLayout.ts', './tableSocialLayout.ts', './taskLayout.ts', './vipLayout.ts', './wheelLayout.ts', './bankruptFlow.ts', './broadPresenter.ts', './checkinPresenter.ts', './eventPresenter.ts', './exitGamePresenter.ts', './firstChargeSale.ts', './freeCoinPresenter.ts', './friendPresenter.ts', './getRewardPresenter.ts', './hallPresenter.ts', './inviteHubPresenter.ts', './lobbyPresenter.ts', './loginPresenter.ts', './mallPresenter.ts', './marqueePresenter.ts', './messagePresenter.ts', './newbiePresenter.ts', './onlineBoxPresenter.ts', './piggyPresenter.ts', './popupQueue.ts', './popupStack.ts', './propBagPresenter.ts', './rankPresenter.ts', './rewardFx.ts', './rewardText.ts', './sceneCover.ts', './settingPresenter.ts', './shopText.ts', './socialText.ts', './tableBankrupt.ts', './tableInvitePresenter.ts', './tablePlatformPresenter.ts', './tableSocialPresenter.ts', './taskPresenter.ts', './userDetailPresenter.ts', './userInfoPresenter.ts', './videoPresenter.ts', './vipPresenter.ts', './wheelPresenter.ts', './seat.ts', './settlement.ts', './tableHints.ts', './tableMarks.ts', './tableText.ts', './topTip.ts', './views.ts', './apkAudio.ts', './apkCard.ts', './apkRes.ts', './apkResTypes.ts', './burroRes.ts', './escobaRes.ts', './eventArt.ts', './langPath.ts', './platformAudio.ts', './platformExtraRes.ts', './shopRes.ts', './slot25Res.ts', './tableSocialRes.ts', './texasRes.ts', './appConfig3.ts', './catalog.ts', './economy.ts', './events.ts', './piggy.ts', './social.ts', './tasks.ts', './vip3.ts', './wheel.ts', './constants2.ts', './config.ts', './botBrain.ts', './botMemory.ts', './card.ts', './cardGroup.ts', './gameHelper.ts', './gameMgr.ts', './player.ts', './validCardGroup.ts', './conquianMatch.ts', './dispatcher.ts', './env.ts', './appConfig2.ts', './atomic.ts', './bankrupt.ts', './botRegistry.ts', './checkin.ts', './chipLock.ts', './clock.ts', './day.ts', './economy2.ts', './events2.ts', './eventsStore.ts', './friends2.ts', './googlePay2.ts', './heldTable.ts', './homeState2.ts', './inbox.ts', './levels.ts', './marquee.ts', './newbie.ts', './onlineBox.ts', './orders.ts', './payFlags.ts', './payment.ts', './piggy2.ts', './presence.ts', './props.ts', './rank2.ts', './receipts.ts', './rewardsRpc.ts', './rewardsStore.ts', './rounds.ts', './rpcArgs.ts', './seatMoney.ts', './shop.ts', './shopRpc.ts', './socialHome.ts', './tableInvite2.ts', './tableSocial2.ts', './tableSocialMatch.ts', './taskDots.ts', './tasks3.ts', './vip.ts', './wallet.ts', './wheelStore.ts', './types2.ts', './profile.ts', './apply.ts', './gameStore.ts', './builtin.ts', './burroHand.ts', './burroLayout.ts', './burroProtocol.ts', './burroRules.ts', './burroState.ts', './burroTablePresenter.ts', './burroText.ts', './burroTimeline.ts', './module4.ts', './module2.ts', './demoProtocol.ts', './demoTablePresenter.ts', './module.ts', './escobaHandHit.ts', './escobaLayout.ts', './escobaProtocol.ts', './escobaRules.ts', './escobaSelection.ts', './escobaState.ts', './escobaTablePresenter.ts', './escobaText.ts', './escobaTimeline.ts', './module3.ts', './module6.ts', './slot25Layout.ts', './slot25Presenter.ts', './slot25Rules.ts', './slot25Text.ts', './slot25Timeline.ts', './module5.ts', './texasActions.ts', './texasLayout.ts', './texasProtocol.ts', './texasRules.ts', './texasState.ts', './texasTablePresenter.ts', './texasText.ts', './texasTimeline.ts', './ActionBar.ts', './CardView.ts', './CornerButtons.ts', './CountdownView.ts', './DealFlyLayer.ts', './EndGamePanel.ts', './GameSceneRoot.ts', './HandView.ts', './LobbyTestRoot.ts', './NocView.ts', './PlayerView.ts', './PotView.ts', './RoomInfoView.ts', './StartFxLayer.ts', './StatusView.ts', './TableView.ts', './AnimRunner.ts', './CardSkew.ts', './FlyLayer.ts', './GafPlayer.ts', './SpineFxView.ts', './canvasPoint.ts', './ApkActionBar.ts', './ApkCardView.ts', './ApkDiscardPopup.ts', './ApkGameSceneRoot.ts', './ApkHandView.ts', './ApkMeldsView.ts', './ApkNocView.ts', './ApkPitView.ts', './ApkReadyClock.ts', './ApkRulePopup.ts', './ApkSeatClock.ts', './ApkSeatsView.ts', './ApkSettlementView.ts', './ApkSound.ts', './ApkStartCountdown.ts', './ApkStartFx.ts', './ApkTableMenu.ts', './ApkTableView.ts', './ApkTopTip.ts', './apkAssets.ts', './apkContext.ts', './apkFx.ts', './apkScroll.ts', './apkSprite.ts', './gameBoot.ts', './ApkAssetGalleryRoot.ts', './BurroAssets.ts', './BurroCardView.ts', './BurroCenterView.ts', './BurroFx.ts', './BurroHandView.ts', './BurroResultPopup.ts', './BurroRulePopup.ts', './BurroSeatsView.ts', './BurroSound.ts', './BurroTableMenu.ts', './BurroTableSceneRoot.ts', './DemoTableSceneRoot.ts', './EscobaAssets.ts', './EscobaCardView.ts', './EscobaFx.ts', './EscobaHandView.ts', './EscobaPotView.ts', './EscobaRulePopup.ts', './EscobaScoreboardView.ts', './EscobaSeatsView.ts', './EscobaSound.ts', './EscobaTableGrid.ts', './EscobaTableMenu.ts', './EscobaTableSceneRoot.ts', './Slot25Assets.ts', './Slot25Bar.ts', './Slot25BonusView.ts', './Slot25Fx.ts', './Slot25Popups.ts', './Slot25ReelsView.ts', './Slot25SceneRoot.ts', './Slot25Sound.ts', './TexasAssets.ts', './TexasBottomView.ts', './TexasBuyInPopup.ts', './TexasCardView.ts', './TexasCenterView.ts', './TexasFx.ts', './TexasRaisePopup.ts', './TexasRulePopup.ts', './TexasSeatsView.ts', './TexasSound.ts', './TexasTableMenu.ts', './TexasTableSceneRoot.ts', './BootSceneRoot.ts', './jsbOtaPort.ts', './FreeCoinPanel.ts', './HallSceneRoot.ts', './LobbyLayer.ts', './LoginSceneRoot.ts', './SceneCover2.ts', './admobBridge.ts', './caRoots.ts', './googleBillingBridge.ts', './keepScreenOn.ts', './lobbyRules.ts', './nativeWssCa.ts', './nativeXhrShim.ts', './navigation.ts', './platformAssets.ts', './platformBoot.ts', './BkPopup.ts', './BroadProp.ts', './EventPopup.ts', './ExitGamePopup.ts', './FCPopup.ts', './FriendPopup.ts', './GetRewardPopup.ts', './HallRankPopup.ts', './MallPopup.ts', './MessagePopup.ts', './NewInviteFriendPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './PiggyRulePopup.ts', './PropPopup.ts', './RewardVideoPopup.ts', './SettingPopup.ts', './SignPopup.ts', './TaskPopup.ts', './UpdateWindow.ts', './UserDetailPopup.ts', './UserInfoPopup.ts', './VIPInfoHelpPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './screenPolicy.ts', './tablePreload.ts', './ChatBubbleView.ts', './FaceAnimView.ts', './OnlinePopup.ts', './PropThrowView.ts', './RoomChatPopup.ts', './RoomOnlineBox.ts', './RoomUserPopup.ts', './TablePlatformRoot.ts', './TableSocialLayer.ts', './tableSocialFx.ts', './InviteBanner.ts', './LangPos.ts', './LangSprite.ts', './MarqueeBar.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SafeEdge.ts', './SimplePopup.ts', './SliceInset.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './popupKit.ts', './progressBar.ts', './scrollList.ts', './uiKit.ts', './viewBind.ts'], function () {
   return {
     setters: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
     execute: function () {}
@@ -72465,9 +72507,9 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
       class Slot25Bar {
         /**
          * `root` = lop ban (theo mep duoi); `hud` = lop thanh tren (con cua room view trong APK, theo mep tren);
-         * `visibleH` = chieu cao vung nhin (Task F).
+         * `vis` = vung nhin (Task F).
          */
-        constructor(root, hud, a, h, wide, visibleH) {
+        constructor(root, hud, a, h, wide, vis) {
           this.chipLabel = void 0;
           this.betNode = void 0;
           this.center = void 0;
@@ -72531,7 +72573,7 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
           onTap(sprite(hud, r('slot25_room_select_btn'), zero, 1, 'menuBtn').node, () => h.menu());
           onTap(sprite(hud, r('slot25_room_mall_btn'), zero, 1, 'mall').node, () => h.mall());
           onTap(sprite(hud, t('slot25_room_jack_bg'), zero, 1, 'jackpotBtn').node, () => h.jackpot());
-          this.placeTop(wide, visibleH);
+          this.placeTop(wide, vis);
           // Bang hu tren mat cuon.
           void this.loopSpine(root, 'jackpotTitle', TABLE_FX.jackpotTitle);
           this.jackpotNode = child(root, 'jackpot', TABLE_FX.jackpotNumber);
@@ -72553,18 +72595,18 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
         }
 
         /**
-         * Thanh tren theo mep tren (TOP.*; dung xong va moi lan canvas doi co, Task I): chip, nut menu lech wide;
-         * Mall (cx + 583, top - 61) va nut hu giu giua (cx + 578, cy + 165), khong lech wide (Slot25Location.lua:582, 586-587).
+         * Thanh tren theo mep tren (TOP.*; dung xong va moi lan canvas doi co, Task I): chip, nut menu sat goc trai;
+         * Mall sat goc phai; nut hu giu giua (cx + 578, cy + 165), khong lech wide (Slot25Location.lua:582).
          */
-        placeTop(wide, visibleH) {
+        placeTop(wide, vis) {
           if (!this.hud.isValid) return;
           const at = (name, p) => {
             var _this$hud$getChildByN;
             return (_this$hud$getChildByN = this.hud.getChildByName(name)) == null ? void 0 : _this$hud$getChildByN.setPosition(p.x, p.y);
           };
-          at('chipBg', TOP.chipBg(wide, visibleH));
-          at('menuBtn', TOP.back(wide, visibleH));
-          at('mall', TOP.mall(visibleH));
+          at('chipBg', TOP.chipBg(wide, vis));
+          at('menuBtn', TOP.back(wide, vis));
+          at('mall', TOP.mall(wide, vis));
           at('jackpotBtn', TOP.jackpotBtn());
         }
 
@@ -73245,11 +73287,11 @@ System.register("chunks:///_virtual/slot25Layout.ts", ['cc', './apkScreen.ts'], 
 
       /** Vung nhin (don vi thiet ke). */
 
-      /** APK display.top - fromTop -> Canvas (Task F: thanh tren theo mep tren vung nhin cao `visibleH`). */
-      function topPt(x, fromTop, visibleH) {
+      /** Cach mep trai `fromLeft`, mep tren `fromTop` cua vung nhin `s` -> Canvas (sat goc ca khi man rong hon 1280). */
+      function leftTopPt(fromLeft, fromTop, s) {
         return {
-          x: x - 640,
-          y: visibleH / 2 - fromTop
+          x: -s.w / 2 + fromLeft,
+          y: s.h / 2 - fromTop
         };
       }
 
@@ -73356,10 +73398,12 @@ System.register("chunks:///_virtual/slot25Layout.ts", ['cc', './apkScreen.ts'], 
        * Thanh tren (con cua room view, khong phai cua ban). Task F: theo mep tren vung nhin nhu APK — gameCoinBg
        * (left + wide + 217, top - 52) (Slot25Location.lua:561), backSelect (left + wide + 57, top - 61) (:292), selectBg
        * (left + wide + 104, top - 81) (:301-302), mall (cx + 583, top - 61) (:586-587). Nut hu jackpotBg (cx + 578,
-       * cy + 165) (:582) giu giua; Mall va nut hu KHONG lech wideOffsetX (Task I). `visibleH` = chieu cao vung nhin; 720 -> trung toa do cu.
+       * cy + 165) (:582) giu giua, khong lech wideOffsetX (Task I). 1280 x 720 -> trung toa do cu.
+       * Sua UI 2026-10-17: nut menu (va chip, khung menu) sat goc trai, Mall sat goc phai cua vung nhin (doi xung,
+       * 57 + wide tu mep) — man rong hon 1280 hai nut van o goc thay vi o toa do 1280 co dinh.
        */
       const TOP = exports('TOP', {
-        chipBg: (wide, visibleH) => topPt(217 + wide, 52, visibleH),
+        chipBg: (wide, s) => leftTopPt(217 + wide, 52, s),
         chipIcon: {
           x: 22 - 93,
           y: 20 - 22
@@ -73374,9 +73418,12 @@ System.register("chunks:///_virtual/slot25Layout.ts", ['cc', './apkScreen.ts'], 
           x: 164 - 93,
           y: 20 - 22
         },
-        back: (wide, visibleH) => topPt(57 + wide, 61, visibleH),
-        menu: (wide, visibleH) => topPt(104 + wide, 81, visibleH),
-        mall: visibleH => topPt(640 + 583, 61, visibleH),
+        back: (wide, s) => leftTopPt(57 + wide, 61, s),
+        menu: (wide, s) => leftTopPt(104 + wide, 81, s),
+        mall: (wide, s) => ({
+          x: s.w / 2 - 57 - wide,
+          y: s.h / 2 - 61
+        }),
         jackpotBtn: () => screenPt(640 + 578, 360 + 165)
       });
       const BOTTOM = exports('BOTTOM', {
@@ -73526,7 +73573,7 @@ System.register("chunks:///_virtual/slot25Layout.ts", ['cc', './apkScreen.ts'], 
 });
 
 System.register("chunks:///_virtual/Slot25Popups.ts", ['cc', './inbox2.ts', './slot25Res.ts', './slot25Layout.ts', './slot25Text.ts', './SimplePopup.ts', './uiKit.ts'], function (exports) {
-  var cclegacy, UITransform, Sprite, tween, Vec3, msgTimeText, SLOT25_DIGITS, SEQ, slot25Text, ellipsize, buildSimplePopup, sprite, onTap, label, child;
+  var cclegacy, UITransform, Sprite, tween, Vec3, Node, msgTimeText, SLOT25_DIGITS, SEQ, slot25Text, ellipsize, buildSimplePopup, sprite, onTap, label, child;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -73534,6 +73581,7 @@ System.register("chunks:///_virtual/Slot25Popups.ts", ['cc', './inbox2.ts', './s
       Sprite = module.Sprite;
       tween = module.tween;
       Vec3 = module.Vec3;
+      Node = module.Node;
     }, function (module) {
       msgTimeText = module.msgTimeText;
     }, function (module) {
@@ -73777,10 +73825,14 @@ System.register("chunks:///_virtual/Slot25Popups.ts", ['cc', './inbox2.ts', './s
       }
       exports('Slot25AutoList', Slot25AutoList);
 
-      /** Menu goc (selectBg): Salir + Musica bat / tat (Loc:559-579). */
+      /** Lop chan cham phu ca man duoi khung menu: cham ra ngoai menu thi dong menu (khong lot xuong nut duoi). */
+      const SLOT25_MENU_SHIELD = exports('SLOT25_MENU_SHIELD', 4000);
+
+      /** Menu goc (selectBg): Salir + Musica bat / tat (Loc:559-579). Cham ra ngoai khung thi dong. */
       class Slot25Menu {
         constructor(parent, a, lang) {
           this.panel = null;
+          this.shield = null;
           this.parent = parent;
           this.a = a;
           this.lang = lang;
@@ -73790,7 +73842,15 @@ System.register("chunks:///_virtual/Slot25Popups.ts", ['cc', './inbox2.ts', './s
             this.close();
             return;
           }
+          const shield = child(this.parent, 'menuShield', {
+            x: 0,
+            y: 0
+          }, SLOT25_MENU_SHIELD, SLOT25_MENU_SHIELD);
+          shield.on(Node.EventType.TOUCH_END, () => this.close());
+          this.shield = shield;
           const bg = sprite(this.parent, this.a.images.menuBg, pos, 1, 'menu').node;
+          // Cham vao nen khung (ngoai 2 dong) thi nuot, khong lot xuong lop chan ma dong menu
+          bg.on(Node.EventType.TOUCH_END, () => undefined);
           const ui = bg.getComponent(UITransform);
           const at = (x, y) => ({
             x: x - ui.contentSize.width / 2,
@@ -73817,7 +73877,9 @@ System.register("chunks:///_virtual/Slot25Popups.ts", ['cc', './inbox2.ts', './s
         }
         close() {
           if (this.panel !== null && this.panel.isValid) this.panel.destroy();
+          if (this.shield !== null && this.shield.isValid) this.shield.destroy();
           this.panel = null;
+          this.shield = null;
         }
       }
       exports('Slot25Menu', Slot25Menu);
@@ -75550,7 +75612,7 @@ System.register("chunks:///_virtual/Slot25SceneRoot.ts", ['cc', './appContext.ts
               var _this$presenter10;
               return void ((_this$presenter10 = this.presenter) == null ? void 0 : _this$presenter10.tapJackpot());
             }
-          }, this.wide, s.h);
+          }, this.wide, s);
           this.fx = new Slot25Fx(root, table, a, this.sound, this.screenSize, app.lang);
           // Lop rieng cho Bonus: node 'bonus' tao luc mo, phai nam DUOI popup (hop thu lai) va toast.
           this.bonus = new Slot25BonusView(child(root, 'bonusLayer'), a, this.sound, this.screenSize);
@@ -75675,7 +75737,7 @@ System.register("chunks:///_virtual/Slot25SceneRoot.ts", ['cc', './appContext.ts
           at('rightHouse', BG.rightHouse(s));
           at('leftHouse', BG.leftHouse(s));
           if (sc.table.isValid) sc.table.setPosition(0, tableLayerY(s.h));
-          (_this$bar = this.bar) == null || _this$bar.placeTop(this.wide, s.h);
+          (_this$bar = this.bar) == null || _this$bar.placeTop(this.wide, s);
           (_this$autoList = this.autoList) == null || _this$autoList.relayout(s.h);
           (_this$menu = this.menu) == null || _this$menu.close();
           (_this$bonus2 = this.bonus) == null || _this$bonus2.relayout();
@@ -75706,7 +75768,7 @@ System.register("chunks:///_virtual/Slot25SceneRoot.ts", ['cc', './appContext.ts
           var _this$sound2, _this$menu2;
           const app = getApp();
           (_this$sound2 = this.sound) == null || _this$sound2.play('setting');
-          (_this$menu2 = this.menu) == null || _this$menu2.toggle(TOP.menu(this.wide, this.screenSize.h), () => app.music, () => {
+          (_this$menu2 = this.menu) == null || _this$menu2.toggle(TOP.menu(this.wide, this.screenSize), () => app.music, () => {
             var _this$presenter14;
             return (_this$presenter14 = this.presenter) == null ? void 0 : _this$presenter14.tapBack();
           }, () => {
@@ -79026,8 +79088,8 @@ System.register("chunks:///_virtual/tablePlatformPresenter.ts", ['cc', './homeSt
   };
 });
 
-System.register("chunks:///_virtual/TablePlatformRoot.ts", ['cc', './appContext.ts', './bankruptFlow.ts', './tableBankrupt.ts', './taskLayout.ts', './tablePlatformPresenter.ts', './apkRes.ts', './platformAssets.ts', './platformBoot.ts', './MallPopup.ts', './BkPopup.ts', './PopupLayer.ts', './Toast.ts', './uiKit.ts', './OnlinePopup.ts', './RoomOnlineBox.ts', './TableSocialLayer.ts', './roundHook.ts'], function (exports) {
-  var cclegacy, Component, UITransform, sys, _decorator, getApp, BankruptFlow, TableBankrupt, roomBoxLayout, TablePlatformPresenter, PlatformRes, PlatformAssets, screenOf, openMallPopup, bankruptView, PopupLayer, Toast, child, openOnlinePopup, buildRoomOnlineBox, TableSocialLayer;
+System.register("chunks:///_virtual/TablePlatformRoot.ts", ['cc', './appContext.ts', './bankruptFlow.ts', './tableBankrupt.ts', './taskLayout.ts', './tablePlatformPresenter.ts', './apkRes.ts', './platformAssets.ts', './platformBoot.ts', './MallPopup.ts', './UserInfoPopup.ts', './BkPopup.ts', './PopupLayer.ts', './Toast.ts', './uiKit.ts', './OnlinePopup.ts', './RoomOnlineBox.ts', './TableSocialLayer.ts', './roundHook.ts'], function (exports) {
+  var cclegacy, Component, UITransform, sys, _decorator, getApp, BankruptFlow, TableBankrupt, roomBoxLayout, TablePlatformPresenter, PlatformRes, PlatformAssets, screenOf, openMallPopup, openUserInfoPopup, bankruptView, PopupLayer, Toast, child, openOnlinePopup, buildRoomOnlineBox, TableSocialLayer;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -79053,6 +79115,8 @@ System.register("chunks:///_virtual/TablePlatformRoot.ts", ['cc', './appContext.
       screenOf = module.screenOf;
     }, function (module) {
       openMallPopup = module.openMallPopup;
+    }, function (module) {
+      openUserInfoPopup = module.openUserInfoPopup;
     }, function (module) {
       bankruptView = module.bankruptView;
     }, function (module) {
@@ -79180,6 +79244,10 @@ System.register("chunks:///_virtual/TablePlatformRoot.ts", ['cc', './appContext.
             });
           });
         }
+        toast(text) {
+          var _this$toastView;
+          if (this.isValid) (_this$toastView = this.toastView) == null || _this$toastView.show(text);
+        }
         throwLocal(fromUid, toUid, id) {
           if (!this.isValid || this.social === null) return;
           this.social.throwProp(fromUid, toUid, id);
@@ -79231,19 +79299,27 @@ System.register("chunks:///_virtual/TablePlatformRoot.ts", ['cc', './appContext.
             seats: h.seats ?? null,
             popups: () => this.popups,
             toast: t => {
-              var _this$toastView;
-              return (_this$toastView = this.toastView) == null ? void 0 : _this$toastView.show(t);
+              var _this$toastView2;
+              return (_this$toastView2 = this.toastView) == null ? void 0 : _this$toastView2.show(t);
             },
             openMall: () => this.openMall(),
             store: sys.localStorage,
             gameId: h.gameId,
             wide: this.wide,
-            tableChip: h.tableChip
+            tableChip: h.tableChip,
+            openSelf: () => this.openSelf()
           });
           this.popups = new PopupLayer(this.node, this.screenSize);
           this.toastView = new Toast(this.node, f.toastBg, this.screenSize);
           (_this$presenter3 = this.presenter) == null || _this$presenter3.start();
           void this.social.start();
+        }
+
+        /** Cham avatar cua minh trong ban: popup thong tin ca nhan nhu Hall (UserInfoPopup) tren PopupLayer cua ban. */
+        openSelf() {
+          if (!this.isValid) return;
+          const ph = this.popupHost();
+          if (ph !== null) openUserInfoPopup(ph);
         }
         openOnline() {
           const host = this.popupHost();
@@ -79260,8 +79336,8 @@ System.register("chunks:///_virtual/TablePlatformRoot.ts", ['cc', './appContext.
             app: h.app,
             session: h.session,
             toast: t => {
-              var _this$toastView2;
-              return (_this$toastView2 = this.toastView) == null ? void 0 : _this$toastView2.show(t);
+              var _this$toastView3;
+              return (_this$toastView3 = this.toastView) == null ? void 0 : _this$toastView3.show(t);
             },
             onReward: () => undefined,
             store: sys.localStorage,
@@ -80340,14 +80416,11 @@ System.register("chunks:///_virtual/TableSocialLayer.ts", ['cc', './platformText
           this.bubbles = new SeatBubbles(this.fx, chat.bubbleLeft, chat.bubbleRight, gameId);
           this.faces = new SeatFaces(this.fx, this.spines);
           this.flights = new PropFlights(this.fx, h.assets, this.spines, this.sound);
-          this.taps = new SeatTaps(this.tapNode, SEAT_TAP.size, id => {
-            var _this$presenter;
-            return (_this$presenter = this.presenter) == null ? void 0 : _this$presenter.tapSeat(id);
-          });
+          this.taps = new SeatTaps(this.tapNode, SEAT_TAP.size, id => this.tapSeat(id));
           const btn = sprite(this.root, chat.chatBtn, chatButtonPos(this.screen, gameId, this.wide), 1, 'btnChat');
           onTap(btn.node, () => {
-            var _this$presenter2;
-            return (_this$presenter2 = this.presenter) == null ? void 0 : _this$presenter2.tapChatButton();
+            var _this$presenter;
+            return (_this$presenter = this.presenter) == null ? void 0 : _this$presenter.tapChatButton();
           });
           this.chatBtn = btn.node;
           this.chatFrames = chat;
@@ -80378,32 +80451,32 @@ System.register("chunks:///_virtual/TableSocialLayer.ts", ['cc', './platformText
         makePanel(chat) {
           return new RoomChatPanel(this.root, this.screen, chat, this.h.lang, {
             selectTab: t => {
-              var _this$presenter3;
-              return (_this$presenter3 = this.presenter) == null ? void 0 : _this$presenter3.selectTab(t);
+              var _this$presenter2;
+              return (_this$presenter2 = this.presenter) == null ? void 0 : _this$presenter2.selectTab(t);
             },
             selectFaceTab: t => {
-              var _this$presenter4;
-              return (_this$presenter4 = this.presenter) == null ? void 0 : _this$presenter4.selectFaceTab(t);
+              var _this$presenter3;
+              return (_this$presenter3 = this.presenter) == null ? void 0 : _this$presenter3.selectFaceTab(t);
             },
             sendPhrase: i => {
-              var _this$presenter5;
-              return (_this$presenter5 = this.presenter) == null ? void 0 : _this$presenter5.sendPhrase(i);
+              var _this$presenter4;
+              return (_this$presenter4 = this.presenter) == null ? void 0 : _this$presenter4.sendPhrase(i);
             },
             sendText: t => {
-              var _this$presenter6;
-              return ((_this$presenter6 = this.presenter) == null ? void 0 : _this$presenter6.sendText(t)) === true;
+              var _this$presenter5;
+              return ((_this$presenter5 = this.presenter) == null ? void 0 : _this$presenter5.sendText(t)) === true;
             },
             sendFace: id => {
-              var _this$presenter7;
-              return (_this$presenter7 = this.presenter) == null ? void 0 : _this$presenter7.sendFace(id);
+              var _this$presenter6;
+              return (_this$presenter6 = this.presenter) == null ? void 0 : _this$presenter6.sendFace(id);
             },
             toggleHideAll: () => {
-              var _this$presenter8;
-              return (_this$presenter8 = this.presenter) == null ? void 0 : _this$presenter8.toggleHideAll();
+              var _this$presenter7;
+              return (_this$presenter7 = this.presenter) == null ? void 0 : _this$presenter7.toggleHideAll();
             },
             closed: () => {
-              var _this$presenter9;
-              return (_this$presenter9 = this.presenter) == null ? void 0 : _this$presenter9.chatClosed();
+              var _this$presenter8;
+              return (_this$presenter8 = this.presenter) == null ? void 0 : _this$presenter8.chatClosed();
             }
           }, this.wide, this.h.gameId ?? 'conquian');
         }
@@ -80414,7 +80487,7 @@ System.register("chunks:///_virtual/TableSocialLayer.ts", ['cc', './platformText
          * Bong bong / emoji / o cham doc vi tri ghe moi lan hien nen khong can dat lai.
          */
         relayout(screen, wide) {
-          var _this$root$getCompone, _this$presenter10;
+          var _this$root$getCompone, _this$presenter9;
           this.screen = screen;
           this.wide = wide;
           if (this.disposed || !this.root.isValid) return;
@@ -80429,18 +80502,26 @@ System.register("chunks:///_virtual/TableSocialLayer.ts", ['cc', './platformText
           const wasOpen = this.panel.isOpen;
           this.panel.destroy();
           this.panel = this.makePanel(chat);
-          if (wasOpen) (_this$presenter10 = this.presenter) == null || _this$presenter10.chatClosed();
+          if (wasOpen) (_this$presenter9 = this.presenter) == null || _this$presenter9.chatClosed();
         }
 
         /** TablePlatformRoot goi moi 0.25 s. */
         tick() {
-          var _this$presenter11, _this$taps;
+          var _this$presenter10, _this$taps;
           if (this.disposed) return;
-          (_this$presenter11 = this.presenter) == null || _this$presenter11.tick();
-          (_this$taps = this.taps) == null || _this$taps.sync(this.seatList().filter(s => !s.me && s.userId !== this.h.myUserId && s.node !== null && s.node.isValid).map(s => ({
+          (_this$presenter10 = this.presenter) == null || _this$presenter10.tick();
+          // O cham tren moi avatar, ke ca cua minh (cua minh -> popup thong tin ca nhan, xem tapSeat).
+          (_this$taps = this.taps) == null || _this$taps.sync(this.seatList().filter(s => s.userId !== '' && s.node !== null && s.node.isValid).map(s => ({
             userId: s.userId,
             ...this.pointOf(s.userId)
           })));
+        }
+
+        /** Avatar cua minh -> h.openSelf (UserInfoPopup); nguoi khac -> RoomUserPopup qua presenter. */
+        tapSeat(userId) {
+          var _this$h$openSelf, _this$h, _this$presenter11;
+          const mine = userId === this.h.myUserId || this.seatList().some(s => s.me && s.userId === userId);
+          if (mine) (_this$h$openSelf = (_this$h = this.h).openSelf) == null || _this$h$openSelf.call(_this$h);else (_this$presenter11 = this.presenter) == null || _this$presenter11.tapSeat(userId);
         }
         dispose() {
           var _this$presenter12, _this$panel, _this$bubbles, _this$faces, _this$flights, _this$taps2, _this$userPopup;

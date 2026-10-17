@@ -182,7 +182,7 @@ System.register([], (function (exports, module) {
       });
       const legacyCC = cclegacy;
       cclegacy.internal = {};
-      const engineVersion = exports("VERSION", '3.8.8');
+      const engineVersion = exports("VERSION", '3.8.7');
       _global.CocosEngine = legacyCC.ENGINE_VERSION = engineVersion;
       _global.cc = legacyCC;
       const ccwindow$1 = typeof globalThis.jsb !== 'undefined' ? typeof jsb.window !== 'undefined' ? jsb.window : globalThis : globalThis;
@@ -21487,8 +21487,10 @@ System.register([], (function (exports, module) {
       };
       imageAssetProto.reset = function (data) {
         this._nativeData = data;
-        if (data.format !== undefined && !this.isFormatFixed()) {
-          this.format = data.format;
+        if (!(data instanceof jsbWindow$1.HTMLElement)) {
+          if (data.format !== undefined) {
+            this.format = data.format;
+          }
         }
         this._syncDataToNative();
       };
@@ -21586,7 +21588,7 @@ System.register([], (function (exports, module) {
         }
         if (ext) {
           this._setRawAsset(ext);
-          this.setFixedFormat(format);
+          this.format = format;
         } else {
           warnID(3121);
         }
@@ -30127,7 +30129,6 @@ if (prop) {
         if (prefabInfo && prefabInfo.nestedPrefabInstanceRoots) {
           prefabInfo.nestedPrefabInstanceRoots.forEach(instanceNode => {
             expandPrefabInstanceNode(instanceNode);
-            applyTargetOverrides(instanceNode);
           });
         }
       }
@@ -39593,12 +39594,7 @@ if (prop) {
           this._initIDataCount = iCount;
           this._attributes = attrs;
           this.floatsPerVertex = getAttributeStride(attrs) >> 2;
-          var vDataCountLimit = 65536;
-          const glApi = device.gfxAPI;
-          if (glApi === 8 || glApi === 7 || glApi === 6 && device.hasFeature(0)) {
-            vDataCountLimit = 4294967295;
-          }
-          assertIsTrue(this._initVDataCount / this._floatsPerVertex < vDataCountLimit, getError(9005));
+          assertIsTrue(this._initVDataCount / this._floatsPerVertex < 65536, getError(9005));
           if (!this.vData || !this.iData) {
             this.vData = new Float32Array(this._initVDataCount);
             this.iData = new Uint16Array(this._initIDataCount);
@@ -40483,10 +40479,6 @@ if (prop) {
             renderDrawInfo.setVBCount(this._vc);
             renderDrawInfo.setIBCount(this._ic);
           }
-        }
-        updateSize(vertexCount, indexCount) {
-          this._vc = vertexCount;
-          this._ic = indexCount;
         }
         setRenderDrawInfoAttributes() {
           {
@@ -41878,7 +41870,7 @@ if (prop) {
           this.node.off("anchor-changed", this._nodeStateChange, this);
           this.node.off("size-changed", this._nodeStateChange, this);
           this.node.off("parent-changed", this._colorDirty, this);
-          this.destroyRenderData();
+          this._destroyData();
           uiRendererManager.removeRenderer(this);
           this._renderFlag = false;
           this._renderEntity.enabled = false;
@@ -41960,7 +41952,8 @@ if (prop) {
           this._updateBlendFunc();
         }
         _updateColor() {
-          this._colorDirty();
+          this.node._uiProps.colorDirty = true;
+          this.setEntityColorDirty(true);
           this.setEntityColor(this._color);
           const assembler = this._assembler;
           if (assembler) {
@@ -42662,7 +42655,7 @@ if (prop) {
           if (!this.renderData) {
             if (this._assembler && this._assembler.createData) {
               this._renderData = this._assembler.createData(this);
-              this.renderData.material = this.getRenderMaterial(0);
+              this.renderData.material = this.material;
               this._updateColor();
             }
           }
@@ -43092,7 +43085,6 @@ if (prop) {
             }
             if (textureChanged) {
               if (self.renderData) self.renderData.textureDirty = true;
-              this._colorDirty();
               const oldIsRT = oldFrame ? oldFrame.texture instanceof RenderTexture : false;
               const newIsRT = spriteFrame.texture instanceof RenderTexture;
               if (oldIsRT !== newIsRT) {
@@ -53114,8 +53106,8 @@ if (prop) {
               let accessor = animationFunction.get(lastPropertyKey);
               if (!accessor) {
                 accessor = {
-                  setValue: Function('value', `this.target["${lastPropertyKey}"] = value;`),
-                  getValue: Function(`return this.target["${lastPropertyKey}"];`)
+                  setValue: Function('value', `this.target.${lastPropertyKey} = value;`),
+                  getValue: Function(`return this.target.${lastPropertyKey};`)
                 };
                 animationFunction.set(lastPropertyKey, accessor);
               }
@@ -65723,7 +65715,7 @@ if (prop) {
           }
           indexCount = vertexCount <= 2 ? 0 : (vertexCount - 2) * 3;
           renderData.resize(vertexCount, indexCount);
-          if (comp.texture) {
+          {
             const indexCount = renderData.indexCount;
             this.createQuadIndices(comp, indexCount);
             renderData.chunk.setIndexBuffer(QUAD_INDICES);
@@ -72406,8 +72398,6 @@ if (prop) {
             this.defaultAnimation = '';
             this._animationName = '';
             this._skinName = '';
-            this._animCache = null;
-            this._destroySkeletonInfo(this._skeletonCache);
             this._updateSkeletonData();
             this._updateUITransform();
           }
@@ -73565,17 +73555,13 @@ if (prop) {
         const rd = comp.renderData;
         if (!rd || vc < 1 || ic < 1) return;
         if (rd.vertexCount !== vc || rd.indexCount !== ic) {
-          comp._vLength = vc * 4 * floatStride;
-          if (!rd.chunk || rd.chunk.vb.byteLength < comp._vLength || rd.chunk.indexCount < ic) {
+          if (rd.vertexCount < vc || rd.indexCount < ic) {
             rd.resize(Math.ceil(vc * ADJUST_SIZE_RATE), Math.ceil(ic * ADJUST_SIZE_RATE));
-          } else if (rd.chunk) {
-            rd.updateSize(vc, ic);
           }
+          rd.indices = new Uint16Array(ic);
+          comp._vLength = vc * 4 * floatStride;
           comp._vBuffer = new Uint8Array(rd.chunk.vb.buffer, rd.chunk.vb.byteOffset, comp._vLength);
           comp._iLength = 2 * ic;
-        }
-        if (!rd.indices || rd.indices.length < ic) {
-          rd.indices = new Uint16Array(ic);
           comp._iBuffer = new Uint8Array(rd.indices.buffer);
         }
         const vbuf = rd.chunk.vb;
@@ -73673,13 +73659,9 @@ if (prop) {
         const rd = comp.renderData;
         if (!rd || vc < 1 || ic < 1) return;
         if (rd.vertexCount !== vc || rd.indexCount !== ic) {
-          if (!rd.chunk || rd.chunk.vb.byteLength < vc * 4 * _byteStrideTwoColor || rd.chunk.indexCount < ic) {
+          if (rd.vertexCount < vc || rd.indexCount < ic) {
             rd.resize(Math.ceil(vc * ADJUST_SIZE_RATE), Math.ceil(ic * ADJUST_SIZE_RATE));
-          } else if (rd.chunk) {
-            rd.updateSize(vc, ic);
           }
-        }
-        if (!rd.indices || rd.indices.length < ic) {
           rd.indices = new Uint16Array(ic);
         }
         const vbuf = rd.chunk.vb;

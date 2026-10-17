@@ -1,5 +1,5 @@
 {
-    "CocosEngine": "3.8.8",
+    "CocosEngine": "3.8.7",
     "engine": {
         "debug": true,
         "platform": "android",
