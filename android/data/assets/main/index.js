@@ -44050,6 +44050,7 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
         const rc = v.reconnecting;
         const rf = v.reconnectFailed;
         const kk = v.kicked;
+        const ts = v.toast;
         return {
           table: wrap(v.table),
           hand: wrap(v.hand),
@@ -44079,6 +44080,12 @@ System.register("chunks:///_virtual/gameTablePresenter.ts", ['cc', './transport.
           ...(kk !== undefined ? {
             kicked: text => {
               if (alive()) kk.call(v, text);
+            }
+          } : {}),
+          // Toast chung cua ban (thoat giua van), chan sau detach nhu view. Thieu dong nay = presenter khong thay toast.
+          ...(ts !== undefined ? {
+            toast: text => {
+              if (alive()) ts.call(v, text);
             }
           } : {})
         };
