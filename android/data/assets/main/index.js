@@ -48504,8 +48504,8 @@ System.register("chunks:///_virtual/HallRankPopup.ts", ['cc', './socialLayout.ts
   };
 });
 
-System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLayout.ts', './enterAnimLayout.ts', './hallPager.ts', './appContext.ts', './platformBindings.ts', './freeCoinPresenter.ts', './firstChargeSale.ts', './hallPresenter.ts', './rewardFx.ts', './platformText.ts', './appConfig.ts', './apkRes.ts', './platformExtraRes.ts', './vipLayout.ts', './FreeCoinPanel.ts', './LobbyLayer.ts', './ExitGamePopup.ts', './GetRewardPopup.ts', './MallPopup.ts', './FCPopup.ts', './SettingPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './RewardVideoPopup.ts', './TaskPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './EventPopup.ts', './HallRankPopup.ts', './MessagePopup.ts', './UserInfoPopup.ts', './FriendPopup.ts', './NewInviteFriendPopup.ts', './BroadProp.ts', './marqueePresenter.ts', './tableInvitePresenter.ts', './MarqueeBar.ts', './InviteBanner.ts', './navigation.ts', './SceneCover2.ts', './SignPopup.ts', './platformAssets.ts', './platformBoot.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SimplePopup.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './SafeEdge.ts', './EnterAnim.ts', './HallJackpot2.ts', './uiKit.ts', './viewBind.ts'], function (exports) {
-  var cclegacy, Component, sys, input, Input, view, Tween, UITransform, Vec3, tween, Node, Color, KeyCode, Mask, Layout, PageView, Sprite, instantiate, Label, _decorator, DEBUG, packSlots, hallBottomJump, HALL_BOTTOM_ANIM, hallTopDelay, HALL_TOP_DROP, HALL_CONTENT_ANIM, pagerRect, slotInPage, HALL_PAGER, readSound, readMusic, getApp, HALL_BINDINGS, FreeCoinPresenter, FirstChargeSale, HallPresenter, tileCaption, HALL_TOP_ICONS, countUpValue, COUNT_SEC, countUpText, rewardFx, platformText, ALL_FEATURES, PlatformRes, PlatformExtraRes, vipAlbumFrame, FreeCoinPanel, LobbyLayer, openExitGamePopup, openGetRewardPopup, openMallPopup, firstChargeView, openSettingPopup, NEWBIE_POPUP, openNewbiePopup, openOnlineRewardPopup, openPiggyBankPop, openRewardVideoPopup, openTaskPopup, openVipInfoPopup, openWheelPopup, openEventPopup, openRankPopup, openMessagePopup, openUserInfoPopup, openFriendPopup, openInviteHub, openBroadProp, MarqueePresenter, TableInvitePresenter, inviteAndPlay, MarqueeBar, InviteBanner, toLogin, toHall, enterTable, enterSlot, holdSceneCover, releaseAfter, cancelSceneCover, prepareSceneCover, SIGN_POPUP, openSignPopup, PlatformAssets, screenOf, PlatformSound, PopupLayer, RewardRain, buildSimplePopup, openNetLostBox, Toast, applyLangSprites, applySafeEdges, SafeEdge, EnterAnim, HallJackpot, errorRetry, frameIn, tapArea, sprite, label, reconnectBlocker, coverNode, child, onTap, loadPrefabView, bind, bindNode;
+System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './lobbyTest.ts', './hallLayout.ts', './enterAnimLayout.ts', './hallPager.ts', './appContext.ts', './platformBindings.ts', './freeCoinPresenter.ts', './firstChargeSale.ts', './hallPresenter.ts', './rewardFx.ts', './platformText.ts', './appConfig.ts', './apkRes.ts', './platformExtraRes.ts', './vipLayout.ts', './FreeCoinPanel.ts', './LobbyLayer.ts', './ExitGamePopup.ts', './GetRewardPopup.ts', './MallPopup.ts', './FCPopup.ts', './SettingPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './RewardVideoPopup.ts', './TaskPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './EventPopup.ts', './HallRankPopup.ts', './MessagePopup.ts', './UserInfoPopup.ts', './FriendPopup.ts', './NewInviteFriendPopup.ts', './BroadProp.ts', './marqueePresenter.ts', './tableInvitePresenter.ts', './MarqueeBar.ts', './InviteBanner.ts', './navigation.ts', './SceneCover2.ts', './SignPopup.ts', './platformAssets.ts', './platformBoot.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SimplePopup.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './SafeEdge.ts', './EnterAnim.ts', './HallJackpot2.ts', './uiKit.ts', './viewBind.ts'], function (exports) {
+  var cclegacy, Component, sys, input, Input, view, Tween, UITransform, Vec3, tween, Node, Color, KeyCode, UIOpacity, Mask, Layout, PageView, Sprite, instantiate, Label, _decorator, DEBUG, lobbyDevTools, packSlots, hallBottomJump, HALL_BOTTOM_ANIM, hallTopDelay, HALL_CONTENT_ANIM, HALL_TOP_DROP, pagerRect, slotInPage, HALL_PAGER, readSound, readMusic, getApp, HALL_BINDINGS, FreeCoinPresenter, FirstChargeSale, HallPresenter, tileCaption, HALL_TOP_ICONS, countUpValue, COUNT_SEC, countUpText, rewardFx, platformText, ALL_FEATURES, PlatformRes, PlatformExtraRes, vipAlbumFrame, FreeCoinPanel, LobbyLayer, openExitGamePopup, openGetRewardPopup, openMallPopup, firstChargeView, openSettingPopup, NEWBIE_POPUP, openNewbiePopup, openOnlineRewardPopup, openPiggyBankPop, openRewardVideoPopup, openTaskPopup, openVipInfoPopup, openWheelPopup, openEventPopup, openRankPopup, openMessagePopup, openUserInfoPopup, openFriendPopup, openInviteHub, openBroadProp, MarqueePresenter, TableInvitePresenter, inviteAndPlay, MarqueeBar, InviteBanner, toLogin, toHall, enterTable, enterSlot, holdSceneCover, releaseAfter, cancelSceneCover, prepareSceneCover, SIGN_POPUP, openSignPopup, PlatformAssets, screenOf, PlatformSound, PopupLayer, RewardRain, buildSimplePopup, openNetLostBox, Toast, applyLangSprites, applySafeEdges, SafeEdge, EnterAnim, HallJackpot, errorRetry, frameIn, tapArea, sprite, label, reconnectBlocker, coverNode, child, onTap, loadPrefabView, bind, bindNode;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -48521,6 +48521,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
       Node = module.Node;
       Color = module.Color;
       KeyCode = module.KeyCode;
+      UIOpacity = module.UIOpacity;
       Mask = module.Mask;
       Layout = module.Layout;
       PageView = module.PageView;
@@ -48531,13 +48532,15 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
     }, function (module) {
       DEBUG = module.DEBUG;
     }, function (module) {
+      lobbyDevTools = module.lobbyDevTools;
+    }, function (module) {
       packSlots = module.packSlots;
     }, function (module) {
       hallBottomJump = module.hallBottomJump;
       HALL_BOTTOM_ANIM = module.HALL_BOTTOM_ANIM;
       hallTopDelay = module.hallTopDelay;
-      HALL_TOP_DROP = module.HALL_TOP_DROP;
       HALL_CONTENT_ANIM = module.HALL_CONTENT_ANIM;
+      HALL_TOP_DROP = module.HALL_TOP_DROP;
     }, function (module) {
       pagerRect = module.pagerRect;
       slotInPage = module.slotInPage;
@@ -48682,6 +48685,8 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
       const {
         ccclass
       } = _decorator;
+      /** Opacity bat dau hien dan cua o game: > 0 de batcher van duyet con (Spine nhan opacity dung tu frame dau). */
+      const TILE_FADE_FROM = 1;
 
       /** Chi cac hinh code con dung luc chay; hinh tinh nam trong HallView.prefab. */
       const HALL_FRAMES = {
@@ -48820,6 +48825,33 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           this.jackpot = null;
           /** Nhom node thanh duoi nhay cung nhau theo thu tu APK (headerBg = avatar, ten, o chip). */
           this.bottomJumps = [];
+          /** Frame sau playEnterAnim: o lon / luoi truot it va hien dan. */
+          this.startTileAnim = () => {
+            const a = this.enter;
+            const C = HALL_CONTENT_ANIM;
+            const main = this.tileAnchors[0];
+            if (main !== undefined && main.isValid) {
+              main.setScale(1, 1, 1);
+              a.slideIn(main, C.time, t => ({
+                x: t.x - C.shift,
+                y: t.y
+              }), {
+                easing: 'quadOut'
+              });
+              a.fade(main, TILE_FADE_FROM, 255, C.time);
+            }
+            const grid = this.pagerNode;
+            if (grid !== null && grid.isValid) {
+              grid.setScale(1, 1, 1);
+              a.slideIn(grid, C.time, t => ({
+                x: t.x + C.shift,
+                y: t.y
+              }), {
+                easing: 'quadOut'
+              });
+              a.fade(grid, TILE_FADE_FROM, 255, C.time);
+            }
+          };
         }
         onLoad() {
           const app = getApp();
@@ -48834,7 +48866,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           releaseAfter(this.boot(), () => cover, '[conquian] HallSceneRoot');
         }
         async boot() {
-          var _this$lobby, _this$lobby2;
+          var _app$server, _this$lobby, _this$lobby2;
           const app = getApp();
           const session = app.session;
           if (session === null) return;
@@ -48933,8 +48965,8 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
             onReward: (b, a) => this.rewarded(b, a),
             openMall: tab => this.openMall(tab),
             openPiggy: () => this.openPiggy(),
-            // CONG CU DEV (khong phai release): nut/popup chon so bot + bo bai cheat trong Lobby.
-            dev: DEBUG,
+            // CONG CU DEV: nut/popup chon so bot + bo bai cheat, chi ban debug noi Colyseus dev (lobbyDevTools).
+            dev: lobbyDevTools(!DEBUG, ((_app$server = app.server) == null ? void 0 : _app$server.backend) ?? null),
             store: sys.localStorage
           });
           this.freeCoin = new FreeCoinPresenter(this, {
@@ -49673,29 +49705,19 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
             easing: 'backOut'
           }));
           // O lon tu trai, luoi tu phai: lech it (shift) va hien dan (yeu cau 2026-10-18).
-          const C = HALL_CONTENT_ANIM;
+          // Spine (o Escoba, Slots) lay opacity cua cha o frame truoc, va cha opacity 0 thi batcher khong duyet con (opacity
+          // con dung yen) -> frame dau ve dam = nhay. Lam nong mot frame: opacity 1/255 (con van duoc duyet) + scale 0 (khong
+          // thay), frame sau moi chay hieu ung tu opacity 1/255.
           const main = this.tileAnchors[0];
-          if (main !== undefined && main.isValid) {
-            a.slideIn(main, C.time, t => ({
-              x: t.x - C.shift,
-              y: t.y
-            }), {
-              easing: 'quadOut'
-            });
-            a.fade(main, 0, 255, C.time);
-          }
           const grid = this.pagerNode;
-          if (grid !== null && grid.isValid) {
-            a.slideIn(grid, C.time, t => ({
-              x: t.x + C.shift,
-              y: t.y
-            }), {
-              easing: 'quadOut'
-            });
-            a.fade(grid, 0, 255, C.time);
+          const tiles = [main, grid].filter(n => n !== undefined && n !== null && n.isValid);
+          for (const n of tiles) {
+            n.setScale(0, 0, 1);
+            (n.getComponent(UIOpacity) ?? n.addComponent(UIOpacity)).opacity = TILE_FADE_FROM;
           }
+          this.unschedule(this.startTileAnim);
+          this.scheduleOnce(this.startTileAnim, 0);
         }
-
         /**
          * Luoi o game ben phai dang PageView (yeu cau 2026-10-18): gridPager (khung tu sat phai o lon toi mep phai man)
          * > view (Mask) > content (Layout ngang) > trang. PageView tu lo keo / tha / huy cham o game (cancelInnerEvents).
@@ -54371,6 +54393,7 @@ System.register("chunks:///_virtual/lobbyTest.ts", ['cc', './release.ts', './dev
         deckLabel: deckLabel,
         devPickFor: devPickFor,
         devQuickPlayPayload: devQuickPlayPayload,
+        lobbyDevTools: lobbyDevTools,
         lobbyDeviceId: lobbyDeviceId,
         mergeLobbyTestMemory: mergeLobbyTestMemory,
         parseDeckList: parseDeckList,
@@ -54635,6 +54658,14 @@ System.register("chunks:///_virtual/lobbyTest.ts", ['cc', './release.ts', './dev
       /** Spec B3 §4: toggle "Skin APK" chon scene cho nut Play. */
       function playScene(apkSkin) {
         return apkSkin ? 'ApkGameScene' : 'GameScene';
+      }
+
+      /**
+       * Nut / popup DEV o Lobby (chon bot, bo bai cheat): chi ban debug noi server Colyseus dev - devQuickPlayPayload chi gui
+       * bots/deck toi Colyseus, voi Nakama nut khong co tac dung (yeu cau 2026-10-18: tat o cac ban OTA noi Nakama).
+       */
+      function lobbyDevTools(release, backend) {
+        return !release && backend === 'colyseus';
       }
       cclegacy._RF.pop();
     }
