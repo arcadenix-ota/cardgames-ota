@@ -1,8 +1,4964 @@
 System.register([], function(_export, _context) { return { execute: function () {
-System.register("chunks:///_virtual/env",[],(function(e){return{execute:function(){e("DEBUG",!1)}}}));
+System.register("chunks:///_virtual/env", [], function (exports) {
+  return {
+    execute: function () {
+      const DEBUG = exports('DEBUG', true);
+    }
+  };
+});
 
-System.register("chunks:///_virtual/nakama-js.esm.mjs",[],(function(e){return{execute:function(){var t,r,s=Object.defineProperty,i=Object.getOwnPropertySymbols,n=Object.prototype.hasOwnProperty,o=Object.prototype.propertyIsEnumerable,a=(e,t,r)=>t in e?s(e,t,{enumerable:!0,configurable:!0,writable:!0,value:r}):e[t]=r,u=(e,t)=>{for(var r in t||(t={}))n.call(t,r)&&a(e,r,t[r]);if(i)for(var r of i(t))o.call(t,r)&&a(e,r,t[r]);return e},h=(e,t,r)=>new Promise(((s,i)=>{var n=e=>{try{a(r.next(e))}catch(e){i(e)}},o=e=>{try{a(r.throw(e))}catch(e){i(e)}},a=e=>e.done?s(e.value):Promise.resolve(e.value).then(n,o);a((r=r.apply(e,t)).next())})),d="undefined"!=typeof globalThis&&globalThis||"undefined"!=typeof self&&self||void 0!==d&&d,l="URLSearchParams"in d,c="Symbol"in d&&"iterator"in Symbol,m="FileReader"in d&&"Blob"in d&&function(){try{return new Blob,!0}catch(e){return!1}}(),p="FormData"in d,f="ArrayBuffer"in d;function _(e){if("string"!=typeof e&&(e=String(e)),/[^a-z0-9\-#$%&'*+.^_`|~!]/i.test(e)||""===e)throw new TypeError('Invalid character in header field name: "'+e+'"');return e.toLowerCase()}function w(e){return"string"!=typeof e&&(e=String(e)),e}function b(e){var t={next:function(){var t=e.shift();return{done:void 0===t,value:t}}};return c&&(t[Symbol.iterator]=function(){return t}),t}function y(e){this.map={},e instanceof y?e.forEach((function(e,t){this.append(t,e)}),this):Array.isArray(e)?e.forEach((function(e){this.append(e[0],e[1])}),this):e&&Object.getOwnPropertyNames(e).forEach((function(t){this.append(t,e[t])}),this)}function g(e){if(e.bodyUsed)return Promise.reject(new TypeError("Already read"));e.bodyUsed=!0}function k(e){return new Promise((function(t,r){e.onload=function(){t(e.result)},e.onerror=function(){r(e.error)}}))}function v(e){var t=new FileReader,r=k(t);return t.readAsArrayBuffer(e),r}function P(e){if(e.slice)return e.slice(0);var t=new Uint8Array(e.byteLength);return t.set(new Uint8Array(e)),t.buffer}function T(){return this.bodyUsed=!1,this._initBody=function(e){var t;this.bodyUsed=this.bodyUsed,this._bodyInit=e,e?"string"==typeof e?this._bodyText=e:m&&Blob.prototype.isPrototypeOf(e)?this._bodyBlob=e:p&&FormData.prototype.isPrototypeOf(e)?this._bodyFormData=e:l&&URLSearchParams.prototype.isPrototypeOf(e)?this._bodyText=e.toString():f&&m&&((t=e)&&DataView.prototype.isPrototypeOf(t))?(this._bodyArrayBuffer=P(e.buffer),this._bodyInit=new Blob([this._bodyArrayBuffer])):f&&(ArrayBuffer.prototype.isPrototypeOf(e)||r(e))?this._bodyArrayBuffer=P(e):this._bodyText=e=Object.prototype.toString.call(e):this._bodyText="",this.headers.get("content-type")||("string"==typeof e?this.headers.set("content-type","text/plain;charset=UTF-8"):this._bodyBlob&&this._bodyBlob.type?this.headers.set("content-type",this._bodyBlob.type):l&&URLSearchParams.prototype.isPrototypeOf(e)&&this.headers.set("content-type","application/x-www-form-urlencoded;charset=UTF-8"))},m&&(this.blob=function(){var e=g(this);if(e)return e;if(this._bodyBlob)return Promise.resolve(this._bodyBlob);if(this._bodyArrayBuffer)return Promise.resolve(new Blob([this._bodyArrayBuffer]));if(this._bodyFormData)throw new Error("could not read FormData body as blob");return Promise.resolve(new Blob([this._bodyText]))},this.arrayBuffer=function(){if(this._bodyArrayBuffer){var e=g(this);return e||(ArrayBuffer.isView(this._bodyArrayBuffer)?Promise.resolve(this._bodyArrayBuffer.buffer.slice(this._bodyArrayBuffer.byteOffset,this._bodyArrayBuffer.byteOffset+this._bodyArrayBuffer.byteLength)):Promise.resolve(this._bodyArrayBuffer))}return this.blob().then(v)}),this.text=function(){var e,t,r,s=g(this);if(s)return s;if(this._bodyBlob)return e=this._bodyBlob,t=new FileReader,r=k(t),t.readAsText(e),r;if(this._bodyArrayBuffer)return Promise.resolve(function(e){for(var t=new Uint8Array(e),r=new Array(t.length),s=0;s<t.length;s++)r[s]=String.fromCharCode(t[s]);return r.join("")}(this._bodyArrayBuffer));if(this._bodyFormData)throw new Error("could not read FormData body as text");return Promise.resolve(this._bodyText)},p&&(this.formData=function(){return this.text().then(x)}),this.json=function(){return this.text().then(JSON.parse)},this}f&&(t=["[object Int8Array]","[object Uint8Array]","[object Uint8ClampedArray]","[object Int16Array]","[object Uint16Array]","[object Int32Array]","[object Uint32Array]","[object Float32Array]","[object Float64Array]"],r=ArrayBuffer.isView||function(e){return e&&t.indexOf(Object.prototype.toString.call(e))>-1}),y.prototype.append=function(e,t){e=_(e),t=w(t);var r=this.map[e];this.map[e]=r?r+", "+t:t},y.prototype.delete=function(e){delete this.map[_(e)]},y.prototype.get=function(e){return e=_(e),this.has(e)?this.map[e]:null},y.prototype.has=function(e){return this.map.hasOwnProperty(_(e))},y.prototype.set=function(e,t){this.map[_(e)]=w(t)},y.prototype.forEach=function(e,t){for(var r in this.map)this.map.hasOwnProperty(r)&&e.call(t,this.map[r],r,this)},y.prototype.keys=function(){var e=[];return this.forEach((function(t,r){e.push(r)})),b(e)},y.prototype.values=function(){var e=[];return this.forEach((function(t){e.push(t)})),b(e)},y.prototype.entries=function(){var e=[];return this.forEach((function(t,r){e.push([r,t])})),b(e)},c&&(y.prototype[Symbol.iterator]=y.prototype.entries);var S=["DELETE","GET","HEAD","OPTIONS","POST","PUT"];function R(e,t){if(!(this instanceof R))throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.');var r,s,i=(t=t||{}).body;if(e instanceof R){if(e.bodyUsed)throw new TypeError("Already read");this.url=e.url,this.credentials=e.credentials,t.headers||(this.headers=new y(e.headers)),this.method=e.method,this.mode=e.mode,this.signal=e.signal,i||null==e._bodyInit||(i=e._bodyInit,e.bodyUsed=!0)}else this.url=String(e);if(this.credentials=t.credentials||this.credentials||"same-origin",!t.headers&&this.headers||(this.headers=new y(t.headers)),this.method=(r=t.method||this.method||"GET",s=r.toUpperCase(),S.indexOf(s)>-1?s:r),this.mode=t.mode||this.mode||null,this.signal=t.signal||this.signal,this.referrer=null,("GET"===this.method||"HEAD"===this.method)&&i)throw new TypeError("Body not allowed for GET or HEAD requests");if(this._initBody(i),!("GET"!==this.method&&"HEAD"!==this.method||"no-store"!==t.cache&&"no-cache"!==t.cache)){var n=/([?&])_=[^&]*/;if(n.test(this.url))this.url=this.url.replace(n,"$1_="+(new Date).getTime());else{this.url+=(/\?/.test(this.url)?"&":"?")+"_="+(new Date).getTime()}}}function x(e){var t=new FormData;return e.trim().split("&").forEach((function(e){if(e){var r=e.split("="),s=r.shift().replace(/\+/g," "),i=r.join("=").replace(/\+/g," ");t.append(decodeURIComponent(s),decodeURIComponent(i))}})),t}function M(e,t){if(!(this instanceof M))throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.');t||(t={}),this.type="default",this.status=void 0===t.status?200:t.status,this.ok=this.status>=200&&this.status<300,this.statusText=void 0===t.statusText?"":""+t.statusText,this.headers=new y(t.headers),this.url=t.url||"",this._initBody(e)}R.prototype.clone=function(){return new R(this,{body:this._bodyInit})},T.call(R.prototype),T.call(M.prototype),M.prototype.clone=function(){return new M(this._bodyInit,{status:this.status,statusText:this.statusText,headers:new y(this.headers),url:this.url})},M.error=function(){var e=new M(null,{status:0,statusText:""});return e.type="error",e};var O=[301,302,303,307,308];M.redirect=function(e,t){if(-1===O.indexOf(t))throw new RangeError("Invalid status code");return new M(null,{status:t,headers:{location:e}})};var A=d.DOMException;try{new A}catch(e){(A=function(e,t){this.message=e,this.name=t;var r=Error(e);this.stack=r.stack}).prototype=Object.create(Error.prototype),A.prototype.constructor=A}function E(e,t){return new Promise((function(r,s){var i=new R(e,t);if(i.signal&&i.signal.aborted)return s(new A("Aborted","AbortError"));var n=new XMLHttpRequest;function o(){n.abort()}n.onload=function(){var e,t,s={status:n.status,statusText:n.statusText,headers:(e=n.getAllResponseHeaders()||"",t=new y,e.replace(/\r?\n[\t ]+/g," ").split("\r").map((function(e){return 0===e.indexOf("\n")?e.substr(1,e.length):e})).forEach((function(e){var r=e.split(":"),s=r.shift().trim();if(s){var i=r.join(":").trim();t.append(s,i)}})),t)};s.url="responseURL"in n?n.responseURL:s.headers.get("X-Request-URL");var i="response"in n?n.response:n.responseText;setTimeout((function(){r(new M(i,s))}),0)},n.onerror=function(){setTimeout((function(){s(new TypeError("Network request failed"))}),0)},n.ontimeout=function(){setTimeout((function(){s(new TypeError("Network request failed"))}),0)},n.onabort=function(){setTimeout((function(){s(new A("Aborted","AbortError"))}),0)},n.open(i.method,function(e){try{return""===e&&d.location.href?d.location.href:e}catch(t){return e}}(i.url),!0),"include"===i.credentials?n.withCredentials=!0:"omit"===i.credentials&&(n.withCredentials=!1),"responseType"in n&&(m?n.responseType="blob":f&&i.headers.get("Content-Type")&&-1!==i.headers.get("Content-Type").indexOf("application/octet-stream")&&(n.responseType="arraybuffer")),!t||"object"!=typeof t.headers||t.headers instanceof y?i.headers.forEach((function(e,t){n.setRequestHeader(t,e)})):Object.getOwnPropertyNames(t.headers).forEach((function(e){n.setRequestHeader(e,w(t.headers[e]))})),i.signal&&(i.signal.addEventListener("abort",o),n.onreadystatechange=function(){4===n.readyState&&i.signal.removeEventListener("abort",o)}),n.send(void 0===i._bodyInit?null:i._bodyInit)}))}E.polyfill=!0,d.fetch||(d.fetch=E,d.Headers=y,d.Request=R,d.Response=M);var C="function"==typeof atob,U="function"==typeof btoa,q="function"==typeof Buffer,N="function"==typeof TextDecoder?new TextDecoder:void 0,j="function"==typeof TextEncoder?new TextEncoder:void 0,F=Array.prototype.slice.call("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="),I=(e=>{let t={};return e.forEach(((e,r)=>t[e]=r)),t})(F),B=/^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/,D=String.fromCharCode.bind(String),z="function"==typeof Uint8Array.from?Uint8Array.from.bind(Uint8Array):e=>new Uint8Array(Array.prototype.slice.call(e,0)),G=e=>e.replace(/[^A-Za-z0-9\+\/]/g,""),J=U?e=>btoa(e):q?e=>Buffer.from(e,"binary").toString("base64"):e=>{let t,r,s,i,n="";const o=e.length%3;for(let o=0;o<e.length;){if((r=e.charCodeAt(o++))>255||(s=e.charCodeAt(o++))>255||(i=e.charCodeAt(o++))>255)throw new TypeError("invalid character found");t=r<<16|s<<8|i,n+=F[t>>18&63]+F[t>>12&63]+F[t>>6&63]+F[63&t]}return o?n.slice(0,o-3)+"===".substring(o):n},L=q?e=>Buffer.from(e).toString("base64"):e=>{let t=[];for(let r=0,s=e.length;r<s;r+=4096)t.push(D.apply(null,e.subarray(r,r+4096)));return J(t.join(""))},H=e=>{if(e.length<2)return(t=e.charCodeAt(0))<128?e:t<2048?D(192|t>>>6)+D(128|63&t):D(224|t>>>12&15)+D(128|t>>>6&63)+D(128|63&t);var t=65536+1024*(e.charCodeAt(0)-55296)+(e.charCodeAt(1)-56320);return D(240|t>>>18&7)+D(128|t>>>12&63)+D(128|t>>>6&63)+D(128|63&t)},$=/[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g,X=q?e=>Buffer.from(e,"utf8").toString("base64"):j?e=>L(j.encode(e)):e=>J(e.replace($,H)),Z=(e,t=!1)=>t?(e=>e.replace(/=/g,"").replace(/[+\/]/g,(e=>"+"==e?"-":"_")))(X(e)):X(e),V=/[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF]{2}|[\xF0-\xF7][\x80-\xBF]{3}/g,W=e=>{switch(e.length){case 4:var t=((7&e.charCodeAt(0))<<18|(63&e.charCodeAt(1))<<12|(63&e.charCodeAt(2))<<6|63&e.charCodeAt(3))-65536;return D(55296+(t>>>10))+D(56320+(1023&t));case 3:return D((15&e.charCodeAt(0))<<12|(63&e.charCodeAt(1))<<6|63&e.charCodeAt(2));default:return D((31&e.charCodeAt(0))<<6|63&e.charCodeAt(1))}},K=C?e=>atob(G(e)):q?e=>Buffer.from(e,"base64").toString("binary"):e=>{if(e=e.replace(/\s+/g,""),!B.test(e))throw new TypeError("malformed base64.");e+="==".slice(2-(3&e.length));let t,r,s,i="";for(let n=0;n<e.length;)t=I[e.charAt(n++)]<<18|I[e.charAt(n++)]<<12|(r=I[e.charAt(n++)])<<6|(s=I[e.charAt(n++)]),i+=64===r?D(t>>16&255):64===s?D(t>>16&255,t>>8&255):D(t>>16&255,t>>8&255,255&t);return i},Q=q?e=>z(Buffer.from(e,"base64")):e=>z(K(e).split("").map((e=>e.charCodeAt(0)))),Y=q?e=>Buffer.from(e,"base64").toString("utf8"):N?e=>N.decode(Q(e)):e=>K(e).replace(V,W),ee=e=>Y(G(e.replace(/[-_]/g,(e=>"-"==e?"+":"/"))));function te(e,t,r){const s=u(u({},{method:e}),t);if(s.headers=u({},t.headers),"undefined"!=typeof XMLHttpRequest){const e=Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype,"withCredentials");(null==e?void 0:e.set)||(s.credentials="cocos-ignore")}return Object.keys(s.headers).includes("Accept")||(s.headers.Accept="application/json"),Object.keys(s.headers).includes("Content-Type")||(s.headers["Content-Type"]="application/json"),Object.keys(s.headers).forEach((e=>{s.headers[e]||delete s.headers[e]})),r&&(s.body=r),s}var re,se=e("Session",class{constructor(e,t,r){this.created=r,this.token=e,this.refresh_token=t,this.created_at=Math.floor((new Date).getTime()/1e3),this.update(e,t)}isexpired(e){return this.expires_at-e<0}isrefreshexpired(e){return this.refresh_expires_at-e<0}update(e,t){const r=e.split(".");if(3!=r.length)throw"jwt is not valid.";const s=JSON.parse(K(r[1])),i=Math.floor(parseInt(s.exp));if(t){const e=t.split(".");if(3!=e.length)throw"refresh jwt is not valid.";const r=JSON.parse(K(e[1])),s=Math.floor(parseInt(r.exp));this.refresh_expires_at=s,this.refresh_token=t}this.token=e,this.expires_at=i,this.username=s.usn,this.user_id=s.uid,this.vars=s.vrs}static restore(e,t){return new se(e,t,!1)}}),ie="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",ne="undefined"==typeof Uint8Array?[]:new Uint8Array(256);for(re=0;re<ie.length;re++)ne[ie.charCodeAt(re)]=re;var oe=function(e){var t,r=new Uint8Array(e),s=r.length,i="";for(t=0;t<s;t+=3)i+=ie[r[t]>>2],i+=ie[(3&r[t])<<4|r[t+1]>>4],i+=ie[(15&r[t+1])<<2|r[t+2]>>6],i+=ie[63&r[t+2]];return s%3==2?i=i.substring(0,i.length-1)+"=":s%3==1&&(i=i.substring(0,i.length-2)+"=="),i},ae=function(e){var t,r,s,i,n,o=.75*e.length,a=e.length,u=0;"="===e[e.length-1]&&(o--,"="===e[e.length-2]&&o--);var h=new ArrayBuffer(o),d=new Uint8Array(h);for(t=0;t<a;t+=4)r=ne[e.charCodeAt(t)],s=ne[e.charCodeAt(t+1)],i=ne[e.charCodeAt(t+2)],n=ne[e.charCodeAt(t+3)],d[u++]=r<<2|s>>4,d[u++]=(15&s)<<4|i>>2,d[u++]=(3&i)<<6|63&n;return h},ue=e("WebSocketAdapterText",class{get onClose(){return this._socket.onclose}set onClose(e){this._socket.onclose=e}get onError(){return this._socket.onerror}set onError(e){this._socket.onerror=e}get onMessage(){return this._socket.onmessage}set onMessage(e){e?this._socket.onmessage=t=>{const r=JSON.parse(t.data);r.match_data&&r.match_data.data?r.match_data.data=new Uint8Array(ae(r.match_data.data)):r.party_data&&r.party_data.data&&(r.party_data.data=new Uint8Array(ae(r.party_data.data))),e(r)}:e=null}get onOpen(){return this._socket.onopen}set onOpen(e){this._socket.onopen=e}isOpen(){var e;return(null==(e=this._socket)?void 0:e.readyState)==WebSocket.OPEN}connect(e,t,r,s,i){const n=`${e}${t}:${r}/ws?lang=en&status=${encodeURIComponent(s.toString())}&token=${encodeURIComponent(i)}`;this._socket=new WebSocket(n)}close(){this._socket.close(),this._socket=void 0}send(e){if(e.match_data_send){e.match_data_send.op_code=e.match_data_send.op_code.toString();let t=e.match_data_send.data;t&&t instanceof Uint8Array?e.match_data_send.data=oe(t.buffer):t&&(e.match_data_send.data=J(t))}else if(e.party_data_send){e.party_data_send.op_code=e.party_data_send.op_code.toString();let t=e.party_data_send.data;t&&t instanceof Uint8Array?e.party_data_send.data=oe(t.buffer):t&&(e.party_data_send.data=J(t))}this._socket.send(JSON.stringify(e))}}),he=class{constructor(e,t,r=!1,s=!1,i=new ue,n=he.DefaultSendTimeoutMs){this.host=e,this.port=t,this.useSSL=r,this.verbose=s,this.adapter=i,this.sendTimeoutMs=n,this.cIds={},this.nextCid=1,this._heartbeatTimeoutMs=he.DefaultHeartbeatTimeoutMs}generatecid(){const e=this.nextCid.toString();return++this.nextCid,e}connect(e,t=!1,r=he.DefaultConnectTimeoutMs){if(this.adapter.isOpen())return Promise.resolve(e);const s=this.useSSL?"wss://":"ws://";return this.adapter.connect(s,this.host,this.port,t,e.token),this.adapter.onClose=e=>{this.ondisconnect(e)},this.adapter.onError=e=>{this.onerror(e)},this.adapter.onMessage=e=>{if(this.verbose&&window&&window.console&&console.log("Response: %o",JSON.stringify(e)),e.cid){const t=this.cIds[e.cid];if(!t)return void(this.verbose&&window&&window.console&&console.error("No promise executor for message: %o",e));delete this.cIds[e.cid],e.error?t.reject(e.error):t.resolve(e)}else e.notifications?e.notifications.notifications.forEach((e=>{e.content=e.content?JSON.parse(e.content):void 0,this.onnotification(e)})):e.match_data?(e.match_data.op_code=parseInt(e.match_data.op_code),this.onmatchdata(e.match_data)):e.match_presence_event?this.onmatchpresence(e.match_presence_event):e.matchmaker_ticket?this.onmatchmakerticket(e.matchmaker_ticket):e.matchmaker_matched?this.onmatchmakermatched(e.matchmaker_matched):e.status_presence_event?this.onstatuspresence(e.status_presence_event):e.stream_presence_event?this.onstreampresence(e.stream_presence_event):e.stream_data?this.onstreamdata(e.stream_data):e.channel_message?(e.channel_message.content=JSON.parse(e.channel_message.content),this.onchannelmessage(e.channel_message)):e.channel_presence_event?this.onchannelpresence(e.channel_presence_event):e.party_data?(e.party_data.op_code=parseInt(e.party_data.op_code),this.onpartydata(e.party_data)):e.party_close?this.onpartyclose(e.party_close):e.party_join_request?this.onpartyjoinrequest(e.party_join_request):e.party_leader?this.onpartyleader(e.party_leader):e.party_matchmaker_ticket?this.onpartymatchmakerticket(e.party_matchmaker_ticket):e.party_presence_event?this.onpartypresence(e.party_presence_event):e.party?this.onparty(e.party):this.verbose&&window&&window.console&&console.log("Unrecognized message received: %o",e)},new Promise(((t,s)=>{this.adapter.onOpen=r=>{this.verbose&&window&&window.console&&console.log(r),this.pingPong(),t(e)},this.adapter.onError=e=>{s(e),this.adapter.close()},setTimeout((()=>{s("The socket timed out when trying to connect.")}),r)}))}disconnect(e=!0){this.adapter.isOpen()&&this.adapter.close(),e&&this.ondisconnect({})}setHeartbeatTimeoutMs(e){this._heartbeatTimeoutMs=e}getHeartbeatTimeoutMs(){return this._heartbeatTimeoutMs}ondisconnect(e){this.verbose&&window&&window.console&&console.log(e)}onerror(e){this.verbose&&window&&window.console&&console.log(e)}onchannelmessage(e){this.verbose&&window&&window.console&&console.log(e)}onchannelpresence(e){this.verbose&&window&&window.console&&console.log(e)}onnotification(e){this.verbose&&window&&window.console&&console.log(e)}onmatchdata(e){this.verbose&&window&&window.console&&console.log(e)}onmatchpresence(e){this.verbose&&window&&window.console&&console.log(e)}onmatchmakerticket(e){this.verbose&&window&&window.console&&console.log(e)}onmatchmakermatched(e){this.verbose&&window&&window.console&&console.log(e)}onparty(e){this.verbose&&window&&window.console&&console.log(e)}onpartyclose(e){this.verbose&&window&&window.console&&console.log("Party closed: "+e)}onpartyjoinrequest(e){this.verbose&&window&&window.console&&console.log(e)}onpartydata(e){this.verbose&&window&&window.console&&console.log(e)}onpartyleader(e){this.verbose&&window&&window.console&&console.log(e)}onpartymatchmakerticket(e){this.verbose&&window&&window.console&&console.log(e)}onpartypresence(e){this.verbose&&window&&window.console&&console.log(e)}onstatuspresence(e){this.verbose&&window&&window.console&&console.log(e)}onstreampresence(e){this.verbose&&window&&window.console&&console.log(e)}onstreamdata(e){this.verbose&&window&&window.console&&console.log(e)}onheartbeattimeout(){this.verbose&&window&&window.console&&console.log("Heartbeat timeout.")}send(e,t=he.DefaultSendTimeoutMs){const r=e;return new Promise(((e,s)=>{if(this.adapter.isOpen())if(r.match_data_send)this.adapter.send(r),e();else if(r.party_data_send)this.adapter.send(r),e();else{r.channel_message_send?r.channel_message_send.content=JSON.stringify(r.channel_message_send.content):r.channel_message_update&&(r.channel_message_update.content=JSON.stringify(r.channel_message_update.content));const i=this.generatecid();this.cIds[i]={resolve:e,reject:s},setTimeout((()=>{s("The socket timed out while waiting for a response.")}),t),r.cid=i,this.adapter.send(r)}else s("Socket connection has not been established yet.");if(this.verbose&&window&&window.console){const e=u({},r);e.match_data_send&&e.match_data_send.data?e.match_data_send.data=ee(e.match_data_send.data):e.party_data_send&&e.party_data_send.data&&(e.party_data_send.data=ee(e.party_data_send.data)),console.log("Sent message: %o",JSON.stringify(e))}}))}acceptPartyMember(e,t){return this.send({party_accept:{party_id:e,presence:t}})}addMatchmaker(e,t,r,s,i){return h(this,null,(function*(){return(yield this.send({matchmaker_add:{min_count:t,max_count:r,query:e,string_properties:s,numeric_properties:i}})).matchmaker_ticket}))}addMatchmakerParty(e,t,r,s,i,n){return h(this,null,(function*(){return(yield this.send({party_matchmaker_add:{party_id:e,min_count:r,max_count:s,query:t,string_properties:i,numeric_properties:n}})).party_matchmaker_ticket}))}closeParty(e){return h(this,null,(function*(){return yield this.send({party_close:{party_id:e}})}))}createMatch(e){return h(this,null,(function*(){return(yield this.send({match_create:{name:e}})).match}))}createParty(e,t){return h(this,null,(function*(){return(yield this.send({party_create:{open:e,max_size:t}})).party}))}followUsers(e){return h(this,null,(function*(){return(yield this.send({status_follow:{user_ids:e}})).status}))}joinChat(e,t,r,s){return h(this,null,(function*(){return(yield this.send({channel_join:{target:e,type:t,persistence:r,hidden:s}})).channel}))}joinMatch(e,t,r){return h(this,null,(function*(){const s={match_join:{metadata:r}};t?s.match_join.token=t:s.match_join.match_id=e;return(yield this.send(s)).match}))}joinParty(e){return h(this,null,(function*(){return yield this.send({party_join:{party_id:e}})}))}leaveChat(e){return this.send({channel_leave:{channel_id:e}})}leaveMatch(e){return this.send({match_leave:{match_id:e}})}leaveParty(e){return this.send({party_leave:{party_id:e}})}listPartyJoinRequests(e){return h(this,null,(function*(){return(yield this.send({party_join_request_list:{party_id:e}})).party_join_request}))}promotePartyMember(e,t){return h(this,null,(function*(){return(yield this.send({party_promote:{party_id:e,presence:t}})).party_leader}))}removeChatMessage(e,t){return h(this,null,(function*(){return(yield this.send({channel_message_remove:{channel_id:e,message_id:t}})).channel_message_ack}))}removeMatchmaker(e){return this.send({matchmaker_remove:{ticket:e}})}removeMatchmakerParty(e,t){return this.send({party_matchmaker_remove:{party_id:e,ticket:t}})}removePartyMember(e,t){return h(this,null,(function*(){return this.send({party_remove:{party_id:e,presence:t}})}))}rpc(e,t,r){return h(this,null,(function*(){return(yield this.send({rpc:{id:e,payload:t,http_key:r}})).rpc}))}sendMatchState(e,t,r,s,i){return h(this,null,(function*(){return this.send({match_data_send:{match_id:e,op_code:t,data:r,presences:null!=s?s:[],reliable:i}})}))}sendPartyData(e,t,r){return this.send({party_data_send:{party_id:e,op_code:t,data:r}})}unfollowUsers(e){return this.send({status_unfollow:{user_ids:e}})}updateChatMessage(e,t,r){return h(this,null,(function*(){return(yield this.send({channel_message_update:{channel_id:e,message_id:t,content:r}})).channel_message_ack}))}updateStatus(e){return this.send({status_update:{status:e}})}writeChatMessage(e,t){return h(this,null,(function*(){return(yield this.send({channel_message_send:{channel_id:e,content:t}})).channel_message_ack}))}pingPong(){return h(this,null,(function*(){if(this.adapter.isOpen()){try{yield this.send({ping:{}},this._heartbeatTimeoutMs)}catch(e){return void(this.adapter.isOpen()&&(window&&window.console&&console.error("Server unreachable from heartbeat."),this.onheartbeattimeout(),this.adapter.close()))}setTimeout((()=>this.pingPong()),this._heartbeatTimeoutMs)}}))}},de=e("DefaultSocket",he);de.DefaultHeartbeatTimeoutMs=1e4,de.DefaultSendTimeoutMs=1e4,de.DefaultConnectTimeoutMs=3e4;e("Client",class{constructor(e="defaultkey",t="127.0.0.1",r="7350",s=!1,i=7e3,n=!0){this.serverkey=e,this.host=t,this.port=r,this.useSSL=s,this.timeout=i,this.autoRefreshSession=n,this.expiredTimespanMs=3e5;const o=`${s?"https://":"http://"}${t}:${r}`;this.apiClient=new class{constructor(e,t,r){this.serverKey=e,this.basePath=t,this.timeoutMs=r}healthcheck(e,t={}){const r=new Map,s=this.buildFullUrl(this.basePath,"/healthcheck",r),i=te("GET",t,"");return e&&(i.headers.Authorization="Bearer "+e),Promise.race([fetch(s,i).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}deleteAccount(e,t={}){const r=new Map,s=this.buildFullUrl(this.basePath,"/v2/account",r),i=te("DELETE",t,"");return e&&(i.headers.Authorization="Bearer "+e),Promise.race([fetch(s,i).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}getAccount(e,t={}){const r=new Map,s=this.buildFullUrl(this.basePath,"/v2/account",r),i=te("GET",t,"");return e&&(i.headers.Authorization="Bearer "+e),Promise.race([fetch(s,i).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}updateAccount(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account",s),o=te("PUT",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateApple(e,t,r,s,i,n={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const o=new Map;o.set("create",s),o.set("username",i);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,"/v2/account/authenticate/apple",o),h=te("POST",n,a);return e&&(h.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateCustom(e,t,r,s,i,n={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const o=new Map;o.set("create",s),o.set("username",i);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,"/v2/account/authenticate/custom",o),h=te("POST",n,a);return e&&(h.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateDevice(e,t,r,s,i,n={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const o=new Map;o.set("create",s),o.set("username",i);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,"/v2/account/authenticate/device",o),h=te("POST",n,a);return e&&(h.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateEmail(e,t,r,s,i,n={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const o=new Map;o.set("create",s),o.set("username",i);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,"/v2/account/authenticate/email",o),h=te("POST",n,a);return e&&(h.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateFacebook(e,t,r,s,i,n,o={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const a=new Map;a.set("create",s),a.set("username",i),a.set("sync",n);let u="";u=JSON.stringify(r||{});const h=this.buildFullUrl(this.basePath,"/v2/account/authenticate/facebook",a),d=te("POST",o,u);return e&&(d.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateFacebookInstantGame(e,t,r,s,i,n={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const o=new Map;o.set("create",s),o.set("username",i);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,"/v2/account/authenticate/facebookinstantgame",o),h=te("POST",n,a);return e&&(h.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateGameCenter(e,t,r,s,i,n={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const o=new Map;o.set("create",s),o.set("username",i);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,"/v2/account/authenticate/gamecenter",o),h=te("POST",n,a);return e&&(h.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateGoogle(e,t,r,s,i,n={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const o=new Map;o.set("create",s),o.set("username",i);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,"/v2/account/authenticate/google",o),h=te("POST",n,a);return e&&(h.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}authenticateSteam(e,t,r,s,i,n,o={}){if(null==r)throw new Error("'account' is a required parameter but is null or undefined.");const a=new Map;a.set("create",s),a.set("username",i),a.set("sync",n);let u="";u=JSON.stringify(r||{});const h=this.buildFullUrl(this.basePath,"/v2/account/authenticate/steam",a),d=te("POST",o,u);return e&&(d.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkApple(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/apple",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkCustom(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/custom",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkDevice(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/device",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkEmail(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/email",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkFacebook(e,t,r,s={}){if(null==t)throw new Error("'account' is a required parameter but is null or undefined.");const i=new Map;i.set("sync",r);let n="";n=JSON.stringify(t||{});const o=this.buildFullUrl(this.basePath,"/v2/account/link/facebook",i),a=te("POST",s,n);return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkFacebookInstantGame(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/facebookinstantgame",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkGameCenter(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/gamecenter",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkGoogle(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/google",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}linkSteam(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/link/steam",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}sessionRefresh(e,t,r,s={}){if(null==r)throw new Error("'body' is a required parameter but is null or undefined.");const i=new Map;let n="";n=JSON.stringify(r||{});const o=this.buildFullUrl(this.basePath,"/v2/account/session/refresh",i),a=te("POST",s,n);return e&&(a.headers.Authorization="Basic "+Z(e+":"+t)),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkApple(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/apple",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkCustom(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/custom",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkDevice(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/device",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkEmail(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/email",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkFacebook(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/facebook",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkFacebookInstantGame(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/facebookinstantgame",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkGameCenter(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/gamecenter",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkGoogle(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/google",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}unlinkSteam(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/account/unlink/steam",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listChannelMessages(e,t,r,s,i,n={}){if(null==t)throw new Error("'channelId' is a required parameter but is null or undefined.");const o="/v2/channel/{channelId}".replace("{channelId}",encodeURIComponent(String(t))),a=new Map;a.set("limit",r),a.set("forward",s),a.set("cursor",i);const u=this.buildFullUrl(this.basePath,o,a),h=te("GET",n,"");return e&&(h.headers.Authorization="Bearer "+e),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}event(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/event",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}deleteFriends(e,t,r,s={}){const i=new Map;i.set("ids",t),i.set("usernames",r);const n=this.buildFullUrl(this.basePath,"/v2/friend",i),o=te("DELETE",s,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listFriends(e,t,r,s,i={}){const n=new Map;n.set("limit",t),n.set("state",r),n.set("cursor",s);const o=this.buildFullUrl(this.basePath,"/v2/friend",n),a=te("GET",i,"");return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}addFriends(e,t,r,s={}){const i=new Map;i.set("ids",t),i.set("usernames",r);const n=this.buildFullUrl(this.basePath,"/v2/friend",i),o=te("POST",s,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}blockFriends(e,t,r,s={}){const i=new Map;i.set("ids",t),i.set("usernames",r);const n=this.buildFullUrl(this.basePath,"/v2/friend/block",i),o=te("POST",s,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}importFacebookFriends(e,t,r,s={}){if(null==t)throw new Error("'account' is a required parameter but is null or undefined.");const i=new Map;i.set("reset",r);let n="";n=JSON.stringify(t||{});const o=this.buildFullUrl(this.basePath,"/v2/friend/facebook",i),a=te("POST",s,n);return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listFriendsOfFriends(e,t,r,s={}){const i=new Map;i.set("limit",t),i.set("cursor",r);const n=this.buildFullUrl(this.basePath,"/v2/friend/friends",i),o=te("GET",s,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}importSteamFriends(e,t,r,s={}){if(null==t)throw new Error("'account' is a required parameter but is null or undefined.");const i=new Map;i.set("reset",r);let n="";n=JSON.stringify(t||{});const o=this.buildFullUrl(this.basePath,"/v2/friend/steam",i),a=te("POST",s,n);return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listGroups(e,t,r,s,i,n,o,a={}){const u=new Map;u.set("name",t),u.set("cursor",r),u.set("limit",s),u.set("lang_tag",i),u.set("members",n),u.set("open",o);const h=this.buildFullUrl(this.basePath,"/v2/group",u),d=te("GET",a,"");return e&&(d.headers.Authorization="Bearer "+e),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}createGroup(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/group",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}deleteGroup(e,t,r={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const s="/v2/group/{groupId}".replace("{groupId}",encodeURIComponent(String(t))),i=new Map,n=this.buildFullUrl(this.basePath,s,i),o=te("DELETE",r,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}updateGroup(e,t,r,s={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");if(null==r)throw new Error("'body' is a required parameter but is null or undefined.");const i="/v2/group/{groupId}".replace("{groupId}",encodeURIComponent(String(t))),n=new Map;let o="";o=JSON.stringify(r||{});const a=this.buildFullUrl(this.basePath,i,n),u=te("PUT",s,o);return e&&(u.headers.Authorization="Bearer "+e),Promise.race([fetch(a,u).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}addGroupUsers(e,t,r,s={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const i="/v2/group/{groupId}/add".replace("{groupId}",encodeURIComponent(String(t))),n=new Map;n.set("user_ids",r);const o=this.buildFullUrl(this.basePath,i,n),a=te("POST",s,"");return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}banGroupUsers(e,t,r,s={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const i="/v2/group/{groupId}/ban".replace("{groupId}",encodeURIComponent(String(t))),n=new Map;n.set("user_ids",r);const o=this.buildFullUrl(this.basePath,i,n),a=te("POST",s,"");return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}demoteGroupUsers(e,t,r,s={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const i="/v2/group/{groupId}/demote".replace("{groupId}",encodeURIComponent(String(t))),n=new Map;n.set("user_ids",r);const o=this.buildFullUrl(this.basePath,i,n),a=te("POST",s,"");return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}joinGroup(e,t,r={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const s="/v2/group/{groupId}/join".replace("{groupId}",encodeURIComponent(String(t))),i=new Map,n=this.buildFullUrl(this.basePath,s,i),o=te("POST",r,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}kickGroupUsers(e,t,r,s={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const i="/v2/group/{groupId}/kick".replace("{groupId}",encodeURIComponent(String(t))),n=new Map;n.set("user_ids",r);const o=this.buildFullUrl(this.basePath,i,n),a=te("POST",s,"");return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}leaveGroup(e,t,r={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const s="/v2/group/{groupId}/leave".replace("{groupId}",encodeURIComponent(String(t))),i=new Map,n=this.buildFullUrl(this.basePath,s,i),o=te("POST",r,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}promoteGroupUsers(e,t,r,s={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const i="/v2/group/{groupId}/promote".replace("{groupId}",encodeURIComponent(String(t))),n=new Map;n.set("user_ids",r);const o=this.buildFullUrl(this.basePath,i,n),a=te("POST",s,"");return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listGroupUsers(e,t,r,s,i,n={}){if(null==t)throw new Error("'groupId' is a required parameter but is null or undefined.");const o="/v2/group/{groupId}/user".replace("{groupId}",encodeURIComponent(String(t))),a=new Map;a.set("limit",r),a.set("state",s),a.set("cursor",i);const u=this.buildFullUrl(this.basePath,o,a),h=te("GET",n,"");return e&&(h.headers.Authorization="Bearer "+e),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}validatePurchaseApple(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/iap/purchase/apple",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}validatePurchaseFacebookInstant(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/iap/purchase/facebookinstant",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}validatePurchaseGoogle(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/iap/purchase/google",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}validatePurchaseHuawei(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/iap/purchase/huawei",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listSubscriptions(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/iap/subscription",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}validateSubscriptionApple(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/iap/subscription/apple",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}validateSubscriptionGoogle(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/iap/subscription/google",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}getSubscription(e,t,r={}){if(null==t)throw new Error("'productId' is a required parameter but is null or undefined.");const s="/v2/iap/subscription/{productId}".replace("{productId}",encodeURIComponent(String(t))),i=new Map,n=this.buildFullUrl(this.basePath,s,i),o=te("GET",r,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}deleteLeaderboardRecord(e,t,r={}){if(null==t)throw new Error("'leaderboardId' is a required parameter but is null or undefined.");const s="/v2/leaderboard/{leaderboardId}".replace("{leaderboardId}",encodeURIComponent(String(t))),i=new Map,n=this.buildFullUrl(this.basePath,s,i),o=te("DELETE",r,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listLeaderboardRecords(e,t,r,s,i,n,o={}){if(null==t)throw new Error("'leaderboardId' is a required parameter but is null or undefined.");const a="/v2/leaderboard/{leaderboardId}".replace("{leaderboardId}",encodeURIComponent(String(t))),u=new Map;u.set("owner_ids",r),u.set("limit",s),u.set("cursor",i),u.set("expiry",n);const h=this.buildFullUrl(this.basePath,a,u),d=te("GET",o,"");return e&&(d.headers.Authorization="Bearer "+e),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}writeLeaderboardRecord(e,t,r,s={}){if(null==t)throw new Error("'leaderboardId' is a required parameter but is null or undefined.");if(null==r)throw new Error("'record' is a required parameter but is null or undefined.");const i="/v2/leaderboard/{leaderboardId}".replace("{leaderboardId}",encodeURIComponent(String(t))),n=new Map;let o="";o=JSON.stringify(r||{});const a=this.buildFullUrl(this.basePath,i,n),u=te("POST",s,o);return e&&(u.headers.Authorization="Bearer "+e),Promise.race([fetch(a,u).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listLeaderboardRecordsAroundOwner(e,t,r,s,i,n,o={}){if(null==t)throw new Error("'leaderboardId' is a required parameter but is null or undefined.");if(null==r)throw new Error("'ownerId' is a required parameter but is null or undefined.");const a="/v2/leaderboard/{leaderboardId}/owner/{ownerId}".replace("{leaderboardId}",encodeURIComponent(String(t))).replace("{ownerId}",encodeURIComponent(String(r))),u=new Map;u.set("limit",s),u.set("expiry",i),u.set("cursor",n);const h=this.buildFullUrl(this.basePath,a,u),d=te("GET",o,"");return e&&(d.headers.Authorization="Bearer "+e),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listMatches(e,t,r,s,i,n,o,a={}){const u=new Map;u.set("limit",t),u.set("authoritative",r),u.set("label",s),u.set("min_size",i),u.set("max_size",n),u.set("query",o);const h=this.buildFullUrl(this.basePath,"/v2/match",u),d=te("GET",a,"");return e&&(d.headers.Authorization="Bearer "+e),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}deleteNotifications(e,t,r={}){const s=new Map;s.set("ids",t);const i=this.buildFullUrl(this.basePath,"/v2/notification",s),n=te("DELETE",r,"");return e&&(n.headers.Authorization="Bearer "+e),Promise.race([fetch(i,n).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listNotifications(e,t,r,s={}){const i=new Map;i.set("limit",t),i.set("cacheable_cursor",r);const n=this.buildFullUrl(this.basePath,"/v2/notification",i),o=te("GET",s,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}rpcFunc2(e,t,r,s,i={}){if(null==t)throw new Error("'id' is a required parameter but is null or undefined.");const n="/v2/rpc/{id}".replace("{id}",encodeURIComponent(String(t))),o=new Map;o.set("payload",r),o.set("http_key",s);const a=this.buildFullUrl(this.basePath,n,o),u=te("GET",i,"");return e&&(u.headers.Authorization="Bearer "+e),Promise.race([fetch(a,u).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}rpcFunc(e,t,r,s,i={}){if(null==t)throw new Error("'id' is a required parameter but is null or undefined.");if(null==r)throw new Error("'body' is a required parameter but is null or undefined.");const n="/v2/rpc/{id}".replace("{id}",encodeURIComponent(String(t))),o=new Map;o.set("http_key",s);let a="";a=JSON.stringify(r||{});const u=this.buildFullUrl(this.basePath,n,o),h=te("POST",i,a);return e&&(h.headers.Authorization="Bearer "+e),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}sessionLogout(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/session/logout",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}readStorageObjects(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/storage",s),o=te("POST",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}writeStorageObjects(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/storage",s),o=te("PUT",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}deleteStorageObjects(e,t,r={}){if(null==t)throw new Error("'body' is a required parameter but is null or undefined.");const s=new Map;let i="";i=JSON.stringify(t||{});const n=this.buildFullUrl(this.basePath,"/v2/storage/delete",s),o=te("PUT",r,i);return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listStorageObjects(e,t,r,s,i,n={}){if(null==t)throw new Error("'collection' is a required parameter but is null or undefined.");const o="/v2/storage/{collection}".replace("{collection}",encodeURIComponent(String(t))),a=new Map;a.set("user_id",r),a.set("limit",s),a.set("cursor",i);const u=this.buildFullUrl(this.basePath,o,a),h=te("GET",n,"");return e&&(h.headers.Authorization="Bearer "+e),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listStorageObjects2(e,t,r,s,i,n={}){if(null==t)throw new Error("'collection' is a required parameter but is null or undefined.");if(null==r)throw new Error("'userId' is a required parameter but is null or undefined.");const o="/v2/storage/{collection}/{userId}".replace("{collection}",encodeURIComponent(String(t))).replace("{userId}",encodeURIComponent(String(r))),a=new Map;a.set("limit",s),a.set("cursor",i);const u=this.buildFullUrl(this.basePath,o,a),h=te("GET",n,"");return e&&(h.headers.Authorization="Bearer "+e),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listTournaments(e,t,r,s,i,n,o,a={}){const u=new Map;u.set("category_start",t),u.set("category_end",r),u.set("start_time",s),u.set("end_time",i),u.set("limit",n),u.set("cursor",o);const h=this.buildFullUrl(this.basePath,"/v2/tournament",u),d=te("GET",a,"");return e&&(d.headers.Authorization="Bearer "+e),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}deleteTournamentRecord(e,t,r={}){if(null==t)throw new Error("'tournamentId' is a required parameter but is null or undefined.");const s="/v2/tournament/{tournamentId}".replace("{tournamentId}",encodeURIComponent(String(t))),i=new Map,n=this.buildFullUrl(this.basePath,s,i),o=te("DELETE",r,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listTournamentRecords(e,t,r,s,i,n,o={}){if(null==t)throw new Error("'tournamentId' is a required parameter but is null or undefined.");const a="/v2/tournament/{tournamentId}".replace("{tournamentId}",encodeURIComponent(String(t))),u=new Map;u.set("owner_ids",r),u.set("limit",s),u.set("cursor",i),u.set("expiry",n);const h=this.buildFullUrl(this.basePath,a,u),d=te("GET",o,"");return e&&(d.headers.Authorization="Bearer "+e),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}writeTournamentRecord2(e,t,r,s={}){if(null==t)throw new Error("'tournamentId' is a required parameter but is null or undefined.");if(null==r)throw new Error("'record' is a required parameter but is null or undefined.");const i="/v2/tournament/{tournamentId}".replace("{tournamentId}",encodeURIComponent(String(t))),n=new Map;let o="";o=JSON.stringify(r||{});const a=this.buildFullUrl(this.basePath,i,n),u=te("POST",s,o);return e&&(u.headers.Authorization="Bearer "+e),Promise.race([fetch(a,u).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}writeTournamentRecord(e,t,r,s={}){if(null==t)throw new Error("'tournamentId' is a required parameter but is null or undefined.");if(null==r)throw new Error("'record' is a required parameter but is null or undefined.");const i="/v2/tournament/{tournamentId}".replace("{tournamentId}",encodeURIComponent(String(t))),n=new Map;let o="";o=JSON.stringify(r||{});const a=this.buildFullUrl(this.basePath,i,n),u=te("PUT",s,o);return e&&(u.headers.Authorization="Bearer "+e),Promise.race([fetch(a,u).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}joinTournament(e,t,r={}){if(null==t)throw new Error("'tournamentId' is a required parameter but is null or undefined.");const s="/v2/tournament/{tournamentId}/join".replace("{tournamentId}",encodeURIComponent(String(t))),i=new Map,n=this.buildFullUrl(this.basePath,s,i),o=te("POST",r,"");return e&&(o.headers.Authorization="Bearer "+e),Promise.race([fetch(n,o).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listTournamentRecordsAroundOwner(e,t,r,s,i,n,o={}){if(null==t)throw new Error("'tournamentId' is a required parameter but is null or undefined.");if(null==r)throw new Error("'ownerId' is a required parameter but is null or undefined.");const a="/v2/tournament/{tournamentId}/owner/{ownerId}".replace("{tournamentId}",encodeURIComponent(String(t))).replace("{ownerId}",encodeURIComponent(String(r))),u=new Map;u.set("limit",s),u.set("expiry",i),u.set("cursor",n);const h=this.buildFullUrl(this.basePath,a,u),d=te("GET",o,"");return e&&(d.headers.Authorization="Bearer "+e),Promise.race([fetch(h,d).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}getUsers(e,t,r,s,i={}){const n=new Map;n.set("ids",t),n.set("usernames",r),n.set("facebook_ids",s);const o=this.buildFullUrl(this.basePath,"/v2/user",n),a=te("GET",i,"");return e&&(a.headers.Authorization="Bearer "+e),Promise.race([fetch(o,a).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}listUserGroups(e,t,r,s,i,n={}){if(null==t)throw new Error("'userId' is a required parameter but is null or undefined.");const o="/v2/user/{userId}/group".replace("{userId}",encodeURIComponent(String(t))),a=new Map;a.set("limit",r),a.set("state",s),a.set("cursor",i);const u=this.buildFullUrl(this.basePath,o,a),h=te("GET",n,"");return e&&(h.headers.Authorization="Bearer "+e),Promise.race([fetch(u,h).then((e=>{if(204==e.status)return e;if(e.status>=200&&e.status<300)return e.json();throw e})),new Promise(((e,t)=>setTimeout(t,this.timeoutMs,"Request timed out.")))])}buildFullUrl(e,t,r){let s=e+t+"?";for(let[e,t]of r)t instanceof Array?s+=t.reduce(((t,r)=>t+encodeURIComponent(e)+"="+encodeURIComponent(r)+"&"),""):null!=t&&(s+=encodeURIComponent(e)+"="+encodeURIComponent(t)+"&");return s}}(e,o,i)}addGroupUsers(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.addGroupUsers(e.token,t,r).then((e=>void 0!==e))}))}addFriends(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.addFriends(e.token,t,r).then((e=>void 0!==e))}))}authenticateApple(e,t,r){return h(this,arguments,(function*(e,t,r,s={},i={}){const n={token:e,vars:s};return this.apiClient.authenticateApple(this.serverkey,"",n,t,r,i).then((e=>new se(e.token||"",e.refresh_token||"",e.created||!1)))}))}authenticateCustom(e,t,r,s={},i={}){const n={id:e,vars:s};return this.apiClient.authenticateCustom(this.serverkey,"",n,t,r,i).then((e=>new se(e.token||"",e.refresh_token||"",e.created||!1)))}authenticateDevice(e,t,r,s){const i={id:e,vars:s};return this.apiClient.authenticateDevice(this.serverkey,"",i,t,r).then((e=>new se(e.token||"",e.refresh_token||"",e.created||!1)))}authenticateEmail(e,t,r,s,i){const n={email:e,password:t,vars:i};return this.apiClient.authenticateEmail(this.serverkey,"",n,r,s).then((e=>new se(e.token||"",e.refresh_token||"",e.created||!1)))}authenticateFacebookInstantGame(e,t,r,s,i={}){const n={signed_player_info:e,vars:s};return this.apiClient.authenticateFacebookInstantGame(this.serverkey,"",{signed_player_info:n.signed_player_info,vars:n.vars},t,r,i).then((e=>new se(e.token||"",e.refresh_token||"",e.created||!1)))}authenticateFacebook(e,t,r,s,i,n={}){const o={token:e,vars:i};return this.apiClient.authenticateFacebook(this.serverkey,"",o,t,r,s,n).then((e=>new se(e.token||"",e.refresh_token||"",e.created||!1)))}authenticateGoogle(e,t,r,s){return h(this,arguments,(function*(e,t,r,s,i={}){const n={token:e,vars:s},o=yield this.apiClient.authenticateGoogle(this.serverkey,"",n,t,r,i);return new se(o.token||"",o.refresh_token||"",o.created||!1)}))}authenticateGameCenter(e,t,r,s,i,n,o,a,u){return h(this,arguments,(function*(e,t,r,s,i,n,o,a,u,h={}){const d={bundle_id:e,player_id:t,public_key_url:r,salt:s,signature:i,timestamp_seconds:n,vars:u},l=yield this.apiClient.authenticateGameCenter(this.serverkey,"",d,a,o,h);return new se(l.token||"",l.refresh_token||"",l.created||!1)}))}authenticateSteam(e,t,r,s,i){return h(this,null,(function*(){const n={token:e,vars:i,sync:s};return this.apiClient.authenticateSteam(this.serverkey,"",n,t,r).then((e=>new se(e.token||"",e.refresh_token||"",e.created||!1)))}))}banGroupUsers(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.banGroupUsers(e.token,t,r).then((e=>void 0!==e))}))}blockFriends(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.blockFriends(e.token,t,r).then((e=>Promise.resolve(null!=e)))}))}createGroup(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.createGroup(e.token,t).then((e=>Promise.resolve({avatar_url:e.avatar_url,create_time:e.create_time,creator_id:e.creator_id,description:e.description,edge_count:e.edge_count?Number(e.edge_count):0,id:e.id,lang_tag:e.lang_tag,max_count:e.max_count?Number(e.max_count):0,metadata:e.metadata?JSON.parse(e.metadata):void 0,name:e.name,open:e.open,update_time:e.update_time})))}))}createSocket(e=!1,t=!1,r=new ue,s=de.DefaultSendTimeoutMs){return new de(this.host,this.port,e,t,r,s)}deleteAccount(e){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.deleteAccount(e.token).then((e=>void 0!==e))}))}deleteFriends(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.deleteFriends(e.token,t,r).then((e=>void 0!==e))}))}deleteGroup(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.deleteGroup(e.token,t).then((e=>void 0!==e))}))}deleteNotifications(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.deleteNotifications(e.token,t).then((e=>Promise.resolve(null!=e)))}))}deleteStorageObjects(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.deleteStorageObjects(e.token,t).then((e=>Promise.resolve(null!=e)))}))}deleteTournamentRecord(e,t){return h(this,null,(function*(){return this.apiClient.deleteTournamentRecord(e.token,t)}))}demoteGroupUsers(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.demoteGroupUsers(e.token,t,r).then((e=>Promise.resolve(null!=e)))}))}emitEvent(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.event(e.token,t).then((e=>Promise.resolve(null!=e)))}))}getAccount(e){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.getAccount(e.token)}))}getSubscription(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.getSubscription(e.token,t)}))}importFacebookFriends(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.importFacebookFriends(e.token,t).then((e=>void 0!==e))}))}importSteamFriends(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.importSteamFriends(e.token,t,r).then((e=>void 0!==e))}))}getUsers(e,t,r,s){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.getUsers(e.token,t,r,s).then((e=>{var t={users:[]};return null==e.users||e.users.forEach((e=>{t.users.push({avatar_url:e.avatar_url,create_time:e.create_time,display_name:e.display_name,edge_count:e.edge_count?Number(e.edge_count):0,facebook_id:e.facebook_id,gamecenter_id:e.gamecenter_id,google_id:e.google_id,id:e.id,lang_tag:e.lang_tag,location:e.location,online:e.online,steam_id:e.steam_id,timezone:e.timezone,update_time:e.update_time,username:e.username,metadata:e.metadata?JSON.parse(e.metadata):void 0})})),Promise.resolve(t)}))}))}joinGroup(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.joinGroup(e.token,t,{}).then((e=>void 0!==e))}))}joinTournament(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.joinTournament(e.token,t,{}).then((e=>void 0!==e))}))}kickGroupUsers(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.kickGroupUsers(e.token,t,r).then((e=>Promise.resolve(null!=e)))}))}leaveGroup(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.leaveGroup(e.token,t,{}).then((e=>void 0!==e))}))}listChannelMessages(e,t,r,s,i){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listChannelMessages(e.token,t,r,s,i).then((e=>{var t={messages:[],next_cursor:e.next_cursor,prev_cursor:e.prev_cursor,cacheable_cursor:e.cacheable_cursor};return null==e.messages||e.messages.forEach((e=>{t.messages.push({channel_id:e.channel_id,code:e.code?Number(e.code):0,create_time:e.create_time,message_id:e.message_id,persistent:e.persistent,sender_id:e.sender_id,update_time:e.update_time,username:e.username,content:e.content?JSON.parse(e.content):void 0,group_id:e.group_id,room_name:e.room_name,user_id_one:e.user_id_one,user_id_two:e.user_id_two})})),Promise.resolve(t)}))}))}listGroupUsers(e,t,r,s,i){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listGroupUsers(e.token,t,s,r,i).then((e=>{var t={group_users:[],cursor:e.cursor};return null==e.group_users||e.group_users.forEach((e=>{t.group_users.push({user:{avatar_url:e.user.avatar_url,create_time:e.user.create_time,display_name:e.user.display_name,edge_count:e.user.edge_count?Number(e.user.edge_count):0,facebook_id:e.user.facebook_id,gamecenter_id:e.user.gamecenter_id,google_id:e.user.google_id,id:e.user.id,lang_tag:e.user.lang_tag,location:e.user.location,online:e.user.online,steam_id:e.user.steam_id,timezone:e.user.timezone,update_time:e.user.update_time,username:e.user.username,metadata:e.user.metadata?JSON.parse(e.user.metadata):void 0},state:e.state?Number(e.state):0})})),Promise.resolve(t)}))}))}listUserGroups(e,t,r,s,i){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listUserGroups(e.token,t,r,s,i).then((e=>{var t={user_groups:[],cursor:e.cursor};return null==e.user_groups||e.user_groups.forEach((e=>{t.user_groups.push({group:{avatar_url:e.group.avatar_url,create_time:e.group.create_time,creator_id:e.group.creator_id,description:e.group.description,edge_count:e.group.edge_count?Number(e.group.edge_count):0,id:e.group.id,lang_tag:e.group.lang_tag,max_count:e.group.max_count,metadata:e.group.metadata?JSON.parse(e.group.metadata):void 0,name:e.group.name,open:e.group.open,update_time:e.group.update_time},state:e.state?Number(e.state):0})})),Promise.resolve(t)}))}))}listGroups(e,t,r,s){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listGroups(e.token,t,r,s).then((e=>{var t={groups:[]};return null==e.groups||(t.cursor=e.cursor,e.groups.forEach((e=>{t.groups.push({avatar_url:e.avatar_url,create_time:e.create_time,creator_id:e.creator_id,description:e.description,edge_count:e.edge_count?Number(e.edge_count):0,id:e.id,lang_tag:e.lang_tag,max_count:e.max_count,metadata:e.metadata?JSON.parse(e.metadata):void 0,name:e.name,open:e.open,update_time:e.update_time})}))),Promise.resolve(t)}))}))}linkApple(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkApple(e.token,t).then((e=>void 0!==e))}))}linkCustom(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkCustom(e.token,t).then((e=>void 0!==e))}))}linkDevice(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkDevice(e.token,t).then((e=>void 0!==e))}))}linkEmail(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkEmail(e.token,t).then((e=>void 0!==e))}))}linkFacebook(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkFacebook(e.token,t).then((e=>void 0!==e))}))}linkFacebookInstantGame(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkFacebookInstantGame(e.token,t).then((e=>void 0!==e))}))}linkGoogle(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkGoogle(e.token,t).then((e=>void 0!==e))}))}linkGameCenter(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkGameCenter(e.token,t).then((e=>void 0!==e))}))}linkSteam(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.linkSteam(e.token,t).then((e=>void 0!==e))}))}listFriends(e,t,r,s){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listFriends(e.token,r,t,s).then((e=>{var t={friends:[],cursor:e.cursor};return null==e.friends||e.friends.forEach((e=>{t.friends.push({user:{avatar_url:e.user.avatar_url,create_time:e.user.create_time,display_name:e.user.display_name,edge_count:e.user.edge_count?Number(e.user.edge_count):0,facebook_id:e.user.facebook_id,gamecenter_id:e.user.gamecenter_id,google_id:e.user.google_id,id:e.user.id,lang_tag:e.user.lang_tag,location:e.user.location,online:e.user.online,steam_id:e.user.steam_id,timezone:e.user.timezone,update_time:e.user.update_time,username:e.user.username,metadata:e.user.metadata?JSON.parse(e.user.metadata):void 0,facebook_instant_game_id:e.user.facebook_instant_game_id},state:e.state})})),Promise.resolve(t)}))}))}listFriendsOfFriends(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listFriendsOfFriends(e.token,t,r).then((e=>{var t={friends_of_friends:[],cursor:e.cursor};return null==e.friends_of_friends||e.friends_of_friends.forEach((e=>{t.friends_of_friends.push({referrer:e.referrer,user:{avatar_url:e.user.avatar_url,create_time:e.user.create_time,display_name:e.user.display_name,edge_count:e.user.edge_count?Number(e.user.edge_count):0,facebook_id:e.user.facebook_id,gamecenter_id:e.user.gamecenter_id,google_id:e.user.google_id,id:e.user.id,lang_tag:e.user.lang_tag,location:e.user.location,online:e.user.online,steam_id:e.user.steam_id,timezone:e.user.timezone,update_time:e.user.update_time,username:e.user.username,metadata:e.user.metadata?JSON.parse(e.user.metadata):void 0,facebook_instant_game_id:e.user.facebook_instant_game_id}})})),Promise.resolve(t)}))}))}listLeaderboardRecords(e,t,r,s,i,n){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listLeaderboardRecords(e.token,t,r,s,i,n).then((e=>{var t={next_cursor:e.next_cursor,prev_cursor:e.prev_cursor,rank_count:e.rank_count?Number(e.rank_count):0,owner_records:[],records:[]};return null!=e.owner_records&&e.owner_records.forEach((e=>{t.owner_records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),null!=e.records&&e.records.forEach((e=>{t.records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),Promise.resolve(t)}))}))}listLeaderboardRecordsAroundOwner(e,t,r,s,i,n){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listLeaderboardRecordsAroundOwner(e.token,t,r,s,i,n).then((e=>{var t={next_cursor:e.next_cursor,prev_cursor:e.prev_cursor,rank_count:e.rank_count?Number(e.rank_count):0,owner_records:[],records:[]};return null!=e.owner_records&&e.owner_records.forEach((e=>{t.owner_records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),null!=e.records&&e.records.forEach((e=>{t.records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),Promise.resolve(t)}))}))}listMatches(e,t,r,s,i,n,o){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listMatches(e.token,t,r,s,i,n,o)}))}listNotifications(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listNotifications(e.token,t,r).then((e=>{var t={cacheable_cursor:e.cacheable_cursor,notifications:[]};return null==e.notifications||e.notifications.forEach((e=>{t.notifications.push({code:e.code?Number(e.code):0,create_time:e.create_time,id:e.id,persistent:e.persistent,sender_id:e.sender_id,subject:e.subject,content:e.content?JSON.parse(e.content):void 0})})),Promise.resolve(t)}))}))}listStorageObjects(e,t,r,s,i){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listStorageObjects(e.token,t,r,s,i).then((e=>{var t={objects:[],cursor:e.cursor};return null==e.objects||e.objects.forEach((e=>{t.objects.push({collection:e.collection,key:e.key,permission_read:e.permission_read?Number(e.permission_read):0,permission_write:e.permission_write?Number(e.permission_write):0,value:e.value?JSON.parse(e.value):void 0,version:e.version,user_id:e.user_id,create_time:e.create_time,update_time:e.update_time})})),Promise.resolve(t)}))}))}listTournaments(e,t,r,s,i,n,o){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listTournaments(e.token,t,r,s,i,n,o).then((e=>{var t={cursor:e.cursor,tournaments:[]};return null!=e.tournaments&&e.tournaments.forEach((e=>{t.tournaments.push({id:e.id,title:e.title,description:e.description,duration:e.duration?Number(e.duration):0,category:e.category?Number(e.category):0,sort_order:e.sort_order?Number(e.sort_order):0,size:e.size?Number(e.size):0,max_size:e.max_size?Number(e.max_size):0,max_num_score:e.max_num_score?Number(e.max_num_score):0,can_enter:e.can_enter,end_active:e.end_active?Number(e.end_active):0,next_reset:e.next_reset?Number(e.next_reset):0,metadata:e.metadata?JSON.parse(e.metadata):void 0,create_time:e.create_time,start_time:e.start_time,end_time:e.end_time,start_active:e.start_active,authoritative:e.authoritative})})),Promise.resolve(t)}))}))}listSubscriptions(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listSubscriptions(e.token,{cursor:t,limit:r})}))}listTournamentRecords(e,t,r,s,i,n){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listTournamentRecords(e.token,t,r,s,i,n).then((e=>{var t={next_cursor:e.next_cursor,prev_cursor:e.prev_cursor,owner_records:[],records:[]};return null!=e.owner_records&&e.owner_records.forEach((e=>{t.owner_records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),null!=e.records&&e.records.forEach((e=>{t.records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),Promise.resolve(t)}))}))}listTournamentRecordsAroundOwner(e,t,r,s,i,n){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.listTournamentRecordsAroundOwner(e.token,t,r,s,i,n).then((e=>{var t={next_cursor:e.next_cursor,prev_cursor:e.prev_cursor,owner_records:[],records:[]};return null!=e.owner_records&&e.owner_records.forEach((e=>{t.owner_records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),null!=e.records&&e.records.forEach((e=>{t.records.push({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,rank:e.rank?Number(e.rank):0,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0})})),Promise.resolve(t)}))}))}promoteGroupUsers(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.promoteGroupUsers(e.token,t,r)}))}readStorageObjects(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.readStorageObjects(e.token,t).then((e=>{var t={objects:[]};return null==e.objects||e.objects.forEach((e=>{t.objects.push({collection:e.collection,key:e.key,permission_read:e.permission_read?Number(e.permission_read):0,permission_write:e.permission_write?Number(e.permission_write):0,value:e.value?JSON.parse(e.value):void 0,version:e.version,user_id:e.user_id,create_time:e.create_time,update_time:e.update_time})})),Promise.resolve(t)}))}))}rpc(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.rpcFunc(e.token,t,JSON.stringify(r)).then((e=>Promise.resolve({id:e.id,payload:e.payload?JSON.parse(e.payload):void 0})))}))}rpcHttpKey(e,t,r){return h(this,null,(function*(){return this.apiClient.rpcFunc2("",t,r&&JSON.stringify(r)||"",e).then((e=>Promise.resolve({id:e.id,payload:e.payload?JSON.parse(e.payload):void 0}))).catch((e=>{throw e}))}))}sessionLogout(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.sessionLogout(e.token,{refresh_token:r,token:t}).then((e=>void 0!==e))}))}sessionRefresh(e){return h(this,arguments,(function*(e,t={}){if(!e)return console.error("Cannot refresh a null session."),e;e.created&&e.expires_at-e.created_at<70&&console.warn("Session lifetime too short, please set '--session.token_expiry_sec' option. See the documentation for more info: https://heroiclabs.com/docs/nakama/getting-started/configuration/#session"),e.created&&e.refresh_expires_at-e.created_at<3700&&console.warn("Session refresh lifetime too short, please set '--session.refresh_token_expiry_sec' option. See the documentation for more info: https://heroiclabs.com/docs/nakama/getting-started/configuration/#session");const r=yield this.apiClient.sessionRefresh(this.serverkey,"",{token:e.refresh_token,vars:t});return e.update(r.token,r.refresh_token),e}))}unlinkApple(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkApple(e.token,t).then((e=>void 0!==e))}))}unlinkCustom(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkCustom(e.token,t).then((e=>void 0!==e))}))}unlinkDevice(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkDevice(e.token,t).then((e=>void 0!==e))}))}unlinkEmail(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkEmail(e.token,t).then((e=>void 0!==e))}))}unlinkFacebook(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkFacebook(e.token,t).then((e=>void 0!==e))}))}unlinkFacebookInstantGame(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkFacebookInstantGame(e.token,t).then((e=>void 0!==e))}))}unlinkGoogle(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkGoogle(e.token,t).then((e=>void 0!==e))}))}unlinkGameCenter(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkGameCenter(e.token,t).then((e=>void 0!==e))}))}unlinkSteam(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.unlinkSteam(e.token,t).then((e=>void 0!==e))}))}updateAccount(e,t){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.updateAccount(e.token,t).then((e=>void 0!==e))}))}updateGroup(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.updateGroup(e.token,t,r).then((e=>void 0!==e))}))}validatePurchaseApple(e,t,r=!0){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.validatePurchaseApple(e.token,{receipt:t,persist:r})}))}validatePurchaseFacebookInstant(e,t,r=!0){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.validatePurchaseFacebookInstant(e.token,{signed_request:t,persist:r})}))}validatePurchaseGoogle(e,t,r=!0){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.validatePurchaseGoogle(e.token,{purchase:t,persist:r})}))}validatePurchaseHuawei(e,t,r,s=!0){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.validatePurchaseHuawei(e.token,{purchase:t,signature:r,persist:s})}))}validateSubscriptionApple(e,t,r=!0){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.validateSubscriptionApple(e.token,{receipt:t,persist:r})}))}validateSubscriptionGoogle(e,t,r=!0){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.validateSubscriptionGoogle(e.token,{receipt:t,persist:r})}))}writeLeaderboardRecord(e,t,r){return h(this,null,(function*(){return this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e)),this.apiClient.writeLeaderboardRecord(e.token,t,{metadata:r.metadata?JSON.stringify(r.metadata):void 0,score:r.score,subscore:r.subscore}).then((e=>Promise.resolve({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0,rank:e.rank?Number(e.rank):0})))}))}writeStorageObjects(e,t){return h(this,null,(function*(){this.autoRefreshSession&&e.refresh_token&&e.isexpired((Date.now()+this.expiredTimespanMs)/1e3)&&(yield this.sessionRefresh(e));var r={objects:[]};return t.forEach((e=>{r.objects.push({collection:e.collection,key:e.key,permission_read:e.permission_read,permission_write:e.permission_write,value:JSON.stringify(e.value),version:e.version})})),this.apiClient.writeStorageObjects(e.token,r)}))}writeTournamentRecord(e,t,r){return h(this,null,(function*(){return this.apiClient.writeTournamentRecord(e.token,t,{metadata:r.metadata?JSON.stringify(r.metadata):void 0,score:r.score,subscore:r.subscore}).then((e=>Promise.resolve({expiry_time:e.expiry_time,leaderboard_id:e.leaderboard_id,metadata:e.metadata?JSON.parse(e.metadata):void 0,num_score:e.num_score?Number(e.num_score):0,owner_id:e.owner_id,score:e.score?Number(e.score):0,subscore:e.subscore?Number(e.subscore):0,update_time:e.update_time,username:e.username,max_num_score:e.max_num_score?Number(e.max_num_score):0,rank:e.rank?Number(e.rank):0})))}))}})}}}));
+System.register("chunks:///_virtual/nakama-js.esm.mjs", [], function (exports) {
+  return {
+    execute: function () {
+      var __defProp = Object.defineProperty;
+      var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+      var __hasOwnProp = Object.prototype.hasOwnProperty;
+      var __propIsEnum = Object.prototype.propertyIsEnumerable;
+      var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, {
+        enumerable: true,
+        configurable: true,
+        writable: true,
+        value
+      }) : obj[key] = value;
+      var __spreadValues = (a, b) => {
+        for (var prop in b || (b = {})) if (__hasOwnProp.call(b, prop)) __defNormalProp(a, prop, b[prop]);
+        if (__getOwnPropSymbols) for (var prop of __getOwnPropSymbols(b)) {
+          if (__propIsEnum.call(b, prop)) __defNormalProp(a, prop, b[prop]);
+        }
+        return a;
+      };
+      var __async = (__this, __arguments, generator) => {
+        return new Promise((resolve, reject) => {
+          var fulfilled = value => {
+            try {
+              step(generator.next(value));
+            } catch (e) {
+              reject(e);
+            }
+          };
+          var rejected = value => {
+            try {
+              step(generator.throw(value));
+            } catch (e) {
+              reject(e);
+            }
+          };
+          var step = x => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+          step((generator = generator.apply(__this, __arguments)).next());
+        });
+      };
 
-System.register("chunks:///_virtual/rollupPluginModLoBabelHelpers.js",[],(function(e){return{execute:function(){e({applyDecoratedDescriptor:function(e,i,r,n,l){var t={};Object.keys(n).forEach((function(e){t[e]=n[e]})),t.enumerable=!!t.enumerable,t.configurable=!!t.configurable,("value"in t||t.initializer)&&(t.writable=!0);t=r.slice().reverse().reduce((function(r,n){return n(e,i,r)||r}),t),l&&void 0!==t.initializer&&(t.value=t.initializer?t.initializer.call(l):void 0,t.initializer=void 0);void 0===t.initializer&&(Object.defineProperty(e,i,t),t=null);return t},initializerDefineProperty:function(e,i,r,n){if(!r)return;Object.defineProperty(e,i,{enumerable:r.enumerable,configurable:r.configurable,writable:r.writable,value:r.initializer?r.initializer.call(n):void 0})}})}}}));
+      // ../../node_modules/whatwg-fetch/fetch.js
+      var global = typeof globalThis !== "undefined" && globalThis || typeof self !== "undefined" && self || typeof global !== "undefined" && global;
+      var support = {
+        searchParams: "URLSearchParams" in global,
+        iterable: "Symbol" in global && "iterator" in Symbol,
+        blob: "FileReader" in global && "Blob" in global && function () {
+          try {
+            new Blob();
+            return true;
+          } catch (e) {
+            return false;
+          }
+        }(),
+        formData: "FormData" in global,
+        arrayBuffer: "ArrayBuffer" in global
+      };
+      function isDataView(obj) {
+        return obj && DataView.prototype.isPrototypeOf(obj);
+      }
+      if (support.arrayBuffer) {
+        viewClasses = ["[object Int8Array]", "[object Uint8Array]", "[object Uint8ClampedArray]", "[object Int16Array]", "[object Uint16Array]", "[object Int32Array]", "[object Uint32Array]", "[object Float32Array]", "[object Float64Array]"];
+        isArrayBufferView = ArrayBuffer.isView || function (obj) {
+          return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1;
+        };
+      }
+      var viewClasses;
+      var isArrayBufferView;
+      function normalizeName(name) {
+        if (typeof name !== "string") {
+          name = String(name);
+        }
+        if (/[^a-z0-9\-#$%&'*+.^_`|~!]/i.test(name) || name === "") {
+          throw new TypeError('Invalid character in header field name: "' + name + '"');
+        }
+        return name.toLowerCase();
+      }
+      function normalizeValue(value) {
+        if (typeof value !== "string") {
+          value = String(value);
+        }
+        return value;
+      }
+      function iteratorFor(items) {
+        var iterator = {
+          next: function () {
+            var value = items.shift();
+            return {
+              done: value === void 0,
+              value
+            };
+          }
+        };
+        if (support.iterable) {
+          iterator[Symbol.iterator] = function () {
+            return iterator;
+          };
+        }
+        return iterator;
+      }
+      function Headers(headers) {
+        this.map = {};
+        if (headers instanceof Headers) {
+          headers.forEach(function (value, name) {
+            this.append(name, value);
+          }, this);
+        } else if (Array.isArray(headers)) {
+          headers.forEach(function (header) {
+            this.append(header[0], header[1]);
+          }, this);
+        } else if (headers) {
+          Object.getOwnPropertyNames(headers).forEach(function (name) {
+            this.append(name, headers[name]);
+          }, this);
+        }
+      }
+      Headers.prototype.append = function (name, value) {
+        name = normalizeName(name);
+        value = normalizeValue(value);
+        var oldValue = this.map[name];
+        this.map[name] = oldValue ? oldValue + ", " + value : value;
+      };
+      Headers.prototype["delete"] = function (name) {
+        delete this.map[normalizeName(name)];
+      };
+      Headers.prototype.get = function (name) {
+        name = normalizeName(name);
+        return this.has(name) ? this.map[name] : null;
+      };
+      Headers.prototype.has = function (name) {
+        return this.map.hasOwnProperty(normalizeName(name));
+      };
+      Headers.prototype.set = function (name, value) {
+        this.map[normalizeName(name)] = normalizeValue(value);
+      };
+      Headers.prototype.forEach = function (callback, thisArg) {
+        for (var name in this.map) {
+          if (this.map.hasOwnProperty(name)) {
+            callback.call(thisArg, this.map[name], name, this);
+          }
+        }
+      };
+      Headers.prototype.keys = function () {
+        var items = [];
+        this.forEach(function (value, name) {
+          items.push(name);
+        });
+        return iteratorFor(items);
+      };
+      Headers.prototype.values = function () {
+        var items = [];
+        this.forEach(function (value) {
+          items.push(value);
+        });
+        return iteratorFor(items);
+      };
+      Headers.prototype.entries = function () {
+        var items = [];
+        this.forEach(function (value, name) {
+          items.push([name, value]);
+        });
+        return iteratorFor(items);
+      };
+      if (support.iterable) {
+        Headers.prototype[Symbol.iterator] = Headers.prototype.entries;
+      }
+      function consumed(body) {
+        if (body.bodyUsed) {
+          return Promise.reject(new TypeError("Already read"));
+        }
+        body.bodyUsed = true;
+      }
+      function fileReaderReady(reader) {
+        return new Promise(function (resolve, reject) {
+          reader.onload = function () {
+            resolve(reader.result);
+          };
+          reader.onerror = function () {
+            reject(reader.error);
+          };
+        });
+      }
+      function readBlobAsArrayBuffer(blob) {
+        var reader = new FileReader();
+        var promise = fileReaderReady(reader);
+        reader.readAsArrayBuffer(blob);
+        return promise;
+      }
+      function readBlobAsText(blob) {
+        var reader = new FileReader();
+        var promise = fileReaderReady(reader);
+        reader.readAsText(blob);
+        return promise;
+      }
+      function readArrayBufferAsText(buf) {
+        var view = new Uint8Array(buf);
+        var chars2 = new Array(view.length);
+        for (var i = 0; i < view.length; i++) {
+          chars2[i] = String.fromCharCode(view[i]);
+        }
+        return chars2.join("");
+      }
+      function bufferClone(buf) {
+        if (buf.slice) {
+          return buf.slice(0);
+        } else {
+          var view = new Uint8Array(buf.byteLength);
+          view.set(new Uint8Array(buf));
+          return view.buffer;
+        }
+      }
+      function Body() {
+        this.bodyUsed = false;
+        this._initBody = function (body) {
+          this.bodyUsed = this.bodyUsed;
+          this._bodyInit = body;
+          if (!body) {
+            this._bodyText = "";
+          } else if (typeof body === "string") {
+            this._bodyText = body;
+          } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+            this._bodyBlob = body;
+          } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+            this._bodyFormData = body;
+          } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+            this._bodyText = body.toString();
+          } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+            this._bodyArrayBuffer = bufferClone(body.buffer);
+            this._bodyInit = new Blob([this._bodyArrayBuffer]);
+          } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+            this._bodyArrayBuffer = bufferClone(body);
+          } else {
+            this._bodyText = body = Object.prototype.toString.call(body);
+          }
+          if (!this.headers.get("content-type")) {
+            if (typeof body === "string") {
+              this.headers.set("content-type", "text/plain;charset=UTF-8");
+            } else if (this._bodyBlob && this._bodyBlob.type) {
+              this.headers.set("content-type", this._bodyBlob.type);
+            } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+              this.headers.set("content-type", "application/x-www-form-urlencoded;charset=UTF-8");
+            }
+          }
+        };
+        if (support.blob) {
+          this.blob = function () {
+            var rejected = consumed(this);
+            if (rejected) {
+              return rejected;
+            }
+            if (this._bodyBlob) {
+              return Promise.resolve(this._bodyBlob);
+            } else if (this._bodyArrayBuffer) {
+              return Promise.resolve(new Blob([this._bodyArrayBuffer]));
+            } else if (this._bodyFormData) {
+              throw new Error("could not read FormData body as blob");
+            } else {
+              return Promise.resolve(new Blob([this._bodyText]));
+            }
+          };
+          this.arrayBuffer = function () {
+            if (this._bodyArrayBuffer) {
+              var isConsumed = consumed(this);
+              if (isConsumed) {
+                return isConsumed;
+              }
+              if (ArrayBuffer.isView(this._bodyArrayBuffer)) {
+                return Promise.resolve(this._bodyArrayBuffer.buffer.slice(this._bodyArrayBuffer.byteOffset, this._bodyArrayBuffer.byteOffset + this._bodyArrayBuffer.byteLength));
+              } else {
+                return Promise.resolve(this._bodyArrayBuffer);
+              }
+            } else {
+              return this.blob().then(readBlobAsArrayBuffer);
+            }
+          };
+        }
+        this.text = function () {
+          var rejected = consumed(this);
+          if (rejected) {
+            return rejected;
+          }
+          if (this._bodyBlob) {
+            return readBlobAsText(this._bodyBlob);
+          } else if (this._bodyArrayBuffer) {
+            return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer));
+          } else if (this._bodyFormData) {
+            throw new Error("could not read FormData body as text");
+          } else {
+            return Promise.resolve(this._bodyText);
+          }
+        };
+        if (support.formData) {
+          this.formData = function () {
+            return this.text().then(decode);
+          };
+        }
+        this.json = function () {
+          return this.text().then(JSON.parse);
+        };
+        return this;
+      }
+      var methods = ["DELETE", "GET", "HEAD", "OPTIONS", "POST", "PUT"];
+      function normalizeMethod(method) {
+        var upcased = method.toUpperCase();
+        return methods.indexOf(upcased) > -1 ? upcased : method;
+      }
+      function Request(input, options) {
+        if (!(this instanceof Request)) {
+          throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.');
+        }
+        options = options || {};
+        var body = options.body;
+        if (input instanceof Request) {
+          if (input.bodyUsed) {
+            throw new TypeError("Already read");
+          }
+          this.url = input.url;
+          this.credentials = input.credentials;
+          if (!options.headers) {
+            this.headers = new Headers(input.headers);
+          }
+          this.method = input.method;
+          this.mode = input.mode;
+          this.signal = input.signal;
+          if (!body && input._bodyInit != null) {
+            body = input._bodyInit;
+            input.bodyUsed = true;
+          }
+        } else {
+          this.url = String(input);
+        }
+        this.credentials = options.credentials || this.credentials || "same-origin";
+        if (options.headers || !this.headers) {
+          this.headers = new Headers(options.headers);
+        }
+        this.method = normalizeMethod(options.method || this.method || "GET");
+        this.mode = options.mode || this.mode || null;
+        this.signal = options.signal || this.signal;
+        this.referrer = null;
+        if ((this.method === "GET" || this.method === "HEAD") && body) {
+          throw new TypeError("Body not allowed for GET or HEAD requests");
+        }
+        this._initBody(body);
+        if (this.method === "GET" || this.method === "HEAD") {
+          if (options.cache === "no-store" || options.cache === "no-cache") {
+            var reParamSearch = /([?&])_=[^&]*/;
+            if (reParamSearch.test(this.url)) {
+              this.url = this.url.replace(reParamSearch, "$1_=" + /* @__PURE__ */new Date().getTime());
+            } else {
+              var reQueryString = /\?/;
+              this.url += (reQueryString.test(this.url) ? "&" : "?") + "_=" + /* @__PURE__ */new Date().getTime();
+            }
+          }
+        }
+      }
+      Request.prototype.clone = function () {
+        return new Request(this, {
+          body: this._bodyInit
+        });
+      };
+      function decode(body) {
+        var form = new FormData();
+        body.trim().split("&").forEach(function (bytes) {
+          if (bytes) {
+            var split = bytes.split("=");
+            var name = split.shift().replace(/\+/g, " ");
+            var value = split.join("=").replace(/\+/g, " ");
+            form.append(decodeURIComponent(name), decodeURIComponent(value));
+          }
+        });
+        return form;
+      }
+      function parseHeaders(rawHeaders) {
+        var headers = new Headers();
+        var preProcessedHeaders = rawHeaders.replace(/\r?\n[\t ]+/g, " ");
+        preProcessedHeaders.split("\r").map(function (header) {
+          return header.indexOf("\n") === 0 ? header.substr(1, header.length) : header;
+        }).forEach(function (line) {
+          var parts = line.split(":");
+          var key = parts.shift().trim();
+          if (key) {
+            var value = parts.join(":").trim();
+            headers.append(key, value);
+          }
+        });
+        return headers;
+      }
+      Body.call(Request.prototype);
+      function Response(bodyInit, options) {
+        if (!(this instanceof Response)) {
+          throw new TypeError('Please use the "new" operator, this DOM object constructor cannot be called as a function.');
+        }
+        if (!options) {
+          options = {};
+        }
+        this.type = "default";
+        this.status = options.status === void 0 ? 200 : options.status;
+        this.ok = this.status >= 200 && this.status < 300;
+        this.statusText = options.statusText === void 0 ? "" : "" + options.statusText;
+        this.headers = new Headers(options.headers);
+        this.url = options.url || "";
+        this._initBody(bodyInit);
+      }
+      Body.call(Response.prototype);
+      Response.prototype.clone = function () {
+        return new Response(this._bodyInit, {
+          status: this.status,
+          statusText: this.statusText,
+          headers: new Headers(this.headers),
+          url: this.url
+        });
+      };
+      Response.error = function () {
+        var response = new Response(null, {
+          status: 0,
+          statusText: ""
+        });
+        response.type = "error";
+        return response;
+      };
+      var redirectStatuses = [301, 302, 303, 307, 308];
+      Response.redirect = function (url, status) {
+        if (redirectStatuses.indexOf(status) === -1) {
+          throw new RangeError("Invalid status code");
+        }
+        return new Response(null, {
+          status,
+          headers: {
+            location: url
+          }
+        });
+      };
+      var DOMException = global.DOMException;
+      try {
+        new DOMException();
+      } catch (err) {
+        DOMException = function (message, name) {
+          this.message = message;
+          this.name = name;
+          var error = Error(message);
+          this.stack = error.stack;
+        };
+        DOMException.prototype = Object.create(Error.prototype);
+        DOMException.prototype.constructor = DOMException;
+      }
+      function fetch2(input, init) {
+        return new Promise(function (resolve, reject) {
+          var request = new Request(input, init);
+          if (request.signal && request.signal.aborted) {
+            return reject(new DOMException("Aborted", "AbortError"));
+          }
+          var xhr = new XMLHttpRequest();
+          function abortXhr() {
+            xhr.abort();
+          }
+          xhr.onload = function () {
+            var options = {
+              status: xhr.status,
+              statusText: xhr.statusText,
+              headers: parseHeaders(xhr.getAllResponseHeaders() || "")
+            };
+            options.url = "responseURL" in xhr ? xhr.responseURL : options.headers.get("X-Request-URL");
+            var body = "response" in xhr ? xhr.response : xhr.responseText;
+            setTimeout(function () {
+              resolve(new Response(body, options));
+            }, 0);
+          };
+          xhr.onerror = function () {
+            setTimeout(function () {
+              reject(new TypeError("Network request failed"));
+            }, 0);
+          };
+          xhr.ontimeout = function () {
+            setTimeout(function () {
+              reject(new TypeError("Network request failed"));
+            }, 0);
+          };
+          xhr.onabort = function () {
+            setTimeout(function () {
+              reject(new DOMException("Aborted", "AbortError"));
+            }, 0);
+          };
+          function fixUrl(url) {
+            try {
+              return url === "" && global.location.href ? global.location.href : url;
+            } catch (e) {
+              return url;
+            }
+          }
+          xhr.open(request.method, fixUrl(request.url), true);
+          if (request.credentials === "include") {
+            xhr.withCredentials = true;
+          } else if (request.credentials === "omit") {
+            xhr.withCredentials = false;
+          }
+          if ("responseType" in xhr) {
+            if (support.blob) {
+              xhr.responseType = "blob";
+            } else if (support.arrayBuffer && request.headers.get("Content-Type") && request.headers.get("Content-Type").indexOf("application/octet-stream") !== -1) {
+              xhr.responseType = "arraybuffer";
+            }
+          }
+          if (init && typeof init.headers === "object" && !(init.headers instanceof Headers)) {
+            Object.getOwnPropertyNames(init.headers).forEach(function (name) {
+              xhr.setRequestHeader(name, normalizeValue(init.headers[name]));
+            });
+          } else {
+            request.headers.forEach(function (value, name) {
+              xhr.setRequestHeader(name, value);
+            });
+          }
+          if (request.signal) {
+            request.signal.addEventListener("abort", abortXhr);
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+                request.signal.removeEventListener("abort", abortXhr);
+              }
+            };
+          }
+          xhr.send(typeof request._bodyInit === "undefined" ? null : request._bodyInit);
+        });
+      }
+      fetch2.polyfill = true;
+      if (!global.fetch) {
+        global.fetch = fetch2;
+        global.Headers = Headers;
+        global.Request = Request;
+        global.Response = Response;
+      }
+
+      // ../../node_modules/js-base64/base64.mjs
+      var _hasatob = typeof atob === "function";
+      var _hasbtoa = typeof btoa === "function";
+      var _hasBuffer = typeof Buffer === "function";
+      var _TD = typeof TextDecoder === "function" ? new TextDecoder() : void 0;
+      var _TE = typeof TextEncoder === "function" ? new TextEncoder() : void 0;
+      var b64ch = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+      var b64chs = Array.prototype.slice.call(b64ch);
+      var b64tab = (a => {
+        let tab = {};
+        a.forEach((c, i) => tab[c] = i);
+        return tab;
+      })(b64chs);
+      var b64re = /^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/;
+      var _fromCC = String.fromCharCode.bind(String);
+      var _U8Afrom = typeof Uint8Array.from === "function" ? Uint8Array.from.bind(Uint8Array) : it => new Uint8Array(Array.prototype.slice.call(it, 0));
+      var _mkUriSafe = src => src.replace(/=/g, "").replace(/[+\/]/g, m0 => m0 == "+" ? "-" : "_");
+      var _tidyB64 = s => s.replace(/[^A-Za-z0-9\+\/]/g, "");
+      var btoaPolyfill = bin => {
+        let u32,
+          c0,
+          c1,
+          c2,
+          asc = "";
+        const pad = bin.length % 3;
+        for (let i = 0; i < bin.length;) {
+          if ((c0 = bin.charCodeAt(i++)) > 255 || (c1 = bin.charCodeAt(i++)) > 255 || (c2 = bin.charCodeAt(i++)) > 255) throw new TypeError("invalid character found");
+          u32 = c0 << 16 | c1 << 8 | c2;
+          asc += b64chs[u32 >> 18 & 63] + b64chs[u32 >> 12 & 63] + b64chs[u32 >> 6 & 63] + b64chs[u32 & 63];
+        }
+        return pad ? asc.slice(0, pad - 3) + "===".substring(pad) : asc;
+      };
+      var _btoa = _hasbtoa ? bin => btoa(bin) : _hasBuffer ? bin => Buffer.from(bin, "binary").toString("base64") : btoaPolyfill;
+      var _fromUint8Array = _hasBuffer ? u8a => Buffer.from(u8a).toString("base64") : u8a => {
+        const maxargs = 4096;
+        let strs = [];
+        for (let i = 0, l = u8a.length; i < l; i += maxargs) {
+          strs.push(_fromCC.apply(null, u8a.subarray(i, i + maxargs)));
+        }
+        return _btoa(strs.join(""));
+      };
+      var cb_utob = c => {
+        if (c.length < 2) {
+          var cc = c.charCodeAt(0);
+          return cc < 128 ? c : cc < 2048 ? _fromCC(192 | cc >>> 6) + _fromCC(128 | cc & 63) : _fromCC(224 | cc >>> 12 & 15) + _fromCC(128 | cc >>> 6 & 63) + _fromCC(128 | cc & 63);
+        } else {
+          var cc = 65536 + (c.charCodeAt(0) - 55296) * 1024 + (c.charCodeAt(1) - 56320);
+          return _fromCC(240 | cc >>> 18 & 7) + _fromCC(128 | cc >>> 12 & 63) + _fromCC(128 | cc >>> 6 & 63) + _fromCC(128 | cc & 63);
+        }
+      };
+      var re_utob = /[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g;
+      var utob = u => u.replace(re_utob, cb_utob);
+      var _encode = _hasBuffer ? s => Buffer.from(s, "utf8").toString("base64") : _TE ? s => _fromUint8Array(_TE.encode(s)) : s => _btoa(utob(s));
+      var encode = (src, urlsafe = false) => urlsafe ? _mkUriSafe(_encode(src)) : _encode(src);
+      var re_btou = /[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF]{2}|[\xF0-\xF7][\x80-\xBF]{3}/g;
+      var cb_btou = cccc => {
+        switch (cccc.length) {
+          case 4:
+            var cp = (7 & cccc.charCodeAt(0)) << 18 | (63 & cccc.charCodeAt(1)) << 12 | (63 & cccc.charCodeAt(2)) << 6 | 63 & cccc.charCodeAt(3),
+              offset = cp - 65536;
+            return _fromCC((offset >>> 10) + 55296) + _fromCC((offset & 1023) + 56320);
+          case 3:
+            return _fromCC((15 & cccc.charCodeAt(0)) << 12 | (63 & cccc.charCodeAt(1)) << 6 | 63 & cccc.charCodeAt(2));
+          default:
+            return _fromCC((31 & cccc.charCodeAt(0)) << 6 | 63 & cccc.charCodeAt(1));
+        }
+      };
+      var btou = b => b.replace(re_btou, cb_btou);
+      var atobPolyfill = asc => {
+        asc = asc.replace(/\s+/g, "");
+        if (!b64re.test(asc)) throw new TypeError("malformed base64.");
+        asc += "==".slice(2 - (asc.length & 3));
+        let u24,
+          bin = "",
+          r1,
+          r2;
+        for (let i = 0; i < asc.length;) {
+          u24 = b64tab[asc.charAt(i++)] << 18 | b64tab[asc.charAt(i++)] << 12 | (r1 = b64tab[asc.charAt(i++)]) << 6 | (r2 = b64tab[asc.charAt(i++)]);
+          bin += r1 === 64 ? _fromCC(u24 >> 16 & 255) : r2 === 64 ? _fromCC(u24 >> 16 & 255, u24 >> 8 & 255) : _fromCC(u24 >> 16 & 255, u24 >> 8 & 255, u24 & 255);
+        }
+        return bin;
+      };
+      var _atob = _hasatob ? asc => atob(_tidyB64(asc)) : _hasBuffer ? asc => Buffer.from(asc, "base64").toString("binary") : atobPolyfill;
+      var _toUint8Array = _hasBuffer ? a => _U8Afrom(Buffer.from(a, "base64")) : a => _U8Afrom(_atob(a).split("").map(c => c.charCodeAt(0)));
+      var _decode = _hasBuffer ? a => Buffer.from(a, "base64").toString("utf8") : _TD ? a => _TD.decode(_toUint8Array(a)) : a => btou(_atob(a));
+      var _unURI = a => _tidyB64(a.replace(/[-_]/g, m0 => m0 == "-" ? "+" : "/"));
+      var decode2 = src => _decode(_unURI(src));
+
+      // utils.ts
+      function buildFetchOptions(method, options, bodyJson) {
+        const fetchOptions = __spreadValues(__spreadValues({}, {
+          method
+        }), options);
+        fetchOptions.headers = __spreadValues({}, options.headers);
+        if (typeof XMLHttpRequest !== "undefined") {
+          const descriptor = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, "withCredentials");
+          if (!(descriptor == null ? void 0 : descriptor.set)) {
+            fetchOptions.credentials = "cocos-ignore";
+          }
+        }
+        if (!Object.keys(fetchOptions.headers).includes("Accept")) {
+          fetchOptions.headers["Accept"] = "application/json";
+        }
+        if (!Object.keys(fetchOptions.headers).includes("Content-Type")) {
+          fetchOptions.headers["Content-Type"] = "application/json";
+        }
+        Object.keys(fetchOptions.headers).forEach(key => {
+          if (!fetchOptions.headers[key]) {
+            delete fetchOptions.headers[key];
+          }
+        });
+        if (bodyJson) {
+          fetchOptions.body = bodyJson;
+        }
+        return fetchOptions;
+      }
+
+      // api.gen.ts
+      var NakamaApi = class {
+        constructor(serverKey, basePath, timeoutMs) {
+          this.serverKey = serverKey;
+          this.basePath = basePath;
+          this.timeoutMs = timeoutMs;
+        }
+        /** A healthcheck which load balancers can use to check the service. */
+        healthcheck(bearerToken, options = {}) {
+          const urlPath = "/healthcheck";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Delete the current user's account. */
+        deleteAccount(bearerToken, options = {}) {
+          const urlPath = "/v2/account";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("DELETE", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Fetch the current user's account. */
+        getAccount(bearerToken, options = {}) {
+          const urlPath = "/v2/account";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Update fields in the current user's account. */
+        updateAccount(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("PUT", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with an Apple ID against the server. */
+        authenticateApple(basicAuthUsername, basicAuthPassword, account, create, username, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/apple";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with a custom id against the server. */
+        authenticateCustom(basicAuthUsername, basicAuthPassword, account, create, username, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/custom";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with a device id against the server. */
+        authenticateDevice(basicAuthUsername, basicAuthPassword, account, create, username, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/device";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with an email+password against the server. */
+        authenticateEmail(basicAuthUsername, basicAuthPassword, account, create, username, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/email";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with a Facebook OAuth token against the server. */
+        authenticateFacebook(basicAuthUsername, basicAuthPassword, account, create, username, sync, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/facebook";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          queryParams.set("sync", sync);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with a Facebook Instant Game token against the server. */
+        authenticateFacebookInstantGame(basicAuthUsername, basicAuthPassword, account, create, username, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/facebookinstantgame";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with Apple's GameCenter against the server. */
+        authenticateGameCenter(basicAuthUsername, basicAuthPassword, account, create, username, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/gamecenter";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with Google against the server. */
+        authenticateGoogle(basicAuthUsername, basicAuthPassword, account, create, username, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/google";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Authenticate a user with Steam against the server. */
+        authenticateSteam(basicAuthUsername, basicAuthPassword, account, create, username, sync, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/authenticate/steam";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("create", create);
+          queryParams.set("username", username);
+          queryParams.set("sync", sync);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add an Apple ID to the social profiles on the current user's account. */
+        linkApple(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/apple";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add a custom ID to the social profiles on the current user's account. */
+        linkCustom(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/custom";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add a device ID to the social profiles on the current user's account. */
+        linkDevice(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/device";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add an email+password to the social profiles on the current user's account. */
+        linkEmail(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/email";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add Facebook to the social profiles on the current user's account. */
+        linkFacebook(bearerToken, account, sync, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/facebook";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("sync", sync);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add Facebook Instant Game to the social profiles on the current user's account. */
+        linkFacebookInstantGame(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/facebookinstantgame";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add Apple's GameCenter to the social profiles on the current user's account. */
+        linkGameCenter(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/gamecenter";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add Google to the social profiles on the current user's account. */
+        linkGoogle(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/google";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add Steam to the social profiles on the current user's account. */
+        linkSteam(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/link/steam";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Refresh a user's session using a refresh token retrieved from a previous authentication request. */
+        sessionRefresh(basicAuthUsername, basicAuthPassword, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/session/refresh";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (basicAuthUsername) {
+            fetchOptions.headers["Authorization"] = "Basic " + encode(basicAuthUsername + ":" + basicAuthPassword);
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove the Apple ID from the social profiles on the current user's account. */
+        unlinkApple(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/apple";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove the custom ID from the social profiles on the current user's account. */
+        unlinkCustom(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/custom";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove the device ID from the social profiles on the current user's account. */
+        unlinkDevice(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/device";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove the email+password from the social profiles on the current user's account. */
+        unlinkEmail(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/email";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove Facebook from the social profiles on the current user's account. */
+        unlinkFacebook(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/facebook";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove Facebook Instant Game profile from the social profiles on the current user's account. */
+        unlinkFacebookInstantGame(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/facebookinstantgame";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove Apple's GameCenter from the social profiles on the current user's account. */
+        unlinkGameCenter(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/gamecenter";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove Google from the social profiles on the current user's account. */
+        unlinkGoogle(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/google";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Remove Steam from the social profiles on the current user's account. */
+        unlinkSteam(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/account/unlink/steam";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List a channel's message history. */
+        listChannelMessages(bearerToken, channelId, limit, forward, cursor, options = {}) {
+          if (channelId === null || channelId === void 0) {
+            throw new Error("'channelId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/channel/{channelId}".replace("{channelId}", encodeURIComponent(String(channelId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("forward", forward);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Submit an event for processing in the server's registered runtime custom events handler. */
+        event(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/event";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Delete one or more users by ID or username. */
+        deleteFriends(bearerToken, ids, usernames, options = {}) {
+          const urlPath = "/v2/friend";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("ids", ids);
+          queryParams.set("usernames", usernames);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("DELETE", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List all friends for the current user. */
+        listFriends(bearerToken, limit, state, cursor, options = {}) {
+          const urlPath = "/v2/friend";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("state", state);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add friends by ID or username to a user's account. */
+        addFriends(bearerToken, ids, usernames, options = {}) {
+          const urlPath = "/v2/friend";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("ids", ids);
+          queryParams.set("usernames", usernames);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Block one or more users by ID or username. */
+        blockFriends(bearerToken, ids, usernames, options = {}) {
+          const urlPath = "/v2/friend/block";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("ids", ids);
+          queryParams.set("usernames", usernames);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Import Facebook friends and add them to a user's account. */
+        importFacebookFriends(bearerToken, account, reset, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/friend/facebook";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("reset", reset);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List friends of friends for the current user. */
+        listFriendsOfFriends(bearerToken, limit, cursor, options = {}) {
+          const urlPath = "/v2/friend/friends";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Import Steam friends and add them to a user's account. */
+        importSteamFriends(bearerToken, account, reset, options = {}) {
+          if (account === null || account === void 0) {
+            throw new Error("'account' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/friend/steam";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("reset", reset);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(account || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List groups based on given filters. */
+        listGroups(bearerToken, name, cursor, limit, langTag, members, open, options = {}) {
+          const urlPath = "/v2/group";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("name", name);
+          queryParams.set("cursor", cursor);
+          queryParams.set("limit", limit);
+          queryParams.set("lang_tag", langTag);
+          queryParams.set("members", members);
+          queryParams.set("open", open);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Create a new group with the current user as the owner. */
+        createGroup(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Delete a group by ID. */
+        deleteGroup(bearerToken, groupId, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("DELETE", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Update fields in a given group. */
+        updateGroup(bearerToken, groupId, body, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("PUT", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Add users to a group. */
+        addGroupUsers(bearerToken, groupId, userIds, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/add".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("user_ids", userIds);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Ban a set of users from a group. */
+        banGroupUsers(bearerToken, groupId, userIds, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/ban".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("user_ids", userIds);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Demote a set of users in a group to the next role down. */
+        demoteGroupUsers(bearerToken, groupId, userIds, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/demote".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("user_ids", userIds);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Immediately join an open group, or request to join a closed one. */
+        joinGroup(bearerToken, groupId, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/join".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Kick a set of users from a group. */
+        kickGroupUsers(bearerToken, groupId, userIds, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/kick".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("user_ids", userIds);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Leave a group the user is a member of. */
+        leaveGroup(bearerToken, groupId, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/leave".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Promote a set of users in a group to the next role up. */
+        promoteGroupUsers(bearerToken, groupId, userIds, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/promote".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("user_ids", userIds);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List all users that are part of a group. */
+        listGroupUsers(bearerToken, groupId, limit, state, cursor, options = {}) {
+          if (groupId === null || groupId === void 0) {
+            throw new Error("'groupId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/group/{groupId}/user".replace("{groupId}", encodeURIComponent(String(groupId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("state", state);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Validate Apple IAP Receipt */
+        validatePurchaseApple(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/purchase/apple";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Validate FB Instant IAP Receipt */
+        validatePurchaseFacebookInstant(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/purchase/facebookinstant";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Validate Google IAP Receipt */
+        validatePurchaseGoogle(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/purchase/google";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Validate Huawei IAP Receipt */
+        validatePurchaseHuawei(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/purchase/huawei";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List user's subscriptions. */
+        listSubscriptions(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/subscription";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Validate Apple Subscription Receipt */
+        validateSubscriptionApple(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/subscription/apple";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Validate Google Subscription Receipt */
+        validateSubscriptionGoogle(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/subscription/google";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Get subscription by product id. */
+        getSubscription(bearerToken, productId, options = {}) {
+          if (productId === null || productId === void 0) {
+            throw new Error("'productId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/iap/subscription/{productId}".replace("{productId}", encodeURIComponent(String(productId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Delete a leaderboard record. */
+        deleteLeaderboardRecord(bearerToken, leaderboardId, options = {}) {
+          if (leaderboardId === null || leaderboardId === void 0) {
+            throw new Error("'leaderboardId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/leaderboard/{leaderboardId}".replace("{leaderboardId}", encodeURIComponent(String(leaderboardId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("DELETE", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List leaderboard records. */
+        listLeaderboardRecords(bearerToken, leaderboardId, ownerIds, limit, cursor, expiry, options = {}) {
+          if (leaderboardId === null || leaderboardId === void 0) {
+            throw new Error("'leaderboardId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/leaderboard/{leaderboardId}".replace("{leaderboardId}", encodeURIComponent(String(leaderboardId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("owner_ids", ownerIds);
+          queryParams.set("limit", limit);
+          queryParams.set("cursor", cursor);
+          queryParams.set("expiry", expiry);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Write a record to a leaderboard. */
+        writeLeaderboardRecord(bearerToken, leaderboardId, record, options = {}) {
+          if (leaderboardId === null || leaderboardId === void 0) {
+            throw new Error("'leaderboardId' is a required parameter but is null or undefined.");
+          }
+          if (record === null || record === void 0) {
+            throw new Error("'record' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/leaderboard/{leaderboardId}".replace("{leaderboardId}", encodeURIComponent(String(leaderboardId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(record || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List leaderboard records that belong to a user. */
+        listLeaderboardRecordsAroundOwner(bearerToken, leaderboardId, ownerId, limit, expiry, cursor, options = {}) {
+          if (leaderboardId === null || leaderboardId === void 0) {
+            throw new Error("'leaderboardId' is a required parameter but is null or undefined.");
+          }
+          if (ownerId === null || ownerId === void 0) {
+            throw new Error("'ownerId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/leaderboard/{leaderboardId}/owner/{ownerId}".replace("{leaderboardId}", encodeURIComponent(String(leaderboardId))).replace("{ownerId}", encodeURIComponent(String(ownerId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("expiry", expiry);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Fetch list of running matches. */
+        listMatches(bearerToken, limit, authoritative, label, minSize, maxSize, query, options = {}) {
+          const urlPath = "/v2/match";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("authoritative", authoritative);
+          queryParams.set("label", label);
+          queryParams.set("min_size", minSize);
+          queryParams.set("max_size", maxSize);
+          queryParams.set("query", query);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Delete one or more notifications for the current user. */
+        deleteNotifications(bearerToken, ids, options = {}) {
+          const urlPath = "/v2/notification";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("ids", ids);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("DELETE", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Fetch list of notifications. */
+        listNotifications(bearerToken, limit, cacheableCursor, options = {}) {
+          const urlPath = "/v2/notification";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("cacheable_cursor", cacheableCursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Execute a Lua function on the server. */
+        rpcFunc2(bearerToken, id, payload, httpKey, options = {}) {
+          if (id === null || id === void 0) {
+            throw new Error("'id' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/rpc/{id}".replace("{id}", encodeURIComponent(String(id)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("payload", payload);
+          queryParams.set("http_key", httpKey);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Execute a Lua function on the server. */
+        rpcFunc(bearerToken, id, body, httpKey, options = {}) {
+          if (id === null || id === void 0) {
+            throw new Error("'id' is a required parameter but is null or undefined.");
+          }
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/rpc/{id}".replace("{id}", encodeURIComponent(String(id)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("http_key", httpKey);
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user. */
+        sessionLogout(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/session/logout";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Get storage objects. */
+        readStorageObjects(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/storage";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Write objects into the storage engine. */
+        writeStorageObjects(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/storage";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("PUT", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Delete one or more objects by ID or username. */
+        deleteStorageObjects(bearerToken, body, options = {}) {
+          if (body === null || body === void 0) {
+            throw new Error("'body' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/storage/delete";
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(body || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("PUT", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List publicly readable storage objects in a given collection. */
+        listStorageObjects(bearerToken, collection, userId, limit, cursor, options = {}) {
+          if (collection === null || collection === void 0) {
+            throw new Error("'collection' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/storage/{collection}".replace("{collection}", encodeURIComponent(String(collection)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("user_id", userId);
+          queryParams.set("limit", limit);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List publicly readable storage objects in a given collection. */
+        listStorageObjects2(bearerToken, collection, userId, limit, cursor, options = {}) {
+          if (collection === null || collection === void 0) {
+            throw new Error("'collection' is a required parameter but is null or undefined.");
+          }
+          if (userId === null || userId === void 0) {
+            throw new Error("'userId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/storage/{collection}/{userId}".replace("{collection}", encodeURIComponent(String(collection))).replace("{userId}", encodeURIComponent(String(userId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List current or upcoming tournaments. */
+        listTournaments(bearerToken, categoryStart, categoryEnd, startTime, endTime, limit, cursor, options = {}) {
+          const urlPath = "/v2/tournament";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("category_start", categoryStart);
+          queryParams.set("category_end", categoryEnd);
+          queryParams.set("start_time", startTime);
+          queryParams.set("end_time", endTime);
+          queryParams.set("limit", limit);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Delete a tournament record. */
+        deleteTournamentRecord(bearerToken, tournamentId, options = {}) {
+          if (tournamentId === null || tournamentId === void 0) {
+            throw new Error("'tournamentId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/tournament/{tournamentId}".replace("{tournamentId}", encodeURIComponent(String(tournamentId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("DELETE", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List tournament records. */
+        listTournamentRecords(bearerToken, tournamentId, ownerIds, limit, cursor, expiry, options = {}) {
+          if (tournamentId === null || tournamentId === void 0) {
+            throw new Error("'tournamentId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/tournament/{tournamentId}".replace("{tournamentId}", encodeURIComponent(String(tournamentId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("owner_ids", ownerIds);
+          queryParams.set("limit", limit);
+          queryParams.set("cursor", cursor);
+          queryParams.set("expiry", expiry);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Write a record to a tournament. */
+        writeTournamentRecord2(bearerToken, tournamentId, record, options = {}) {
+          if (tournamentId === null || tournamentId === void 0) {
+            throw new Error("'tournamentId' is a required parameter but is null or undefined.");
+          }
+          if (record === null || record === void 0) {
+            throw new Error("'record' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/tournament/{tournamentId}".replace("{tournamentId}", encodeURIComponent(String(tournamentId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(record || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Write a record to a tournament. */
+        writeTournamentRecord(bearerToken, tournamentId, record, options = {}) {
+          if (tournamentId === null || tournamentId === void 0) {
+            throw new Error("'tournamentId' is a required parameter but is null or undefined.");
+          }
+          if (record === null || record === void 0) {
+            throw new Error("'record' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/tournament/{tournamentId}".replace("{tournamentId}", encodeURIComponent(String(tournamentId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          bodyJson = JSON.stringify(record || {});
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("PUT", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Attempt to join an open and running tournament. */
+        joinTournament(bearerToken, tournamentId, options = {}) {
+          if (tournamentId === null || tournamentId === void 0) {
+            throw new Error("'tournamentId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/tournament/{tournamentId}/join".replace("{tournamentId}", encodeURIComponent(String(tournamentId)));
+          const queryParams = /* @__PURE__ */new Map();
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("POST", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List tournament records for a given owner. */
+        listTournamentRecordsAroundOwner(bearerToken, tournamentId, ownerId, limit, expiry, cursor, options = {}) {
+          if (tournamentId === null || tournamentId === void 0) {
+            throw new Error("'tournamentId' is a required parameter but is null or undefined.");
+          }
+          if (ownerId === null || ownerId === void 0) {
+            throw new Error("'ownerId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/tournament/{tournamentId}/owner/{ownerId}".replace("{tournamentId}", encodeURIComponent(String(tournamentId))).replace("{ownerId}", encodeURIComponent(String(ownerId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("expiry", expiry);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** Fetch zero or more users by ID and/or username. */
+        getUsers(bearerToken, ids, usernames, facebookIds, options = {}) {
+          const urlPath = "/v2/user";
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("ids", ids);
+          queryParams.set("usernames", usernames);
+          queryParams.set("facebook_ids", facebookIds);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        /** List groups the current user belongs to. */
+        listUserGroups(bearerToken, userId, limit, state, cursor, options = {}) {
+          if (userId === null || userId === void 0) {
+            throw new Error("'userId' is a required parameter but is null or undefined.");
+          }
+          const urlPath = "/v2/user/{userId}/group".replace("{userId}", encodeURIComponent(String(userId)));
+          const queryParams = /* @__PURE__ */new Map();
+          queryParams.set("limit", limit);
+          queryParams.set("state", state);
+          queryParams.set("cursor", cursor);
+          let bodyJson = "";
+          const fullUrl = this.buildFullUrl(this.basePath, urlPath, queryParams);
+          const fetchOptions = buildFetchOptions("GET", options, bodyJson);
+          if (bearerToken) {
+            fetchOptions.headers["Authorization"] = "Bearer " + bearerToken;
+          }
+          return Promise.race([fetch(fullUrl, fetchOptions).then(response => {
+            if (response.status == 204) {
+              return response;
+            } else if (response.status >= 200 && response.status < 300) {
+              return response.json();
+            } else {
+              throw response;
+            }
+          }), new Promise((_, reject) => setTimeout(reject, this.timeoutMs, "Request timed out."))]);
+        }
+        buildFullUrl(basePath, fragment, queryParams) {
+          let fullPath = basePath + fragment + "?";
+          for (let [k, v] of queryParams) {
+            if (v instanceof Array) {
+              fullPath += v.reduce((prev, curr) => {
+                return prev + encodeURIComponent(k) + "=" + encodeURIComponent(curr) + "&";
+              }, "");
+            } else {
+              if (v != null) {
+                fullPath += encodeURIComponent(k) + "=" + encodeURIComponent(v) + "&";
+              }
+            }
+          }
+          return fullPath;
+        }
+      };
+
+      // session.ts
+      var Session = exports('Session', class {
+        constructor(token, refresh_token, created) {
+          this.created = created;
+          this.token = token;
+          this.refresh_token = refresh_token;
+          this.created_at = Math.floor( /* @__PURE__ */new Date().getTime() / 1e3);
+          this.update(token, refresh_token);
+        }
+        isexpired(currenttime) {
+          return this.expires_at - currenttime < 0;
+        }
+        isrefreshexpired(currenttime) {
+          return this.refresh_expires_at - currenttime < 0;
+        }
+        update(token, refreshToken) {
+          const tokenParts = token.split(".");
+          if (tokenParts.length != 3) {
+            throw "jwt is not valid.";
+          }
+          const tokenDecoded = JSON.parse(_atob(tokenParts[1]));
+          const tokenExpiresAt = Math.floor(parseInt(tokenDecoded["exp"]));
+          if (refreshToken) {
+            const refreshTokenParts = refreshToken.split(".");
+            if (refreshTokenParts.length != 3) {
+              throw "refresh jwt is not valid.";
+            }
+            const refreshTokenDecoded = JSON.parse(_atob(refreshTokenParts[1]));
+            const refreshTokenExpiresAt = Math.floor(parseInt(refreshTokenDecoded["exp"]));
+            this.refresh_expires_at = refreshTokenExpiresAt;
+            this.refresh_token = refreshToken;
+          }
+          this.token = token;
+          this.expires_at = tokenExpiresAt;
+          this.username = tokenDecoded["usn"];
+          this.user_id = tokenDecoded["uid"];
+          this.vars = tokenDecoded["vrs"];
+        }
+        static restore(token, refreshToken) {
+          return new Session(token, refreshToken, false);
+        }
+      });
+
+      // ../../node_modules/base64-arraybuffer/dist/base64-arraybuffer.es5.js
+      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+      var lookup = typeof Uint8Array === "undefined" ? [] : new Uint8Array(256);
+      for (i = 0; i < chars.length; i++) {
+        lookup[chars.charCodeAt(i)] = i;
+      }
+      var i;
+      var encode2 = function (arraybuffer) {
+        var bytes = new Uint8Array(arraybuffer),
+          i,
+          len = bytes.length,
+          base64 = "";
+        for (i = 0; i < len; i += 3) {
+          base64 += chars[bytes[i] >> 2];
+          base64 += chars[(bytes[i] & 3) << 4 | bytes[i + 1] >> 4];
+          base64 += chars[(bytes[i + 1] & 15) << 2 | bytes[i + 2] >> 6];
+          base64 += chars[bytes[i + 2] & 63];
+        }
+        if (len % 3 === 2) {
+          base64 = base64.substring(0, base64.length - 1) + "=";
+        } else if (len % 3 === 1) {
+          base64 = base64.substring(0, base64.length - 2) + "==";
+        }
+        return base64;
+      };
+      var decode3 = function (base64) {
+        var bufferLength = base64.length * 0.75,
+          len = base64.length,
+          i,
+          p = 0,
+          encoded1,
+          encoded2,
+          encoded3,
+          encoded4;
+        if (base64[base64.length - 1] === "=") {
+          bufferLength--;
+          if (base64[base64.length - 2] === "=") {
+            bufferLength--;
+          }
+        }
+        var arraybuffer = new ArrayBuffer(bufferLength),
+          bytes = new Uint8Array(arraybuffer);
+        for (i = 0; i < len; i += 4) {
+          encoded1 = lookup[base64.charCodeAt(i)];
+          encoded2 = lookup[base64.charCodeAt(i + 1)];
+          encoded3 = lookup[base64.charCodeAt(i + 2)];
+          encoded4 = lookup[base64.charCodeAt(i + 3)];
+          bytes[p++] = encoded1 << 2 | encoded2 >> 4;
+          bytes[p++] = (encoded2 & 15) << 4 | encoded3 >> 2;
+          bytes[p++] = (encoded3 & 3) << 6 | encoded4 & 63;
+        }
+        return arraybuffer;
+      };
+
+      // web_socket_adapter.ts
+      var WebSocketAdapterText = exports('WebSocketAdapterText', class {
+        get onClose() {
+          return this._socket.onclose;
+        }
+        set onClose(value) {
+          this._socket.onclose = value;
+        }
+        get onError() {
+          return this._socket.onerror;
+        }
+        set onError(value) {
+          this._socket.onerror = value;
+        }
+        get onMessage() {
+          return this._socket.onmessage;
+        }
+        set onMessage(value) {
+          if (value) {
+            this._socket.onmessage = evt => {
+              const message = JSON.parse(evt.data);
+              if (message.match_data && message.match_data.data) {
+                message.match_data.data = new Uint8Array(decode3(message.match_data.data));
+              } else if (message.party_data && message.party_data.data) {
+                message.party_data.data = new Uint8Array(decode3(message.party_data.data));
+              }
+              value(message);
+            };
+          } else {
+            value = null;
+          }
+        }
+        get onOpen() {
+          return this._socket.onopen;
+        }
+        set onOpen(value) {
+          this._socket.onopen = value;
+        }
+        isOpen() {
+          var _a;
+          return ((_a = this._socket) == null ? void 0 : _a.readyState) == WebSocket.OPEN;
+        }
+        connect(scheme, host, port, createStatus, token) {
+          const url = `${scheme}${host}:${port}/ws?lang=en&status=${encodeURIComponent(createStatus.toString())}&token=${encodeURIComponent(token)}`;
+          this._socket = new WebSocket(url);
+        }
+        close() {
+          this._socket.close();
+          this._socket = void 0;
+        }
+        send(msg) {
+          if (msg.match_data_send) {
+            msg.match_data_send.op_code = msg.match_data_send.op_code.toString();
+            let payload = msg.match_data_send.data;
+            if (payload && payload instanceof Uint8Array) {
+              msg.match_data_send.data = encode2(payload.buffer);
+            } else if (payload) {
+              msg.match_data_send.data = _btoa(payload);
+            }
+          } else if (msg.party_data_send) {
+            msg.party_data_send.op_code = msg.party_data_send.op_code.toString();
+            let payload = msg.party_data_send.data;
+            if (payload && payload instanceof Uint8Array) {
+              msg.party_data_send.data = encode2(payload.buffer);
+            } else if (payload) {
+              msg.party_data_send.data = _btoa(payload);
+            }
+          }
+          this._socket.send(JSON.stringify(msg));
+        }
+      });
+
+      // socket.ts
+      var _DefaultSocket = class {
+        constructor(host, port, useSSL = false, verbose = false, adapter = new WebSocketAdapterText(), sendTimeoutMs = _DefaultSocket.DefaultSendTimeoutMs) {
+          this.host = host;
+          this.port = port;
+          this.useSSL = useSSL;
+          this.verbose = verbose;
+          this.adapter = adapter;
+          this.sendTimeoutMs = sendTimeoutMs;
+          this.cIds = {};
+          this.nextCid = 1;
+          this._heartbeatTimeoutMs = _DefaultSocket.DefaultHeartbeatTimeoutMs;
+        }
+        generatecid() {
+          const cid = this.nextCid.toString();
+          ++this.nextCid;
+          return cid;
+        }
+        connect(session, createStatus = false, connectTimeoutMs = _DefaultSocket.DefaultConnectTimeoutMs) {
+          if (this.adapter.isOpen()) {
+            return Promise.resolve(session);
+          }
+          const scheme = this.useSSL ? "wss://" : "ws://";
+          this.adapter.connect(scheme, this.host, this.port, createStatus, session.token);
+          this.adapter.onClose = evt => {
+            this.ondisconnect(evt);
+          };
+          this.adapter.onError = evt => {
+            this.onerror(evt);
+          };
+          this.adapter.onMessage = message => {
+            if (this.verbose && window && window.console) {
+              console.log("Response: %o", JSON.stringify(message));
+            }
+            if (!message.cid) {
+              if (message.notifications) {
+                message.notifications.notifications.forEach(n => {
+                  n.content = n.content ? JSON.parse(n.content) : void 0;
+                  this.onnotification(n);
+                });
+              } else if (message.match_data) {
+                message.match_data.op_code = parseInt(message.match_data.op_code);
+                this.onmatchdata(message.match_data);
+              } else if (message.match_presence_event) {
+                this.onmatchpresence(message.match_presence_event);
+              } else if (message.matchmaker_ticket) {
+                this.onmatchmakerticket(message.matchmaker_ticket);
+              } else if (message.matchmaker_matched) {
+                this.onmatchmakermatched(message.matchmaker_matched);
+              } else if (message.status_presence_event) {
+                this.onstatuspresence(message.status_presence_event);
+              } else if (message.stream_presence_event) {
+                this.onstreampresence(message.stream_presence_event);
+              } else if (message.stream_data) {
+                this.onstreamdata(message.stream_data);
+              } else if (message.channel_message) {
+                message.channel_message.content = JSON.parse(message.channel_message.content);
+                this.onchannelmessage(message.channel_message);
+              } else if (message.channel_presence_event) {
+                this.onchannelpresence(message.channel_presence_event);
+              } else if (message.party_data) {
+                message.party_data.op_code = parseInt(message.party_data.op_code);
+                this.onpartydata(message.party_data);
+              } else if (message.party_close) {
+                this.onpartyclose(message.party_close);
+              } else if (message.party_join_request) {
+                this.onpartyjoinrequest(message.party_join_request);
+              } else if (message.party_leader) {
+                this.onpartyleader(message.party_leader);
+              } else if (message.party_matchmaker_ticket) {
+                this.onpartymatchmakerticket(message.party_matchmaker_ticket);
+              } else if (message.party_presence_event) {
+                this.onpartypresence(message.party_presence_event);
+              } else if (message.party) {
+                this.onparty(message.party);
+              } else {
+                if (this.verbose && window && window.console) {
+                  console.log("Unrecognized message received: %o", message);
+                }
+              }
+            } else {
+              const executor = this.cIds[message.cid];
+              if (!executor) {
+                if (this.verbose && window && window.console) {
+                  console.error("No promise executor for message: %o", message);
+                }
+                return;
+              }
+              delete this.cIds[message.cid];
+              if (message.error) {
+                executor.reject(message.error);
+              } else {
+                executor.resolve(message);
+              }
+            }
+          };
+          return new Promise((resolve, reject) => {
+            this.adapter.onOpen = evt => {
+              if (this.verbose && window && window.console) {
+                console.log(evt);
+              }
+              this.pingPong();
+              resolve(session);
+            };
+            this.adapter.onError = evt => {
+              reject(evt);
+              this.adapter.close();
+            };
+            setTimeout(() => {
+              reject("The socket timed out when trying to connect.");
+            }, connectTimeoutMs);
+          });
+        }
+        disconnect(fireDisconnectEvent = true) {
+          if (this.adapter.isOpen()) {
+            this.adapter.close();
+          }
+          if (fireDisconnectEvent) {
+            this.ondisconnect({});
+          }
+        }
+        setHeartbeatTimeoutMs(ms) {
+          this._heartbeatTimeoutMs = ms;
+        }
+        getHeartbeatTimeoutMs() {
+          return this._heartbeatTimeoutMs;
+        }
+        ondisconnect(evt) {
+          if (this.verbose && window && window.console) {
+            console.log(evt);
+          }
+        }
+        onerror(evt) {
+          if (this.verbose && window && window.console) {
+            console.log(evt);
+          }
+        }
+        onchannelmessage(channelMessage) {
+          if (this.verbose && window && window.console) {
+            console.log(channelMessage);
+          }
+        }
+        onchannelpresence(channelPresence) {
+          if (this.verbose && window && window.console) {
+            console.log(channelPresence);
+          }
+        }
+        onnotification(notification) {
+          if (this.verbose && window && window.console) {
+            console.log(notification);
+          }
+        }
+        onmatchdata(matchData) {
+          if (this.verbose && window && window.console) {
+            console.log(matchData);
+          }
+        }
+        onmatchpresence(matchPresence) {
+          if (this.verbose && window && window.console) {
+            console.log(matchPresence);
+          }
+        }
+        onmatchmakerticket(matchmakerTicket) {
+          if (this.verbose && window && window.console) {
+            console.log(matchmakerTicket);
+          }
+        }
+        onmatchmakermatched(matchmakerMatched) {
+          if (this.verbose && window && window.console) {
+            console.log(matchmakerMatched);
+          }
+        }
+        onparty(party) {
+          if (this.verbose && window && window.console) {
+            console.log(party);
+          }
+        }
+        onpartyclose(close) {
+          if (this.verbose && window && window.console) {
+            console.log("Party closed: " + close);
+          }
+        }
+        onpartyjoinrequest(partyJoinRequest) {
+          if (this.verbose && window && window.console) {
+            console.log(partyJoinRequest);
+          }
+        }
+        onpartydata(partyData) {
+          if (this.verbose && window && window.console) {
+            console.log(partyData);
+          }
+        }
+        onpartyleader(partyLeader) {
+          if (this.verbose && window && window.console) {
+            console.log(partyLeader);
+          }
+        }
+        onpartymatchmakerticket(partyMatched) {
+          if (this.verbose && window && window.console) {
+            console.log(partyMatched);
+          }
+        }
+        onpartypresence(partyPresence) {
+          if (this.verbose && window && window.console) {
+            console.log(partyPresence);
+          }
+        }
+        onstatuspresence(statusPresence) {
+          if (this.verbose && window && window.console) {
+            console.log(statusPresence);
+          }
+        }
+        onstreampresence(streamPresence) {
+          if (this.verbose && window && window.console) {
+            console.log(streamPresence);
+          }
+        }
+        onstreamdata(streamData) {
+          if (this.verbose && window && window.console) {
+            console.log(streamData);
+          }
+        }
+        onheartbeattimeout() {
+          if (this.verbose && window && window.console) {
+            console.log("Heartbeat timeout.");
+          }
+        }
+        send(message, sendTimeout = _DefaultSocket.DefaultSendTimeoutMs) {
+          const untypedMessage = message;
+          return new Promise((resolve, reject) => {
+            if (!this.adapter.isOpen()) {
+              reject("Socket connection has not been established yet.");
+            } else {
+              if (untypedMessage.match_data_send) {
+                this.adapter.send(untypedMessage);
+                resolve();
+              } else if (untypedMessage.party_data_send) {
+                this.adapter.send(untypedMessage);
+                resolve();
+              } else {
+                if (untypedMessage.channel_message_send) {
+                  untypedMessage.channel_message_send.content = JSON.stringify(untypedMessage.channel_message_send.content);
+                } else if (untypedMessage.channel_message_update) {
+                  untypedMessage.channel_message_update.content = JSON.stringify(untypedMessage.channel_message_update.content);
+                }
+                const cid = this.generatecid();
+                this.cIds[cid] = {
+                  resolve,
+                  reject
+                };
+                setTimeout(() => {
+                  reject("The socket timed out while waiting for a response.");
+                }, sendTimeout);
+                untypedMessage.cid = cid;
+                this.adapter.send(untypedMessage);
+              }
+            }
+            if (this.verbose && window && window.console) {
+              const loggedMessage = __spreadValues({}, untypedMessage);
+              if (loggedMessage.match_data_send && loggedMessage.match_data_send.data) {
+                loggedMessage.match_data_send.data = decode2(loggedMessage.match_data_send.data);
+              } else if (loggedMessage.party_data_send && loggedMessage.party_data_send.data) {
+                loggedMessage.party_data_send.data = decode2(loggedMessage.party_data_send.data);
+              }
+              console.log("Sent message: %o", JSON.stringify(loggedMessage));
+            }
+          });
+        }
+        acceptPartyMember(party_id, presence) {
+          return this.send({
+            party_accept: {
+              party_id,
+              presence
+            }
+          });
+        }
+        addMatchmaker(query, min_count, max_count, string_properties, numeric_properties) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              "matchmaker_add": {
+                min_count,
+                max_count,
+                query,
+                string_properties,
+                numeric_properties
+              }
+            });
+            return response.matchmaker_ticket;
+          });
+        }
+        addMatchmakerParty(party_id, query, min_count, max_count, string_properties, numeric_properties) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              party_matchmaker_add: {
+                party_id,
+                min_count,
+                max_count,
+                query,
+                string_properties,
+                numeric_properties
+              }
+            });
+            return response.party_matchmaker_ticket;
+          });
+        }
+        closeParty(party_id) {
+          return __async(this, null, function* () {
+            return yield this.send({
+              party_close: {
+                party_id
+              }
+            });
+          });
+        }
+        createMatch(name) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              match_create: {
+                name
+              }
+            });
+            return response.match;
+          });
+        }
+        createParty(open, max_size) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              party_create: {
+                open,
+                max_size
+              }
+            });
+            return response.party;
+          });
+        }
+        followUsers(userIds) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              status_follow: {
+                user_ids: userIds
+              }
+            });
+            return response.status;
+          });
+        }
+        joinChat(target, type, persistence, hidden) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              channel_join: {
+                target,
+                type,
+                persistence,
+                hidden
+              }
+            });
+            return response.channel;
+          });
+        }
+        joinMatch(match_id, token, metadata) {
+          return __async(this, null, function* () {
+            const join = {
+              match_join: {
+                metadata
+              }
+            };
+            if (token) {
+              join.match_join.token = token;
+            } else {
+              join.match_join.match_id = match_id;
+            }
+            const response = yield this.send(join);
+            return response.match;
+          });
+        }
+        joinParty(party_id) {
+          return __async(this, null, function* () {
+            return yield this.send({
+              party_join: {
+                party_id
+              }
+            });
+          });
+        }
+        leaveChat(channel_id) {
+          return this.send({
+            channel_leave: {
+              channel_id
+            }
+          });
+        }
+        leaveMatch(matchId) {
+          return this.send({
+            match_leave: {
+              match_id: matchId
+            }
+          });
+        }
+        leaveParty(party_id) {
+          return this.send({
+            party_leave: {
+              party_id
+            }
+          });
+        }
+        listPartyJoinRequests(party_id) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              party_join_request_list: {
+                party_id
+              }
+            });
+            return response.party_join_request;
+          });
+        }
+        promotePartyMember(party_id, party_member) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              party_promote: {
+                party_id,
+                presence: party_member
+              }
+            });
+            return response.party_leader;
+          });
+        }
+        removeChatMessage(channel_id, message_id) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              channel_message_remove: {
+                channel_id,
+                message_id
+              }
+            });
+            return response.channel_message_ack;
+          });
+        }
+        removeMatchmaker(ticket) {
+          return this.send({
+            matchmaker_remove: {
+              ticket
+            }
+          });
+        }
+        removeMatchmakerParty(party_id, ticket) {
+          return this.send({
+            party_matchmaker_remove: {
+              party_id,
+              ticket
+            }
+          });
+        }
+        removePartyMember(party_id, member) {
+          return __async(this, null, function* () {
+            return this.send({
+              party_remove: {
+                party_id,
+                presence: member
+              }
+            });
+          });
+        }
+        rpc(id, payload, http_key) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              rpc: {
+                id,
+                payload,
+                http_key
+              }
+            });
+            return response.rpc;
+          });
+        }
+        sendMatchState(matchId, opCode, data, presences, reliable) {
+          return __async(this, null, function* () {
+            return this.send({
+              match_data_send: {
+                match_id: matchId,
+                op_code: opCode,
+                data,
+                presences: presences != null ? presences : [],
+                reliable
+              }
+            });
+          });
+        }
+        sendPartyData(party_id, op_code, data) {
+          return this.send({
+            party_data_send: {
+              party_id,
+              op_code,
+              data
+            }
+          });
+        }
+        unfollowUsers(user_ids) {
+          return this.send({
+            status_unfollow: {
+              user_ids
+            }
+          });
+        }
+        updateChatMessage(channel_id, message_id, content) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              channel_message_update: {
+                channel_id,
+                message_id,
+                content
+              }
+            });
+            return response.channel_message_ack;
+          });
+        }
+        updateStatus(status) {
+          return this.send({
+            status_update: {
+              status
+            }
+          });
+        }
+        writeChatMessage(channel_id, content) {
+          return __async(this, null, function* () {
+            const response = yield this.send({
+              channel_message_send: {
+                channel_id,
+                content
+              }
+            });
+            return response.channel_message_ack;
+          });
+        }
+        pingPong() {
+          return __async(this, null, function* () {
+            if (!this.adapter.isOpen()) {
+              return;
+            }
+            try {
+              yield this.send({
+                ping: {}
+              }, this._heartbeatTimeoutMs);
+            } catch (e) {
+              if (this.adapter.isOpen()) {
+                if (window && window.console) {
+                  console.error("Server unreachable from heartbeat.");
+                }
+                this.onheartbeattimeout();
+                this.adapter.close();
+              }
+              return;
+            }
+            setTimeout(() => this.pingPong(), this._heartbeatTimeoutMs);
+          });
+        }
+      };
+      var DefaultSocket = exports('DefaultSocket', _DefaultSocket);
+      DefaultSocket.DefaultHeartbeatTimeoutMs = 1e4;
+      DefaultSocket.DefaultSendTimeoutMs = 1e4;
+      DefaultSocket.DefaultConnectTimeoutMs = 3e4;
+
+      // client.ts
+      var DEFAULT_HOST = "127.0.0.1";
+      var DEFAULT_PORT = "7350";
+      var DEFAULT_SERVER_KEY = "defaultkey";
+      var DEFAULT_TIMEOUT_MS = 7e3;
+      var DEFAULT_EXPIRED_TIMESPAN_MS = 5 * 60 * 1e3;
+      var Client = exports('Client', class {
+        constructor(serverkey = DEFAULT_SERVER_KEY, host = DEFAULT_HOST, port = DEFAULT_PORT, useSSL = false, timeout = DEFAULT_TIMEOUT_MS, autoRefreshSession = true) {
+          this.serverkey = serverkey;
+          this.host = host;
+          this.port = port;
+          this.useSSL = useSSL;
+          this.timeout = timeout;
+          this.autoRefreshSession = autoRefreshSession;
+          /** The expired timespan used to check session lifetime. */
+          this.expiredTimespanMs = DEFAULT_EXPIRED_TIMESPAN_MS;
+          const scheme = useSSL ? "https://" : "http://";
+          const basePath = `${scheme}${host}:${port}`;
+          this.apiClient = new NakamaApi(serverkey, basePath, timeout);
+        }
+        /** Add users to a group, or accept their join requests. */
+        addGroupUsers(session, groupId, ids) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.addGroupUsers(session.token, groupId, ids).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add friends by ID or username to a user's account. */
+        addFriends(session, ids, usernames) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.addFriends(session.token, ids, usernames).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Authenticate a user with an Apple ID against the server. */
+        authenticateApple(_0, _1, _2) {
+          return __async(this, arguments, function* (token, create, username, vars = {}, options = {}) {
+            const request = {
+              "token": token,
+              "vars": vars
+            };
+            return this.apiClient.authenticateApple(this.serverkey, "", request, create, username, options).then(apiSession => {
+              return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+            });
+          });
+        }
+        /** Authenticate a user with a custom id against the server. */
+        authenticateCustom(id, create, username, vars = {}, options = {}) {
+          const request = {
+            "id": id,
+            "vars": vars
+          };
+          return this.apiClient.authenticateCustom(this.serverkey, "", request, create, username, options).then(apiSession => {
+            return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+          });
+        }
+        /** Authenticate a user with a device id against the server. */
+        authenticateDevice(id, create, username, vars) {
+          const request = {
+            "id": id,
+            "vars": vars
+          };
+          return this.apiClient.authenticateDevice(this.serverkey, "", request, create, username).then(apiSession => {
+            return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+          });
+        }
+        /** Authenticate a user with an email+password against the server. */
+        authenticateEmail(email, password, create, username, vars) {
+          const request = {
+            "email": email,
+            "password": password,
+            "vars": vars
+          };
+          return this.apiClient.authenticateEmail(this.serverkey, "", request, create, username).then(apiSession => {
+            return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+          });
+        }
+        /** Authenticate a user with a Facebook Instant Game token against the server. */
+        authenticateFacebookInstantGame(signedPlayerInfo, create, username, vars, options = {}) {
+          const request = {
+            "signed_player_info": signedPlayerInfo,
+            "vars": vars
+          };
+          return this.apiClient.authenticateFacebookInstantGame(this.serverkey, "", {
+            signed_player_info: request.signed_player_info,
+            vars: request.vars
+          }, create, username, options).then(apiSession => {
+            return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+          });
+        }
+        /** Authenticate a user with a Facebook OAuth token against the server. */
+        authenticateFacebook(token, create, username, sync, vars, options = {}) {
+          const request = {
+            "token": token,
+            "vars": vars
+          };
+          return this.apiClient.authenticateFacebook(this.serverkey, "", request, create, username, sync, options).then(apiSession => {
+            return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+          });
+        }
+        /** Authenticate a user with Google against the server. */
+        authenticateGoogle(_0, _1, _2, _3) {
+          return __async(this, arguments, function* (token, create, username, vars, options = {}) {
+            const request = {
+              token,
+              vars
+            };
+            const apiSession = yield this.apiClient.authenticateGoogle(this.serverkey, "", request, create, username, options);
+            return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+          });
+        }
+        /** Authenticate a user with GameCenter against the server. */
+        authenticateGameCenter(_0, _1, _2, _3, _4, _5, _6, _7, _8) {
+          return __async(this, arguments, function* (bundleId, playerId, publicKeyUrl, salt, signature, timestamp, username, create, vars, options = {}) {
+            const request = {
+              bundle_id: bundleId,
+              player_id: playerId,
+              public_key_url: publicKeyUrl,
+              salt,
+              signature,
+              timestamp_seconds: timestamp,
+              vars
+            };
+            const apiSession = yield this.apiClient.authenticateGameCenter(this.serverkey, "", request, create, username, options);
+            return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+          });
+        }
+        /** Authenticate a user with Steam against the server. */
+        authenticateSteam(token, create, username, sync, vars) {
+          return __async(this, null, function* () {
+            const request = {
+              "token": token,
+              "vars": vars,
+              "sync": sync
+            };
+            return this.apiClient.authenticateSteam(this.serverkey, "", request, create, username).then(apiSession => {
+              return new Session(apiSession.token || "", apiSession.refresh_token || "", apiSession.created || false);
+            });
+          });
+        }
+        /** Ban users from a group. */
+        banGroupUsers(session, groupId, ids) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.banGroupUsers(session.token, groupId, ids).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Block one or more users by ID or username. */
+        blockFriends(session, ids, usernames) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.blockFriends(session.token, ids, usernames).then(response => {
+              return Promise.resolve(response != void 0);
+            });
+          });
+        }
+        /** Create a new group with the current user as the creator and superadmin. */
+        createGroup(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.createGroup(session.token, request).then(response => {
+              return Promise.resolve({
+                avatar_url: response.avatar_url,
+                create_time: response.create_time,
+                creator_id: response.creator_id,
+                description: response.description,
+                edge_count: response.edge_count ? Number(response.edge_count) : 0,
+                id: response.id,
+                lang_tag: response.lang_tag,
+                max_count: response.max_count ? Number(response.max_count) : 0,
+                metadata: response.metadata ? JSON.parse(response.metadata) : void 0,
+                name: response.name,
+                open: response.open,
+                update_time: response.update_time
+              });
+            });
+          });
+        }
+        /** A socket created with the client's configuration. */
+        createSocket(useSSL = false, verbose = false, adapter = new WebSocketAdapterText(), sendTimeoutMs = DefaultSocket.DefaultSendTimeoutMs) {
+          return new DefaultSocket(this.host, this.port, useSSL, verbose, adapter, sendTimeoutMs);
+        }
+        /** Delete the current user's account. */
+        deleteAccount(session) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.deleteAccount(session.token).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Delete one or more users by ID or username. */
+        deleteFriends(session, ids, usernames) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.deleteFriends(session.token, ids, usernames).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Delete a group the user is part of and has permissions to delete. */
+        deleteGroup(session, groupId) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.deleteGroup(session.token, groupId).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Delete one or more notifications */
+        deleteNotifications(session, ids) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.deleteNotifications(session.token, ids).then(response => {
+              return Promise.resolve(response != void 0);
+            });
+          });
+        }
+        /** Delete one or more storage objects */
+        deleteStorageObjects(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.deleteStorageObjects(session.token, request).then(response => {
+              return Promise.resolve(response != void 0);
+            });
+          });
+        }
+        /** Delete a tournament record. */
+        deleteTournamentRecord(session, tournamentId) {
+          return __async(this, null, function* () {
+            return this.apiClient.deleteTournamentRecord(session.token, tournamentId);
+          });
+        }
+        /** Demote a set of users in a group to the next role down. */
+        demoteGroupUsers(session, groupId, ids) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.demoteGroupUsers(session.token, groupId, ids).then(response => {
+              return Promise.resolve(response != void 0);
+            });
+          });
+        }
+        /** Submit an event for processing in the server's registered runtime custom events handler. */
+        emitEvent(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.event(session.token, request).then(response => {
+              return Promise.resolve(response != void 0);
+            });
+          });
+        }
+        /** Fetch the current user's account. */
+        getAccount(session) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.getAccount(session.token);
+          });
+        }
+        /** Get subscription by product id. */
+        getSubscription(session, productId) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.getSubscription(session.token, productId);
+          });
+        }
+        /** Import Facebook friends and add them to a user's account. */
+        importFacebookFriends(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.importFacebookFriends(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Import Steam friends and add them to a user's account. */
+        importSteamFriends(session, request, reset) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.importSteamFriends(session.token, request, reset).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Fetch zero or more users by ID and/or username. */
+        getUsers(session, ids, usernames, facebookIds) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.getUsers(session.token, ids, usernames, facebookIds).then(response => {
+              var result = {
+                users: []
+              };
+              if (response.users == null) {
+                return Promise.resolve(result);
+              }
+              response.users.forEach(u => {
+                result.users.push({
+                  avatar_url: u.avatar_url,
+                  create_time: u.create_time,
+                  display_name: u.display_name,
+                  edge_count: u.edge_count ? Number(u.edge_count) : 0,
+                  facebook_id: u.facebook_id,
+                  gamecenter_id: u.gamecenter_id,
+                  google_id: u.google_id,
+                  id: u.id,
+                  lang_tag: u.lang_tag,
+                  location: u.location,
+                  online: u.online,
+                  steam_id: u.steam_id,
+                  timezone: u.timezone,
+                  update_time: u.update_time,
+                  username: u.username,
+                  metadata: u.metadata ? JSON.parse(u.metadata) : void 0
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** Join a group that's open, or send a request to join a group that is closed. */
+        joinGroup(session, groupId) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.joinGroup(session.token, groupId, {}).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        joinTournament(session, tournamentId) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.joinTournament(session.token, tournamentId, {}).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Kick users from a group, or decline their join requests. */
+        kickGroupUsers(session, groupId, ids) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.kickGroupUsers(session.token, groupId, ids).then(response => {
+              return Promise.resolve(response != void 0);
+            });
+          });
+        }
+        /** Leave a group the user is part of. */
+        leaveGroup(session, groupId) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.leaveGroup(session.token, groupId, {}).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** List a channel's message history. */
+        listChannelMessages(session, channelId, limit, forward, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listChannelMessages(session.token, channelId, limit, forward, cursor).then(response => {
+              var result = {
+                messages: [],
+                next_cursor: response.next_cursor,
+                prev_cursor: response.prev_cursor,
+                cacheable_cursor: response.cacheable_cursor
+              };
+              if (response.messages == null) {
+                return Promise.resolve(result);
+              }
+              response.messages.forEach(m => {
+                result.messages.push({
+                  channel_id: m.channel_id,
+                  code: m.code ? Number(m.code) : 0,
+                  create_time: m.create_time,
+                  message_id: m.message_id,
+                  persistent: m.persistent,
+                  sender_id: m.sender_id,
+                  update_time: m.update_time,
+                  username: m.username,
+                  content: m.content ? JSON.parse(m.content) : void 0,
+                  group_id: m.group_id,
+                  room_name: m.room_name,
+                  user_id_one: m.user_id_one,
+                  user_id_two: m.user_id_two
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** List a group's users. */
+        listGroupUsers(session, groupId, state, limit, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listGroupUsers(session.token, groupId, limit, state, cursor).then(response => {
+              var result = {
+                group_users: [],
+                cursor: response.cursor
+              };
+              if (response.group_users == null) {
+                return Promise.resolve(result);
+              }
+              response.group_users.forEach(gu => {
+                result.group_users.push({
+                  user: {
+                    avatar_url: gu.user.avatar_url,
+                    create_time: gu.user.create_time,
+                    display_name: gu.user.display_name,
+                    edge_count: gu.user.edge_count ? Number(gu.user.edge_count) : 0,
+                    facebook_id: gu.user.facebook_id,
+                    gamecenter_id: gu.user.gamecenter_id,
+                    google_id: gu.user.google_id,
+                    id: gu.user.id,
+                    lang_tag: gu.user.lang_tag,
+                    location: gu.user.location,
+                    online: gu.user.online,
+                    steam_id: gu.user.steam_id,
+                    timezone: gu.user.timezone,
+                    update_time: gu.user.update_time,
+                    username: gu.user.username,
+                    metadata: gu.user.metadata ? JSON.parse(gu.user.metadata) : void 0
+                  },
+                  state: gu.state ? Number(gu.state) : 0
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** List a user's groups. */
+        listUserGroups(session, userId, state, limit, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listUserGroups(session.token, userId, state, limit, cursor).then(response => {
+              var result = {
+                user_groups: [],
+                cursor: response.cursor
+              };
+              if (response.user_groups == null) {
+                return Promise.resolve(result);
+              }
+              response.user_groups.forEach(ug => {
+                result.user_groups.push({
+                  group: {
+                    avatar_url: ug.group.avatar_url,
+                    create_time: ug.group.create_time,
+                    creator_id: ug.group.creator_id,
+                    description: ug.group.description,
+                    edge_count: ug.group.edge_count ? Number(ug.group.edge_count) : 0,
+                    id: ug.group.id,
+                    lang_tag: ug.group.lang_tag,
+                    max_count: ug.group.max_count,
+                    metadata: ug.group.metadata ? JSON.parse(ug.group.metadata) : void 0,
+                    name: ug.group.name,
+                    open: ug.group.open,
+                    update_time: ug.group.update_time
+                  },
+                  state: ug.state ? Number(ug.state) : 0
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** List groups based on given filters. */
+        listGroups(session, name, cursor, limit) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listGroups(session.token, name, cursor, limit).then(response => {
+              var result = {
+                groups: []
+              };
+              if (response.groups == null) {
+                return Promise.resolve(result);
+              }
+              result.cursor = response.cursor;
+              response.groups.forEach(ug => {
+                result.groups.push({
+                  avatar_url: ug.avatar_url,
+                  create_time: ug.create_time,
+                  creator_id: ug.creator_id,
+                  description: ug.description,
+                  edge_count: ug.edge_count ? Number(ug.edge_count) : 0,
+                  id: ug.id,
+                  lang_tag: ug.lang_tag,
+                  max_count: ug.max_count,
+                  metadata: ug.metadata ? JSON.parse(ug.metadata) : void 0,
+                  name: ug.name,
+                  open: ug.open,
+                  update_time: ug.update_time
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** Add an Apple ID to the social profiles on the current user's account. */
+        linkApple(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkApple(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add a custom ID to the social profiles on the current user's account. */
+        linkCustom(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkCustom(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add a device ID to the social profiles on the current user's account. */
+        linkDevice(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkDevice(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add an email+password to the social profiles on the current user's account. */
+        linkEmail(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkEmail(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add Facebook to the social profiles on the current user's account. */
+        linkFacebook(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkFacebook(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add Facebook Instant to the social profiles on the current user's account. */
+        linkFacebookInstantGame(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkFacebookInstantGame(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add Google to the social profiles on the current user's account. */
+        linkGoogle(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkGoogle(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add GameCenter to the social profiles on the current user's account. */
+        linkGameCenter(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkGameCenter(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Add Steam to the social profiles on the current user's account. */
+        linkSteam(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.linkSteam(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** List all friends for the current user. */
+        listFriends(session, state, limit, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listFriends(session.token, limit, state, cursor).then(response => {
+              var result = {
+                friends: [],
+                cursor: response.cursor
+              };
+              if (response.friends == null) {
+                return Promise.resolve(result);
+              }
+              response.friends.forEach(f => {
+                result.friends.push({
+                  user: {
+                    avatar_url: f.user.avatar_url,
+                    create_time: f.user.create_time,
+                    display_name: f.user.display_name,
+                    edge_count: f.user.edge_count ? Number(f.user.edge_count) : 0,
+                    facebook_id: f.user.facebook_id,
+                    gamecenter_id: f.user.gamecenter_id,
+                    google_id: f.user.google_id,
+                    id: f.user.id,
+                    lang_tag: f.user.lang_tag,
+                    location: f.user.location,
+                    online: f.user.online,
+                    steam_id: f.user.steam_id,
+                    timezone: f.user.timezone,
+                    update_time: f.user.update_time,
+                    username: f.user.username,
+                    metadata: f.user.metadata ? JSON.parse(f.user.metadata) : void 0,
+                    facebook_instant_game_id: f.user.facebook_instant_game_id
+                  },
+                  state: f.state
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** List friends of friends for the current user. */
+        listFriendsOfFriends(session, limit, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listFriendsOfFriends(session.token, limit, cursor).then(response => {
+              var result = {
+                friends_of_friends: [],
+                cursor: response.cursor
+              };
+              if (response.friends_of_friends == null) {
+                return Promise.resolve(result);
+              }
+              response.friends_of_friends.forEach(f => {
+                result.friends_of_friends.push({
+                  referrer: f.referrer,
+                  user: {
+                    avatar_url: f.user.avatar_url,
+                    create_time: f.user.create_time,
+                    display_name: f.user.display_name,
+                    edge_count: f.user.edge_count ? Number(f.user.edge_count) : 0,
+                    facebook_id: f.user.facebook_id,
+                    gamecenter_id: f.user.gamecenter_id,
+                    google_id: f.user.google_id,
+                    id: f.user.id,
+                    lang_tag: f.user.lang_tag,
+                    location: f.user.location,
+                    online: f.user.online,
+                    steam_id: f.user.steam_id,
+                    timezone: f.user.timezone,
+                    update_time: f.user.update_time,
+                    username: f.user.username,
+                    metadata: f.user.metadata ? JSON.parse(f.user.metadata) : void 0,
+                    facebook_instant_game_id: f.user.facebook_instant_game_id
+                  }
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** List leaderboard records */
+        listLeaderboardRecords(session, leaderboardId, ownerIds, limit, cursor, expiry) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listLeaderboardRecords(session.token, leaderboardId, ownerIds, limit, cursor, expiry).then(response => {
+              var list = {
+                next_cursor: response.next_cursor,
+                prev_cursor: response.prev_cursor,
+                rank_count: response.rank_count ? Number(response.rank_count) : 0,
+                owner_records: [],
+                records: []
+              };
+              if (response.owner_records != null) {
+                response.owner_records.forEach(o => {
+                  list.owner_records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              if (response.records != null) {
+                response.records.forEach(o => {
+                  list.records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              return Promise.resolve(list);
+            });
+          });
+        }
+        listLeaderboardRecordsAroundOwner(session, leaderboardId, ownerId, limit, expiry, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listLeaderboardRecordsAroundOwner(session.token, leaderboardId, ownerId, limit, expiry, cursor).then(response => {
+              var list = {
+                next_cursor: response.next_cursor,
+                prev_cursor: response.prev_cursor,
+                rank_count: response.rank_count ? Number(response.rank_count) : 0,
+                owner_records: [],
+                records: []
+              };
+              if (response.owner_records != null) {
+                response.owner_records.forEach(o => {
+                  list.owner_records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              if (response.records != null) {
+                response.records.forEach(o => {
+                  list.records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              return Promise.resolve(list);
+            });
+          });
+        }
+        /** Fetch list of running matches. */
+        listMatches(session, limit, authoritative, label, minSize, maxSize, query) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listMatches(session.token, limit, authoritative, label, minSize, maxSize, query);
+          });
+        }
+        /** Fetch list of notifications. */
+        listNotifications(session, limit, cacheableCursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listNotifications(session.token, limit, cacheableCursor).then(response => {
+              var result = {
+                cacheable_cursor: response.cacheable_cursor,
+                notifications: []
+              };
+              if (response.notifications == null) {
+                return Promise.resolve(result);
+              }
+              response.notifications.forEach(n => {
+                result.notifications.push({
+                  code: n.code ? Number(n.code) : 0,
+                  create_time: n.create_time,
+                  id: n.id,
+                  persistent: n.persistent,
+                  sender_id: n.sender_id,
+                  subject: n.subject,
+                  content: n.content ? JSON.parse(n.content) : void 0
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** List storage objects. */
+        listStorageObjects(session, collection, userId, limit, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listStorageObjects(session.token, collection, userId, limit, cursor).then(response => {
+              var result = {
+                objects: [],
+                cursor: response.cursor
+              };
+              if (response.objects == null) {
+                return Promise.resolve(result);
+              }
+              response.objects.forEach(o => {
+                result.objects.push({
+                  collection: o.collection,
+                  key: o.key,
+                  permission_read: o.permission_read ? Number(o.permission_read) : 0,
+                  permission_write: o.permission_write ? Number(o.permission_write) : 0,
+                  value: o.value ? JSON.parse(o.value) : void 0,
+                  version: o.version,
+                  user_id: o.user_id,
+                  create_time: o.create_time,
+                  update_time: o.update_time
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** List current or upcoming tournaments. */
+        listTournaments(session, categoryStart, categoryEnd, startTime, endTime, limit, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listTournaments(session.token, categoryStart, categoryEnd, startTime, endTime, limit, cursor).then(response => {
+              var list = {
+                cursor: response.cursor,
+                tournaments: []
+              };
+              if (response.tournaments != null) {
+                response.tournaments.forEach(o => {
+                  list.tournaments.push({
+                    id: o.id,
+                    title: o.title,
+                    description: o.description,
+                    duration: o.duration ? Number(o.duration) : 0,
+                    category: o.category ? Number(o.category) : 0,
+                    sort_order: o.sort_order ? Number(o.sort_order) : 0,
+                    size: o.size ? Number(o.size) : 0,
+                    max_size: o.max_size ? Number(o.max_size) : 0,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0,
+                    can_enter: o.can_enter,
+                    end_active: o.end_active ? Number(o.end_active) : 0,
+                    next_reset: o.next_reset ? Number(o.next_reset) : 0,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    create_time: o.create_time,
+                    start_time: o.start_time,
+                    end_time: o.end_time,
+                    start_active: o.start_active,
+                    authoritative: o.authoritative
+                  });
+                });
+              }
+              return Promise.resolve(list);
+            });
+          });
+        }
+        /** List user subscriptions. */
+        listSubscriptions(session, cursor, limit) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listSubscriptions(session.token, {
+              cursor,
+              limit
+            });
+          });
+        }
+        /** List tournament records from a given tournament. */
+        listTournamentRecords(session, tournamentId, ownerIds, limit, cursor, expiry) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listTournamentRecords(session.token, tournamentId, ownerIds, limit, cursor, expiry).then(response => {
+              var list = {
+                next_cursor: response.next_cursor,
+                prev_cursor: response.prev_cursor,
+                owner_records: [],
+                records: []
+              };
+              if (response.owner_records != null) {
+                response.owner_records.forEach(o => {
+                  list.owner_records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              if (response.records != null) {
+                response.records.forEach(o => {
+                  list.records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              return Promise.resolve(list);
+            });
+          });
+        }
+        /** List tournament records from a given tournament around the owner. */
+        listTournamentRecordsAroundOwner(session, tournamentId, ownerId, limit, expiry, cursor) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.listTournamentRecordsAroundOwner(session.token, tournamentId, ownerId, limit, expiry, cursor).then(response => {
+              var list = {
+                next_cursor: response.next_cursor,
+                prev_cursor: response.prev_cursor,
+                owner_records: [],
+                records: []
+              };
+              if (response.owner_records != null) {
+                response.owner_records.forEach(o => {
+                  list.owner_records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              if (response.records != null) {
+                response.records.forEach(o => {
+                  list.records.push({
+                    expiry_time: o.expiry_time,
+                    leaderboard_id: o.leaderboard_id,
+                    metadata: o.metadata ? JSON.parse(o.metadata) : void 0,
+                    num_score: o.num_score ? Number(o.num_score) : 0,
+                    owner_id: o.owner_id,
+                    rank: o.rank ? Number(o.rank) : 0,
+                    score: o.score ? Number(o.score) : 0,
+                    subscore: o.subscore ? Number(o.subscore) : 0,
+                    update_time: o.update_time,
+                    username: o.username,
+                    max_num_score: o.max_num_score ? Number(o.max_num_score) : 0
+                  });
+                });
+              }
+              return Promise.resolve(list);
+            });
+          });
+        }
+        /** Promote users in a group to the next role up. */
+        promoteGroupUsers(session, groupId, ids) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.promoteGroupUsers(session.token, groupId, ids);
+          });
+        }
+        /** Fetch storage objects. */
+        readStorageObjects(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.readStorageObjects(session.token, request).then(response => {
+              var result = {
+                objects: []
+              };
+              if (response.objects == null) {
+                return Promise.resolve(result);
+              }
+              response.objects.forEach(o => {
+                result.objects.push({
+                  collection: o.collection,
+                  key: o.key,
+                  permission_read: o.permission_read ? Number(o.permission_read) : 0,
+                  permission_write: o.permission_write ? Number(o.permission_write) : 0,
+                  value: o.value ? JSON.parse(o.value) : void 0,
+                  version: o.version,
+                  user_id: o.user_id,
+                  create_time: o.create_time,
+                  update_time: o.update_time
+                });
+              });
+              return Promise.resolve(result);
+            });
+          });
+        }
+        /** Execute an RPC function on the server. */
+        rpc(session, id, input) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.rpcFunc(session.token, id, JSON.stringify(input)).then(response => {
+              return Promise.resolve({
+                id: response.id,
+                payload: !response.payload ? void 0 : JSON.parse(response.payload)
+              });
+            });
+          });
+        }
+        /** Execute an RPC function on the server. */
+        rpcHttpKey(httpKey, id, input) {
+          return __async(this, null, function* () {
+            return this.apiClient.rpcFunc2("", id, input && JSON.stringify(input) || "", httpKey).then(response => {
+              return Promise.resolve({
+                id: response.id,
+                payload: !response.payload ? void 0 : JSON.parse(response.payload)
+              });
+            }).catch(err => {
+              throw err;
+            });
+          });
+        }
+        /** Log out a session, invalidate a refresh token, or log out all sessions/refresh tokens for a user. */
+        sessionLogout(session, token, refreshToken) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.sessionLogout(session.token, {
+              refresh_token: refreshToken,
+              token
+            }).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Refresh a user's session using a refresh token retrieved from a previous authentication request. */
+        sessionRefresh(_0) {
+          return __async(this, arguments, function* (session, vars = {}) {
+            if (!session) {
+              console.error("Cannot refresh a null session.");
+              return session;
+            }
+            if (session.created && session.expires_at - session.created_at < 70) {
+              console.warn("Session lifetime too short, please set '--session.token_expiry_sec' option. See the documentation for more info: https://heroiclabs.com/docs/nakama/getting-started/configuration/#session");
+            }
+            if (session.created && session.refresh_expires_at - session.created_at < 3700) {
+              console.warn("Session refresh lifetime too short, please set '--session.refresh_token_expiry_sec' option. See the documentation for more info: https://heroiclabs.com/docs/nakama/getting-started/configuration/#session");
+            }
+            const apiSession = yield this.apiClient.sessionRefresh(this.serverkey, "", {
+              token: session.refresh_token,
+              vars
+            });
+            session.update(apiSession.token, apiSession.refresh_token);
+            return session;
+          });
+        }
+        /** Remove the Apple ID from the social profiles on the current user's account. */
+        unlinkApple(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkApple(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove custom ID from the social profiles on the current user's account. */
+        unlinkCustom(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkCustom(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove a device ID from the social profiles on the current user's account. */
+        unlinkDevice(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkDevice(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove an email+password from the social profiles on the current user's account. */
+        unlinkEmail(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkEmail(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove Facebook from the social profiles on the current user's account. */
+        unlinkFacebook(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkFacebook(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove Facebook Instant social profiles from the current user's account. */
+        unlinkFacebookInstantGame(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkFacebookInstantGame(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove Google from the social profiles on the current user's account. */
+        unlinkGoogle(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkGoogle(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove GameCenter from the social profiles on the current user's account. */
+        unlinkGameCenter(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkGameCenter(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Remove Steam from the social profiles on the current user's account. */
+        unlinkSteam(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.unlinkSteam(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Update fields in the current user's account. */
+        updateAccount(session, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.updateAccount(session.token, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Update a group the user is part of and has permissions to update. */
+        updateGroup(session, groupId, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.updateGroup(session.token, groupId, request).then(response => {
+              return response !== void 0;
+            });
+          });
+        }
+        /** Validate an Apple IAP receipt. */
+        validatePurchaseApple(session, receipt, persist = true) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.validatePurchaseApple(session.token, {
+              receipt,
+              persist
+            });
+          });
+        }
+        /** Validate a FB Instant IAP receipt. */
+        validatePurchaseFacebookInstant(session, signedRequest, persist = true) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.validatePurchaseFacebookInstant(session.token, {
+              signed_request: signedRequest,
+              persist
+            });
+          });
+        }
+        /** Validate a Google IAP receipt. */
+        validatePurchaseGoogle(session, purchase, persist = true) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.validatePurchaseGoogle(session.token, {
+              purchase,
+              persist
+            });
+          });
+        }
+        /** Validate a Huawei IAP receipt. */
+        validatePurchaseHuawei(session, purchase, signature, persist = true) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.validatePurchaseHuawei(session.token, {
+              purchase,
+              signature,
+              persist
+            });
+          });
+        }
+        /** Validate Apple Subscription Receipt */
+        validateSubscriptionApple(session, receipt, persist = true) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.validateSubscriptionApple(session.token, {
+              receipt,
+              persist
+            });
+          });
+        }
+        /** Validate Google Subscription Receipt */
+        validateSubscriptionGoogle(session, receipt, persist = true) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.validateSubscriptionGoogle(session.token, {
+              receipt,
+              persist
+            });
+          });
+        }
+        /** Write a record to a leaderboard. */
+        writeLeaderboardRecord(session, leaderboardId, request) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            return this.apiClient.writeLeaderboardRecord(session.token, leaderboardId, {
+              metadata: request.metadata ? JSON.stringify(request.metadata) : void 0,
+              score: request.score,
+              subscore: request.subscore
+            }).then(response => {
+              return Promise.resolve({
+                expiry_time: response.expiry_time,
+                leaderboard_id: response.leaderboard_id,
+                metadata: response.metadata ? JSON.parse(response.metadata) : void 0,
+                num_score: response.num_score ? Number(response.num_score) : 0,
+                owner_id: response.owner_id,
+                score: response.score ? Number(response.score) : 0,
+                subscore: response.subscore ? Number(response.subscore) : 0,
+                update_time: response.update_time,
+                username: response.username,
+                max_num_score: response.max_num_score ? Number(response.max_num_score) : 0,
+                rank: response.rank ? Number(response.rank) : 0
+              });
+            });
+          });
+        }
+        /** Write storage objects. */
+        writeStorageObjects(session, objects) {
+          return __async(this, null, function* () {
+            if (this.autoRefreshSession && session.refresh_token && session.isexpired((Date.now() + this.expiredTimespanMs) / 1e3)) {
+              yield this.sessionRefresh(session);
+            }
+            var request = {
+              objects: []
+            };
+            objects.forEach(o => {
+              request.objects.push({
+                collection: o.collection,
+                key: o.key,
+                permission_read: o.permission_read,
+                permission_write: o.permission_write,
+                value: JSON.stringify(o.value),
+                version: o.version
+              });
+            });
+            return this.apiClient.writeStorageObjects(session.token, request);
+          });
+        }
+        /** Write a record to a tournament. */
+        writeTournamentRecord(session, tournamentId, request) {
+          return __async(this, null, function* () {
+            return this.apiClient.writeTournamentRecord(session.token, tournamentId, {
+              metadata: request.metadata ? JSON.stringify(request.metadata) : void 0,
+              score: request.score,
+              subscore: request.subscore
+            }).then(response => {
+              return Promise.resolve({
+                expiry_time: response.expiry_time,
+                leaderboard_id: response.leaderboard_id,
+                metadata: response.metadata ? JSON.parse(response.metadata) : void 0,
+                num_score: response.num_score ? Number(response.num_score) : 0,
+                owner_id: response.owner_id,
+                score: response.score ? Number(response.score) : 0,
+                subscore: response.subscore ? Number(response.subscore) : 0,
+                update_time: response.update_time,
+                username: response.username,
+                max_num_score: response.max_num_score ? Number(response.max_num_score) : 0,
+                rank: response.rank ? Number(response.rank) : 0
+              });
+            });
+          });
+        }
+      });
+    }
+  };
+});
+
+System.register("chunks:///_virtual/rollupPluginModLoBabelHelpers.js", [], function (exports) {
+  return {
+    execute: function () {
+      exports({
+        applyDecoratedDescriptor: _applyDecoratedDescriptor,
+        initializerDefineProperty: _initializerDefineProperty
+      });
+      function _initializerDefineProperty(target, property, descriptor, context) {
+        if (!descriptor) return;
+        Object.defineProperty(target, property, {
+          enumerable: descriptor.enumerable,
+          configurable: descriptor.configurable,
+          writable: descriptor.writable,
+          value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+        });
+      }
+      function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+        var desc = {};
+        Object.keys(descriptor).forEach(function (key) {
+          desc[key] = descriptor[key];
+        });
+        desc.enumerable = !!desc.enumerable;
+        desc.configurable = !!desc.configurable;
+        if ('value' in desc || desc.initializer) {
+          desc.writable = true;
+        }
+        desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+          return decorator(target, property, desc) || desc;
+        }, desc);
+        if (context && desc.initializer !== void 0) {
+          desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+          desc.initializer = undefined;
+        }
+        if (desc.initializer === void 0) {
+          Object.defineProperty(target, property, desc);
+          desc = null;
+        }
+        return desc;
+      }
+    }
+  };
+});
 
 } }; });

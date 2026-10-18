@@ -1,4 +1,8 @@
-System.register("chunks:///_virtual/cq-burro",[],(function(){return{execute:function(){}}}));
+System.register("chunks:///_virtual/cq-burro", [], function () {
+  return {
+    execute: function () {}
+  };
+});
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-burro', 'chunks:///_virtual/cq-burro'); 

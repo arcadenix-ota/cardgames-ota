@@ -1,4 +1,8 @@
-System.register("chunks:///_virtual/cq-common",[],(function(){return{execute:function(){}}}));
+System.register("chunks:///_virtual/cq-common", [], function () {
+  return {
+    execute: function () {}
+  };
+});
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-common', 'chunks:///_virtual/cq-common'); 
