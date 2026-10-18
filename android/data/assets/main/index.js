@@ -2829,6 +2829,7 @@ System.register("chunks:///_virtual/apkFormat.ts", ['cc'], function (exports) {
     execute: function () {
       exports({
         abbreviateCoins: abbreviateCoins,
+        chipShort: chipShort,
         lostText: lostText,
         potText: potText,
         winText: winText
@@ -2894,6 +2895,29 @@ System.register("chunks:///_virtual/apkFormat.ts", ['cc'], function (exports) {
           return '+' + String(Number(x.toFixed(decimals))) + suffix;
         }
         return '+' + String(v);
+      }
+
+      /**
+       * So chip / gold gon (yeu cau 2026-10-18): duoi CHIP_SHORT_FROM giu phay hang nghin; tu do tro len rut gon K/M/B/T toi
+       * da CHIP_SHORT_LEN ky tu, cat (khong lam tron) so le, bo 0 thua: 123456 -> 123.4K, 1234567 -> 1.234M,
+       * 12500000 -> 12.5M, 100000 -> 100K.
+       */
+      const CHIP_SHORT_FROM = exports('CHIP_SHORT_FROM', 100000);
+      const CHIP_SHORT_LEN = 6;
+      function chipShort(n) {
+        const v = Math.floor(Math.abs(n));
+        const sign = n < 0 ? '-' : '';
+        if (v < CHIP_SHORT_FROM) return sign + String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        for (const [unit, suffix] of UNITS) {
+          if (v < unit) continue;
+          const whole = Math.floor(v / unit);
+          const decimals = Math.max(0, CHIP_SHORT_LEN - suffix.length - String(whole).length - 1);
+          const scale = Math.pow(10, decimals);
+          // Nhan truoc roi chia (nhu abbreviateCoins) de floor khong sai so float
+          const x = Math.floor(v * scale / unit) / scale;
+          return sign + String(Number(x.toFixed(decimals))) + suffix;
+        }
+        return sign + String(v);
       }
       cclegacy._RF.pop();
     }
@@ -21478,7 +21502,7 @@ System.register("chunks:///_virtual/burroRules.ts", ['cc', './apkFormat.ts'], fu
 });
 
 System.register("chunks:///_virtual/BurroSeatsView.ts", ['cc', './apkFormat.ts', './profile2.ts', './burroRes.ts', './burroLayout.ts', './burroRules.ts', './burroState.ts', './burroTimeline.ts', './apkSprite.ts', './uiKit.ts', './BurroCardView.ts', './BurroFx.ts'], function (exports) {
-  var cclegacy, Tween, Mask, UIOpacity, Sprite, UITransform, tween, Vec3, Vec2, potText, avatarFrame, BURRO_SPINE_ANIM, SEAT_AT, byView, SEAT, BACKS, GRAY, OUT_CARD, PASS, RANK, BANKRUPT, SMOKE, DONKEY, POT_BAR, FLOAT, OWN_TAG, viewSeat, shortMoney, mySeatIndex, meSeated, clockColor, TIME_LIMIT_SEC, addSprite, child, label, onTap, BurroCardView, liveNode;
+  var cclegacy, Tween, Mask, UIOpacity, Sprite, UITransform, tween, Vec3, Vec2, chipShort, avatarFrame, BURRO_SPINE_ANIM, SEAT_AT, byView, SEAT, BACKS, GRAY, OUT_CARD, PASS, RANK, BANKRUPT, SMOKE, DONKEY, POT_BAR, FLOAT, OWN_TAG, viewSeat, shortMoney, mySeatIndex, meSeated, clockColor, TIME_LIMIT_SEC, addSprite, child, label, onTap, BurroCardView, liveNode;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -21491,7 +21515,7 @@ System.register("chunks:///_virtual/BurroSeatsView.ts", ['cc', './apkFormat.ts',
       Vec3 = module.Vec3;
       Vec2 = module.Vec2;
     }, function (module) {
-      potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       avatarFrame = module.avatarFrame;
     }, function (module) {
@@ -21624,7 +21648,7 @@ System.register("chunks:///_virtual/BurroSeatsView.ts", ['cc', './apkFormat.ts',
           label(board, s.name, SEAT.name, SEAT.name.size, s.gone ? [150, 150, 150] : [255, 255, 255], {
             width: SEAT.name.w
           });
-          const chip = label(board, potText(s.chip), SEAT.money, SEAT.money.size, SEAT.money.rgb);
+          const chip = label(board, chipShort(s.chip), SEAT.money, SEAT.money.size, SEAT.money.rgb);
           if (s.gone || s.status === 'next') (root.getComponent(UIOpacity) ?? root.addComponent(UIOpacity)).opacity = 160;
           if (inGame && s.status === 'play') {
             if (!this.isMe(s.uid) && s.out === 'in' && s.handCount > 0) this.backs(root, view, s.handCount);
@@ -21734,7 +21758,7 @@ System.register("chunks:///_virtual/BurroSeatsView.ts", ['cc', './apkFormat.ts',
         }
         setChip(uid, chip) {
           const s = this.seats.find(x => x.uid === uid);
-          if (s !== undefined && s.chip.isValid) s.chip.string = potText(chip);
+          if (s !== undefined && s.chip.isValid) s.chip.string = chipShort(chip);
         }
 
         /** Con lua (SV:191-215, 342-375): ghe moi bi burro co khoi Smoke 0.5 s truoc (`smoke`), am burro_change. */
@@ -28920,12 +28944,13 @@ System.register("chunks:///_virtual/demoProtocol.ts", ['cc'], function (exports)
 });
 
 System.register("chunks:///_virtual/demoTablePresenter.ts", ['cc', './apkFormat.ts', './demoProtocol.ts'], function (exports) {
-  var cclegacy, potText, DemoOp, parseDemoState, parseDemoDeal, parseDemoResult;
+  var cclegacy, potText, chipShort, DemoOp, parseDemoState, parseDemoDeal, parseDemoResult;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
     }, function (module) {
       potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       DemoOp = module.DemoOp;
       parseDemoState = module.parseDemoState;
@@ -29046,7 +29071,7 @@ System.register("chunks:///_virtual/demoTablePresenter.ts", ['cc', './apkFormat.
           const card = this.cards[s.userId];
           return {
             name: s.name + (isMe ? this.t('you') : ''),
-            chipText: potText(s.chip),
+            chipText: chipShort(s.chip),
             readyText: s.ready ? this.t('isReady') : '',
             cardText: card !== undefined ? String(card) : ''
           };
@@ -30710,9 +30735,13 @@ System.register("chunks:///_virtual/enterAnimLayout.ts", ['cc'], function (expor
         return k <= 0 ? 0 : HALL_TOP_DROP.stagger * k;
       }
 
-      /** O game Hall (HallContentView0x06001200:743-770): o lon tu trai, luoi tu phai, lech mot be ngang man. */
+      /**
+       * O game Hall (HallContentView0x06001200:743-770: o lon tu trai, luoi tu phai). Yeu cau 2026-10-18: truot it (shift px)
+       * va hien dan opacity 0 -> 255 cho muot thay vi lech ca be ngang man.
+       */
       const HALL_CONTENT_ANIM = exports('HALL_CONTENT_ANIM', {
-        time: 0.3
+        time: 0.3,
+        shift: 60
       });
 
       /**
@@ -33695,7 +33724,7 @@ System.register("chunks:///_virtual/EscobaScoreboardView.ts", ['cc', './escobaRe
 });
 
 System.register("chunks:///_virtual/EscobaSeatsView.ts", ['cc', './profile2.ts', './escobaLayout.ts', './escobaRules.ts', './escobaState.ts', './escobaTimeline.ts', './apkFormat.ts', './apkSprite.ts', './uiKit.ts'], function (exports) {
-  var cclegacy, Tween, Mask, tween, Vec3, Sprite, Vec2, avatarFrame, dealerPos, SEAT_COUNT, seatPos, SEAT, starPos, FLOAT_MONEY, viewSeat, mySeatIndex, meSeated, clockColor, TIME_LIMIT_SEC, potText, addSprite, child, onTap, label, numberImage;
+  var cclegacy, Tween, Mask, tween, Vec3, Sprite, Vec2, avatarFrame, dealerPos, SEAT_COUNT, seatPos, SEAT, starPos, FLOAT_MONEY, viewSeat, mySeatIndex, meSeated, clockColor, TIME_LIMIT_SEC, chipShort, addSprite, child, onTap, label, numberImage;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -33723,7 +33752,7 @@ System.register("chunks:///_virtual/EscobaSeatsView.ts", ['cc', './profile2.ts',
       clockColor = module.clockColor;
       TIME_LIMIT_SEC = module.TIME_LIMIT_SEC;
     }, function (module) {
-      potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       addSprite = module.addSprite;
     }, function (module) {
@@ -33843,7 +33872,7 @@ System.register("chunks:///_virtual/EscobaSeatsView.ts", ['cc', './profile2.ts',
           label(nick, s.name, SEAT.name, SEAT.name.size, [255, 255, 255], {
             width: SEAT.name.w
           });
-          const chip = label(nick, potText(s.chip), SEAT.chip, SEAT.chip.size, SEAT.chip.rgb, {
+          const chip = label(nick, chipShort(s.chip), SEAT.chip, SEAT.chip.size, SEAT.chip.rgb, {
             width: SEAT.chip.w
           });
           if (s.stars > 0) {
@@ -40048,7 +40077,7 @@ System.register("chunks:///_virtual/FriendPopup.ts", ['cc', './friendLayout.ts',
 });
 
 System.register("chunks:///_virtual/friendPresenter.ts", ['cc', './platformText.ts', './friends.ts', './profile2.ts', './apkFormat.ts', './socialText.ts'], function (exports) {
-  var cclegacy, platformText, canGift, canInvite, validateSearchId, friendCountText, onlineText, avatarFrame, potText, socialFail, socialFailText;
+  var cclegacy, platformText, canGift, canInvite, validateSearchId, friendCountText, onlineText, avatarFrame, potText, chipShort, socialFail, socialFailText;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -40064,6 +40093,7 @@ System.register("chunks:///_virtual/friendPresenter.ts", ['cc', './platformText.
       avatarFrame = module.avatarFrame;
     }, function (module) {
       potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       socialFail = module.socialFail;
       socialFailText = module.socialFailText;
@@ -40325,7 +40355,7 @@ System.register("chunks:///_virtual/friendPresenter.ts", ['cc', './platformText.
             sex: avatarFrame(r.avatar),
             vipLevel: r.vip,
             name: r.name,
-            chipText: potText(r.chip),
+            chipText: chipShort(r.chip),
             online: r.online,
             onlineText: onlineText(r.online, lang),
             inviteText: this.t('friendInvite'),
@@ -40341,7 +40371,7 @@ System.register("chunks:///_virtual/friendPresenter.ts", ['cc', './platformText.
             sex: avatarFrame(u.avatar),
             vipLevel: u.vip,
             name: u.name,
-            chipText: potText(u.chip),
+            chipText: chipShort(u.chip),
             online: u.online,
             onlineText: onlineText(u.online, this.d.app.lang),
             addText: this.t(key),
@@ -47674,52 +47704,38 @@ System.register("chunks:///_virtual/hallPager.ts", ['cc'], function (exports) {
     }],
     execute: function () {
       exports({
-        pagerDragOffset: pagerDragOffset,
-        pagerRelease: pagerRelease
+        pagerRect: pagerRect,
+        slotInPage: slotInPage
       });
-      cclegacy._RF.push({}, "96b13TeSrJL3ZjXOBZTZ0tk", "hallPager", undefined);
-      // assets/scripts/core/presenter/layout/hallPager.ts
-      // Luoi o game ben phai Hall dang trang cuon (yeu cau 2026-10-18): keo ngang de lat trang, trang theo ngon tay.
-
+      cclegacy._RF.push({}, "96b13TeSrJL3ZjXOBZTZ0tk", "hallPager", undefined); // assets/scripts/core/presenter/layout/hallPager.ts
+      // Luoi o game ben phai Hall dang PageView (yeu cau 2026-10-18): moi trang 4 o dat dung cho neo tile0..3 cua prefab.
       const HALL_PAGER = exports('HALL_PAGER', {
-        /** Vung cat cua luoi (toa do content): sat phai o lon (x -208) toi mep phai man; doc du cao 2 hang o. */
+        /** Khung PageView (toa do content): sat phai o lon (x -208) toi mep phai man; doc du cao 2 hang o. */
         clipLeft: -150,
         clipBottom: -210,
         clipTop: 200,
-        /** Keo qua px nay moi tinh la keo trang (huy cham o game). */
-        dragStart: 10,
-        /** Tha tay: keo qua ty le nay cua be ngang trang thi lat. */
-        flipRatio: 0.2,
-        /** Vuot nhanh: trong flickMs ma keo qua flickPx cung lat. */
-        flickMs: 250,
-        flickPx: 40,
-        /** Keo ve phia khong con trang: chi di theo mot phan ngon tay. */
-        edgeResist: 0.3,
-        /** Thoi gian lat trang / bat ve cho. */
-        flipTime: 0.25,
-        backTime: 0.2
+        /** Bam mui ten: thoi gian cuon sang trang ke (PageView.scrollToPage). */
+        turnTime: 0.3
       });
-
-      /** Do lech trang khi dang keo dx: ve phia khong con trang thi bi ham. */
-      function pagerDragOffset(dx, page, pages) {
-        const canPrev = page > 0;
-        const canNext = page < pages - 1;
-        if (dx > 0 && !canPrev || dx < 0 && !canNext) return dx * HALL_PAGER.edgeResist;
-        return dx;
+      /** Khung PageView theo be ngang man (mep phai khung = mep phai man). */
+      function pagerRect(screenW) {
+        const P = HALL_PAGER;
+        const w = Math.max(1, screenW / 2 - P.clipLeft);
+        const h = P.clipTop - P.clipBottom;
+        return {
+          x: P.clipLeft + w / 2,
+          y: P.clipBottom + h / 2,
+          w,
+          h
+        };
       }
 
-      /**
-       * Tha tay sau khi keo dx trong ms mili giay tren trang rong width: +1 = trang sau (keo sang trai), -1 = trang
-       * truoc, 0 = bat ve cho.
-       */
-      function pagerRelease(dx, ms, page, pages, width) {
-        const P = HALL_PAGER;
-        const far = Math.abs(dx) >= width * P.flipRatio;
-        const flick = ms <= P.flickMs && Math.abs(dx) >= P.flickPx;
-        if (!far && !flick) return 0;
-        if (dx < 0 && page < pages - 1) return 1;
-        if (dx > 0 && page > 0) return -1;
-        return 0;
+      /** Vi tri o trong trang (goc = tam trang) tu vi tri neo cua o trong content. */
+      function slotInPage(anchor, r) {
+        return {
+          x: anchor.x - r.x,
+          y: anchor.y - r.y
+        };
       }
       cclegacy._RF.pop();
     }
@@ -47727,7 +47743,7 @@ System.register("chunks:///_virtual/hallPager.ts", ['cc'], function (exports) {
 });
 
 System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts', './release.ts', './gameModule.ts', './gameRegistry.ts', './platformText.ts', './hallJackpot.ts', './homeState.ts', './vip2.ts', './profile2.ts', './apkFormat.ts', './popupQueue.ts', './sessionGuard.ts', './onlineBoxPresenter.ts'], function (exports) {
-  var cclegacy, noteTableTried, RELEASE, gameName, getGame, platformText, JackpotPoller, NO_RED_DOTS, fcOffer, effectiveLevel, avatarFrame, potText, PopupQueue, SessionGuard, onlineClock, onlineBoxView;
+  var cclegacy, noteTableTried, RELEASE, gameName, getGame, platformText, JackpotPoller, NO_RED_DOTS, fcOffer, effectiveLevel, avatarFrame, chipShort, PopupQueue, SessionGuard, onlineClock, onlineBoxView;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -47751,7 +47767,7 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
     }, function (module) {
       avatarFrame = module.avatarFrame;
     }, function (module) {
-      potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       PopupQueue = module.PopupQueue;
     }, function (module) {
@@ -47824,11 +47840,14 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
         const grid = [...tiles.slice(1), ...soon];
         const pages = Math.max(1, Math.ceil(grid.length / HALL_GRID_SIZE));
         const p = Math.min(Math.max(0, page), pages - 1);
+        const pagesGrid = [];
+        for (let i = 0; i < pages; i++) pagesGrid.push(grid.slice(i * HALL_GRID_SIZE, (i + 1) * HALL_GRID_SIZE));
         return {
           main: tiles.length > 0 ? tiles[0] : null,
-          grid: grid.slice(p * HALL_GRID_SIZE, (p + 1) * HALL_GRID_SIZE),
+          grid: pagesGrid[p],
           page: p,
-          pages
+          pages,
+          pagesGrid
         };
       }
 
@@ -47845,8 +47864,10 @@ System.register("chunks:///_virtual/hallPresenter.ts", ['cc', './appContext.ts',
       function displayName(p) {
         return p.name !== '' ? p.name : 'Guest_' + p.userId.slice(-4);
       }
+
+      /** So chip thanh Hall / Lobby: gon K/M tu 100K (chipShort). */
       function chipText(n) {
-        return potText(n);
+        return chipShort(n);
       }
 
       /** Logic Hall (spec C1 Q2, P0 §4.2): moi game choi duoc mot o mo Lobby cua no, con lai bao sap co. */
@@ -48484,7 +48505,7 @@ System.register("chunks:///_virtual/HallRankPopup.ts", ['cc', './socialLayout.ts
 });
 
 System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLayout.ts', './enterAnimLayout.ts', './hallPager.ts', './appContext.ts', './platformBindings.ts', './freeCoinPresenter.ts', './firstChargeSale.ts', './hallPresenter.ts', './rewardFx.ts', './platformText.ts', './appConfig.ts', './apkRes.ts', './platformExtraRes.ts', './vipLayout.ts', './FreeCoinPanel.ts', './LobbyLayer.ts', './ExitGamePopup.ts', './GetRewardPopup.ts', './MallPopup.ts', './FCPopup.ts', './SettingPopup.ts', './NewbiePopup.ts', './OnlineRewardPopup.ts', './PiggyBankPop.ts', './RewardVideoPopup.ts', './TaskPopup.ts', './VIPInfoPopup.ts', './WheelPopup.ts', './EventPopup.ts', './HallRankPopup.ts', './MessagePopup.ts', './UserInfoPopup.ts', './FriendPopup.ts', './NewInviteFriendPopup.ts', './BroadProp.ts', './marqueePresenter.ts', './tableInvitePresenter.ts', './MarqueeBar.ts', './InviteBanner.ts', './navigation.ts', './SceneCover2.ts', './SignPopup.ts', './platformAssets.ts', './platformBoot.ts', './PlatformSound.ts', './PopupLayer.ts', './RewardRain.ts', './SimplePopup.ts', './Toast.ts', './applyLang.ts', './applySafeEdges.ts', './SafeEdge.ts', './EnterAnim.ts', './HallJackpot2.ts', './uiKit.ts', './viewBind.ts'], function (exports) {
-  var cclegacy, Component, sys, input, Input, view, Tween, UITransform, Vec3, tween, Color, KeyCode, Mask, EventTouch, Sprite, instantiate, Label, _decorator, DEBUG, packSlots, hallBottomJump, HALL_BOTTOM_ANIM, hallTopDelay, HALL_CONTENT_ANIM, HALL_TOP_DROP, HALL_PAGER, pagerDragOffset, pagerRelease, readSound, readMusic, getApp, HALL_BINDINGS, FreeCoinPresenter, FirstChargeSale, HallPresenter, tileCaption, HALL_TOP_ICONS, countUpValue, COUNT_SEC, countUpText, rewardFx, platformText, ALL_FEATURES, PlatformRes, PlatformExtraRes, vipAlbumFrame, FreeCoinPanel, LobbyLayer, openExitGamePopup, openGetRewardPopup, openMallPopup, firstChargeView, openSettingPopup, NEWBIE_POPUP, openNewbiePopup, openOnlineRewardPopup, openPiggyBankPop, openRewardVideoPopup, openTaskPopup, openVipInfoPopup, openWheelPopup, openEventPopup, openRankPopup, openMessagePopup, openUserInfoPopup, openFriendPopup, openInviteHub, openBroadProp, MarqueePresenter, TableInvitePresenter, inviteAndPlay, MarqueeBar, InviteBanner, toLogin, toHall, enterTable, enterSlot, holdSceneCover, releaseAfter, cancelSceneCover, prepareSceneCover, SIGN_POPUP, openSignPopup, PlatformAssets, screenOf, PlatformSound, PopupLayer, RewardRain, buildSimplePopup, openNetLostBox, Toast, applyLangSprites, applySafeEdges, SafeEdge, EnterAnim, HallJackpot, errorRetry, frameIn, sprite, label, reconnectBlocker, coverNode, child, onTap, tapArea, loadPrefabView, bind, bindNode;
+  var cclegacy, Component, sys, input, Input, view, Tween, UITransform, Vec3, tween, Node, Color, KeyCode, Mask, Layout, PageView, Sprite, instantiate, Label, _decorator, DEBUG, packSlots, hallBottomJump, HALL_BOTTOM_ANIM, hallTopDelay, HALL_TOP_DROP, HALL_CONTENT_ANIM, pagerRect, slotInPage, HALL_PAGER, readSound, readMusic, getApp, HALL_BINDINGS, FreeCoinPresenter, FirstChargeSale, HallPresenter, tileCaption, HALL_TOP_ICONS, countUpValue, COUNT_SEC, countUpText, rewardFx, platformText, ALL_FEATURES, PlatformRes, PlatformExtraRes, vipAlbumFrame, FreeCoinPanel, LobbyLayer, openExitGamePopup, openGetRewardPopup, openMallPopup, firstChargeView, openSettingPopup, NEWBIE_POPUP, openNewbiePopup, openOnlineRewardPopup, openPiggyBankPop, openRewardVideoPopup, openTaskPopup, openVipInfoPopup, openWheelPopup, openEventPopup, openRankPopup, openMessagePopup, openUserInfoPopup, openFriendPopup, openInviteHub, openBroadProp, MarqueePresenter, TableInvitePresenter, inviteAndPlay, MarqueeBar, InviteBanner, toLogin, toHall, enterTable, enterSlot, holdSceneCover, releaseAfter, cancelSceneCover, prepareSceneCover, SIGN_POPUP, openSignPopup, PlatformAssets, screenOf, PlatformSound, PopupLayer, RewardRain, buildSimplePopup, openNetLostBox, Toast, applyLangSprites, applySafeEdges, SafeEdge, EnterAnim, HallJackpot, errorRetry, frameIn, tapArea, sprite, label, reconnectBlocker, coverNode, child, onTap, loadPrefabView, bind, bindNode;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -48497,10 +48518,12 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
       UITransform = module.UITransform;
       Vec3 = module.Vec3;
       tween = module.tween;
+      Node = module.Node;
       Color = module.Color;
       KeyCode = module.KeyCode;
       Mask = module.Mask;
-      EventTouch = module.EventTouch;
+      Layout = module.Layout;
+      PageView = module.PageView;
       Sprite = module.Sprite;
       instantiate = module.instantiate;
       Label = module.Label;
@@ -48513,12 +48536,12 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
       hallBottomJump = module.hallBottomJump;
       HALL_BOTTOM_ANIM = module.HALL_BOTTOM_ANIM;
       hallTopDelay = module.hallTopDelay;
-      HALL_CONTENT_ANIM = module.HALL_CONTENT_ANIM;
       HALL_TOP_DROP = module.HALL_TOP_DROP;
+      HALL_CONTENT_ANIM = module.HALL_CONTENT_ANIM;
     }, function (module) {
+      pagerRect = module.pagerRect;
+      slotInPage = module.slotInPage;
       HALL_PAGER = module.HALL_PAGER;
-      pagerDragOffset = module.pagerDragOffset;
-      pagerRelease = module.pagerRelease;
     }, function (module) {
       readSound = module.readSound;
       readMusic = module.readMusic;
@@ -48641,13 +48664,13 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
     }, function (module) {
       errorRetry = module.errorRetry;
       frameIn = module.frameIn;
+      tapArea = module.tapArea;
       sprite = module.sprite;
       label = module.label;
       reconnectBlocker = module.reconnectBlocker;
       coverNode = module.coverNode;
       child = module.child;
       onTap = module.onTap;
-      tapArea = module.tapArea;
     }, function (module) {
       loadPrefabView = module.loadPrefabView;
       bind = module.bind;
@@ -48782,15 +48805,17 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           this.bg = null;
           /** Hieu ung xuat hien Hall (HallController:198-281): moi lan vao Hall va khi dong Lobby. */
           this.enter = new EnterAnim();
-          /** Luoi o game dang trang cuon (buildPager). */
-          this.gridClip = null;
-          this.gridPage = null;
-          this.ghost = null;
-          this.pageWidth = 1;
-          this.tilePage = 0;
-          this.tilePages = 1;
-          this.dragging = false;
-          this.dragAt = 0;
+          /** Luoi o game dang PageView (buildPager): moi trang 4 o dat dung cho neo tile0..3 cua prefab. */
+          this.gridParent = null;
+          this.pagerNode = null;
+          this.pager = null;
+          this.pagerContent = null;
+          this.gridPages = [];
+          this.gridTiles = [];
+          /** Khoa noi dung moi trang: giong thi khong dung lai trang (khong nap lai anh). */
+          this.gridKey = '';
+          /** Vi tri / co cua neo tile0..3 trong content (an di, chi lay cho dat o). */
+          this.gridSlots = [];
           /** So jackpot tren o Slots (presenter goi renderSlotJackpot). */
           this.jackpot = null;
           /** Nhom node thanh duoi nhay cung nhau theo thu tu APK (headerBg = avatar, ten, o chip). */
@@ -48955,7 +48980,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           const j = this.jackpot;
           if (j === null) return;
           j.set(gameId, pot);
-          for (const n of this.tileNodes) if (n !== null && n.isValid && n.name === gameId) j.attach(n);
+          for (const n of [...this.tileNodes, ...this.gridTiles]) if (n !== null && n.isValid && n.name === gameId) j.attach(n);
         }
         onDestroy() {
           view.off('canvas-resize', this.onResize, this);
@@ -49092,11 +49117,7 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
         renderTiles(t) {
           const anchors = this.tileAnchors;
           if (anchors.length === 0 || !anchors[0].isValid) return;
-          if (this.arrowLeft !== null && this.arrowLeft.isValid) this.arrowLeft.active = t.page > 0;
-          if (this.arrowRight !== null && this.arrowRight.isValid) this.arrowRight.active = t.page < t.pages - 1;
-          this.tilePage = t.page;
-          this.tilePages = t.pages;
-          // Chuyen trang (mui ten) chi thay o doi noi dung: o giu nguyen thi khong tao lai; o doi thi ve o moi de len,
+          // O lon chi thay khi noi dung doi: o giu nguyen thi khong tao lai; o doi thi ve o moi de len,
           // XOA o cu khi anh/GAF/Spine moi nap xong -> khong co khung trong (truoc day huy het roi nap lai -> nhay).
           const put = (slot, key, name, onTap, art) => {
             var _this$jackpot;
@@ -49129,14 +49150,70 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
             var _this$presenter8;
             if (main !== null) (_this$presenter8 = this.presenter) == null || _this$presenter8.tapGame(main.gameId);
           }, n => main === null ? Promise.resolve() : this.tileArt(n, main.art, null));
-          for (let i = 0; i < anchors.length - 1; i++) {
-            const tile = t.grid[i];
-            put(i + 1, tile === undefined ? null : tile.kind + ':' + (tile.kind === 'game' ? tile.gameId : '') + ':' + tile.art.path + ':' + String(tileCaption(tile)), tile === undefined ? 'empty' + i : tile.kind === 'game' ? tile.gameId : 'other' + i, () => {
-              var _this$presenter9, _this$presenter10;
-              if (tile === undefined) return;
-              if (tile.kind === 'game') (_this$presenter9 = this.presenter) == null || _this$presenter9.tapGame(tile.gameId);else (_this$presenter10 = this.presenter) == null || _this$presenter10.tap('otherGame');
-            }, n => tile === undefined ? Promise.resolve() : this.tileArt(n, tile.art, tileCaption(tile), tile.kind !== 'game'));
+          this.renderGrid(t.pagesGrid);
+        }
+
+        /** Dung lai cac trang PageView khi noi dung luoi doi (giu trang dang xem); mui ten theo trang hien tai. */
+        renderGrid(pages) {
+          const pv = this.pager;
+          const content = this.pagerContent;
+          if (pv === null || content === null || !content.isValid) return;
+          const tileKey = x => x.kind + ':' + (x.kind === 'game' ? x.gameId : '') + ':' + x.art.path + ':' + String(tileCaption(x));
+          const key = pages.map(pg => pg.map(tileKey).join('|')).join('/');
+          if (key !== this.gridKey) {
+            this.gridKey = key;
+            const cur = pv.getCurrentPageIndex();
+            pv.removeAllPages();
+            for (const old of this.gridPages) if (old.isValid) old.destroy();
+            this.gridPages = [];
+            this.gridTiles = [];
+            const r = pagerRect(screenOf().w);
+            pages.forEach((tiles, pi) => {
+              const page = new Node('page' + pi);
+              page.layer = content.layer;
+              page.addComponent(UITransform).setContentSize(r.w, r.h);
+              pv.addPage(page);
+              this.gridPages.push(page);
+              tiles.forEach((tile, i) => {
+                var _this$jackpot3;
+                const slot = this.gridSlots[i];
+                if (slot === undefined) return;
+                const at = slotInPage(slot, r);
+                const name = tile.kind === 'game' ? tile.gameId : 'other' + pi + '_' + i;
+                const n = tapArea(page, name, at, slot.w, slot.h, () => {
+                  var _this$presenter9, _this$presenter10;
+                  if (tile.kind === 'game') (_this$presenter9 = this.presenter) == null || _this$presenter9.tapGame(tile.gameId);else (_this$presenter10 = this.presenter) == null || _this$presenter10.tap('otherGame');
+                });
+                this.gridTiles.push(n);
+                (_this$jackpot3 = this.jackpot) == null || _this$jackpot3.attach(n);
+                // Anh o nap xong (de len): dua so jackpot len tren.
+                const top = () => {
+                  var _this$jackpot4;
+                  return (_this$jackpot4 = this.jackpot) == null ? void 0 : _this$jackpot4.attach(n);
+                };
+                this.tileArt(n, tile.art, tileCaption(tile), tile.kind !== 'game').then(top, top);
+              });
+            });
+            pv.scrollToPage(Math.max(0, Math.min(cur, pages.length - 1)), 0);
           }
+          this.updateArrows();
+        }
+
+        /** Mui ten chi hien khi con trang phia do (APK an mac dinh, HCV:139, 157). */
+        updateArrows() {
+          const pv = this.pager;
+          const n = this.gridPages.length;
+          const cur = pv === null ? 0 : pv.getCurrentPageIndex();
+          if (this.arrowLeft !== null && this.arrowLeft.isValid) this.arrowLeft.active = cur > 0;
+          if (this.arrowRight !== null && this.arrowRight.isValid) this.arrowRight.active = cur < n - 1;
+        }
+        turnPage(dir) {
+          const pv = this.pager;
+          if (pv === null) return;
+          const to = pv.getCurrentPageIndex() + dir;
+          if (to < 0 || to >= this.gridPages.length) return;
+          pv.scrollToPage(to, HALL_PAGER.turnTime);
+          this.updateArrows();
         }
 
         /**
@@ -49536,28 +49613,32 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
         /** canvas-resize (screenPolicy da ap FIXED_AUTO truoc): phong lai nen, lui lai nut mep Hall + Lobby. */
         onResize() {
           if (this.bg !== null && this.bg.isValid) coverNode(this.bg, screenOf());
-          this.sizePager();
+          if (this.pagerNode !== null && this.pagerNode.isValid && this.pagerNode.getComponent(UITransform).width !== pagerRect(screenOf().w).w) {
+            var _this$presenter13;
+            this.buildPager();
+            (_this$presenter13 = this.presenter) == null || _this$presenter13.renderTiles();
+          }
           applySafeEdges(this.node);
         }
 
         /** Nut back Android (va Esc tren desktop) theo thu tu KeypadManager (spec C2+D1 §4 buoc 5). */
         onKey(e) {
-          var _this$presenter13;
+          var _this$presenter14;
           if (e.keyCode !== KeyCode.MOBILE_BACK && e.keyCode !== KeyCode.ESCAPE) return;
           const lobby = this.lobby;
-          (_this$presenter13 = this.presenter) == null || _this$presenter13.back({
+          (_this$presenter14 = this.presenter) == null || _this$presenter14.back({
             lobbyBusy: lobby !== null && lobby.isOpen && lobby.isBusy,
             popupOpen: this.popups !== null && this.popups.count > 0,
             lobbyOpen: lobby !== null && lobby.isOpen
           });
         }
         onLobbyOpen(open) {
-          var _this$presenter14, _this$presenter15;
-          if (open) (_this$presenter14 = this.presenter) == null || _this$presenter14.closeFreeCoin();
+          var _this$presenter15, _this$presenter16;
+          if (open) (_this$presenter15 = this.presenter) == null || _this$presenter15.closeFreeCoin();
           if (open) this.enter.finish();
           for (const n of this.hallLayers) n.active = !open;
           if (this.marqueeBar !== null) this.marqueeBar.setLobby(open);
-          if (!open) (_this$presenter15 = this.presenter) == null || _this$presenter15.pokeQueue();
+          if (!open) (_this$presenter16 = this.presenter) == null || _this$presenter16.pokeQueue();
           if (this.moreNode !== null) this.moreNode.active = false;
           // HallView:807-839 showHallView: ve lai Hall tu Lobby chay lai hieu ung xuat hien.
           if (!open) this.playEnterAnim();
@@ -49591,154 +49672,73 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
             delay: hallTopDelay(k),
             easing: 'backOut'
           }));
-          const w = screenOf().w;
-          this.endFlip();
+          // O lon tu trai, luoi tu phai: lech it (shift) va hien dan (yeu cau 2026-10-18).
+          const C = HALL_CONTENT_ANIM;
           const main = this.tileAnchors[0];
-          if (main !== undefined && main.isValid) a.slideIn(main, HALL_CONTENT_ANIM.time, t => ({
-            x: t.x - w,
-            y: t.y
-          }));
-          const page = this.gridPage;
-          if (page !== null && page.isValid) a.slideIn(page, HALL_CONTENT_ANIM.time, t => ({
-            x: t.x + w,
-            y: t.y
-          }));
+          if (main !== undefined && main.isValid) {
+            a.slideIn(main, C.time, t => ({
+              x: t.x - C.shift,
+              y: t.y
+            }), {
+              easing: 'quadOut'
+            });
+            a.fade(main, 0, 255, C.time);
+          }
+          const grid = this.pagerNode;
+          if (grid !== null && grid.isValid) {
+            a.slideIn(grid, C.time, t => ({
+              x: t.x + C.shift,
+              y: t.y
+            }), {
+              easing: 'quadOut'
+            });
+            a.fade(grid, 0, 255, C.time);
+          }
         }
 
         /**
-         * Luoi o game dang trang cuon: tile0..3 nam trong gridPage (con cua gridClip co Mask); keo ngang thi trang theo
-         * ngon tay, tha tay lat trang (o cu truot ra trong gridGhost, o moi truot vao) hoac bat ve. Bat chuoc ScrollView:
-         * nghe o pha capture, keo qua dragStart thi gia TOUCH_CANCEL cho o dang cham (khong mo game).
+         * Luoi o game ben phai dang PageView (yeu cau 2026-10-18): gridPager (khung tu sat phai o lon toi mep phai man)
+         * > view (Mask) > content (Layout ngang) > trang. PageView tu lo keo / tha / huy cham o game (cancelInnerEvents).
+         * Doi co man thi dung lai ca khung (vi tri o trong trang theo tam khung).
          */
-        buildPager(content, grid) {
-          const clip = child(content, 'gridClip');
-          clip.addComponent(Mask).type = Mask.Type.GRAPHICS_RECT;
-          // Duoi cung trong content: mui ten (de len mep vung cat) van nhan cham.
-          clip.setSiblingIndex(0);
-          this.gridClip = clip;
-          this.sizePager();
-          const page = child(clip, 'gridPage');
-          for (const g of grid) {
-            const p = g.position.clone();
-            g.setParent(page);
-            g.setPosition(p);
-          }
-          this.gridPage = page;
-          clip.on(Input.EventType.TOUCH_START, this.onPagerStart, this, true);
-          clip.on(Input.EventType.TOUCH_MOVE, this.onPagerMove, this, true);
-          clip.on(Input.EventType.TOUCH_END, this.onPagerEnd, this, true);
-          clip.on(Input.EventType.TOUCH_CANCEL, this.onPagerEnd, this, true);
-        }
-
-        /** Vung cat: tu sat phai o lon toi mep phai man (doi theo canvas-resize). */
-        sizePager() {
-          const clip = this.gridClip;
-          if (clip === null || !clip.isValid) return;
-          const P = HALL_PAGER;
-          const w = screenOf().w / 2 - P.clipLeft;
-          const h = P.clipTop - P.clipBottom;
-          const ut = clip.getComponent(UITransform);
-          ut.setContentSize(w, h);
-          ut.setAnchorPoint(-P.clipLeft / w, -P.clipBottom / h);
-          this.pageWidth = w;
-        }
-        onPagerStart() {
-          this.endFlip();
-          this.dragging = false;
-          this.dragAt = Date.now();
-          this.enter.finish();
-        }
-        onPagerMove(e) {
-          const t = e.touch;
-          const page = this.gridPage;
-          if (t === null || page === null || !page.isValid) return;
-          const dx = t.getUILocation().x - t.getUIStartLocation().x;
-          if (!this.dragging) {
-            if (Math.abs(dx) < HALL_PAGER.dragStart) return;
-            this.dragging = true;
-            // Huy cham o game dang bam (nhu ScrollView._onTouchMoved).
-            const target = e.target;
-            if (target !== null && target !== this.gridClip) {
-              const cancel = new EventTouch(e.getTouches(), e.bubbles, Input.EventType.TOUCH_CANCEL);
-              cancel.touch = t;
-              cancel.simulate = true;
-              target.dispatchEvent(cancel);
-            }
-          }
-          page.setPosition(pagerDragOffset(dx, this.tilePage, this.tilePages), 0);
-        }
-        onPagerEnd(e) {
-          if (!this.dragging) return;
-          this.dragging = false;
-          e.propagationStopped = true;
-          const t = e.touch;
-          const dx = t === null ? 0 : t.getUILocation().x - t.getUIStartLocation().x;
-          const dir = pagerRelease(dx, Date.now() - this.dragAt, this.tilePage, this.tilePages, this.pageWidth);
-          if (dir === 0) {
-            const page = this.gridPage;
-            if (page !== null && page.isValid) tween(page).to(HALL_PAGER.backTime, {
-              position: new Vec3(0, 0, 0)
-            }, {
-              easing: 'quadOut'
-            }).start();
-            return;
-          }
-          this.flipPage(dir);
-        }
-
-        /** Lat trang: o hien tai doi sang gridGhost truot ra, presenter ve trang moi vao gridPage truot vao. */
-        flipPage(dir) {
-          var _this$presenter16;
-          const page = this.gridPage;
-          const clip = this.gridClip;
-          if (page === null || clip === null || !page.isValid) return;
-          if (dir === 1 ? this.tilePage >= this.tilePages - 1 : this.tilePage <= 0) return;
-          const start = page.position.x;
-          this.endFlip();
-          const ghost = child(clip, 'gridGhost', {
-            x: start,
+        buildPager() {
+          const parent = this.gridParent;
+          if (parent === null || !parent.isValid) return;
+          if (this.pagerNode !== null && this.pagerNode.isValid) this.pagerNode.destroy();
+          this.gridPages = [];
+          this.gridTiles = [];
+          this.gridKey = '';
+          const r = pagerRect(screenOf().w);
+          const root = child(parent, 'gridPager', {
+            x: r.x,
+            y: r.y
+          }, r.w, r.h);
+          // Duoi cung trong content: mui ten (de len mep khung) van nhan cham.
+          root.setSiblingIndex(0);
+          root.active = false;
+          const vw = child(root, 'view', {
+            x: 0,
             y: 0
-          });
-          for (let slot = 1; slot < this.tileAnchors.length; slot++) {
-            const n = this.tileNodes[slot];
-            const anchor = this.tileAnchors[slot];
-            if (n !== null && n !== undefined && n.isValid) {
-              n.setParent(ghost);
-              n.setPosition(anchor.position);
-            }
-            this.tileNodes[slot] = null;
-            this.tileKeys[slot] = '';
-          }
-          this.ghost = ghost;
-          (_this$presenter16 = this.presenter) == null || _this$presenter16.tap(dir === 1 ? 'arrowRight' : 'arrowLeft');
-          const W = this.pageWidth;
-          const T = HALL_PAGER.flipTime;
-          page.setPosition(start + dir * W, 0);
-          tween(page).to(T, {
-            position: new Vec3(0, 0, 0)
-          }, {
-            easing: 'quadOut'
-          }).start();
-          tween(ghost).to(T, {
-            position: new Vec3(start - dir * W, 0, 0)
-          }, {
-            easing: 'quadOut'
-          }).call(() => this.endFlip()).start();
-        }
-
-        /** Dung lat trang dang chay: trang ve cho, bo o cu. */
-        endFlip() {
-          const page = this.gridPage;
-          if (page !== null && page.isValid) {
-            Tween.stopAllByTarget(page);
-            page.setPosition(0, 0);
-          }
-          const g = this.ghost;
-          this.ghost = null;
-          if (g !== null && g.isValid) {
-            Tween.stopAllByTarget(g);
-            g.destroy();
-          }
+          }, r.w, r.h);
+          vw.addComponent(Mask).type = Mask.Type.GRAPHICS_RECT;
+          const content = child(vw, 'content', {
+            x: -r.w / 2,
+            y: 0
+          }, r.w, r.h);
+          content.getComponent(UITransform).setAnchorPoint(0, 0.5);
+          const lay = content.addComponent(Layout);
+          lay.type = Layout.Type.HORIZONTAL;
+          lay.resizeMode = Layout.ResizeMode.CONTAINER;
+          const pv = root.addComponent(PageView);
+          pv.content = content;
+          pv.direction = PageView.Direction.HORIZONTAL;
+          pv.sizeMode = PageView.SizeMode.Unified;
+          root.on(PageView.EventType.PAGE_TURNING, () => this.updateArrows());
+          // Bat sau khi gan content: PageView.onLoad doc content luc kich hoat.
+          root.active = true;
+          this.pagerNode = root;
+          this.pager = pv;
+          this.pagerContent = content;
         }
 
         /** Nap HallView.prefab vao Canvas; tra ve node lobby (LobbyLayer dung). Bind hong thi bo view do dang. */
@@ -49781,9 +49781,20 @@ System.register("chunks:///_virtual/HallSceneRoot.ts", ['cc', './env', './hallLa
           this.arrowRight = n(B.arrowRight);
           this.arrowLeft.active = false;
           this.arrowRight.active = false;
-          onTap(this.arrowLeft, () => this.flipPage(-1));
-          onTap(this.arrowRight, () => this.flipPage(1));
-          this.buildPager(content, this.tileAnchors.slice(1));
+          onTap(this.arrowLeft, () => this.turnPage(-1));
+          onTap(this.arrowRight, () => this.turnPage(1));
+          this.gridSlots = this.tileAnchors.slice(1).map(g => {
+            const ut = g.getComponent(UITransform);
+            g.active = false;
+            return {
+              x: g.position.x,
+              y: g.position.y,
+              w: ut.width,
+              h: ut.height
+            };
+          });
+          this.gridParent = content;
+          this.buildPager();
 
           // Hang icon tren (HTC:8-114)
           for (const name of HALL_TOP_ICONS) {
@@ -53587,7 +53598,7 @@ System.register("chunks:///_virtual/lobbyLayout.ts", ['cc', './platformScreen.ts
 });
 
 System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts', './homeState.ts', './gameRegistry.ts', './platformErrors.ts', './platformText.ts', './apkFormat.ts', './release.ts', './hallPresenter.ts'], function (exports) {
-  var cclegacy, DEFAULT_BOTS, devPickFor, readLobbyMemory, botChoicesFor, writeLobbyMemory, withDevPick, fcOffer, chipLockedText, asGatewayError, lobbyFailOf, platformText, abbreviateCoins, potText, storageKey, displayName, chipText;
+  var cclegacy, DEFAULT_BOTS, devPickFor, readLobbyMemory, botChoicesFor, writeLobbyMemory, withDevPick, fcOffer, chipLockedText, asGatewayError, lobbyFailOf, platformText, abbreviateCoins, potText, chipShort, storageKey, displayName, chipText;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -53610,6 +53621,7 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
     }, function (module) {
       abbreviateCoins = module.abbreviateCoins;
       potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       storageKey = module.storageKey;
     }, function (module) {
@@ -54211,7 +54223,7 @@ System.register("chunks:///_virtual/lobbyPresenter.ts", ['cc', './lobbyTest.ts',
           this.view.renderBar({
             name: p !== null ? displayName(p) : '',
             chipText: chipText(p !== null ? p.chip : 0),
-            goldText: potText(p !== null ? p.gold : 0)
+            goldText: chipShort(p !== null ? p.gold : 0)
           });
         }
         t(k) {
@@ -68820,12 +68832,12 @@ System.register("chunks:///_virtual/responseTopupMoneyData.ts", ['cc'], function
 });
 
 System.register("chunks:///_virtual/rewardFx.ts", ['cc', './apkFormat.ts'], function (exports) {
-  var cclegacy, potText;
+  var cclegacy, chipShort;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
     }, function (module) {
-      potText = module.potText;
+      chipShort = module.chipShort;
     }],
     execute: function () {
       exports({
@@ -68850,7 +68862,7 @@ System.register("chunks:///_virtual/rewardFx.ts", ['cc', './apkFormat.ts'], func
         return Math.round(fx.before + (fx.after - fx.before) * k);
       }
       function countUpText(fx, t) {
-        return potText(countUpValue(fx, t));
+        return chipShort(countUpValue(fx, t));
       }
       cclegacy._RF.pop();
     }
@@ -73348,8 +73360,8 @@ System.register("chunks:///_virtual/Slot25Assets.ts", ['cc', './slot25Res.ts', '
   };
 });
 
-System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './slot25Res.ts', './slot25Layout.ts', './slot25Timeline.ts', './uiKit.ts', './Slot25Assets.ts'], function (exports) {
-  var cclegacy, sp, Node, Tween, tween, Sprite, potText, SLOT25_SPINE_ANIM, SLOT25_DIGITS, BOTTOM, TOP, TABLE_FX, FLOW, countUp, sprite, onTap, child, label, tapArea, clearChildren;
+System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './slot25Res.ts', './slot25Layout.ts', './slot25Timeline.ts', './uiKit.ts', './apkRes.ts', './apkAssets.ts', './Slot25Assets.ts'], function (exports) {
+  var cclegacy, sp, Node, Tween, tween, Sprite, SpriteAtlas, chipShort, SLOT25_SPINE_ANIM, SLOT25_DIGITS, BOTTOM, TOP, TABLE_FX, FLOW, countUp, sprite, onTap, child, label, frameIn, tapArea, PlatformRes, loadAsset, loadBundle, clearChildren;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -73358,8 +73370,9 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
       Tween = module.Tween;
       tween = module.tween;
       Sprite = module.Sprite;
+      SpriteAtlas = module.SpriteAtlas;
     }, function (module) {
-      potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       SLOT25_SPINE_ANIM = module.SLOT25_SPINE_ANIM;
       SLOT25_DIGITS = module.SLOT25_DIGITS;
@@ -73375,7 +73388,13 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
       onTap = module.onTap;
       child = module.child;
       label = module.label;
+      frameIn = module.frameIn;
       tapArea = module.tapArea;
+    }, function (module) {
+      PlatformRes = module.PlatformRes;
+    }, function (module) {
+      loadAsset = module.loadAsset;
+      loadBundle = module.loadBundle;
     }, function (module) {
       clearChildren = module.clearChildren;
     }],
@@ -73397,6 +73416,14 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
        * Jackpot; vung cuoc (- so +, "bet/25 x25"), o giua (good luck / so thang dem len), MAX, Quick, SPIN
        * (Spine SPIN_anniu + lizi; giu 0.5 s mo tu quay), STOP / FREE co so luot. Hu: JACKPOT_wenzi + so anh.
        */
+      const CHIP_ICON_SCALE = 0.8;
+
+      /** Frame Common_gameCoin (atlas common dung chung, cq-common). */
+      async function loadCommonCoin() {
+        const e = PlatformRes.Common_gameCoin;
+        const atlas = await loadAsset(await loadBundle(e.bundle), e.path, SpriteAtlas);
+        return frameIn(atlas, e.frame);
+      }
       class Slot25Bar {
         /**
          * `root` = lop ban (theo mep duoi); `hud` = lop thanh tren (con cua room view trong APK, theo mep tren);
@@ -73463,6 +73490,10 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
             width: 120
           });
           onTap(sprite(chipBg, r('slot25_room_game_coin_add'), TOP.chipAdd, 1, 'add').node, () => h.mall());
+          // Slot25Location:559-567 gameCoinBg.sprite: icon chip chung Common_gameCoin scale 0.8 ben trai so chip.
+          void loadCommonCoin().then(f => {
+            if (chipBg.isValid) sprite(chipBg, f, TOP.chipIcon, CHIP_ICON_SCALE, 'chipIcon');
+          }, e => console.warn('[conquian] Slot25Bar: nap icon chip hong', e));
           onTap(sprite(hud, r('slot25_room_select_btn'), zero, 1, 'menuBtn').node, () => h.menu());
           onTap(sprite(hud, r('slot25_room_mall_btn'), zero, 1, 'mall').node, () => h.mall());
           onTap(sprite(hud, t('slot25_room_jack_bg'), zero, 1, 'jackpotBtn').node, () => h.jackpot());
@@ -73524,7 +73555,7 @@ System.register("chunks:///_virtual/Slot25Bar.ts", ['cc', './apkFormat.ts', './s
           const prev = this.last;
           this.last = s;
           if (!this.betNode.isValid) return;
-          this.chipLabel.string = potText(s.chip);
+          this.chipLabel.string = chipShort(s.chip);
           if (prev === null || prev.bet !== s.bet || prev.betAllowed !== s.betAllowed) {
             clearChildren(this.betNode);
             const n = this.a.digits(this.betNode, 'roomAtlas', SLOT25_DIGITS.bet, grouped(s.bet), BOTTOM.betNumber, 2);
@@ -86150,7 +86181,7 @@ System.register("chunks:///_virtual/TexasBottomView.ts", ['cc', './texasLayout.t
 });
 
 System.register("chunks:///_virtual/TexasBuyInPopup.ts", ['cc', './apkFormat.ts', './texasRules.ts', './texasText.ts', './apkSprite.ts', './uiKit.ts'], function (exports) {
-  var cclegacy, UITransform, Color, BlockInputEvents, Sprite, Node, Vec3, Label, potText, shortCoins, texasText, addSprite, child, fog, onTap, sliced, label;
+  var cclegacy, UITransform, Color, BlockInputEvents, Sprite, Node, Vec3, Label, chipShort, shortCoins, texasText, addSprite, child, fog, onTap, sliced, label;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -86162,7 +86193,7 @@ System.register("chunks:///_virtual/TexasBuyInPopup.ts", ['cc', './apkFormat.ts'
       Vec3 = module.Vec3;
       Label = module.Label;
     }, function (module) {
-      potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       shortCoins = module.shortCoins;
     }, function (module) {
@@ -86376,7 +86407,7 @@ System.register("chunks:///_virtual/TexasBuyInPopup.ts", ['cc', './apkFormat.ts'
             y: 0
           }, 'coin').node.setScale(0.92, 0.92);
           // Chu vi nam giua dong xu va nut +, co lai khi dai (khong bi nut + che chu so cuoi).
-          label(money, potText(spec.wallet), {
+          label(money, chipShort(spec.wallet), {
             x: B.money.textX - B.money.w / 2,
             y: 0
           }, B.money.size, B.money.color, {
@@ -88696,7 +88727,7 @@ System.register("chunks:///_virtual/texasRules.ts", ['cc'], function (exports) {
 });
 
 System.register("chunks:///_virtual/TexasSeatsView.ts", ['cc', './apkFormat.ts', './profile2.ts', './texasLayout.ts', './texasRules.ts', './texasState.ts', './texasTimeline.ts', './apkSprite.ts', './uiKit.ts', './TexasCardView.ts'], function (exports) {
-  var cclegacy, Label, tween, UIOpacity, Sprite, Tween, potText, avatarFrame, SEAT_POS, SEAT_INNER, SEAT_CARDS, viewPos, pokerSide, clockColor, mySeatIndex, FX, addSprite, child, onTap, avatar, label, TexasCardView;
+  var cclegacy, Label, tween, UIOpacity, Sprite, Tween, chipShort, avatarFrame, SEAT_POS, SEAT_INNER, SEAT_CARDS, viewPos, pokerSide, clockColor, mySeatIndex, FX, addSprite, child, onTap, avatar, label, TexasCardView;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -88706,7 +88737,7 @@ System.register("chunks:///_virtual/TexasSeatsView.ts", ['cc', './apkFormat.ts',
       Sprite = module.Sprite;
       Tween = module.Tween;
     }, function (module) {
-      potText = module.potText;
+      chipShort = module.chipShort;
     }, function (module) {
       avatarFrame = module.avatarFrame;
     }, function (module) {
@@ -88813,7 +88844,7 @@ System.register("chunks:///_virtual/TexasSeatsView.ts", ['cc', './apkFormat.ts',
             width: I.money.nameW
           });
           name.overflow = Label.Overflow.SHRINK;
-          const stack = label(bg, potText(s.stack), {
+          const stack = label(bg, chipShort(s.stack), {
             x: 0,
             y: I.money.moneyY - 37
           }, I.money.size, I.money.moneyColor);
@@ -88928,7 +88959,7 @@ System.register("chunks:///_virtual/TexasSeatsView.ts", ['cc', './apkFormat.ts',
         }
         setStack(seat, value) {
           const s = this.seats.find(x => x.seat === seat);
-          if (s !== undefined && s.stack.isValid) s.stack.string = potText(value);
+          if (s !== undefined && s.stack.isValid) s.stack.string = chipShort(value);
         }
 
         /** Bo bai: 2 la mo dan va xoa (RV:1444-1498 runFoldPoker), mat na xam. */
@@ -92882,7 +92913,7 @@ System.register("chunks:///_virtual/UserInfoPopup.ts", ['cc', './socialLayout.ts
 });
 
 System.register("chunks:///_virtual/userInfoPresenter.ts", ['cc', './platformErrors.ts', './platformText.ts', './profile2.ts', './vip2.ts', './apkFormat.ts'], function (exports) {
-  var cclegacy, profileFailOf, asGatewayError, platformText, avatarFrame, winTotal, winRate, expBar, shortId, normalizeNameLocal, validateNameLocal, avatarOf, effectiveLevel, potText;
+  var cclegacy, profileFailOf, asGatewayError, platformText, avatarFrame, winTotal, winRate, expBar, shortId, normalizeNameLocal, validateNameLocal, avatarOf, effectiveLevel, chipShort, potText;
   return {
     setters: [function (module) {
       cclegacy = module.cclegacy;
@@ -92903,6 +92934,7 @@ System.register("chunks:///_virtual/userInfoPresenter.ts", ['cc', './platformErr
     }, function (module) {
       effectiveLevel = module.effectiveLevel;
     }, function (module) {
+      chipShort = module.chipShort;
       potText = module.potText;
     }],
     execute: function () {
@@ -92936,8 +92968,8 @@ System.register("chunks:///_virtual/userInfoPresenter.ts", ['cc', './platformErr
           sex: avatarFrame(p.avatar),
           vipLevel: effectiveLevel(p.vip),
           name: p.name,
-          chipText: potText(p.chip),
-          goldText: potText(p.gold),
+          chipText: chipShort(p.chip),
+          goldText: chipShort(p.gold),
           levelText: 'Lv.' + p.level,
           totalText: platformText(lang, 'userTotal') + ' ' + winTotal(p),
           rateText: platformText(lang, 'userRate') + ' ' + winRate(p) + '%',
