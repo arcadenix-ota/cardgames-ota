@@ -1,8 +1,4 @@
-System.register("chunks:///_virtual/cq-escoba", [], function () {
-  return {
-    execute: function () {}
-  };
-});
+System.register("chunks:///_virtual/cq-escoba",[],(function(){return{execute:function(){}}}));
 
 (function(r) {
   r('virtual:///prerequisite-imports/cq-escoba', 'chunks:///_virtual/cq-escoba'); 
